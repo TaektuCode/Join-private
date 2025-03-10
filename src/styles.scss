@@ -1,0 +1,219 @@
+:root {
+    --backgroundColor: #fff;
+    --footerColor: #2A3647;
+    --accentColor: #2A3647;
+    --accentColor2: #29ABE2;
+    --fontColorMaim: #000;
+
+    --headerHeight: 96px;
+    --footerHeight: 232px;
+    --boxShadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  }
+/* inter-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/scss/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./assets/fonts/inter-v18-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* inter-500 - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/scss/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    src: url('./assets/fonts/inter-v18-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* inter-600 - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/scss/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    src: url('./assets/fonts/inter-v18-latin-600.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* inter-700 - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/scss/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    src: url('./assets/fonts/inter-v18-latin-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  /* inter-800 - latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/scss/@font-face/font-display for other options. */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    src: url('./assets/fonts/inter-v18-latin-800.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  
+  /* Basis-Reset und Standardstile */
+  h1 {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    font-size: 64px;
+  }
+  
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 48px;
+    transition: color 0.3s; // sorgt für sanften Übergang der Farbe
+    &:hover {
+        color: #00BC8F;
+      }
+  }
+  
+  h3 {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  
+  html {
+    min-height: 100dvh;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--headerHeight) + 120px);
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--backgroundColor);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
+  }
+  
+  
+  /* Content Wrapper */
+  .content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+  
+  /* Header */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--backgroundColor);
+    width: 100%;
+    height: var(--headerHeight);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    z-index: 1000;
+  
+    .header-content {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0;
+    }
+  
+    /* Media Queries für größere Geräte */
+    @media (min-width: 900px) {
+      .header-content {
+        width: 860px;
+      }
+    }
+    @media (min-width: 1440px) {
+      .header-content {
+        width: 1400px;
+      }
+    }
+    @media (min-width: 1920px) {
+      .header-content {
+        width: 1880px;
+      }
+    }
+  
+    svg {
+      display: block;
+    }
+  
+    img {
+      display: block;
+      cursor: pointer;
+    }
+  }
+  
+  /* Main Content */
+  .main {
+    flex: 1;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--backgroundColor);
+    scroll-margin-top: calc(var(--headerHeight) + 120px);
+  
+    .main-content {
+      scroll-behavior: smooth;
+      width: 100%;
+    }
+  
+    /* Media Queries für Main-Content */
+    @media (min-width: 900px) {
+      .main-content {
+        width: 860px;
+      }
+    }
+    @media (min-width: 1440px) {
+      .main-content {
+        width: 1400px;
+      }
+    }
+    @media (min-width: 1920px) {
+      .main-content {
+        width: 1880px;
+      }
+    }
+  }
+  
+  /* Footer */
+  footer {
+    background-color: var(--backgroundColor);
+    width: 100%;
+    height: var(--footerHeight);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  
+    .footer-content {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0;
+    }
+  
+    /* Media Queries für Footer-Content */
+    @media (min-width: 900px) {
+      .footer-content {
+        width: 860px;
+      }
+    }
+    @media (min-width: 1440px) {
+      .footer-content {
+        width: 1400px;
+      }
+    }
+    @media (min-width: 1920px) {
+      .footer-content {
+        width: 1880px;
+      }
+    }
+  }
+  
