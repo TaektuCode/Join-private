@@ -1,0 +1,37 @@
+*{
+    font-family: 'inter';
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Abstand zwischen Text und Strich */
+}
+
+.separator {
+    width: 3px; /* Breite des Strichs */
+    height: 59px; /* Höhe des Strichs */
+    background-color: rgba(0,124, 238,1); /* Farbe des Strichs */
+}
+
+.subtitle {
+    font-size: 27px;
+    color: rgba(42,54, 70,1);
+}
+
+h2 {
+    font-size: 47px;
+    font-weight: 500;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+
+
+p {
+    font-size: 16px;
+    font-weight: 700;
+}
+
