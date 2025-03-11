@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
+import { ContactInterface } from '../../maincontent/contacts/contact-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,7 @@ import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
 export class FirebaseService {
   firebase = inject(Firestore);
   unsubscribe;
+  contactList: ContactInterface[] = [];
 
   constructor() {
     this.unsubscribe = onSnapshot(
