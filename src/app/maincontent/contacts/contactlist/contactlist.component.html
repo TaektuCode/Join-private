@@ -1,8 +1,14 @@
 <div class="contact-list">
   @for (item of firebaseService.contactList; track $index) {
   <div class="contact">
-    <p>{{ item.name }} {{ item.lastname }}</p>
-    <a href="mailto:item.email">{{ item.email }}</a>
+    <div class="logo" [style.background-color]="getRandomColor($index)">
+      {{ item.name.charAt(0).toUpperCase()
+      }}{{ item.lastname.charAt(0).toUpperCase() }}
+    </div>
+    <div class="contact-data">
+      <p>{{ item.name }} {{ item.lastname }}</p>
+      <a [attr.href]="'mailto:' + item.email">{{ item.email }}</a>
+    </div>
   </div>
   }
 </div>
