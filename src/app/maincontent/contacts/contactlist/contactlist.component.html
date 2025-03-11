@@ -1,2 +1,8 @@
-<p>contactlist works!</p>
-<h1>Test Test</h1>
+<div class="contact-list">
+  @for (item of firebaseService.contactList; track $index) {
+  <div class="contact">
+    <p>{{ item.name }} {{ item.lastname }}</p>
+    <a href="mailto:item.email">{{ item.email }}</a>
+  </div>
+  }
+</div>

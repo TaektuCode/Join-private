@@ -9,8 +9,5 @@ import { FirebaseService } from '../../../shared/services/firebase.service';
   styleUrl: './contactlist.component.scss',
 })
 export class ContactlistComponent {
-  firebase = inject(FirebaseService);
-  constructor() {
-    this.firebase;
-  }
+  firebaseService = inject(FirebaseService);
 }

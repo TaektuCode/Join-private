@@ -15,10 +15,26 @@ export class FirebaseService {
       collection(this.firebase, 'contacts'),
       (contactsObject) => {
         contactsObject.forEach((element) => {
-          console.log('Current data: ', element.id, element.data());
+          // console.log('Current data: ', element.id, element.data());
+          this.contactList.push(
+            this.setContactObject(
+              element.id,
+              element.data() as ContactInterface
+            )
+          );
         });
       }
     );
+  }
+
+  setContactObject(id: string, obj: ContactInterface): ContactInterface {
+    return {
+      id: id,
+      email: obj.email,
+      lastname: obj.lastname,
+      name: obj.name,
+      phone: obj.phone,
+    };
   }
 
   ngOnDestroy() {
