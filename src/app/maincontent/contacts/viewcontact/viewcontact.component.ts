@@ -12,7 +12,7 @@ export class ViewcontactComponent {
     name: 'Denis',
     lastname: 'Welsch',
     email: 'denis@gmail.de',
-    phone: '0165215465'
+    phone: '+49 1652 154 65'
   };
 
   get contactInitials(): string {
