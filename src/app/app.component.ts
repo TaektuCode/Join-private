@@ -4,6 +4,7 @@ import { HeaderComponent } from "./shared/header/header.component";
 import { FooterComponent } from "./shared/footer/footer.component";
 import { MaincontentComponent } from './maincontent/maincontent.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,7 +15,7 @@ import { MaincontentComponent } from './maincontent/maincontent.component';
     FooterComponent
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'join';
