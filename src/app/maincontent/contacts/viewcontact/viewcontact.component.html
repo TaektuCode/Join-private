@@ -5,10 +5,12 @@
             <div class="separator"></div>
             <span class="subtitle">Better with a Team</span>
         </h1>
-        <button (click)="toggleContact()">Toggle Contact</button>
+        <button (click)="toggleVisibility()">
+            {{ visible() ? 'Hide' : 'Show' }}
+        </button>
     </div>
 
-    <div id="viewcontact-card" class="slide-in" [ngClass]="{ 'active': isContactVisible }">
+    <div [@slide]="visible()" id="viewcontact-card">    
         <div class="viewcontact-card-headline">
             <div class="avatar-container">
                 <div class="avatar">{{ contactInitials }}</div>
