@@ -44,10 +44,37 @@ export class FirebaseService {
     };
   }
 
+  getGroupedContacts(): { letter: string; contacts: ContactInterface[] }[] {
+    // Initialize an empty array to hold the grouped contacts
+    const grouped: { letter: string; contacts: ContactInterface[] }[] = [];
+    // Create a copy of the contactList array to avoid modifying the original
+    const sortedContacts = [...this.contactList];
+    // Iterate through each contact in the sortedContacts array
+    sortedContacts.forEach((contact) => {
+      // Get the first letter of the contact's name and convert it to uppercase
+      const firstLetter = contact.name.charAt(0).toUpperCase();
+
+      // Find if a group with the same first letter already exists in the grouped array
+      let group = grouped.find((g) => g.letter === firstLetter);
+
+      // If a group with the first letter doesn't exist, create a new group
+      if (!group) {
+        // Create a new group object with the letter and an empty contacts array
+        group = { letter: firstLetter, contacts: [] };
+        // Add the new group to the grouped array
+        grouped.push(group);
+      }
+      // Add the current contact to the contacts array of the corresponding group
+      group.contacts.push(contact);
+    });
+
+    // Return the array of grouped contacts
+    return grouped;
+  }
   // Lifecycle hook to unsubscribe from onSnapshot when the service is destroye
   ngOnDestroy() {
     if (this.unsubscribe) {
-      this.unsubscribe();
+      this.unsubscribe(); // Call the unsubscribe function
     }
   }
 }

@@ -1,5 +1,9 @@
 <div class="contact-list">
-  @for (item of firebaseService.contactList; track $index) {
+  @for (group of groupedContacts; track group.letter) {
+  <div class="letter-separator">
+    {{ group.letter }}
+  </div>
+  @for (item of group.contacts; track item.id) {
   <div class="contact">
     <div class="logo" [style.background-color]="getRandomColor($index)">
       {{ item.name.charAt(0).toUpperCase()
@@ -10,5 +14,5 @@
       <a [attr.href]="'mailto:' + item.email">{{ item.email }}</a>
     </div>
   </div>
-  }
+  } }
 </div>
