@@ -1,0 +1,68 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--backgroundColor);
+    width: 100%;
+    height: var(--headerHeight);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    z-index: 1;
+    
+    .header-content {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+  }
+  
+  .header-left {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 0; // Standardmäßig kein Abstand (ggf Sidebar anpassen)
+    
+    @media (min-width: 1000px) {
+      margin-left: 0; // ab breiteren Bildschirmen wird der gewünschte Abstand eingefügt falls nötig
+    }
+  }
+  
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0; // soll nicht schrumpfen
+    
+    img {
+      display: block;
+      cursor: pointer;
+      height: 40px;
+    }
+    
+    .circle {
+      width: 40px;
+      height: 40px;
+      background-color: var(--accentColor2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      span {
+        color: var(--fontColorMaim);
+        font-weight: bold;
+      }
+    }
+  }
+  
+  
