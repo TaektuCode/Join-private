@@ -10,16 +10,14 @@ header {
     text-align: center;
     z-index: 1;
     
-    // Kein Padding mehr im Header selbst – stattdessen zentraler Content
     .header-content {
       height: 100%;
       width: 100%;
-      max-width: 1400px; // Beispiel-Maximalbreite, anpassen wie benötigt
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px; // kleiner horizontaler Innenabstand
-      margin: 0 auto;  // zentriert den Container im Header
+      padding: 0 20px;
+      margin: 0 auto;
     }
   }
   
@@ -28,14 +26,14 @@ header {
     font-size: 1.5rem;
     font-weight: 600;
     line-height: 1;
-    flex: 1; // nimmt so viel Platz wie möglich ein
+    flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-left: 0; // Standardmäßig kein Abstand
+    margin-left: 0; // Standardmäßig kein Abstand (ggf Sidebar anpassen)
     
     @media (min-width: 1000px) {
-      margin-left: 0; // ab breiteren Bildschirmen wird der gewünschte Abstand eingefügt
+      margin-left: 0; // ab breiteren Bildschirmen wird der gewünschte Abstand eingefügt falls nötig
     }
   }
   
