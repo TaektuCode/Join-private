@@ -46,6 +46,11 @@
             &:hover {
                 background-color: rgba(42, 61, 89);
             }
+
+            &.active {
+                background-color: rgb(9, 25, 49);
+                font-weight: 700;
+            }
         }
     }
 
