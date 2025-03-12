@@ -4,7 +4,7 @@
     {{ group.letter }}
   </div>
   @for (item of group.contacts; track item.id) {
-  <div class="contact">
+  <div class="contact" (click)="selectContact(item)">
     <div class="logo" [style.background-color]="getRandomColor($index)">
       {{ item.name.charAt(0).toUpperCase()
       }}{{ item.lastname.charAt(0).toUpperCase() }}
