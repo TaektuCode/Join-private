@@ -55,16 +55,18 @@
   h1 {
     font-family: 'Inter', sans-serif;
     margin: 0;
-    font-size: 64px;
+    font-weight: 700;
+    font-size: 61px;
+    color: rgba(0, 0, 0, 1);
   }
   
   h2 {
     font-family: 'Inter', sans-serif;
-    font-size: 48px;
-    transition: color 0.3s; // sorgt für sanften Übergang der Farbe
-    &:hover {
-        color: #00BC8F;
-      }
+    font-size: 47px;
+    // transition: color 0.3s; // sorgt für sanften Übergang der Farbe
+    // &:hover {
+    //     color: #00BC8F;
+    //   }
   }
   
   h3 {
