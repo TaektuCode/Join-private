@@ -1,31 +1,31 @@
 <section class="viewcontact">
-    <h1 class="title">
-        Contacts
-        <div class="separator"></div>
-        <span class="subtitle">Better with a Team</span>
-    </h1>
+  <h1 class="title">
+    Contacts
+    <div class="separator"></div>
+    <span class="subtitle">Better with a Team</span>
+  </h1>
 
-    <div class="contact-card">
-        <div class="avatar">{{ contactInitials }}</div>
-        <h2>{{ contact.name }} {{ contact.lastname }}</h2>
+  <div class="contact-card">
+    <div class="avatar">{{ contactInitials }}</div>
+    <h2>{{ contact?.name }} {{ contact?.lastname }}</h2>
 
-        <div class="contact-actions">
-            <button (click)="editContact()">
-                <i class="icon edit-icon"></i> Edit
-            </button>
-            <button (click)="deleteContact()">
-                <i class="icon delete-icon"></i> Delete
-            </button>
-        </div>
-
-        <div class="contact-info">
-            <h3>Contact Information</h3>
-
-            <p>Email</p>
-            <a [href]="'mailto:' + contact.email">{{ contact.email }}</a>
-
-            <p>Phone</p>
-            <span>{{ contact.phone }}</span>
-        </div>
+    <div class="contact-actions">
+      <button (click)="editContact()">
+        <i class="icon edit-icon"></i> Edit
+      </button>
+      <button (click)="deleteContact()">
+        <i class="icon delete-icon"></i> Delete
+      </button>
     </div>
+
+    <div class="contact-info">
+      <h3>Contact Information</h3>
+
+      <p>Email</p>
+      <a [href]="'mailto:' + contact?.email">{{ contact?.email }}</a>
+
+      <p>Phone</p>
+      <span>{{ contact?.phone }}</span>
+    </div>
+  </div>
 </section>

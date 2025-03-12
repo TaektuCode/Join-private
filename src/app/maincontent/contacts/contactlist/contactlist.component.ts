@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
+import { ContactService } from '../contact.service'; // Import ContactService
+import { ContactInterface } from '../contact-interface'; // Import ContactInterface
 
 @Component({
   selector: 'app-contactlist',
@@ -10,6 +12,7 @@ import { FirebaseService } from '../../../shared/services/firebase.service';
 })
 export class ContactlistComponent {
   firebaseService = inject(FirebaseService);
+  contactService = inject(ContactService);
 
   // Getter method to retrieve the grouped contacts from the FirebaseService
   get groupedContacts() {
@@ -30,5 +33,11 @@ export class ContactlistComponent {
     ];
     // Return a color from the array based on the index modulo the array length, creating a rotation effect
     return colors[index % colors.length]; // Rotate through colors based on index
+  }
+
+  // Method to set the selected contact in the ContactService
+  selectContact(contact: ContactInterface): void {
+    console.log('Contact selected:', contact);
+    this.contactService.setSelectedContact(contact);
   }
 }

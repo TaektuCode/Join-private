@@ -1,12 +1,33 @@
+.contact-list {
+  font-family: inter;
+  width: 456px;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.letter-separator {
+  width: 352px;
+  height: 58px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #d1d1d1;
+}
+
 .contact {
   display: flex;
+  width: 352px;
+  height: 78px;
   align-items: center;
   margin-bottom: 10px;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -14,7 +35,7 @@
   color: white;
   font-weight: bold;
   margin-right: 10px;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .contact-data {
@@ -22,5 +43,6 @@
   flex-direction: column;
   p {
     margin: 0;
+    font-size: 20px;
   }
 }
