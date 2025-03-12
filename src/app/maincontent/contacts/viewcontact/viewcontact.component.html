@@ -5,9 +5,10 @@
             <div class="separator"></div>
             <span class="subtitle">Better with a Team</span>
         </h1>
+        <button (click)="toggleContact()">Toggle Contact</button>
     </div>
 
-    <div class="viewcontact-card">
+    <div id="viewcontact-card" class="slide-in" [ngClass]="{ 'active': isContactVisible }">
         <div class="viewcontact-card-headline">
             <div class="avatar-container">
                 <div class="avatar">{{ contactInitials }}</div>
