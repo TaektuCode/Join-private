@@ -2,6 +2,11 @@
     font-family: 'Inter';
 }
 
+section {
+    margin-top: 110px;
+    margin-left: 55px;
+}
+
 .viewcontact-header {
     margin-bottom: 20px;
 }
@@ -67,6 +72,30 @@ h2 {
 .contact-actions {
     display: flex;
     gap: 10px;
+
+    button {
+        font-size: 16px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+.icon-edit {
+    background-image: url("/assets/img/addtask/edit.svg");
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.icon-delete {
+    background-image: url("/assets/img/addtask/delete.svg");
+    display: inline-block;
+    width: 24px;
+    height: 24px;
 }
 
 .contact-info {
@@ -90,13 +119,4 @@ p {
 a {
     text-decoration: none;
     color: blue;
-}
-
-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
 }

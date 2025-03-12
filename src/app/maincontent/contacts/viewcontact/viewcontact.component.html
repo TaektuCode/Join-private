@@ -16,10 +16,12 @@
                 <h2>{{ contact?.name }} {{ contact?.lastname }}</h2>
                 <div class="contact-actions">
                     <button (click)="editContact()">
-                        <i class="icon edit-icon"></i> Edit
+                        <span class="icon-edit"></span>
+                        Edit
                     </button>
                     <button (click)="deleteContact()">
-                        <i class="icon delete-icon"></i> Delete
+                        <span class="icon-delete"></span>
+                        Delete
                     </button>
                 </div>
             </div>
@@ -38,5 +40,4 @@
             </div>
         </div>
     </div>
-  </div>
 </section>
