@@ -11,7 +11,6 @@ import { MaincontentComponent } from './maincontent/maincontent.component';
   imports: [
     RouterOutlet,
     HeaderComponent,
-    MaincontentComponent,
     FooterComponent
   ],
   templateUrl: './app.component.html',

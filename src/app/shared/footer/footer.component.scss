@@ -36,6 +36,7 @@
             color: rgba(205, 205, 205, 1);
             cursor: pointer;
             box-sizing: border-box;
+            text-decoration: none;
 
             img {
                 width: 30px;
@@ -44,6 +45,11 @@
 
             &:hover {
                 background-color: rgba(42, 61, 89);
+            }
+
+            &.active {
+                background-color: rgb(9, 25, 49);
+                font-weight: 700;
             }
         }
     }
