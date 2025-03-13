@@ -1,68 +1,122 @@
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: var(--backgroundColor);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--backgroundColor);
+  width: 100%;
+  height: var(--headerHeight);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+
+  .header-content {
+    height: 100%;
     width: 100%;
-    height: var(--headerHeight);
     display: flex;
-    justify-content: center;
-    text-align: center;
-    z-index: 1;
-    
-    .header-content {
-      height: 100%;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      margin: 0 auto;
-    }
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin: 0 auto;
   }
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
   
-  .header-left {
+  .header-title {
     font-family: 'Inter', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
-    line-height: 1;
-    flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-left: 0; // Standardmäßig kein Abstand (ggf Sidebar anpassen)
+  }
+  
+  .header-logo {
+    display: none;
+    max-height: 40px; // Höhe anpassen falls nötig
+  }
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  
+  img {
+    display: block;
+    cursor: pointer;
+    height: 40px;
+  }
+  
+  .circle {
+    width: 40px;
+    height: 40px;
+    background-color: var(--accentColor2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8; // leicht transparent bei Hover
+    }
     
-    @media (min-width: 1000px) {
-      margin-left: 0; // ab breiteren Bildschirmen wird der gewünschte Abstand eingefügt falls nötig
+    span {
+      color: var(--fontColorMaim);
+      font-weight: bold;
+    }
+  }
+}
+
+// Responsive Anpassungen
+@media (max-width: 1000px) {
+  .header-left {
+    justify-content: left;
+    .header-title {
+      display: none; // Text ausblenden
+    }
+    .header-logo {
+      display: inline-block; // Logo einblenden
     }
   }
   
   .header-right {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-shrink: 0; // soll nicht schrumpfen
-    
     img {
-      display: block;
-      cursor: pointer;
-      height: 40px;
-    }
-    
-    .circle {
-      width: 40px;
-      height: 40px;
-      background-color: var(--accentColor2);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-      span {
-        color: var(--fontColorMaim);
-        font-weight: bold;
-      }
+      display: none; // Help-Icon ausblenden
     }
   }
-  
-  
+}
+
+@media (max-width: 750px) {
+  .header-left {
+    .header-title {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .header-left {
+    .header-title {
+      font-size: 1rem;
+    }
+  }
+  .header-right {
+    gap: 0.1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-left {
+    .header-title {
+      font-size: 0.75rem;
+    }
+  }
+}

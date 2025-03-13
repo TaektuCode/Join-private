@@ -1,0 +1,38 @@
+.help {
+    padding: 25px 0 50px 50px;
+    max-width: 1440px;
+}
+
+.instruction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+  
+    .instruction-row {
+      border-bottom: 1px solid transparent;
+    }
+  
+    .instruction-step-number {
+      font-weight: bold;
+      text-align: left;
+      vertical-align: top;
+      padding-right: 10px;
+      width: 50px;
+    }
+  
+    .instruction-step-content {
+      text-align: left;
+      padding: 5px 0;
+  
+      .instruction-title {
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 5px;
+      }
+    }
+
+  }
+  
+  .color {
+    color: var(--accentColor2);
+}
