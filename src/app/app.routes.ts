@@ -6,6 +6,7 @@ import { SummaryComponent } from './maincontent/summary/summary.component';
 import { AddtaskComponent } from './maincontent/addtask/addtask.component';
 import { BoardComponent } from './maincontent/board/board.component';
 import { ContactsComponent } from './maincontent/contacts/contacts.component';
+import { HelpComponent } from './help/help.component';
 
 export const routes: Routes = [
     { path: '', component: MaincontentComponent },
@@ -14,5 +15,6 @@ export const routes: Routes = [
     { path: 'summary', component: SummaryComponent },
     { path: 'addtask', component: AddtaskComponent },
     { path: 'board', component: BoardComponent },
-    { path: 'contacts', component: ContactsComponent }
+    { path: 'contacts', component: ContactsComponent },
+    { path: 'help', component: HelpComponent }
 ];
