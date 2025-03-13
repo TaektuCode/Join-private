@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-policy',
@@ -8,7 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './policy.component.scss'
 })
 export class PolicyComponent {
+  constructor(private location: Location) { }
+
   backPage() {
-    window.history.back();
+    this.location.back();
   }
 }
