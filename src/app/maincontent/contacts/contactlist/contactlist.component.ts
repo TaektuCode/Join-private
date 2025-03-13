@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 import { ContactService } from '../contact.service'; // Import ContactService
 import { ContactInterface } from '../contact-interface'; // Import ContactInterface
+import { AddcontactComponent } from '../addcontact/addcontact.component';
 
 @Component({
   selector: 'app-contactlist',
   standalone: true,
-  imports: [],
+  imports: [AddcontactComponent],
   templateUrl: './contactlist.component.html',
   styleUrl: './contactlist.component.scss',
 })
@@ -37,7 +38,6 @@ export class ContactlistComponent {
 
   // Method to set the selected contact in the ContactService
   selectContact(contact: ContactInterface): void {
-    console.log('Contact selected:', contact);
     this.contactService.setSelectedContact(contact);
   }
 }

@@ -53,10 +53,8 @@ export class FirebaseService {
     sortedContacts.forEach((contact) => {
       // Get the first letter of the contact's name and convert it to uppercase
       const firstLetter = contact.name.charAt(0).toUpperCase();
-
       // Find if a group with the same first letter already exists in the grouped array
       let group = grouped.find((g) => g.letter === firstLetter);
-
       // If a group with the first letter doesn't exist, create a new group
       if (!group) {
         // Create a new group object with the letter and an empty contacts array
