@@ -11,9 +11,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrl: './viewcontact.component.scss',
   animations: [
     trigger('slide', [
-      state('false', style({ transform: 'translateX(800%)' })), 
+      state('false', style({ transform: 'translateX(600%)' })), 
       state('true', style({ transform: 'translateX(0)' })), 
-      transition('false <=> true', animate('0.15s ease-in-out'))
+      transition('false <=> true', animate('0.8s ease-in-out'))
     ])
   ]
 })
