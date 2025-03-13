@@ -8,20 +8,21 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { EditcontactComponent } from "../editcontact/editcontact.component";
 
 @Component({
   selector: 'app-viewcontact',
   standalone: true,
-  imports: [],
+  imports: [EditcontactComponent],
   templateUrl: './viewcontact.component.html',
   styleUrl: './viewcontact.component.scss',
-  animations: [
-    trigger('slide', [
-      state('false', style({ transform: 'translateX(600%)' })), 
-      state('true', style({ transform: 'translateX(0)' })), 
-      transition('false <=> true', animate('0.8s ease-in-out'))
-    ])
-  ]
+  // animations: [
+  //   trigger('slide', [
+  //     state('false', style({ transform: 'translateX(600%)' })), 
+  //     state('true', style({ transform: 'translateX(0)' })), 
+  //     transition('false <=> true', animate('0.8s ease-in-out'))
+  //   ])
+  // ]
 })
 export class ViewcontactComponent implements OnInit {
   contactService = inject(ContactService);
@@ -43,15 +44,28 @@ export class ViewcontactComponent implements OnInit {
     });
   }
 
-  toggleVisibility() {
-    console.log('Before toggle:', this.visible());
-    this.visible.set(!this.visible());
-    console.log('After toggle:', this.visible());
+  // toggleVisibility() {
+  //   console.log('Before toggle:', this.visible());
+  //   this.visible.set(!this.visible());
+  //   console.log('After toggle:', this.visible());
+  // }
+
+  showOverlay = false;
+
+  editContactShowOverlay() {
+    this.showOverlay = true;;
   }
 
-  editContact() {
-    console.log('Edit Contact:', this.contact);
-  }
+  // showOverlay = false;
+
+  // openOverlay(): void {
+  //   this.showOverlay = true;
+  // }
+
+  // closeOverlay(): void {
+  //   this.showOverlay = false;
+  //   this.applyForm.reset();
+  // }
 
   deleteContact() {
     console.log('Delete Contact:', this.contact);

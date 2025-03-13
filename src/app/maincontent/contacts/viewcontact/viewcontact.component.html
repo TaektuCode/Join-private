@@ -1,13 +1,13 @@
-<section class="viewcontact">
+<section>
   <div class="viewcontact-header">
     <h1 class="viewcontact-headline">
       Contacts
       <div class="separator"></div>
       <span class="subtitle">Better with a Team</span>
     </h1>
-    <button (click)="toggleVisibility()">
+    <!-- <button (click)="toggleVisibility()">
       {{ visible() ? "Hide" : "Show" }}
-    </button>
+    </button> -->
   </div>
 
   <div [@slide]="visible()" id="viewcontact-card">
@@ -18,10 +18,11 @@
       <div class="name-container">
         <h2>{{ contact?.name }}</h2>
         <div class="contact-actions">
-          <button (click)="editContact()">
+          <!-- <button (click)="editContactShowOverlay()">
             <span class="icon-edit"></span>
             Edit
-          </button>
+          </button> -->
+          <app-editcontact></app-editcontact>
           <button (click)="deleteContact()">
             <span class="icon-delete"></span>
             Delete
