@@ -17,11 +17,11 @@ import {
   styleUrl: './viewcontact.component.scss',
   animations: [
     trigger('slide', [
-      state('false', style({ transform: 'translateX(800%)' })),
-      state('true', style({ transform: 'translateX(0)' })),
-      transition('false <=> true', animate('0.15s ease-in-out')),
-    ]),
-  ],
+      state('false', style({ transform: 'translateX(600%)' })), 
+      state('true', style({ transform: 'translateX(0)' })), 
+      transition('false <=> true', animate('0.8s ease-in-out'))
+    ])
+  ]
 })
 export class ViewcontactComponent implements OnInit {
   contactService = inject(ContactService);

@@ -47,7 +47,6 @@ section {
 .avatar-container {
   width: 120px;
   height: 120px;
-  // background: rgba(255, 122, 0, 1);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -68,38 +67,51 @@ section {
 }
 
 h2 {
-  font-size: 47px;
-  font-weight: 500;
-  margin-bottom: 5px;
+    font-weight: 500;
+    margin: 0;
 }
 
 .contact-actions {
   display: flex;
   gap: 10px;
 
-  button {
-    font-size: 16px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
+    button {
+        font-size: 16px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        &:hover {
+            color: rgba(41, 171, 226, 1);
+            .icon-delete {
+                filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
+            }
+            .icon-edit {
+                filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
+            }
+        }
+    }
 }
 
 .icon-edit {
-  background-image: url("/assets/img/addtask/edit.svg");
-  display: inline-block;
-  width: 24px;
-  height: 24px;
+    background-image: url("/assets/img/addtask/edit.svg");
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .icon-delete {
-  background-image: url("/assets/img/addtask/delete.svg");
-  display: inline-block;
-  width: 24px;
-  height: 24px;
+    background-image: url("/assets/img/addtask/delete.svg");
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 h3 {
@@ -120,20 +132,3 @@ a {
   text-decoration: none;
   color: blue;
 }
-
-// .slide-in {
-//     position: fixed; /* Fixiert die Karte auf der Seite */
-//     top: 350px;
-//     right: 0;
-//     width: 80%;
-//     max-width: 400px;;
-//     height: 100%;
-//     background-color: #F5F5F5;
-//     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-//     transform: translateX(100%);
-//     transition: transform 0.4s ease-in-out;
-// }
-
-// .slide-in.active {
-//     transform: translateX(0); /* Schiebt die Karte rein */
-// }

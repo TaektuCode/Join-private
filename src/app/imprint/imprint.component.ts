@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-imprint',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './imprint.component.scss'
 })
 export class ImprintComponent {
+  constructor(private location: Location) { }
 
+  backPage() {
+    this.location.back();
+  }
 }

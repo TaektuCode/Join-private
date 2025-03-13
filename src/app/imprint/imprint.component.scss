@@ -1,12 +1,17 @@
 .legal-notice {
     padding: 25px 0 50px 50px;
     max-width: 1440px;
+
+    @media (max-width: 550px) {
+        width: 100%;
+        padding: 10px;
+        padding-bottom: 125px;
+    }
 }
 
 h2 {
     font-size: 27px;
     font-weight: 700;
-    margin-bottom: 0;
 }
 
 p,
@@ -16,6 +21,52 @@ span {
     margin: 0;
 }
 
+.top {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+        cursor: pointer;
+    }
+}
+
 .color {
     color: var(--accentColor2);
+}
+
+@media (max-width: 1000px) {
+    h1 {
+        font-size: 47px;
+    }
+
+    h2 {
+        font-size: 27px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    h4 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 550px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    h4 {
+        font-size: 16px;
+        font-weight: bold;
+    }
 }
