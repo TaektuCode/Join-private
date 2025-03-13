@@ -38,7 +38,6 @@ export class ViewcontactComponent {
 
   ngOnInit(): void {
     this.contactService.selectedContact$.subscribe((contact) => {
-      console.log('Contact received in view:', contact);
       this.contact = contact;
       if (contact) {
         this.contactInitials =

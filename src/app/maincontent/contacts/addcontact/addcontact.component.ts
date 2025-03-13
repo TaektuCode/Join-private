@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './addcontact.component.html',
-  styleUrl: './addcontact.component.scss'
+  styleUrl: './addcontact.component.scss',
 })
-export class AddcontactComponent {
-
-}
+export class AddcontactComponent {}

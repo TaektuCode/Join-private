@@ -15,6 +15,9 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid #d1d1d1;
+  padding-left: 50px;
+  padding-bottom: 17px;
+  margin-bottom: 17px;
 }
 
 .contact {
@@ -22,7 +25,7 @@
   width: 352px;
   height: 78px;
   align-items: center;
-  margin-bottom: 10px;
+  padding-left: 20px;
 }
 
 .logo {
@@ -36,6 +39,8 @@
   font-weight: bold;
   margin-right: 10px;
   font-size: 12px;
+  border: 2px solid white;
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .contact-data {
