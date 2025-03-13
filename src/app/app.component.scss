@@ -1,9 +1,17 @@
-body{
+body {
     height: 100dvh;
 }
 
-.main-router{
+.main-router {
     margin-left: 240px;
     margin-top: 100px;
     max-width: 1440px;
 }
+
+@media (max-width: 1000px) {
+    .main-router {
+        margin-left: 0;
+        margin-right: 50px;
+    }
+}
+
