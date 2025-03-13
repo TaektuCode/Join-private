@@ -118,14 +118,43 @@
         background-color: #2A3647;
         color: #ffffff;
         border: none;
+
+        &:hover {
+          background-color: var(--accentColor2);
+          box-shadow: 4px 4px 4px lightgray;
+        }
       }
   
       .guest-btn {
         background-color: transparent;
-        border: 1px solid #2A3647;
+        border: 3px solid #2A3647;
         color: #2A3647;
+
+        &:hover {
+          border: 3px solid var(--accentColor2);
+          box-shadow: 4px 4px 4px lightgray;
+        }
+
       }
     }
   }
+
+  .login-footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  
+    a {
+      color: gray;
+      text-decoration: none;
+      cursor: pointer;
+  
+      &:hover {
+        color: var(--accentColor2);
+      }
+    }
+  }
+  
   
   
