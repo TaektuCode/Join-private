@@ -94,8 +94,9 @@
         .form-buttons {
           display: flex;
           gap: 24px;
-          .close-button {
+          .delete-button {
             display: flex;
+            width: 113px;
             justify-content: center;
             align-items: center;
             gap: 4px;
@@ -106,9 +107,6 @@
             font-size: 20px;
             padding: 16px;
             cursor: pointer;
-            svg {
-              margin-bottom: 2px;
-            }
           }
           .submit-button {
             display: flex;
