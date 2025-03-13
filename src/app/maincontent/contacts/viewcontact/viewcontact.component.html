@@ -12,7 +12,7 @@
 
   <div [@slide]="visible()" id="viewcontact-card">
     <div class="viewcontact-card-headline">
-      <div class="avatar-container">
+      <div class="avatar-container" [style.background-color]="contactColor">
         <div class="avatar">{{ contactInitials }}</div>
       </div>
       <div class="name-container">

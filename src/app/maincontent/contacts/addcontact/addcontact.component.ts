@@ -28,6 +28,7 @@ export class AddcontactComponent {
 
   closeOverlay(): void {
     this.showOverlay = false;
+    this.applyForm.reset();
   }
 
   async submitAddContact() {

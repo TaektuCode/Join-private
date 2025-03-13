@@ -27,6 +27,7 @@ export class ViewcontactComponent implements OnInit {
   contactService = inject(ContactService);
   contact: ContactInterface | null = null;
   contactInitials: string = '';
+  contactColor: string = '';
   protected visible = signal(false);
 
   ngOnInit(): void {
@@ -34,8 +35,10 @@ export class ViewcontactComponent implements OnInit {
       this.contact = contact;
       if (contact) {
         this.contactInitials = this.getInitials(contact.name); // Use the getInitials method
+        this.contactColor = contact.color || '#808080'; // Store the color, default to grey if no color exists
       } else {
         this.contactInitials = '';
+        this.contactColor = '';
       }
     });
   }

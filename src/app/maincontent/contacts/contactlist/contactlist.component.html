@@ -11,7 +11,9 @@
     </div>
     <div class="contact-data">
       <p>{{ item.name | truncate : 23 }}</p>
-      <a [attr.href]="'mailto:' + item.email">{{ item.email }}</a>
+      <a [attr.href]="'mailto:' + item.email">{{
+        item.email | truncate : 30
+      }}</a>
     </div>
   </div>
   } }
