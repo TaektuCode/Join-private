@@ -14,9 +14,7 @@ export class HeaderComponent {
 
   toggleOverlay(event: MouseEvent): void {
     event.stopPropagation();
-    console.log('Kreis geklickt. Alter Overlay-Status', this.overlayVisible);
     this.overlayVisible = !this.overlayVisible;
-    console.log('neuer status:', this.overlayVisible);
   }
 }
 

@@ -30,4 +30,16 @@
 
     }
   }
+
+  .help{
+    display: none;
+
+    @media (max-width: 1000px) {
+      
+        display: block;
+      
+    }
+  }
+
+
   
