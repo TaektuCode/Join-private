@@ -1,0 +1,35 @@
+.login-header {
+    
+    height: var(--headerHeight, 96px); // Falls --headerHeight nicht definiert ist, wird 96px genutzt
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px; // Außenabstand links und rechts
+  
+    img {
+      height: 80%; // Nimmt 80% der Header-Höhe ein
+      object-fit: contain;
+    }
+  
+    .header-right {
+      display: flex;
+      align-items: center;
+  
+      span {
+        color: #000000;
+        margin-right: 20px; // Abstand zwischen Text und Button
+      }
+  
+      button {
+        background-color: #2A3647;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        text-align: center;
+        appearance: none; // Entfernt native Browser-Styles
+      }
+    }
+  }
+  
