@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './imprint.component.scss'
 })
 export class ImprintComponent {
-
+  backPage() {
+    window.history.back();
+  }
 }

@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './policy.component.scss'
 })
 export class PolicyComponent {
-
+  backPage() {
+    window.history.back();
+  }
 }

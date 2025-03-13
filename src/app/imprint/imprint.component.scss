@@ -16,6 +16,15 @@ span {
     margin: 0;
 }
 
+.top {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+        cursor: pointer;
+    }
+}
+
 .color {
     color: var(--accentColor2);
 }

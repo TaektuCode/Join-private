@@ -9,6 +9,15 @@ h3 {
     margin-bottom: 0;
 }
 
+.top {
+    display: flex;
+    justify-content: space-between;
+
+    img {
+        cursor: pointer;
+    }
+}
+
 p,
 span,
 ul,
