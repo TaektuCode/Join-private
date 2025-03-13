@@ -1,6 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { ContactService } from '../contact.service'; // Import ContactService
-import { ContactInterface } from '../contact-interface'; // Import ContactInterface
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { ContactService } from '../contact.service';
+import { ContactInterface } from '../contact-interface';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-viewcontact',
@@ -8,33 +9,20 @@ import { ContactInterface } from '../contact-interface'; // Import ContactInterf
   imports: [],
   templateUrl: './viewcontact.component.html',
   styleUrl: './viewcontact.component.scss',
+  animations: [
+    trigger('slide', [
+      state('false', style({ transform: 'translateX(800%)' })), 
+      state('true', style({ transform: 'translateX(0)' })), 
+      transition('false <=> true', animate('0.15s ease-in-out'))
+    ])
+  ]
 })
-export class ViewcontactComponent {
-  // @Input() contact: {
-  //   name: string;
-  //   lastname: string;
-  //   email: string;
-  //   phone: string;
-  // } = {
-  //   name: 'Denis',
-  //   lastname: 'Welsch',
-  //   email: 'denis@gmail.de',
-  //   phone: '+49 1652 154 65',
-  // };
-
-  // get contactInitials(): string {
-  //   return this.extractInitials(this.contact.name, this.contact.lastname);
-  // }
-
-  // private extractInitials(name: string, lastname: string): string {
-  //   const firstInitial = name ? name.charAt(0).toUpperCase() : '';
-  //   const lastInitial = lastname ? lastname.charAt(0).toUpperCase() : '';
-  //   return firstInitial + lastInitial;
-  // }
+export class ViewcontactComponent implements OnInit {
 
   contactService = inject(ContactService);
   contact: ContactInterface | null = null;
   contactInitials: string = '';
+  protected visible = signal(false);
 
   ngOnInit(): void {
     this.contactService.selectedContact$.subscribe((contact) => {
@@ -49,13 +37,17 @@ export class ViewcontactComponent {
     });
   }
 
+  toggleVisibility() {
+    console.log('Before toggle:', this.visible());
+    this.visible.set(!this.visible());
+    console.log('After toggle:', this.visible());
+  }
+
   editContact() {
     console.log('Edit Contact:', this.contact);
-    // Hier könnte eine Navigationslogik oder ein Popup zum Bearbeiten geöffnet werden
   }
 
   deleteContact() {
     console.log('Delete Contact:', this.contact);
-    // Hier könnte eine Bestätigungsabfrage und die Löschlogik implementiert werden
   }
 }
