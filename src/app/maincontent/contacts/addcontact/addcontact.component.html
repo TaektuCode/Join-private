@@ -1,4 +1,4 @@
-<button>
+<button (click)="openOverlay()">
   Add new contact<svg
     width="33"
     height="33"
@@ -25,3 +25,12 @@
     </g>
   </svg>
 </button>
+@if (showOverlay) {
+<div class="overlay-background" (click)="closeOverlay()">
+  <div class="overlay-content" (click)="$event.stopPropagation()">
+    <h2>Add New Contact</h2>
+    <p>Your overlay content goes here.</p>
+    <button (click)="closeOverlay()">Close</button>
+  </div>
+</div>
+}

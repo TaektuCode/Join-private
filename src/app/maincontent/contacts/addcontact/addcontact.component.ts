@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
   templateUrl: './addcontact.component.html',
   styleUrl: './addcontact.component.scss',
 })
-export class AddcontactComponent {}
+export class AddcontactComponent {
+  showOverlay = false;
+
+  openOverlay(): void {
+    this.showOverlay = true;
+  }
+
+  closeOverlay(): void {
+    this.showOverlay = false;
+  }
+}
