@@ -1,7 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ContactService } from '../contact.service';
 import { ContactInterface } from '../contact-interface';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-viewcontact',
@@ -11,14 +17,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrl: './viewcontact.component.scss',
   animations: [
     trigger('slide', [
-      state('false', style({ transform: 'translateX(800%)' })), 
-      state('true', style({ transform: 'translateX(0)' })), 
-      transition('false <=> true', animate('0.15s ease-in-out'))
-    ])
-  ]
+      state('false', style({ transform: 'translateX(800%)' })),
+      state('true', style({ transform: 'translateX(0)' })),
+      transition('false <=> true', animate('0.15s ease-in-out')),
+    ]),
+  ],
 })
 export class ViewcontactComponent implements OnInit {
-
   contactService = inject(ContactService);
   contact: ContactInterface | null = null;
   contactInitials: string = '';
@@ -28,9 +33,7 @@ export class ViewcontactComponent implements OnInit {
     this.contactService.selectedContact$.subscribe((contact) => {
       this.contact = contact;
       if (contact) {
-        this.contactInitials =
-          contact.name.charAt(0).toUpperCase() +
-          contact.lastname.charAt(0).toUpperCase();
+        this.contactInitials = this.getInitials(contact.name); // Use the getInitials method
       } else {
         this.contactInitials = '';
       }
@@ -49,5 +52,21 @@ export class ViewcontactComponent implements OnInit {
 
   deleteContact() {
     console.log('Delete Contact:', this.contact);
+  }
+
+  getInitials(name: string): string {
+    if (!name) {
+      return ''; // Handle empty name
+    }
+
+    const names = name.trim().split(' '); // Split the name into an array of words
+    if (names.length === 1) {
+      return names[0].charAt(0).toUpperCase(); // Only one name, return first letter
+    }
+
+    const firstNameInitial = names[0].charAt(0).toUpperCase();
+    const lastNameInitial = names[names.length - 1].charAt(0).toUpperCase(); // Last word is assumed to be last name
+
+    return firstNameInitial + lastNameInitial;
   }
 }

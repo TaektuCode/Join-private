@@ -1,4 +1,4 @@
-button {
+.add-button {
   font-weight: 700;
   font-size: 21px;
   display: flex;
@@ -29,8 +29,102 @@ button {
 }
 
 .overlay-content {
+  display: flex;
   background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
+  border-radius: 30px;
+  width: 1212px;
+  height: 592px;
+  .overlay-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 467px;
+    color: #fff;
+    background-color: #2a3647;
+    border-radius: 28px 0 0 28px;
+    h2 {
+      font-size: 61px;
+      font-weight: 700;
+      margin: 0;
+      height: 73px;
+    }
+    p {
+      font-size: 27px;
+      margin: 0;
+    }
+  }
+  .overlay-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    .form-box {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      .person-logo {
+        width: 120px;
+        height: 120px;
+        background-color: #d1d1d1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 250px;
+      }
+      .formular {
+        width: 422px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        .input-field {
+          border: 1px solid #d1d1d1;
+          border-radius: 10px;
+          padding: 13px 21px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          input {
+            height: 100%;
+            width: 100%;
+            font-size: 20px;
+            border: none;
+          }
+        }
+        .form-buttons {
+          display: flex;
+          gap: 24px;
+          .close-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            background-color: #fff;
+            color: #2a3647;
+            border: 1px solid #2a3647;
+            border-radius: 10px;
+            font-size: 20px;
+            padding: 16px;
+            cursor: pointer;
+            svg {
+              margin-bottom: 2px;
+            }
+          }
+          .submit-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            color: #fff;
+            font-size: 21px;
+            font-weight: 700;
+            background-color: #2a3647;
+            padding: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
 }

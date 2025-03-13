@@ -21,6 +21,22 @@ export class ContactlistComponent {
     return this.firebaseService.getGroupedContacts();
   }
 
+  getInitials(name: string): string {
+    if (!name) {
+      return ''; // Handle empty name
+    }
+
+    const names = name.trim().split(' '); // Split the name into an array of words
+    if (names.length === 1) {
+      return names[0].charAt(0).toUpperCase(); // Only one name, return first letter
+    }
+
+    const firstNameInitial = names[0].charAt(0).toUpperCase();
+    const lastNameInitial = names[names.length - 1].charAt(0).toUpperCase(); // Last word is assumed to be last name
+
+    return firstNameInitial + lastNameInitial;
+  }
+
   // Method to generate a random color based on the index
   getRandomColor(index: number): string {
     const colors = [

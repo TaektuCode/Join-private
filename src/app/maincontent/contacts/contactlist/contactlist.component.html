@@ -7,11 +7,10 @@
   @for (item of group.contacts; track item.id) {
   <div class="contact" (click)="selectContact(item)">
     <div class="logo" [style.background-color]="getRandomColor($index)">
-      {{ item.name.charAt(0).toUpperCase()
-      }}{{ item.lastname.charAt(0).toUpperCase() }}
+      {{ getInitials(item.name) }}
     </div>
     <div class="contact-data">
-      <p>{{ item.name }} {{ item.lastname }}</p>
+      <p>{{ item.name }}</p>
       <a [attr.href]="'mailto:' + item.email">{{ item.email }}</a>
     </div>
   </div>

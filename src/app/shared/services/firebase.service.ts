@@ -38,7 +38,6 @@ export class FirebaseService {
     return {
       id: id,
       email: obj.email,
-      lastname: obj.lastname,
       name: obj.name,
       phone: obj.phone,
     };
