@@ -1,44 +1,44 @@
 <section class="viewcontact">
-    <div class="viewcontact-header">
-        <h1 class="viewcontact-headline">
-            Contacts
-            <div class="separator"></div>
-            <span class="subtitle">Better with a Team</span>
-        </h1>
-        <button (click)="toggleVisibility()">
-            {{ visible() ? 'Hide' : 'Show' }}
-        </button>
-    </div>
+  <div class="viewcontact-header">
+    <h1 class="viewcontact-headline">
+      Contacts
+      <div class="separator"></div>
+      <span class="subtitle">Better with a Team</span>
+    </h1>
+    <button (click)="toggleVisibility()">
+      {{ visible() ? "Hide" : "Show" }}
+    </button>
+  </div>
 
-    <div [@slide]="visible()" id="viewcontact-card">    
-        <div class="viewcontact-card-headline">
-            <div class="avatar-container">
-                <div class="avatar">{{ contactInitials }}</div>
-            </div>
-            <div class="name-container">
-                <h2>{{ contact?.name }} {{ contact?.lastname }}</h2>
-                <div class="contact-actions">
-                    <button (click)="editContact()">
-                        <span class="icon-edit"></span>
-                        Edit
-                    </button>
-                    <button (click)="deleteContact()">
-                        <span class="icon-delete"></span>
-                        Delete
-                    </button>
-                </div>
-            </div>
+  <div [@slide]="visible()" id="viewcontact-card">
+    <div class="viewcontact-card-headline">
+      <div class="avatar-container" [style.background-color]="contactColor">
+        <div class="avatar">{{ contactInitials }}</div>
+      </div>
+      <div class="name-container">
+        <h2>{{ contact?.name }}</h2>
+        <div class="contact-actions">
+          <button (click)="editContact()">
+            <span class="icon-edit"></span>
+            Edit
+          </button>
+          <button (click)="deleteContact()">
+            <span class="icon-delete"></span>
+            Delete
+          </button>
         </div>
-        <h3>Contact Information</h3>
-        <div class="contact-info">
-            <div class="contact-details">
-                <p>Email</p>
-                <a [href]="'mailto:' + contact?.email">{{ contact?.email }}</a>
-            </div>
-            <div class="contact-details">
-                <p>Phone</p>
-                <span>{{ contact?.phone }}</span>
-            </div>
-        </div>
+      </div>
     </div>
+    <h3>Contact Information</h3>
+    <div class="contact-info">
+      <div class="contact-details">
+        <p>Email</p>
+        <a [href]="'mailto:' + contact?.email">{{ contact?.email }}</a>
+      </div>
+      <div class="contact-details">
+        <p>Phone</p>
+        <span>{{ contact?.phone }}</span>
+      </div>
+    </div>
+  </div>
 </section>

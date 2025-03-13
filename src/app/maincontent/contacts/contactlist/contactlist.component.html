@@ -6,13 +6,14 @@
   </div>
   @for (item of group.contacts; track item.id) {
   <div class="contact" (click)="selectContact(item)">
-    <div class="logo" [style.background-color]="getRandomColor($index)">
-      {{ item.name.charAt(0).toUpperCase()
-      }}{{ item.lastname.charAt(0).toUpperCase() }}
+    <div class="logo" [style.background-color]="item.color">
+      {{ getInitials(item.name) }}
     </div>
     <div class="contact-data">
-      <p>{{ item.name }} {{ item.lastname }}</p>
-      <a [attr.href]="'mailto:' + item.email">{{ item.email }}</a>
+      <p>{{ item.name | truncate : 23 }}</p>
+      <a [attr.href]="'mailto:' + item.email">{{
+        item.email | truncate : 30
+      }}</a>
     </div>
   </div>
   } }
