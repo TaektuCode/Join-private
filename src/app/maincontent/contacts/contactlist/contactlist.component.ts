@@ -3,11 +3,12 @@ import { FirebaseService } from '../../../shared/services/firebase.service';
 import { ContactService } from '../contact.service'; // Import ContactService
 import { ContactInterface } from '../contact-interface'; // Import ContactInterface
 import { AddcontactComponent } from '../addcontact/addcontact.component';
+import { TruncatePipe } from '../../../truncate.pipe';
 
 @Component({
   selector: 'app-contactlist',
   standalone: true,
-  imports: [AddcontactComponent],
+  imports: [AddcontactComponent, TruncatePipe],
   templateUrl: './contactlist.component.html',
   styleUrl: './contactlist.component.scss',
 })

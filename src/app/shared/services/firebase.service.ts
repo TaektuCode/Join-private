@@ -40,6 +40,7 @@ export class FirebaseService {
       email: obj.email,
       name: obj.name,
       phone: obj.phone,
+      color: obj.color,
     };
   }
 

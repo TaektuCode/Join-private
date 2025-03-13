@@ -3,4 +3,5 @@ export interface ContactInterface {
   email: string;
   name: string;
   phone: number;
+  color: string;
 }

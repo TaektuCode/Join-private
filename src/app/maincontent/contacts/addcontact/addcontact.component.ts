@@ -17,6 +17,7 @@ export class AddcontactComponent {
     name: new FormControl(''),
     email: new FormControl(''),
     phone: new FormControl(''),
+    color: new FormControl(''),
   });
 
   showOverlay = false;
@@ -32,15 +33,36 @@ export class AddcontactComponent {
   async submitAddContact() {
     if (this.applyForm.valid) {
       const contactData = this.applyForm.value;
+      const randomColor = this.getRandomColor(); // Generate a random color
 
-      try {
-        await addDoc(collection(this.firestore, 'contacts'), contactData);
-        console.log('Contact added successfully!');
-        this.closeOverlay(); // Close the overlay after successful submission
-        this.applyForm.reset(); // Reset the form
-      } catch (error) {
-        console.error('Error adding contact:', error);
-      }
+      // Create a new object with the contact data and the random color
+      const contactWithColor = {
+        name: contactData.name,
+        email: contactData.email,
+        phone: contactData.phone,
+        color: randomColor,
+      };
+
+      await addDoc(collection(this.firestore, 'contacts'), contactWithColor);
+      console.log('Contact added successfully!');
+      this.closeOverlay();
+      this.applyForm.reset();
     }
+  }
+
+  getRandomColor(): string {
+    const colors = [
+      '#FF7A00',
+      '#9327FF',
+      '#6E52FF',
+      '#FC71FF',
+      '#FFBB2B',
+      '#1FD7C1',
+      '#462F8A',
+      '#FF4646',
+      '#00BEE8',
+    ];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
   }
 }
