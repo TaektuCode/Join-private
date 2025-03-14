@@ -29,6 +29,11 @@
         cursor: pointer;
         text-align: center;
         appearance: none; // Entfernt native Browser-Styles
+
+        &:hover {
+          background-color: var(--accentColor2);
+          box-shadow: 4px 4px 4px lightgray;
+        }
       }
     }
   }
