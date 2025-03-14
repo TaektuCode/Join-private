@@ -11,25 +11,43 @@ section {
 }
 
 .viewcontact-header {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 .viewcontact-headline {
   display: flex;
   align-items: center;
-  gap: 15px; /* Abstand zwischen Text und Strich */
+  flex-direction: row;
+  gap: 15px; /* Standardmäßig nebeneinander */
+
+  .separator {
+    width: 3px;
+    height: 59px;
+    background-color: rgba(0, 124, 238, 1);
+  }
+
+  .subtitle {
+    font-size: 27px;
+    color: rgba(42, 54, 70, 1);
+  }
+
+  @media (max-width: 1350px) {
+    flex-direction: column; /* Elemente untereinander anordnen */
+    align-items: flex-start;
+    gap: 10px; /* Etwas geringerer Abstand */
+
+    .subtitle {
+      order: 1;
+    }
+
+    .separator {
+      width: 90px; /* Breite statt Höhe ändern */
+      height: 3px; /* Höhe minimieren */
+      order: 2;
+    }
+  }
 }
 
-.separator {
-  width: 3px;
-  height: 59px;
-  background-color: rgba(0, 124, 238, 1);
-}
-
-.subtitle {
-  font-size: 27px;
-  color: rgba(42, 54, 70, 1);
-}
 
 #viewcontact-card {
   height: 364px;
@@ -43,6 +61,12 @@ section {
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
+
+  @media (max-width: 1350px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .avatar-container {
@@ -62,9 +86,23 @@ section {
   color: white;
 }
 
+// .name-container {
+//   display: flex;
+//   flex-direction: column;
+// }
+
 .name-container {
   display: flex;
   flex-direction: column;
+
+  h2 {
+
+    @media (max-width: 1180px) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
 }
 
 h2 {
