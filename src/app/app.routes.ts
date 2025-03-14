@@ -7,6 +7,7 @@ import { AddtaskComponent } from './maincontent/addtask/addtask.component';
 import { BoardComponent } from './maincontent/board/board.component';
 import { ContactsComponent } from './maincontent/contacts/contacts.component';
 import { HelpComponent } from './help/help.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     { path: '', component: MaincontentComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'addtask', component: AddtaskComponent },
     { path: 'board', component: BoardComponent },
     { path: 'contacts', component: ContactsComponent },
-    { path: 'help', component: HelpComponent }
+    { path: 'help', component: HelpComponent },
+    { path: 'login', component: LoginComponent }
 ];
