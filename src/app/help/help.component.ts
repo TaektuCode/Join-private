@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-help',
@@ -8,5 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './help.component.scss'
 })
 export class HelpComponent {
+  constructor(private location: Location) { }
 
+  backPage() {
+    this.location.back();
+  }
 }

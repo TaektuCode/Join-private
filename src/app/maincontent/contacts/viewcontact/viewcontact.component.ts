@@ -9,20 +9,22 @@ import {
   trigger,
 } from '@angular/animations';
 import { DeletecontactComponent } from '../deletecontact/deletecontact.component';
+import { EditcontactComponent } from "../editcontact/editcontact.component";
+
 
 @Component({
   selector: 'app-viewcontact',
   standalone: true,
-  imports: [DeletecontactComponent],
+  imports: [DeletecontactComponent, EditcontactComponent],
   templateUrl: './viewcontact.component.html',
   styleUrl: './viewcontact.component.scss',
-  animations: [
-    trigger('slide', [
-      state('false', style({ transform: 'translateX(600%)' })),
-      state('true', style({ transform: 'translateX(0)' })),
-      transition('false <=> true', animate('0.8s ease-in-out')),
-    ]),
-  ],
+  // animations: [
+  //   trigger('slide', [
+  //     state('false', style({ transform: 'translateX(600%)' })), 
+  //     state('true', style({ transform: 'translateX(0)' })), 
+  //     transition('false <=> true', animate('0.8s ease-in-out'))
+  //   ])
+  // ]
 })
 export class ViewcontactComponent implements OnInit {
   contactService = inject(ContactService);
@@ -44,14 +46,16 @@ export class ViewcontactComponent implements OnInit {
     });
   }
 
-  toggleVisibility() {
-    console.log('Before toggle:', this.visible());
-    this.visible.set(!this.visible());
-    console.log('After toggle:', this.visible());
-  }
+  // toggleVisibility() {
+  //   console.log('Before toggle:', this.visible());
+  //   this.visible.set(!this.visible());
+  //   console.log('After toggle:', this.visible());
+  // }
 
-  editContact() {
-    console.log('Edit Contact:', this.contact);
+  showOverlay = false;
+
+  editContactShowOverlay() {
+    this.showOverlay = true;;
   }
 
   getInitials(name: string): string {

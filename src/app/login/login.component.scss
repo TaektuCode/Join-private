@@ -1,0 +1,160 @@
+.login-header {
+    
+    height: var(--headerHeight); // Falls --headerHeight nicht definiert ist, wird 96px genutzt
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px; // Außenabstand links und rechts
+  
+    img {
+      height: 50px; 
+      
+    }
+  
+    .header-right {
+      display: flex;
+      align-items: center;
+  
+      span {
+        color: #000000;
+        margin-right: 20px; // Abstand zwischen Text und Button
+      }
+  
+      button {
+        background-color: #2A3647;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 20px;
+        cursor: pointer;
+        text-align: center;
+        appearance: none; // Entfernt native Browser-Styles
+      }
+    }
+  }
+
+  .main-content {
+    width: 600px;
+    height: 400px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;           // Grauer Rahmen
+    border-radius: 16px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);  // Grauer Schatten (1px stark)
+    margin: 0 auto;                   // Zentriert horizontal
+    padding: 20px;                    // Innenabstand, damit der Inhalt nicht direkt am Rand klebt
+  
+    h1 {
+      margin-top: 40px;               // Abstand nach oben
+      text-align: center;
+      color: #000000;
+    }
+  
+    .underline {
+      width: 25%; 
+      height: 2px;
+      background-color: var(--accentColor2);
+      margin: 10px auto 20px auto;     // Zentriert und etwas Abstand nach oben und unten
+    }
+  
+    .input-group {
+      width: 80%;
+      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;         // Grauer Rahmen für das Eingabefeld
+      border-radius: 8px;
+      padding: 8px 12px;
+  
+      input {
+        flex: 1;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        color: gray;
+        background-color: transparent;
+        
+        &::placeholder {
+          color: gray;
+        }
+      }
+  
+      img {
+        width: 24px;                  // Feste Breite für das Symbol
+        height: auto;
+      }
+    }
+  
+    .remember-me {
+      width: 80%;
+      margin: 10px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: gray;
+  
+      input[type="checkbox"] {
+        margin-right: 8px;
+      }
+    }
+  
+    .button-group {
+      width: 80%;
+      margin: 20px auto;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+  
+      button {
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        appearance: none;
+      }
+  
+      .login-btn {
+        background-color: #2A3647;
+        color: #ffffff;
+        border: none;
+
+        &:hover {
+          background-color: var(--accentColor2);
+          box-shadow: 4px 4px 4px lightgray;
+        }
+      }
+  
+      .guest-btn {
+        background-color: transparent;
+        border: 3px solid #2A3647;
+        color: #2A3647;
+
+        &:hover {
+          border: 3px solid var(--accentColor2);
+          box-shadow: 4px 4px 4px lightgray;
+        }
+
+      }
+    }
+  }
+
+  .login-footer {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  
+    a {
+      color: gray;
+      text-decoration: none;
+      cursor: pointer;
+  
+      &:hover {
+        color: var(--accentColor2);
+      }
+    }
+  }
+  
+  
+  
