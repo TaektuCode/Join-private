@@ -16,9 +16,9 @@
         <div class="avatar">{{ contactInitials }}</div>
       </div>
       <div class="name-container">
-        <h2>{{ contact?.name }}</h2>
+        <h2>{{ contact?.name | truncate : 20 }}</h2>
         <div class="contact-actions">
-          <app-editcontact></app-editcontact>
+          <app-editcontact [contact]="contact"></app-editcontact>
           <app-deletecontact [contactId]="contact?.id"></app-deletecontact>
         </div>
       </div>

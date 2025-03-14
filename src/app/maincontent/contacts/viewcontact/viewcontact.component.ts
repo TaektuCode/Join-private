@@ -9,19 +9,19 @@ import {
   trigger,
 } from '@angular/animations';
 import { DeletecontactComponent } from '../deletecontact/deletecontact.component';
-import { EditcontactComponent } from "../editcontact/editcontact.component";
-
+import { EditcontactComponent } from '../editcontact/editcontact.component';
+import { TruncatePipe } from '../../../truncate.pipe';
 
 @Component({
   selector: 'app-viewcontact',
   standalone: true,
-  imports: [DeletecontactComponent, EditcontactComponent],
+  imports: [DeletecontactComponent, EditcontactComponent, TruncatePipe],
   templateUrl: './viewcontact.component.html',
   styleUrl: './viewcontact.component.scss',
   // animations: [
   //   trigger('slide', [
-  //     state('false', style({ transform: 'translateX(600%)' })), 
-  //     state('true', style({ transform: 'translateX(0)' })), 
+  //     state('false', style({ transform: 'translateX(600%)' })),
+  //     state('true', style({ transform: 'translateX(0)' })),
   //     transition('false <=> true', animate('0.8s ease-in-out'))
   //   ])
   // ]
@@ -55,7 +55,7 @@ export class ViewcontactComponent implements OnInit {
   showOverlay = false;
 
   editContactShowOverlay() {
-    this.showOverlay = true;;
+    this.showOverlay = true;
   }
 
   getInitials(name: string): string {
