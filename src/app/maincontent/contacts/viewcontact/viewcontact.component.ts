@@ -8,12 +8,14 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { DeletecontactComponent } from '../deletecontact/deletecontact.component';
 import { EditcontactComponent } from "../editcontact/editcontact.component";
+
 
 @Component({
   selector: 'app-viewcontact',
   standalone: true,
-  imports: [EditcontactComponent],
+  imports: [DeletecontactComponent, EditcontactComponent],
   templateUrl: './viewcontact.component.html',
   styleUrl: './viewcontact.component.scss',
   // animations: [
@@ -54,21 +56,6 @@ export class ViewcontactComponent implements OnInit {
 
   editContactShowOverlay() {
     this.showOverlay = true;;
-  }
-
-  // showOverlay = false;
-
-  // openOverlay(): void {
-  //   this.showOverlay = true;
-  // }
-
-  // closeOverlay(): void {
-  //   this.showOverlay = false;
-  //   this.applyForm.reset();
-  // }
-
-  deleteContact() {
-    console.log('Delete Contact:', this.contact);
   }
 
   getInitials(name: string): string {

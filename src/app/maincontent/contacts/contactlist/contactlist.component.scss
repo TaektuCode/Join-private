@@ -1,11 +1,16 @@
 .contact-list {
   font-family: inter;
-  width: 400px;
+  width: 420px;
   min-height: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
   background-color: #fff;
+}
+
+.contact-box {
+  max-height: 79vh;
+  overflow: auto;
 }
 
 .letter-separator {

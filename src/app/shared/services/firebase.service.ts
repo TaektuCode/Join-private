@@ -1,5 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { collection, Firestore, onSnapshot } from '@angular/fire/firestore';
+import {
+  collection,
+  Firestore,
+  onSnapshot,
+  doc,
+  deleteDoc,
+} from '@angular/fire/firestore';
 import { ContactInterface } from '../../maincontent/contacts/contact-interface';
 
 @Injectable({
@@ -69,6 +75,12 @@ export class FirebaseService {
     // Return the array of grouped contacts
     return grouped;
   }
+
+  async deleteContact(contactId: string) {
+    const contactDocRef = doc(this.firebase, 'contacts', contactId);
+    await deleteDoc(contactDocRef);
+  }
+
   // Lifecycle hook to unsubscribe from onSnapshot when the service is destroye
   ngOnDestroy() {
     if (this.unsubscribe) {
