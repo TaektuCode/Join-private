@@ -19,11 +19,6 @@
         <h2>{{ contact?.name }}</h2>
         <div class="contact-actions">
           <app-editcontact></app-editcontact>
-          <button (click)="deleteContact()">
-
-            <span class="icon-delete"></span>
-            Delete
-          </button> -->
           <app-deletecontact [contactId]="contact?.id"></app-deletecontact>
         </div>
       </div>
