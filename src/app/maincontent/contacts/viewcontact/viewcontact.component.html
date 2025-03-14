@@ -22,10 +22,11 @@
             <span class="icon-edit"></span>
             Edit
           </button>
-          <button (click)="deleteContact()">
+          <!-- <button (click)="deleteContact()">
             <span class="icon-delete"></span>
             Delete
-          </button>
+          </button> -->
+          <app-deletecontact [contactId]="contact?.id"></app-deletecontact>
         </div>
       </div>
     </div>

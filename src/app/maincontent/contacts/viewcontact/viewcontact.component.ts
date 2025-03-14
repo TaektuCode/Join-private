@@ -8,20 +8,21 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { DeletecontactComponent } from '../deletecontact/deletecontact.component';
 
 @Component({
   selector: 'app-viewcontact',
   standalone: true,
-  imports: [],
+  imports: [DeletecontactComponent],
   templateUrl: './viewcontact.component.html',
   styleUrl: './viewcontact.component.scss',
   animations: [
     trigger('slide', [
-      state('false', style({ transform: 'translateX(600%)' })), 
-      state('true', style({ transform: 'translateX(0)' })), 
-      transition('false <=> true', animate('0.8s ease-in-out'))
-    ])
-  ]
+      state('false', style({ transform: 'translateX(600%)' })),
+      state('true', style({ transform: 'translateX(0)' })),
+      transition('false <=> true', animate('0.8s ease-in-out')),
+    ]),
+  ],
 })
 export class ViewcontactComponent implements OnInit {
   contactService = inject(ContactService);
@@ -51,10 +52,6 @@ export class ViewcontactComponent implements OnInit {
 
   editContact() {
     console.log('Edit Contact:', this.contact);
-  }
-
-  deleteContact() {
-    console.log('Delete Contact:', this.contact);
   }
 
   getInitials(name: string): string {
