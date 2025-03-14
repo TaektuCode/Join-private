@@ -164,6 +164,32 @@
     }
   }
   
+  .mobile-header-right {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+  
+    span {
+      color: #000;
+      margin-right: 20px;
+    }
+  
+    button {
+      background-color: #2A3647;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      appearance: none;
+  
+      &:hover {
+        background-color: var(--accentColor2);
+        box-shadow: 4px 4px 4px lightgray;
+      }
+    }
+  }
 
  @keyframes expandUnderline {
   to {
@@ -177,5 +203,32 @@
   }
   to {
     transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 1000px) {
+  .login-header .header-right {
+    display: none;
+  }
+  .mobile-header-right {
+    display: flex;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .button-group {
+    flex-direction: column;
+    gap: 16px;
+    button {
+      width: 100%;
+    }
+  }
+  
+  .main-content {
+    width: 100%;
+    max-width: 318px;
+    margin: 0 auto;
+    padding: 20px;
   }
 }
