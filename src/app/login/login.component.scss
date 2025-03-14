@@ -59,6 +59,9 @@
       height: 2px;
       background-color: var(--accentColor2);
       margin: 10px auto 20px auto;     // Zentriert und etwas Abstand nach oben und unten
+      transform: scale(0);
+      transform-origin: center;
+      animation: expandUnderline 2s ease-out forwards;
     }
   
     .input-group {
@@ -161,5 +164,10 @@
     }
   }
   
-  
+
+ @keyframes expandUnderline {
+  to {
+    transform: scaleX(1);
+  }
+} 
   
