@@ -64,6 +64,19 @@
     justify-content: center;
     align-items: center;
     flex: 1;
+    position: relative;
+    .exit-button {
+      position: absolute;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      top: 28px;
+      right: 75px;
+      background-color: #fff;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
     .form-box {
       display: flex;
       align-items: center;
@@ -147,4 +160,31 @@
       }
     }
   }
+}
+
+.general-error-messages {
+  position: relative;
+  min-height: 50px;
+}
+
+.error-message {
+  position: absolute;
+  color: red;
+  font-size: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-message:nth-child(1) {
+  top: 0;
+}
+
+.error-message:nth-child(2) {
+  top: 20px;
+}
+
+.error-message:nth-child(3) {
+  top: 40px;
 }
