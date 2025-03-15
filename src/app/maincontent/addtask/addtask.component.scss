@@ -189,4 +189,48 @@
       }
     }
   }
+
+  @media (max-width: 1000px) {
+    h1 {
+      font-size: 40px;
+      margin-bottom: 40px;
+    }
+  
+    .top {
+      justify-content: center;
+    }
+  
+    .addtask-content {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+  
+      .left,
+      .right {
+        width: 260px;
+        margin: 0;
+      }
+    }
+  
+    .addtask-content .left {
+      border-right: none;
+      padding-right: 0;
+    }
+    
+    .footer {
+      flex-direction: column-reverse;
+      text-align: center;
+      padding-bottom: 40px;
+  
+      .footer-right {
+        margin: 20px 0;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        padding-right: 0;
+      }
+    }
+  }
+  
+  
   
