@@ -60,18 +60,29 @@
   
     // Speziell für das Datumfeld
     .date-wrapper {
-      display: flex;
-      align-items: center;
-  
-      input {
-        flex: 1;
-        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        background-color: #fff;    // weißer Hintergrund
+        border-radius: 8px;        // abgerundete Ecken
+        padding: 8px;              // Innenabstand
+      
+        input {
+          flex: 1;
+          border: none;           // Entfernt den Standardborder
+          outline: none;          // Entfernt den Fokusrahmen (optional)
+        }
+      
+        .calendar-link {
+          // Optional: zusätzliche Styles falls nötig
+          display: flex;
+          align-items: center;
+          
+          img {
+            display: block;
+          }
+        }
       }
-  
-      .calendar-link {
-        display: inline-block;
-      }
-    }
+      
   
     // Priority-Bereich
     .priority-wrapper {
