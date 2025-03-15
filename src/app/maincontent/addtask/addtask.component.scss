@@ -43,11 +43,16 @@
         textarea,
         select {
           width: 100%;
-          border: 1px solid #ccc;  // heller Border
+          border: 1px solid gray;  // heller Border
           border-radius: 8px;
           padding: 8px;
           font-size: 14px;
         }
+
+        textarea {
+            height: 100px; 
+          }
+          
       }
   
       .error {
