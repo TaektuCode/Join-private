@@ -1,0 +1,55 @@
+<div class="login-header">
+    <img src="./assets/img/contacts/back-arrow.svg" alt="back-arrow" (click)="backPage()">
+    <div class="header-right">
+      <span>Already a Join User?</span>
+      <button routerLink="/login">Log in</button>
+    </div>
+  </div>
+  
+  <div class="main-content">
+    <h1>Sign up</h1>
+    <div class="underline"></div>
+  
+    <!-- Neues Namensfeld -->
+    <div class="input-group">
+      <input type="text" placeholder="Name">
+      <img src="./assets/img/contacts/person.svg" alt="Person Icon">
+    </div>
+  
+    <!-- E-Mail-Feld -->
+    <div class="input-group">
+      <input type="text" placeholder="Email">
+      <img src="./assets/img/login/mail.svg" alt="Mail Icon">
+    </div>
+  
+    <!-- Passwort-Feld -->
+    <div class="input-group">
+      <input type="password" placeholder="Password">
+      <img src="./assets/img/login/lock.svg" alt="Lock Icon">
+    </div>
+  
+    <!-- Confirm Password-Feld -->
+    <div class="input-group">
+      <input type="password" placeholder="Confirm Password">
+      <img src="./assets/img/login/lock.svg" alt="Lock Icon">
+    </div>
+  
+    <!-- Checkbox für Privacy Policy -->
+    <div class="remember-me">
+      <input type="checkbox" id="accept">
+      <label for="accept">
+        I accept the <a routerLink="/policy">Privacy Policy</a>
+      </label>
+    </div>
+  
+    <!-- Button-Gruppe -->
+    <div class="button-group">
+      <button class="login-btn">Sign up</button>
+    </div>
+  </div>
+  
+  <div class="login-footer">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Legal notice</a>
+  </div>
+  
