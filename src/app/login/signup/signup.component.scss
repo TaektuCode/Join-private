@@ -1,4 +1,4 @@
-.login-header {
+.signup-header {
     height: var(--headerHeight); // Falls --headerHeight nicht definiert ist, wird 96px genutzt
     display: flex;
     justify-content: space-between;
@@ -136,7 +136,7 @@
     }
   }
   
-  .login-footer {
+  .signup-footer {
     margin-top: 40px;
     display: flex;
     justify-content: center;
