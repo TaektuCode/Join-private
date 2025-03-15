@@ -62,18 +62,17 @@
     .date-wrapper {
         display: flex;
         align-items: center;
-        background-color: #fff;    // weißer Hintergrund
-        border-radius: 8px;        // abgerundete Ecken
-        padding: 8px;              // Innenabstand
+        background-color: #fff;   
+        border-radius: 8px;
+        padding: 8px;              
       
         input {
           flex: 1;
-          border: none;           // Entfernt den Standardborder
-          outline: none;          // Entfernt den Fokusrahmen (optional)
+          border: none;           
+          outline: none;          
         }
       
         .calendar-link {
-          // Optional: zusätzliche Styles falls nötig
           display: flex;
           align-items: center;
           
@@ -94,14 +93,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid #ccc;
+        background-color: white;
+        border: 1px solid gray;
         border-radius: 8px;
         padding: 8px;
         cursor: pointer;
         transition: box-shadow 0.3s;
   
         &:hover {
-          box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
         }
   
         img {
@@ -116,18 +116,24 @@
   
     // Subtasks-Bereich
     .subtasks-wrapper {
-      display: flex;
-      align-items: center;
-  
-      input {
-        flex: 1;
-        margin-right: 10px;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 8px;
+      
+        input {
+          flex: 1;
+          border: none !important;
+          outline: none;
+        }
+      
+        .add-subtask-link {
+          display: flex;
+          align-items: center;
+        }
       }
-  
-      .add-subtask-link {
-        display: inline-block;
-      }
-    }
+      
   }
   
   
