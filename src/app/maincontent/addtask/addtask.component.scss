@@ -23,7 +23,7 @@
 
     .left {
         border-right: 2px solid gray;
-        padding: 80px;
+        padding-right: 100px;
     }
   
     .input-field {
@@ -141,4 +141,52 @@
       
   }
   
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+  
+    .footer-left {
+      font-size: 14px;
+      .required {
+        color: red;
+      }
+    }
+  
+    .footer-right {
+      display: flex;
+      gap: 20px;
+      padding-right: 50px;
+  
+      .btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 16px;
+        border: 1px solid gray;
+        border-radius: 8px;
+        background-color: white;
+        cursor: pointer;
+        transition: box-shadow 0.3s;
+  
+        &:hover {
+          box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+        }
+  
+        img {
+          display: inline-block;
+        }
+      }
+  
+      .create-btn {
+        background-color: var(--footerColor);
+        color: white;
+
+        img {
+            filter: brightness(0) invert(1);
+        }
+      }
+    }
+  }
   
