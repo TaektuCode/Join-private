@@ -48,6 +48,21 @@ h1 {
         box-sizing: border-box;
         gap: 18px;
         cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .top-container-main:hover {
+        transform: scale(1.05);
+        background-color: rgba(42, 54, 71, 1);
+        color: white;
+
+        .todo-done-svg circle {
+            fill: white;
+        }
+
+        .todo-done-svg path {
+            fill: rgba(42, 54, 71, 1);
+        }
     }
 }
 
@@ -63,6 +78,7 @@ h1 {
     box-sizing: border-box;
     gap: 61px;
     cursor: pointer;
+    transition: all 0.3s ease;
 
     .urgent-container {
         display: flex;
@@ -78,6 +94,12 @@ h1 {
         height: 57px;
         gap: 13px;
     }
+}
+
+.urgent-deadline-container:hover {
+    transform: scale(1.05);
+    background-color: rgba(42, 54, 71, 1);
+    color: white;
 }
 
 .bottom-task-container {
@@ -98,6 +120,13 @@ h1 {
         box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
         box-sizing: border-box;
         cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .tasks:hover {
+        transform: scale(1.05);
+        background-color: rgba(42, 54, 71, 1);
+        color: white;
     }
 }
 
@@ -132,17 +161,17 @@ h1 {
     align-items: center;
     justify-content: center;
     width: 385px;
-}
 
-.timezone {
-    font-size: 47px;
-    font-weight: 500;
-    margin-top: 155px;
-    color: rgba(42, 54, 71, 1);
-}
+    .timezone {
+        font-size: 47px;
+        font-weight: 500;
+        margin-top: 155px;
+        color: rgba(42, 54, 71, 1);
+    }
 
-.user-name {
-    font-size: 64px;
-    font-weight: 700;
-    color: rgba(41, 171, 226, 1);
+    .user-name {
+        font-size: 64px;
+        font-weight: 700;
+        color: rgba(41, 171, 226, 1);
+    }
 }
