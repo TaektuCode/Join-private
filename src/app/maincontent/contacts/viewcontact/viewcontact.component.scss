@@ -31,7 +31,7 @@ section {
   .separator {
     width: 3px;
     height: 59px;
-    background-color: rgba(0, 124, 238, 1);
+    background-color: #29ABE2;
   }
 
   .subtitle {
@@ -49,8 +49,8 @@ section {
     }
 
     .separator {
-      width: 90px; /* Breite statt Höhe ändern */
-      height: 3px; /* Höhe minimieren */
+      width: 90px; /* Breite des Striches */
+      height: 3px; /* Höhe des Striches */
       order: 2;
     }
   }
