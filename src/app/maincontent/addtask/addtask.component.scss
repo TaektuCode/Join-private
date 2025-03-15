@@ -10,4 +10,113 @@
       cursor: pointer;
     }
   }
+
+  .addtask-content {
+    display: flex;
+    gap: 20px;
+  
+    .left,
+    .right {
+      width: 300px;
+      margin: 40px;
+    }
+
+    .left {
+        border-right: 2px solid gray;
+        padding: 80px;
+    }
+  
+    .input-field {
+      margin-bottom: 20px;
+  
+      .label {
+        font-size: 16px;
+        margin-bottom: 5px;
+  
+        .required {
+          color: red;
+        }
+      }
+  
+      .input-wrapper {
+        input,
+        textarea,
+        select {
+          width: 100%;
+          border: 1px solid #ccc;  // heller Border
+          border-radius: 8px;
+          padding: 8px;
+          font-size: 14px;
+        }
+      }
+  
+      .error {
+        font-size: 12px;
+        color: red;
+        margin-top: 5px;
+        display: none;  // wird ausgeblendet, wenn Eingabe erfolgt
+      }
+    }
+  
+    // Speziell für das Datumfeld
+    .date-wrapper {
+      display: flex;
+      align-items: center;
+  
+      input {
+        flex: 1;
+        margin-right: 10px;
+      }
+  
+      .calendar-link {
+        display: inline-block;
+      }
+    }
+  
+    // Priority-Bereich
+    .priority-wrapper {
+      display: flex;
+      gap: 10px;
+  
+      .priority-option {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 8px;
+        cursor: pointer;
+        transition: box-shadow 0.3s;
+  
+        &:hover {
+          box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+        }
+  
+        img {
+          margin-right: 5px;
+        }
+      }
+  
+      .medium {
+        background-color: yellow;
+      }
+    }
+  
+    // Subtasks-Bereich
+    .subtasks-wrapper {
+      display: flex;
+      align-items: center;
+  
+      input {
+        flex: 1;
+        margin-right: 10px;
+      }
+  
+      .add-subtask-link {
+        display: inline-block;
+      }
+    }
+  }
+  
   

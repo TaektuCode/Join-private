@@ -3,4 +3,92 @@
       <h1>Add Task</h1>
       <!-- <img src="./assets/img/contacts/back-arrow.svg" alt="back-arrow" (click)="backPage()"> -->
     </div>
+    <div class="addtask-content">
+        <!-- Linkes Div -->
+        <div class="left">
+          <!-- Title Field -->
+          <div class="input-field">
+            <div class="label">Title <span class="required">*</span></div>
+            <div class="input-wrapper">
+              <input type="text" placeholder="Enter a title">
+            </div>
+            <div class="error">Enter title now</div>
+          </div>
+          <!-- Description Field -->
+          <div class="input-field">
+            <div class="label">Description</div>
+            <div class="input-wrapper">
+              <textarea placeholder="Enter a Description"></textarea>
+            </div>
+            <div class="error">Enter the Description</div>
+          </div>
+          <!-- Due Date Field -->
+          <div class="input-field">
+            <div class="label">Due date <span class="required">*</span></div>
+            <div class="input-wrapper date-wrapper">
+              <input type="text" placeholder="tt.mm.jjjj">
+              <a href="#" class="calendar-link">
+                <img src="./assets/img/addtask/calendar.svg" alt="calendar">
+              </a>
+            </div>
+            <div class="error">Date require</div>
+          </div>
+        </div>
+      
+        <!-- Rechtes Div -->
+        <div class="right">
+          <!-- Priority Field -->
+          <div class="input-field">
+            <div class="label">Priority</div>
+            <div class="input-wrapper priority-wrapper">
+              <div class="priority-option">
+                <img src="./assets/img/addtask/low.svg" alt="Low">
+                <span>Low</span>
+              </div>
+              <div class="priority-option medium">
+                <img src="./assets/img/addtask/mid.svg" alt="Medium">
+                <span>Medium</span>
+              </div>
+              <div class="priority-option">
+                <img src="./assets/img/addtask/higher.svg" alt="Urgent">
+                <span>Urgent</span>
+              </div>
+            </div>
+            <div class="error">chose your Trio</div>
+          </div>
+          <!-- Assigned To Field -->
+          <div class="input-field">
+            <div class="label">Assigned to</div>
+            <div class="input-wrapper">
+              <select>
+                <option>Select Contacts to assign</option>
+              </select>
+            </div>
+            <div class="error">Add Your Contacts</div>
+          </div>
+          <!-- Category Field -->
+          <div class="input-field">
+            <div class="label">Category <span class="required">*</span></div>
+            <div class="input-wrapper">
+              <select>
+                <option>Select task category</option>
+                <option>Technical Task</option>
+                <option>User Story</option>
+              </select>
+            </div>
+            <div class="error">Add Category</div>
+          </div>
+          <!-- Subtasks Field -->
+          <div class="input-field">
+            <div class="label">Subtasks</div>
+            <div class="input-wrapper subtasks-wrapper">
+              <input type="text" placeholder="And new subtasks">
+              <a href="#" class="add-subtask-link">
+                <img src="./assets/img/addtask/add.svg" alt="add">
+              </a>
+            </div>
+            <div class="error subtasks-error">Add your subtasks if you need</div>
+          </div>
+        </div>
+      </div>      
   </div>
