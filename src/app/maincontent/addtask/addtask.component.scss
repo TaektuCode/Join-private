@@ -95,6 +95,7 @@
   
       .priority-option {
         flex: 1;
+        max-width: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -215,6 +216,22 @@
     .addtask-content .left {
       border-right: none;
       padding-right: 0;
+    }
+
+    .priority-wrapper {
+        .priority-option {
+          max-width: 80px;
+          padding: 4px; // reduziert den Innenabstand
+    
+          img {
+            width: 16px;  // setzt die Bildgröße herab
+            height: auto;
+          }
+    
+          span {
+            font-size: 10px; // verkleinert den Text
+          }
+        }
     }
     
     .footer {
