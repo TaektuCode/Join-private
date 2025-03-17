@@ -1,5 +1,5 @@
 .signup-header {
-    height: var(--headerHeight); // Falls --headerHeight nicht definiert ist, wird 96px genutzt
+    height: var(--headerHeight); 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -60,7 +60,7 @@
       margin: 10px auto;
       display: flex;
       align-items: center;
-      border: 1px solid #ccc;         // Grauer Rahmen für das Eingabefeld
+      border: 1px solid #ccc;
       border-radius: 8px;
       padding: 8px 12px;
   
@@ -78,7 +78,7 @@
       }
   
       img {
-        width: 24px;  // Feste Breite für das Symbol
+        width: 24px; 
         height: auto;
       }
     }
