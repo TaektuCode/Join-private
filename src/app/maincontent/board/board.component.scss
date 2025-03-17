@@ -1,0 +1,56 @@
+.board {
+    padding: 25px 0 50px 50px;
+    max-width: 1440px;
+  }
+.board-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem; // optional, je nach gewünschtem Abstand
+  
+    h1 {
+      margin: 0;
+    }
+  
+    .board-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem; // Abstand zwischen Suchfeld und Button
+  
+      .search-container {
+        display: flex;
+        align-items: center;
+        border: 1px solid lightgray;
+        border-radius: 8px;
+        overflow: hidden;
+  
+        input {
+          border: none;
+          padding: 0.5rem;
+          outline: none;
+          border-right: 1px solid gray;
+        }
+  
+        img {
+          padding: 0.5rem;
+        }
+      }
+  
+      .add-task {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: var(--fontColorMaim);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+  
+        img {
+          width: 12px;
+        }
+      }
+    }
+  }
+  
