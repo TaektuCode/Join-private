@@ -1,12 +1,18 @@
 .board {
     padding: 25px 0 50px 50px;
     max-width: 1440px;
+
+    h2{
+        margin: 0;
+        font-size: 16px;
+    }
   }
-.board-header {
+  
+  .board-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem; // optional, je nach gewünschtem Abstand
+    padding: 1rem;
   
     h1 {
       margin: 0;
@@ -15,7 +21,7 @@
     .board-controls {
       display: flex;
       align-items: center;
-      gap: 1rem; // Abstand zwischen Suchfeld und Button
+      gap: 1rem;
   
       .search-container {
         background-color: #fff;
@@ -50,6 +56,27 @@
   
         img {
           width: 12px;
+        }
+      }
+    }
+  }
+  
+  .main-board {
+    display: flex;
+    gap: 16px;
+  
+    .board-column {
+      flex: 1;
+      padding: 1rem;
+  
+      .column-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+  
+        img {
+          width: 16px;
         }
       }
     }
