@@ -53,6 +53,11 @@
       font-size: 27px;
       margin: 0;
     }
+    .separator {
+      width: 90px;
+      height: 3px;
+      background-color: #29ABE2;
+    }
   }
   .overlay-form {
     display: flex;
@@ -79,11 +84,18 @@
       .person-logo {
         width: 120px;
         height: 120px;
-        background-color: #d1d1d1;
+        border-radius: 50%;
         display: flex;
-        justify-content: center;
         align-items: center;
-        border-radius: 250px;
+        justify-content: center;
+        border: 3px solid white;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+        span {
+          font-size: 47px;
+          font-weight: 500;
+          color: white;
+        }
+
       }
       .formular {
         width: 422px;

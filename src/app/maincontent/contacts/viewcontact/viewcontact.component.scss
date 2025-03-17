@@ -8,6 +8,14 @@ section {
   margin-left: 55px;
   width: 100%;
   // overflow: hidden;
+  @media (max-width: 1350px) {
+    margin-top: 50px;
+    margin-left: 30px;
+  }
+
+  @media (max-width: 1175px) {
+    width: 85%;
+  }
 }
 
 .viewcontact-header {
@@ -23,7 +31,7 @@ section {
   .separator {
     width: 3px;
     height: 59px;
-    background-color: rgba(0, 124, 238, 1);
+    background-color: #29ABE2;
   }
 
   .subtitle {
@@ -41,8 +49,8 @@ section {
     }
 
     .separator {
-      width: 90px; /* Breite statt Höhe ändern */
-      height: 3px; /* Höhe minimieren */
+      width: 90px; /* Breite des Striches */
+      height: 3px; /* Höhe des Striches */
       order: 2;
     }
   }
@@ -63,7 +71,6 @@ section {
   margin-bottom: 20px;
 
   @media (max-width: 1350px) {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -78,18 +85,26 @@ section {
   justify-content: center;
   border: 3px solid white;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+
+  .avatar {
+    font-size: 47px;
+    font-weight: 500;
+    color: white;
+  }
+
+  @media (max-width: 1350px) {
+    width: 80px;
+    height: 80px;
+
+    .avatar {
+      font-size: 32px;
+    }
+  }  
 }
 
-.avatar {
-  font-size: 47px;
-  font-weight: 500;
-  color: white;
-}
 
-// .name-container {
-//   display: flex;
-//   flex-direction: column;
-// }
+
+
 
 .name-container {
   display: flex;
@@ -165,6 +180,10 @@ h3 {
 p {
   font-size: 16px;
   font-weight: 700;
+
+  @media (max-width: 1350px) {
+    margin: 0;
+  }
 }
 
 a {

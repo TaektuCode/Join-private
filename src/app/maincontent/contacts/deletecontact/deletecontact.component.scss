@@ -1,6 +1,26 @@
-button {
-  width: 15px;
-  height: 15px;
-  background-color: red;
+.delete-button {
+  font-size: 16px;
+  border: none;
+  background: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &:hover {
+    color: rgba(41, 171, 226, 1);
+    .icon-delete {
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
+        hue-rotate(162deg) brightness(97%) contrast(91%);
+    }
+  }
+}
+
+.icon-delete {
+  background-image: url("/assets/img/addtask/delete.svg");
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }

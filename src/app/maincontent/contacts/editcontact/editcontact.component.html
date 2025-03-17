@@ -49,6 +49,8 @@
           </defs>
         </svg>
         <h2>Edit contact</h2>
+        <div class="separator">
+        </div>
       </div>
     </div>
     <div class="overlay-form">
@@ -84,8 +86,6 @@
         <div class="person-logo" [style.background-color]="contact?.color">
           <span>{{ contactInitials }}</span>
         </div>
-        <!-- <div class="avatar-container" [style.background-color]="contactColor">
-          <div class="avatar">{{ contactInitials }}</div> -->
         <form
           class="formular"
           [formGroup]="applyForm"
