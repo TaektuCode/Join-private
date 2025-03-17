@@ -1,17 +1,23 @@
 <div class="board">
     <div class="board-header">
-      <h1>Board</h1>
-      <div class="board-controls">
+        <h1>Board</h1>
+        <div class="board-controls">
+          <div class="search-container header-search">
+            <input type="text" placeholder="Find Task">
+            <img src="./assets/img/board/search.svg" alt="Search">
+          </div>
+          <button class="add-task">
+            <img src="./assets/img/board/add.svg" alt="Add">
+            <span class="btn-text">Add task</span>
+          </button>
+        </div>
+      </div>
+      <div class="mobile-search">
         <div class="search-container">
           <input type="text" placeholder="Find Task">
           <img src="./assets/img/board/search.svg" alt="Search">
         </div>
-        <button class="add-task">
-          <img src="./assets/img/board/add.svg" alt="Add">
-          Add task
-        </button>
       </div>
-    </div>
     <div class="main-board">
       <div class="board-column">
         <div class="column-heading">
@@ -43,4 +49,3 @@
       </div>
     </div>
   </div>
-  
