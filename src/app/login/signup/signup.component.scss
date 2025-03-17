@@ -53,6 +53,8 @@
       height: 2px;
       background-color: var(--accentColor2);
       margin: 10px auto 20px auto;
+      transform-origin: center; // startpinkt animation
+      animation: growFromCenter 3s forwards; // dauer Animation 3 Sekunden
     }
   
     .input-group {
@@ -153,3 +155,11 @@
     }
   }
   
+  @keyframes growFromCenter {
+    0% {
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }

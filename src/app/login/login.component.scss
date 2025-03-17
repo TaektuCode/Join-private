@@ -54,6 +54,8 @@
       height: 2px;
       background-color: var(--accentColor2);
       margin: 10px auto 20px auto;     // Zentriert und etwas Abstand nach oben und unten
+      transform-origin: center;
+      animation: growFromCenter 3s forwards;
     }
   
     .input-group {
@@ -156,5 +158,13 @@
     }
   }
   
+  @keyframes growFromCenter {
+    0% {
+      transform: scaleX(0);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
   
   
