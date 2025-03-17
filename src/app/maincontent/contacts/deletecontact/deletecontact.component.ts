@@ -13,9 +13,10 @@ export class DeletecontactComponent {
   @Output() deleteConfirmed = new EventEmitter<void>();
   private contactService = inject(ContactService);
 
-  deleteContact() {
+  async deleteContact() {
     if (this.contactId) {
-      this.contactService.deleteContact(this.contactId);
+      await this.contactService.deleteContact(this.contactId);
+      this.deleteConfirmed.emit();
     }
   }
 }
