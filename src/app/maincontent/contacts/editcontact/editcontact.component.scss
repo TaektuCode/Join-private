@@ -34,6 +34,7 @@
   border-radius: 30px;
   width: 1212px;
   height: 592px;
+
   .overlay-description {
     display: flex;
     justify-content: center;
@@ -43,28 +44,33 @@
     color: #fff;
     background-color: #2a3647;
     border-radius: 28px 0 0 28px;
+
     h2 {
       font-size: 61px;
       font-weight: 700;
       margin: 0;
       height: 73px;
     }
+
     p {
       font-size: 27px;
       margin: 0;
     }
+
     .separator {
       width: 90px;
       height: 3px;
       background-color: #29ABE2;
     }
   }
+
   .overlay-form {
     display: flex;
     justify-content: center;
     align-items: center;
     flex: 1;
     position: relative;
+
     .exit-button {
       position: absolute;
       display: inline-flex;
@@ -77,10 +83,12 @@
       cursor: pointer;
       padding: 0;
     }
+
     .form-box {
       display: flex;
       align-items: center;
       gap: 60px;
+
       .person-logo {
         width: 120px;
         height: 120px;
@@ -90,6 +98,9 @@
         justify-content: center;
         border: 3px solid white;
         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+
+        background-color: red;
+
         span {
           font-size: 47px;
           font-weight: 500;
@@ -97,11 +108,13 @@
         }
 
       }
+
       .formular {
         width: 422px;
         display: flex;
         flex-direction: column;
         gap: 32px;
+
         .input-field {
           border: 1px solid #d1d1d1;
           border-radius: 10px;
@@ -109,6 +122,7 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
+
           input {
             height: 100%;
             width: 100%;
@@ -116,9 +130,11 @@
             border: none;
           }
         }
+
         .form-buttons {
           display: flex;
           gap: 24px;
+
           .delete-button {
             display: flex;
             width: 113px;
@@ -133,6 +149,7 @@
             padding: 16px;
             cursor: pointer;
           }
+
           .submit-button {
             display: flex;
             justify-content: center;
@@ -163,9 +180,9 @@
 
   &:hover {
     color: rgba(41, 171, 226, 1);
+
     .icon-edit {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
-        hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 }
@@ -177,4 +194,124 @@
   height: 24px;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 1250px) {
+  .overlay-content {
+    margin: 0 15px 0 15px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .overlay-content .overlay-description {
+    width: 30%;
+  }
+
+  h2 {
+    padding-bottom: 80px;
+  }
+  .description-box{
+    padding: 15px;
+  }
+}
+
+@media (max-width: 900px) {
+  .overlay-content {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 900px) {
+  .overlay-content {
+    height: 85%;
+    width: 98%;
+  }
+
+  .overlay-content .overlay-description {
+    width: 100%;
+    border-radius: 28px 28px 0 0;
+    height: 35%;
+  }
+
+  h2 {
+    padding: 0;
+  }
+
+  .description-box svg {
+    display: none;
+  }
+
+  .form-box {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .overlay-content .overlay-form .exit-button {
+    position: absolute;
+    top: -50%;
+    right: 15px;
+  }
+
+  .exit-button svg {
+    fill: #d1d1d1;
+    background-color: #2a3647;
+  }
+
+  .exit-button svg path {
+    fill: #d1d1d1;
+  }
+
+  .person-logo {
+    position: absolute;
+    top: -9%;
+
+  }
+
+  .description-box {
+    padding: 30px;
+  }
+
+  .form-buttons {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 550px) {
+  .overlay-content {
+    height: 70%;
+  }
+
+  .overlay-content .overlay-description h2 {
+    font-size: 36px;
+    height: 40px;
+  }
+
+  .overlay-content .overlay-description p {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .form-box {
+    transform: scale(0.75);
+  }
+
+  .person-logo {
+    position: absolute;
+    top: -55%;
+  }
+}
+
+@media (max-width: 350px) {
+  .form-box {
+    transform: scale(0.65);
+  }
+
+  .person-logo {
+    position: absolute;
+    top: -70%;
+  }
+
+  .description-box {
+    padding: 0;
+  }
 }
