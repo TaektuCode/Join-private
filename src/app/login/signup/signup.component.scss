@@ -188,6 +188,10 @@
     .main-content {
       width: 100%;
       padding: 20px 10px;
+
+      .underline {
+        width: 5%;
+      }
   
       // Mobiler Header einblenden und Desktop-Header ausblenden
       .mobile-header {
