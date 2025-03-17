@@ -8,7 +8,7 @@
   
     img {
       height: 50px; 
-      
+      animation: logoMove 2s ease-out forwards;
     }
   
     .header-right {
@@ -29,6 +29,11 @@
         cursor: pointer;
         text-align: center;
         appearance: none; // Entfernt native Browser-Styles
+
+        &:hover {
+          background-color: var(--accentColor2);
+          box-shadow: 4px 4px 4px lightgray;
+        }
       }
     }
   }
@@ -53,9 +58,10 @@
       width: 25%; 
       height: 2px;
       background-color: var(--accentColor2);
-      margin: 10px auto 20px auto;     // Zentriert und etwas Abstand nach oben und unten
+      margin: 10px auto 20px auto;     // Zentriert und etwas Abstand nach oben und unten<<<<<<< 53-      
+      transform: scale(0);
       transform-origin: center;
-      animation: growFromCenter 3s forwards;
+      animation: expandUnderline 2s ease-out forwards;
     }
   
     .input-group {
@@ -158,13 +164,72 @@
     }
   }
   
-  @keyframes growFromCenter {
-    0% {
-      transform: scaleX(0);
+
+  .mobile-header-right {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+  
+    span {
+      color: #000;
+      margin-right: 20px;
     }
-    100% {
-      transform: scaleX(1);
+  
+    button {
+      background-color: #2A3647;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      appearance: none;
+  
+      &:hover {
+        background-color: var(--accentColor2);
+        box-shadow: 4px 4px 4px lightgray;
+      }
+    }
+  }
+
+ @keyframes expandUnderline {
+  to {
+    transform: scaleX(1);
+  }
+} 
+
+@keyframes logoMove {
+  from {
+    transform: translate(300px, 300px);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 1000px) {
+  .login-header .header-right {
+    display: none;
+  }
+  .mobile-header-right {
+    display: flex;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .button-group {
+    flex-direction: column;
+    gap: 16px;
+    button {
+      width: 100%;
     }
   }
   
-  
+  .main-content {
+    width: 100%;
+    max-width: 318px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+}
