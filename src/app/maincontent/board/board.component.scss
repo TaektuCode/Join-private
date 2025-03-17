@@ -18,6 +18,7 @@
       gap: 1rem; // Abstand zwischen Suchfeld und Button
   
       .search-container {
+        background-color: #fff;
         display: flex;
         align-items: center;
         border: 1px solid lightgray;
@@ -40,8 +41,8 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        background-color: var(--fontColorMaim);
-        color: #fff;
+        background-color: #2A3647;
+        color: #ffffff;
         border: none;
         border-radius: 8px;
         padding: 0.5rem 1rem;
