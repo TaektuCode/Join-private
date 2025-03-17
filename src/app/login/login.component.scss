@@ -58,7 +58,7 @@
       width: 25%; 
       height: 2px;
       background-color: var(--accentColor2);
-      margin: 10px auto 20px auto;     // Zentriert und etwas Abstand nach oben und unten
+      margin: 10px auto 20px auto;     // Zentriert und etwas Abstand nach oben und unten<<<<<<< 53-      
       transform: scale(0);
       transform-origin: center;
       animation: expandUnderline 2s ease-out forwards;
@@ -164,6 +164,7 @@
     }
   }
   
+
   .mobile-header-right {
     display: none;
     align-items: center;
