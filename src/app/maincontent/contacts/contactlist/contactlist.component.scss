@@ -51,8 +51,15 @@
 .contact-data {
   display: flex;
   flex-direction: column;
+
   p {
     margin: 0;
     font-size: 20px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .contact-list {
+    width: 380px;
   }
 }
