@@ -47,7 +47,23 @@
       text-align: center;
       color: #000000;
     }
-  
+    .mobile-header {
+      display: none;
+      align-items: center;
+      margin-bottom: 20px;
+      
+      .mobile-back-arrow {
+        cursor: pointer;
+        height: 30px; // nach Bedarf anpassen
+        margin-right: 10px;
+      }
+      
+      h1 {
+        margin: 0;
+        font-size: 24px;  // ggf. anpassen
+        color: #000000;
+      }
+    }
     .underline {
       width: 25%;
       height: 2px;
@@ -163,3 +179,70 @@
       transform: scaleX(1);
     }
   }
+
+  @media (max-width: 1000px) {
+    .signup-header {
+      display: none; // Original Header ausblenden
+    }
+  
+    .main-content {
+      width: 100%;
+      padding: 20px 10px;
+  
+      // Mobiler Header einblenden und Desktop-Header ausblenden
+      .mobile-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: center;
+        width: 80%;
+        margin: 0 auto 20px;
+  
+        .mobile-back-arrow {
+          height: 30px;
+          cursor: pointer;
+        }
+  
+        h1 {
+          margin: 0;
+          text-align: center;
+          font-size: 24px;
+          color: #000;
+        }
+  
+        .spacer {
+          width: 30px; // Gleiche Breite wie der Arrow, damit das h1 exakt zentriert wird
+        }
+      }
+  
+      .desktop-header {
+        display: none;
+      }
+    }
+  }
+
+  // @media (max-width: 1000px) {
+  //   .login-header .header-right {
+  //     display: none;
+  //   }
+  //   .mobile-header-right {
+  //     display: flex;
+  //   }
+  // }
+  
+  
+  // @media (max-width: 700px) {
+  //   .button-group {
+  //     flex-direction: column;
+  //     gap: 16px;
+  //     button {
+  //       width: 100%;
+  //     }
+  //   }
+    
+  //   .main-content {
+  //     width: 100%;
+  //     max-width: 318px;
+  //     margin: 0 auto;
+  //     padding: 20px;
+  //   }
+  // }
