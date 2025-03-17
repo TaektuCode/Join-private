@@ -1,44 +1,41 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, Input, Output, EventEmitter } from '@angular/core';
 import { ContactService } from '../contact.service';
 import { ContactInterface } from '../contact-interface';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { DeletecontactComponent } from '../deletecontact/deletecontact.component';
 import { EditcontactComponent } from '../editcontact/editcontact.component';
 import { TruncatePipe } from '../../../truncate.pipe';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-viewcontact',
   standalone: true,
-  imports: [DeletecontactComponent, EditcontactComponent, TruncatePipe],
+  imports: [DeletecontactComponent, EditcontactComponent, TruncatePipe, CommonModule, RouterModule],
   templateUrl: './viewcontact.component.html',
   styleUrl: './viewcontact.component.scss',
-  // animations: [
-  //   trigger('slide', [
-  //     state('false', style({ transform: 'translateX(600%)' })),
-  //     state('true', style({ transform: 'translateX(0)' })),
-  //     transition('false <=> true', animate('0.8s ease-in-out'))
-  //   ])
-  // ]
 })
 export class ViewcontactComponent implements OnInit {
   contactService = inject(ContactService);
   contact: ContactInterface | null = null;
   contactInitials: string = '';
   contactColor: string = '';
-  protected visible = signal(false);
+  overlayVisible = false;
+
+  // Verwende `visibleSignal` für das interne Signal
+  protected visibleSignal = signal(false);
+  
+  // Umbenennen der Input-Variable, um Konflikte zu vermeiden
+  @Input() isVisible: boolean = false;
+
+  @Output() closed = new EventEmitter<void>();
+visible: any;
 
   ngOnInit(): void {
     this.contactService.selectedContact$.subscribe((contact) => {
       this.contact = contact;
       if (contact) {
-        this.contactInitials = this.getInitials(contact.name); // Use the getInitials method
-        this.contactColor = contact.color || '#808080'; // Store the color, default to grey if no color exists
+        this.contactInitials = this.getInitials(contact.name);
+        this.contactColor = contact.color || '#808080';
       } else {
         this.contactInitials = '';
         this.contactColor = '';
@@ -50,11 +47,12 @@ export class ViewcontactComponent implements OnInit {
     this.contact = null;
   }
 
-  // toggleVisibility() {
-  //   console.log('Before toggle:', this.visible());
-  //   this.visible.set(!this.visible());
-  //   console.log('After toggle:', this.visible());
-  // }
+  // toggleVisibility() verwendet nun das Signal korrekt
+  toggleVisibility() {
+    console.log('Before toggle:', this.visibleSignal());
+    this.visibleSignal.set(!this.visibleSignal()); // Wert ändern mit .set()
+    console.log('After toggle:', this.visibleSignal());
+  }
 
   showOverlay = false;
 
@@ -64,17 +62,24 @@ export class ViewcontactComponent implements OnInit {
 
   getInitials(name: string): string {
     if (!name) {
-      return ''; // Handle empty name
+      return '';
     }
-
-    const names = name.trim().split(' '); // Split the name into an array of words
+    const names = name.trim().split(' ');
     if (names.length === 1) {
-      return names[0].charAt(0).toUpperCase(); // Only one name, return first letter
+      return names[0].charAt(0).toUpperCase();
     }
-
     const firstNameInitial = names[0].charAt(0).toUpperCase();
-    const lastNameInitial = names[names.length - 1].charAt(0).toUpperCase(); // Last word is assumed to be last name
-
+    const lastNameInitial = names[names.length - 1].charAt(0).toUpperCase();
     return firstNameInitial + lastNameInitial;
+  }
+
+  close(): void {
+    this.visibleSignal.set(false); // Sichtbarkeit zurücksetzen
+    this.closed.emit();
+  }
+
+  toggleOverlay(event: MouseEvent): void {
+    event.stopPropagation();
+    this.overlayVisible = !this.overlayVisible;
   }
 }
