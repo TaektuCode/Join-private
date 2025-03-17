@@ -81,30 +81,39 @@
     }
   }
   
-  /* Responsive Anpassungen für Bildschirme bis 1000px Breite */
+  
   @media (max-width: 1000px) {
+
+    h1{
+        font-size: 34px;
+    }
+
+    .board{
+        padding: 25px;
+    }
+    
     .main-board {
       flex-direction: column;
     }
-    /* Das Search-Feld in board-controls ausblenden */
+    
     .board-header .board-controls .search-container {
       display: none;
     }
-    /* Den Text im Add-Task-Button ausblenden, sodass nur das Icon bleibt */
+    
     .board-header .board-controls .add-task .btn-text {
       display: none;
     }
-    /* Das zusätzliche, zentrierte Search-Feld unterhalb des Headers einblenden */
+    
     .mobile-search {
       display: block;
       text-align: center;
       margin-top: 1rem;
 
       .search-container {
-        background-color: #fff;   // auch hier weißer Hintergrund
+        background-color: #fff; 
         border: 1px solid lightgray;
-        border-radius: 8px;         // runde Ecken
-        display: inline-flex;       // inline, damit es mittig zentriert werden kann
+        border-radius: 8px;         
+        display: inline-flex;
         align-items: center;
         overflow: hidden;
   
