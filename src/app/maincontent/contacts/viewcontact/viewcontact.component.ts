@@ -46,6 +46,10 @@ export class ViewcontactComponent implements OnInit {
     });
   }
 
+  onContactDeleted() {
+    this.contact = null;
+  }
+
   // toggleVisibility() {
   //   console.log('Before toggle:', this.visible());
   //   this.visible.set(!this.visible());
