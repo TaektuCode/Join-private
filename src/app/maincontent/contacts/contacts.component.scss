@@ -1,4 +1,8 @@
 .content-wrapper {
     display: flex;
     min-height:  calc(100dvh - 100px);
+
+    @media (max-width:800px) {
+    justify-content: center;
+    }
 }

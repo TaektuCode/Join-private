@@ -6,6 +6,14 @@
   align-items: center;
   flex-direction: column;
   background-color: #fff;
+
+  @media (max-width: 1100px) {
+      width: 380px;
+  }
+
+  // @media (max-width: 800px) {
+  //   display: none;
+  // }
 }
 
 .contact-box {
@@ -55,11 +63,5 @@
   p {
     margin: 0;
     font-size: 20px;
-  }
-}
-
-@media (max-width: 1100px) {
-  .contact-list {
-    width: 380px;
   }
 }
