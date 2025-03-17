@@ -16,6 +16,10 @@ section {
   @media (max-width: 1175px) {
     width: 85%;
   }
+
+  @media (max-width: 800px) {
+    display: none;
+  }
 }
 
 .viewcontact-header {
