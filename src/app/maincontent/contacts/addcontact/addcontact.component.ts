@@ -91,4 +91,8 @@ export class AddcontactComponent {
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   }
+
+  getErrorTopPosition(index: number): number {
+    return 55 + index * 85;
+  }
 }
