@@ -8,7 +8,12 @@ import {
 } from '@angular/core';
 import { Firestore, updateDoc, doc } from '@angular/fire/firestore';
 import { FirebaseService } from '../../../shared/services/firebase.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ContactInterface } from '../contact-interface';
 
 @Component({
@@ -27,8 +32,8 @@ export class EditcontactComponent implements OnInit {
 
   applyForm = new FormGroup({
     name: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
+    email: new FormControl('', [Validators.email]),
+    phone: new FormControl('', [Validators.pattern(/^[\+]?[0-9]+$/)]),
   });
 
   showOverlay = false;
