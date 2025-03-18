@@ -30,7 +30,7 @@ export class AddcontactComponent {
     this.applyForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.pattern(/^\+?\d{1,15}$/)]],
+      phone: ['', [Validators.pattern(/^[\+]?[0-9]+$/)]],
     });
   }
 

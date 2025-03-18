@@ -73,8 +73,7 @@
         </svg>
         <h2>Add contact</h2>
         <p>Tasks are better with a team!</p>
-        <div class="separator">
-        </div>
+        <div class="separator"></div>
       </div>
     </div>
     <div class="overlay-form">
@@ -225,7 +224,7 @@
             <input
               placeholder="Phone"
               id="phone"
-              type="number"
+              type="text"
               formControlName="phone"
             />
             <svg
@@ -258,7 +257,7 @@
           (applyForm.get('phone')?.touched || formSubmitted)) {
           <span class="error-message" [style.top.px]="getErrorTopPosition(2)">
             @if (applyForm.get('phone')?.errors?.['pattern']) { Invalid phone
-            number. }
+            number. Only use "+" and digits [0-9] }
           </span>
           }
           <div class="form-buttons">

@@ -9,6 +9,7 @@
 
   @media (max-width: 1100px) {
     width: 380px;
+    padding-left: 20px;
   }
 
   @media (max-width: 420px) {
@@ -42,9 +43,19 @@
   height: 78px;
   align-items: center;
   padding-left: 20px;
+  border-radius: 10px;
   cursor: pointer;
   @media (max-width: 420px) {
     width: 270px;
+  }
+}
+
+.contact.active {
+  background-color: #2a3647; /* Ihre gewünschte Hintergrundfarbe für den aktiven Zustand */
+  color: white; /* Optional: Ändern Sie die Textfarbe, um Kontrast zu bieten */
+
+  .logo {
+    border-color: #2a3647; /* Optional: Ändern Sie die Rahmenfarbe des Logos im aktiven Zustand */
   }
 }
 
@@ -70,5 +81,12 @@
   p {
     margin: 0;
     font-size: 20px;
+  }
+
+  a {
+    margin: 0;
+    font-size: 14px;
+    color: #007cee;
+    text-decoration: none;
   }
 }
