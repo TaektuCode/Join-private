@@ -12,6 +12,10 @@
     padding-left: 20px;
   }
 
+  @media (max-width: 460px) {
+    padding-left: 4px;
+  }
+
   @media (max-width: 420px) {
     width: 280px;
   }
@@ -32,6 +36,7 @@
   padding-left: 50px;
   padding-bottom: 17px;
   margin-bottom: 17px;
+
   @media (max-width: 420px) {
     width: 245px;
   }
@@ -45,17 +50,21 @@
   padding-left: 20px;
   border-radius: 10px;
   cursor: pointer;
+
   @media (max-width: 420px) {
     width: 270px;
   }
 }
 
 .contact.active {
-  background-color: #2a3647; /* Ihre gewünschte Hintergrundfarbe für den aktiven Zustand */
-  color: white; /* Optional: Ändern Sie die Textfarbe, um Kontrast zu bieten */
+  background-color: #2a3647;
+  /* Ihre gewünschte Hintergrundfarbe für den aktiven Zustand */
+  color: white;
+  /* Optional: Ändern Sie die Textfarbe, um Kontrast zu bieten */
 
   .logo {
-    border-color: #2a3647; /* Optional: Ändern Sie die Rahmenfarbe des Logos im aktiven Zustand */
+    border-color: #2a3647;
+    /* Optional: Ändern Sie die Rahmenfarbe des Logos im aktiven Zustand */
   }
 }
 
