@@ -181,8 +181,7 @@
     color: rgba(41, 171, 226, 1);
 
     .icon-edit {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
-        hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 }
@@ -210,6 +209,7 @@
   h2 {
     padding-bottom: 80px;
   }
+
   .description-box {
     padding: 15px;
   }
@@ -312,5 +312,59 @@
 
   .description-box {
     padding: 0;
+  }
+}
+
+@media (max-width: 380px) and (max-height: 700px) {
+  .person-logo {
+    position: absolute;
+    top: -30%;
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .overlay-content .overlay-form .exit-button {
+    position: absolute;
+    top: -35%;
+    right: 15px;
+  }
+}
+
+@media (max-width: 320px) and (max-height: 658px) {
+  .person-logo {
+    position: absolute;
+    top: -40%;
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  .overlay-content .overlay-form .exit-button {
+    position: absolute;
+    top: -35%;
+    right: 15px;
+  }
+}
+
+@media (max-width: 360px) and (max-height: 740px) {
+  .person-logo {
+    position: absolute;
+    top: -40%;
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
+
+@media (max-width: 360px) and (max-height: 640px) {
+  .person-logo {
+    position: absolute;
+    top: -28%;
+    width: 70px !important;
+    height: 70px !important;
+  }
+
+  .overlay-content .overlay-form .exit-button {
+    position: absolute;
+    top: -35%;
+    right: 15px;
   }
 }
