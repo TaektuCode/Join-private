@@ -113,6 +113,15 @@
         display: flex;
         flex-direction: column;
         gap: 32px;
+        position: relative;
+
+        .error-message {
+          color: red;
+          font-size: 0.8em;
+          margin-top: 5px;
+          left: 10px;
+          position: absolute;
+        }
 
         .input-field {
           border: 1px solid #d1d1d1;
@@ -181,7 +190,8 @@
     color: rgba(41, 171, 226, 1);
 
     .icon-edit {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
+        hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 }

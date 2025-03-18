@@ -123,6 +123,14 @@
               </g>
             </svg>
           </div>
+          @if (applyForm.get('name')?.invalid && (applyForm.get('name')?.touched
+          || formSubmitted)) {
+          <span class="error-message" [style.top.px]="getErrorTopPosition(0)">
+            @if (applyForm.get('name')?.errors?.['required']) { Name is
+            required. } @if (applyForm.get('name')?.errors?.['minlength']) {
+            Name must be at least 2 characters long. }
+          </span>
+          }
           <div class="input-field">
             <input
               placeholder="Email"
@@ -156,6 +164,14 @@
               </g>
             </svg>
           </div>
+          @if (applyForm.get('email')?.invalid &&
+          (applyForm.get('email')?.touched || formSubmitted)) {
+          <span class="error-message" [style.top.px]="getErrorTopPosition(1)">
+            @if (applyForm.get('email')?.errors?.['required']) { Email is
+            required. } @if (applyForm.get('email')?.errors?.['email']) {
+            Invalid email address. }
+          </span>
+          }
           <div class="input-field">
             <input
               placeholder="Phone"
@@ -189,6 +205,13 @@
               </g>
             </svg>
           </div>
+          @if (applyForm.get('phone')?.invalid &&
+          (applyForm.get('phone')?.touched || formSubmitted)) {
+          <span class="error-message" [style.top.px]="getErrorTopPosition(2)">
+            @if (applyForm.get('phone')?.errors?.['pattern']) { Invalid phone
+            number. Only use "+" and digits [0-9] }
+          </span>
+          }
           <div class="form-buttons">
             <button class="delete-button" (click)="closeOverlay()">
               Delete

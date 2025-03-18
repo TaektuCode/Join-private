@@ -24,6 +24,9 @@
 .contact-box {
   max-height: 79vh;
   overflow: auto;
+  @media (max-height: 670px) {
+    max-height: 73vh;
+  }
 }
 
 .letter-separator {
