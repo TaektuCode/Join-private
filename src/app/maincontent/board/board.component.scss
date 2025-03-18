@@ -1,0 +1,144 @@
+.board {
+    padding: 25px 0 50px 50px;
+    max-width: 1440px;
+  
+    h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+  
+  .board-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  
+    h1 {
+      margin: 0;
+    }
+  
+    .board-controls {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+  
+      .search-container {
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        border: 1px solid lightgray;
+        border-radius: 8px;
+        overflow: hidden;
+  
+        input {
+          border: none;
+          padding: 0.5rem;
+          outline: none;
+          border-right: 1px solid gray;
+        }
+  
+        img {
+          padding: 0.5rem;
+        }
+      }
+  
+      .add-task {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        background-color: #2A3647;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+  
+        img {
+          width: 12px;
+        }
+      }
+    }
+  }
+  
+  .main-board {
+    display: flex;
+    gap: 16px;
+  
+    .board-column {
+      flex: 1;
+      padding: 1rem;
+  
+      .column-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+  
+        img {
+          width: 16px;
+        }
+      }
+    }
+  }
+  
+  
+  @media (max-width: 1000px) {
+
+    h1{
+        font-size: 34px;
+    }
+
+    .board{
+        padding: 25px;
+    }
+    
+    .main-board {
+      flex-direction: column;
+    }
+    
+    .board-header .board-controls .search-container {
+      display: none;
+    }
+    
+    .board-header .board-controls .add-task .btn-text {
+      display: none;
+    }
+    
+    .mobile-search {
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
+
+      .search-container {
+        background-color: #fff; 
+        border: 1px solid lightgray;
+        border-radius: 8px;         
+        display: inline-flex;
+        align-items: center;
+        overflow: hidden;
+  
+        input {
+          border: none;
+          padding: 0.5rem;
+          outline: none;
+          border-right: 1px solid gray;
+        }
+  
+        img {
+          padding: 0.5rem;
+        }
+      }
+    }
+    }
+
+
+  
+  
+  /* Auf breiteren Bildschirmen das zusätzliche Search-Feld ausblenden */
+  @media (min-width: 1001px) {
+    .mobile-search {
+      display: none;
+    }
+  }
+  
+  
