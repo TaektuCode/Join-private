@@ -1,5 +1,11 @@
 @if (contact) {
 <section class="viewcontact-container">
+  <img
+    class="back-button"
+    src="./assets/img/contacts/back-arrow.svg"
+    alt="back-arrow"
+    (click)="onContactDeleted()"
+  />
   <div class="viewcontact-header">
     <h1 class="viewcontact-headline">
       Contacts

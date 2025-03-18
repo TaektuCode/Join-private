@@ -2,6 +2,17 @@
   font-family: "Inter";
 }
 
+.back-button {
+  cursor: pointer;
+  display: none;
+  @media (max-width: 800px) {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 40px;
+  }
+}
+
 .viewcontact-container {
   position: relative;
   margin-top: 110px;
