@@ -38,7 +38,7 @@
     margin: 0;
     background-color: white;
   }
-  @media (max-width: 410px) {
+  @media (max-width: 420px) {
     padding-left: 0;
   }
 }
@@ -149,7 +149,7 @@
     align-items: center;
     margin-top: 40px;
   }
-  @media (max-width: 410px) {
+  @media (max-width: 420px) {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -234,7 +234,7 @@ h2 {
 }
 
 .icon-edit {
-  background-image: url("/assets/img/addtask/edit.svg");
+  background-image: url("./assets/img/addtask/edit.svg");
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -243,7 +243,7 @@ h2 {
 }
 
 .icon-delete {
-  background-image: url("/assets/img/addtask/delete.svg");
+  background-image: url("./assets/img/addtask/delete.svg");
   display: inline-block;
   width: 24px;
   height: 24px;

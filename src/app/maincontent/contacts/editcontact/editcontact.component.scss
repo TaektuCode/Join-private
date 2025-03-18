@@ -60,7 +60,7 @@
     .separator {
       width: 90px;
       height: 3px;
-      background-color: #29ABE2;
+      background-color: #29abe2;
     }
   }
 
@@ -106,7 +106,6 @@
           font-weight: 500;
           color: white;
         }
-
       }
 
       .formular {
@@ -182,13 +181,14 @@
     color: rgba(41, 171, 226, 1);
 
     .icon-edit {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
+        hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 }
 
 .icon-edit {
-  background-image: url("/assets/img/addtask/edit.svg");
+  background-image: url("./assets/img/addtask/edit.svg");
   display: inline-block;
   width: 24px;
   height: 24px;
@@ -210,7 +210,7 @@
   h2 {
     padding-bottom: 80px;
   }
-  .description-box{
+  .description-box {
     padding: 15px;
   }
 }
@@ -264,7 +264,6 @@
   .person-logo {
     position: absolute;
     top: -9%;
-
   }
 
   .description-box {
