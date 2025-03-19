@@ -307,6 +307,11 @@
   .person-logo {
     position: absolute;
     top: -55%;
+    > span {
+      @media (max-width: 389px) {
+        font-size: 30px !important;
+      }
+    }
   }
 }
 
