@@ -1,108 +1,125 @@
 <div class="and-task">
-    <div class="top">
-      <h1>Add Task</h1>
-      <!-- <img src="./assets/img/contacts/back-arrow.svg" alt="back-arrow" (click)="backPage()"> -->
+  <div class="top">
+    <h1>Add Task</h1>
+  </div>
+  <div class="addtask-content">
+    <div class="left">
+      <div class="input-field">
+        <div class="label">Title <span class="required">*</span></div>
+        <div class="input-wrapper">
+          <input
+            type="text"
+            placeholder="Enter a title"
+            [(ngModel)]="newTask.title"
+          />
+        </div>
+        <div class="error">@if (!newTask.title) { Enter title now }</div>
+      </div>
+      <div class="input-field">
+        <div class="label">Description</div>
+        <div class="input-wrapper">
+          <textarea
+            placeholder="Enter a Description"
+            [(ngModel)]="newTask.description"
+          ></textarea>
+        </div>
+        <div class="error">Enter the Description</div>
+      </div>
+      <div class="input-field">
+        <div class="label">Due date <span class="required">*</span></div>
+        <div class="date-wrapper">
+          <input type="date" [(ngModel)]="newTask.date" />
+        </div>
+        <div class="error">@if (!newTask.date) { Date require }</div>
+      </div>
     </div>
-    <div class="addtask-content">
-        <!-- Linkes Div -->
-        <div class="left">
-          <!-- Title Field -->
-          <div class="input-field">
-            <div class="label">Title <span class="required">*</span></div>
-            <div class="input-wrapper">
-              <input type="text" placeholder="Enter a title">
-            </div>
-            <div class="error">Enter title now</div>
+    <div class="right">
+      <div class="input-field">
+        <div class="label">Priority</div>
+        <div class="input-wrapper priority-wrapper">
+          <div
+            class="priority-option"
+            (click)="setPriority('low')"
+            [class.selected]="newTask.priority === 'low'"
+          >
+            <img src="./assets/img/addtask/low.svg" alt="Low" />
+            <span>Low</span>
           </div>
-          <!-- Description Field -->
-          <div class="input-field">
-            <div class="label">Description</div>
-            <div class="input-wrapper">
-              <textarea placeholder="Enter a Description"></textarea>
-            </div>
-            <div class="error">Enter the Description</div>
+          <div
+            class="priority-option medium"
+            (click)="setPriority('medium')"
+            [class.selected]="newTask.priority === 'medium'"
+          >
+            <img src="./assets/img/addtask/mid.svg" alt="Medium" />
+            <span>Medium</span>
           </div>
-          <!-- Due Date Field -->
-          <div class="input-field">
-            <div class="label">Due date <span class="required">*</span></div>
-            <div class="date-wrapper">
-              <input type="text" placeholder="tt.mm.jjjj">
-              <a href="#" class="calendar-link">
-                <img src="./assets/img/addtask/calendar.svg" alt="calendar">
-              </a>
-            </div>
-            <div class="error">Date require</div>
+          <div
+            class="priority-option"
+            (click)="setPriority('urgent')"
+            [class.selected]="newTask.priority === 'urgent'"
+          >
+            <img src="./assets/img/addtask/higher.svg" alt="Urgent" />
+            <span>Urgent</span>
           </div>
-        </div>        
-        <!-- Rechtes Div -->
-        <div class="right">
-          <!-- Priority Field -->
-          <div class="input-field">
-            <div class="label">Priority</div>
-            <div class="input-wrapper priority-wrapper">
-              <div class="priority-option">
-                <img src="./assets/img/addtask/low.svg" alt="Low">
-                <span>Low</span>
-              </div>
-              <div class="priority-option medium">
-                <img src="./assets/img/addtask/mid.svg" alt="Medium">
-                <span>Medium</span>
-              </div>
-              <div class="priority-option">
-                <img src="./assets/img/addtask/higher.svg" alt="Urgent">
-                <span>Urgent</span>
-              </div>
-            </div>
-            <div class="error">chose your Trio</div>
-          </div>
-          <!-- Assigned To Field -->
-          <div class="input-field">
-            <div class="label">Assigned to</div>
-            <div class="input-wrapper">
-              <select>
-                <option>Select Contacts to assign</option>
-              </select>
-            </div>
-            <div class="error">Add Your Contacts</div>
-          </div>
-          <!-- Category Field -->
-          <div class="input-field">
-            <div class="label">Category <span class="required">*</span></div>
-            <div class="input-wrapper">
-              <select>
-                <option>Select task category</option>
-                <option>Technical Task</option>
-                <option>User Story</option>
-              </select>
-            </div>
-            <div class="error">Add Category</div>
-          </div>
-          <!-- Subtasks Field -->
-          <div class="input-field">
-            <div class="label">Subtasks</div>
-            <div class="input-wrapper subtasks-wrapper">
-              <input type="text" placeholder="And new subtasks">
-              <a href="#" class="add-subtask-link">
-                <img src="./assets/img/addtask/add.svg" alt="add">
-              </a>
-            </div>
-            <div class="error subtasks-error">Add your subtasks if you need</div>
-          </div>          
         </div>
       </div>
-      <div class="footer">
-        <div class="footer-left">
-          <span class="required">*</span> This Field is required
+      <div class="input-field">
+        <div class="label">Assigned to</div>
+        <div class="input-wrapper">
+          <select [(ngModel)]="newTask.assignedTo">
+            <option [value]="null">Select Contacts to assign</option>
+            @for (contact of contacts; track contact.id) {
+            <option [value]="contact.id">{{ contact.name }}</option>
+            }
+          </select>
         </div>
-        <div class="footer-right">
-          <button class="btn clear-btn">
-            Clear
-            <img src="./assets/img/addtask/close.svg" alt="clear">
-          </button>
-          <button class="btn create-btn">
-            Create Task
-            <img src="./assets/img/addtask/check.svg" alt="create task">
-          </button>
+      </div>
+      <div class="input-field">
+        <div class="label">Category <span class="required">*</span></div>
+        <div class="input-wrapper">
+          <select [(ngModel)]="newTask.category">
+            <option [value]="null">Select task category</option>
+            <option value="Technical Task">Technical Task</option>
+            <option value="User Story">User Story</option>
+          </select>
         </div>
-      </div>            
+        <div class="error">@if (!newTask.category) { Add Category }</div>
+      </div>
+      <div class="input-field">
+        <div class="label">Subtasks</div>
+        <div class="input-wrapper subtasks-wrapper">
+          <input type="text" #subtaskInput placeholder="And new subtasks" />
+          <a
+            href="#"
+            class="add-subtask-link"
+            (click)="addSubtask(subtaskInput.value); subtaskInput.value = ''"
+          >
+            <img src="./assets/img/addtask/add.svg" alt="add" />
+          </a>
+        </div>
+        <div class="error subtasks-error">Add your subtasks if you need</div>
+        @for (subtask of newTask.subtask; track subtask.title; let i = $index) {
+        <div>
+          {{ subtask.title }}
+          <button (click)="removeSubtask(i)">Remove</button>
+        </div>
+        }
+      </div>
+    </div>
   </div>
+  <div class="footer">
+    <div class="footer-left">
+      <span class="required">*</span> This Field is required
+    </div>
+    <div class="footer-right">
+      <button class="btn clear-btn" (click)="resetForm()">
+        Clear
+        <img src="./assets/img/addtask/close.svg" alt="clear" />
+      </button>
+      <button class="btn create-btn" (click)="createTask()">
+        Create Task
+        <img src="./assets/img/addtask/check.svg" alt="create task" />
+      </button>
+    </div>
+  </div>
+</div>
