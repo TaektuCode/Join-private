@@ -142,6 +142,15 @@
   }
   
   // SCSS für Drag and Drop:
+  .dadtesting {
+    /* Falls du die Flex-Eigenschaften direkt hier anwenden möchtest */
+    display: flex;
+    flex-direction: row;
+    gap: 25px;           // Abstand zwischen den Spalten
+    flex-wrap: nowrap;   // Alle Spalten in einer Zeile
+    overflow-x: auto;    // Bei Bedarf horizontales Scrollen
+  }
+  
   .example-container {
     width: 400px;
     max-width: 100%;

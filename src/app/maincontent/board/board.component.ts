@@ -9,9 +9,10 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, 
   styleUrl: './board.component.scss'
 })
 export class BoardComponent {
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-
-  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+  todo: string[] = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  inProgress: string[] = ['Work on project', 'Meet client'];
+  awaitFeedback: string[] = ['Send draft', 'Review comments'];
+  done: string[] = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -21,8 +22,13 @@ export class BoardComponent {
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
+  }
+
+  // Optional: Eine TrackBy-Funktion zur Optimierung der ngFor-Schleife
+  trackByFn(index: number, item: string): number {
+    return index;
   }
 }
