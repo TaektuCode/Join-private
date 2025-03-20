@@ -24,7 +24,17 @@
           <h2>To do</h2>
           <img src="./assets/img/board/plusbutton.svg" alt="Add Task">
         </div>
-        <!-- Inhalt der Spalte -->
+        <div
+        cdkDropList
+        #todoList="cdkDropList"
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="[inProgressList, awaitFeedbackList, doneList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of todo; track item) {
+          <div class="example-box" cdkDrag>{{ item }}</div>
+        }
+      </div>
       </div>
       <div class="board-column">
         <div class="column-heading">
