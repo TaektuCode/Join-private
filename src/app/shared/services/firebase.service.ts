@@ -15,7 +15,7 @@ import {
 import { ContactInterface } from '../../maincontent/contacts/contact-interface';
 import { TaskInterface } from '../../maincontent/addtask/task.interface';
 import { Unsubscribe } from '@angular/fire/auth';
-
+import { Observable, BehaviorSubject, map } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,8 +23,10 @@ export class FirebaseService implements OnDestroy {
   firebase = inject(Firestore); // Inject Firestore service
   unsubscribeTasks: Unsubscribe | undefined; // Variable to store unsubscribe function for contacts
   unsubscribeContacts: Unsubscribe | undefined; // Variable to store unsubscribe function for tasks
-  contactList: ContactInterface[] = []; // Array to hold contact list
   taskList: TaskInterface[] = []; // Array to hold task list
+  private _contactList = new BehaviorSubject<ContactInterface[]>([]);
+  contactList: Observable<ContactInterface[]> =
+    this._contactList.asObservable();
 
   constructor() {
     this.subscribeToContacts(); // Subscribe to contact updates
@@ -32,7 +34,6 @@ export class FirebaseService implements OnDestroy {
   }
 
   private subscribeToContacts() {
-    // Subscribe to real-time updates from the 'contacts' collection
     this.unsubscribeContacts = onSnapshot(
       collection(this.firebase, 'contacts'),
       (contactsObject) => {
@@ -46,7 +47,7 @@ export class FirebaseService implements OnDestroy {
           );
         });
         sortedContacts.sort((a, b) => a.name.localeCompare(b.name));
-        this.contactList = sortedContacts;
+        this._contactList.next(sortedContacts); // Verwende _contactList.next()
       }
     );
   }
@@ -94,20 +95,26 @@ export class FirebaseService implements OnDestroy {
     };
   }
 
-  getGroupedContacts(): { letter: string; contacts: ContactInterface[] }[] {
+  getGroupedContacts(): Observable<
+    { letter: string; contacts: ContactInterface[] }[]
+  > {
     // Method to group contacts by the first letter of their name
-    const grouped: { letter: string; contacts: ContactInterface[] }[] = [];
-    const sortedContacts = [...this.contactList];
-    sortedContacts.forEach((contact) => {
-      const firstLetter = contact.name.charAt(0).toUpperCase();
-      let group = grouped.find((g) => g.letter === firstLetter);
-      if (!group) {
-        group = { letter: firstLetter, contacts: [] };
-        grouped.push(group);
-      }
-      group.contacts.push(contact);
-    });
-    return grouped;
+    return this.contactList.pipe(
+      map((contacts) => {
+        const grouped: { letter: string; contacts: ContactInterface[] }[] = [];
+        const sortedContacts = [...contacts]; // Verwende das Array aus dem Observable
+        sortedContacts.forEach((contact) => {
+          const firstLetter = contact.name.charAt(0).toUpperCase();
+          let group = grouped.find((g) => g.letter === firstLetter);
+          if (!group) {
+            group = { letter: firstLetter, contacts: [] };
+            grouped.push(group);
+          }
+          group.contacts.push(contact);
+        });
+        return grouped;
+      })
+    );
   }
 
   async deleteContact(contactId: string) {
