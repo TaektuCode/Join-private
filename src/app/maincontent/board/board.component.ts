@@ -28,7 +28,7 @@ export class BoardComponent {
   }
 
   // Optional: Eine TrackBy-Funktion zur Optimierung der ngFor-Schleife
-  trackByFn(index: number, item: string): number {
-    return index;
-  }
+  // trackByFn(index: number, item: string): number {
+  //   return index;
+  // }
 }
