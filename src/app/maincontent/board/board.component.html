@@ -58,7 +58,17 @@
           <h2>Await feedback</h2>
           <img src="./assets/img/board/plusbutton.svg" alt="Add Task">
         </div>
-        <!-- Inhalt der Spalte -->
+        <div
+        cdkDropList
+        #awaitFeedbackList="cdkDropList"
+        [cdkDropListData]="awaitFeedback"
+        [cdkDropListConnectedTo]="[todoList, inProgressList, doneList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of awaitFeedback; track item) {
+          <div class="example-box" cdkDrag>{{ item }}</div>
+        }
+      </div>
       </div>
       <div class="board-column">
         <div class="column-heading">
