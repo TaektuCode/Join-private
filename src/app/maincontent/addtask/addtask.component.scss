@@ -1,253 +1,341 @@
 .and-task {
-    padding: 25px 0 50px 50px;
-    max-width: 1440px;
+  padding: 25px 0 50px 50px;
+  max-width: 1440px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  img {
+    cursor: pointer;
   }
-  
-  .top {
-    display: flex;
-    justify-content: space-between;
-    img {
-      cursor: pointer;
-    }
+}
+
+.addtask-content {
+  display: flex;
+  gap: 20px;
+
+  .left,
+  .right {
+    width: 300px;
+    margin: 40px;
   }
 
-  .addtask-content {
-    display: flex;
-    gap: 20px;
-  
-    .left,
-    .right {
-      width: 300px;
-      margin: 40px;
-    }
-
-    .left {
-        border-right: 2px solid gray;
-        padding-right: 100px;
-    }
-  
-    .input-field {
-      margin-bottom: 20px;
-  
-      .label {
-        font-size: 16px;
-        margin-bottom: 5px;
-  
-        .required {
-          color: red;
-        }
-      }
-  
-      .input-wrapper {
-        input,
-        textarea,
-        select {
-          width: 100%;
-          border: 1px solid gray;  // heller Border
-          border-radius: 8px;
-          padding: 8px;
-          font-size: 14px;
-        }
-
-        textarea {
-            height: 100px; 
-          }
-          
-      }
-  
-      .error {
-        font-size: 12px;
-        color: red;
-        margin-top: 5px;
-        display: none;  // wird ausgeblendet, wenn Eingabe erfolgt
-      }
-    }
-  
-    // Speziell für das Datumfeld
-    .date-wrapper {
-        display: flex;
-        align-items: center;
-        background-color: #fff;   
-        border-radius: 8px;
-        padding: 8px;              
-      
-        input {
-          flex: 1;
-          border: none;           
-          outline: none;          
-        }
-      
-        .calendar-link {
-          display: flex;
-          align-items: center;
-          
-          img {
-            display: block;
-          }
-        }
-      }
-      
-  
-    // Priority-Bereich
-    .priority-wrapper {
-      display: flex;
-      gap: 10px;
-  
-      .priority-option {
-        flex: 1;
-        max-width: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: white;
-        border: 1px solid gray;
-        border-radius: 8px;
-        padding: 8px;
-        cursor: pointer;
-        transition: box-shadow 0.3s;
-  
-        &:hover {
-          box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
-        }
-  
-        img {
-          margin-right: 5px;
-        }
-      }
-  
-      .medium {
-        background-color: yellow;
-      }
-    }
-  
-    // Subtasks-Bereich
-    .subtasks-wrapper {
-        display: flex;
-        align-items: center;
-        background-color: #fff;
-        border-radius: 8px;
-        padding: 8px;
-      
-        input {
-          flex: 1;
-          border: none !important;
-          outline: none;
-        }
-      
-        .add-subtask-link {
-          display: flex;
-          align-items: center;
-        }
-      }
-      
+  .left {
+    border-right: 2px solid gray;
+    padding-right: 100px;
   }
-  
-  .footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-  
-    .footer-left {
-      font-size: 14px;
+
+  .input-field {
+    margin-bottom: 20px;
+
+    .label {
+      font-size: 16px;
+      margin-bottom: 5px;
+
       .required {
         color: red;
       }
     }
-  
-    .footer-right {
-      display: flex;
-      gap: 20px;
-      padding-right: 50px;
-  
-      .btn {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        padding: 8px 16px;
-        border: 1px solid gray;
-        border-radius: 8px;
-        background-color: white;
-        cursor: pointer;
-        transition: box-shadow 0.3s;
-  
-        &:hover {
-          box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
-        }
-  
-        img {
-          display: inline-block;
-        }
-      }
-  
-      .create-btn {
-        background-color: var(--footerColor);
-        color: white;
 
-        img {
-            filter: brightness(0) invert(1);
-        }
+    .input-wrapper {
+      input,
+      textarea,
+      select {
+        width: 100%;
+        border: 1px solid gray; // heller Border
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+      }
+
+      textarea {
+        height: 100px;
+      }
+    }
+
+    .error {
+      font-size: 12px;
+      color: red;
+      margin-top: 5px;
+      display: none; // wird ausgeblendet, wenn Eingabe erfolgt
+    }
+  }
+
+  // Speziell für das Datumfeld
+  .date-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 8px;
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+    }
+
+    .calendar-link {
+      display: flex;
+      align-items: center;
+
+      img {
+        display: block;
       }
     }
   }
 
-  @media (max-width: 1000px) {
-    h1 {
-      font-size: 40px;
-      margin-bottom: 40px;
-    }
-  
-    .top {
-      justify-content: center;
-    }
-  
-    .addtask-content {
-      flex-direction: column;
+  // Priority-Bereich
+  .priority-wrapper {
+    display: flex;
+    gap: 10px;
+
+    .priority-option {
+      flex: 1;
+      max-width: 80px;
+      display: flex;
       align-items: center;
-      gap: 0;
-  
-      .left,
-      .right {
-        width: 260px;
-        margin: 0;
+      justify-content: center;
+      background-color: white;
+      border: 1px solid gray;
+      border-radius: 8px;
+      padding: 8px;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+
+      &:hover {
+        box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+      }
+
+      img {
+        margin-right: 5px;
       }
     }
-  
-    .addtask-content .left {
-      border-right: none;
+
+    .medium {
+      background-color: yellow;
+    }
+  }
+
+  // Assigend To
+  .selected-contact {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+    svg {
+      margin-left: auto;
+    }
+  }
+
+  .dropdown-options {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+    width: 300px;
+  }
+
+  .contact-option {
+    margin-bottom: 2px;
+    cursor: pointer;
+  }
+
+  .assign-contact {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 5px;
+    border-radius: 15px;
+    &:hover {
+      background-color: #f3f1f1;
+    }
+
+    .contact-name {
+      width: 80%;
+      font-size: 18px;
+    }
+
+    .contact-color-circle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      min-width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 1px solid #fff;
+    }
+
+    .contact-checkbox {
+      position: absolute;
+      right: 10px;
+      width: 20px;
+    }
+  }
+
+  .input-wrapper-contact {
+    position: relative;
+  }
+
+  .assigned-to-wrapper {
+    position: relative;
+    min-height: 40px;
+  }
+
+  .selected-contacts-logos {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    z-index: 0;
+
+    .selected-contact-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+    }
+  }
+
+  // Subtasks-Bereich
+  .subtasks-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 8px;
+
+    input {
+      flex: 1;
+      border: none !important;
+      outline: none;
+    }
+
+    .add-subtask-link {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+
+  .footer-left {
+    font-size: 14px;
+    .required {
+      color: red;
+    }
+  }
+
+  .footer-right {
+    display: flex;
+    gap: 20px;
+    padding-right: 50px;
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 16px;
+      border: 1px solid gray;
+      border-radius: 8px;
+      background-color: white;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+
+      &:hover {
+        box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.5);
+      }
+
+      img {
+        display: inline-block;
+      }
+    }
+
+    .create-btn {
+      background-color: var(--footerColor);
+      color: white;
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+
+  .top {
+    justify-content: center;
+  }
+
+  .addtask-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+
+    .left,
+    .right {
+      width: 260px;
+      margin: 0;
+    }
+  }
+
+  .addtask-content .left {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .priority-wrapper {
+    .priority-option {
+      max-width: 80px;
+      padding: 4px; // reduziert den Innenabstand
+
+      img {
+        width: 16px; // setzt die Bildgröße herab
+        height: auto;
+      }
+
+      span {
+        font-size: 10px; // verkleinert den Text
+      }
+    }
+  }
+
+  .footer {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding-bottom: 40px;
+
+    .footer-right {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
       padding-right: 0;
     }
-
-    .priority-wrapper {
-        .priority-option {
-          max-width: 80px;
-          padding: 4px; // reduziert den Innenabstand
-    
-          img {
-            width: 16px;  // setzt die Bildgröße herab
-            height: auto;
-          }
-    
-          span {
-            font-size: 10px; // verkleinert den Text
-          }
-        }
-    }
-    
-    .footer {
-      flex-direction: column-reverse;
-      text-align: center;
-      padding-bottom: 40px;
-  
-      .footer-right {
-        margin: 20px 0;
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        padding-right: 0;
-      }
-    }
   }
-  
-  
-  
+}

@@ -65,15 +65,74 @@
       </div>
       <div class="input-field">
         <div class="label">Assigned to</div>
-        <div class="input-wrapper">
-          <select [(ngModel)]="newTask.assignedTo">
-            <option [value]="null">Select Contacts to assign</option>
-            @for (contact of contacts; track contact.id) {
-            <option [value]="contact.id">{{ contact.name }}</option>
+        <div
+          class="assigned-to-wrapper"
+          [style.minHeight.px]="
+            getSelectedContacts().length > 0
+              ? getSelectedContacts().length > 8
+                ? getSelectedContacts().length * 35 + 80
+                : 80
+              : 0
+          "
+        >
+          <div class="input-wrapper-contact">
+            <div class="selected-contact" (click)="toggleDropdown()">
+              @if (!isDropdownOpen && !selectedContact) { Select Contacts to
+              assign }
+              <svg
+                width="8"
+                height="5"
+                viewBox="0 0 8 5"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.54851 4.3L0.94851 1.7C0.631844 1.38333 0.56101 1.02083 0.73601 0.6125C0.91101 0.204167 1.22351 0 1.67351 0H6.82351C7.27351 0 7.58601 0.204167 7.76101 0.6125C7.93601 1.02083 7.86518 1.38333 7.54851 1.7L4.94851 4.3C4.84851 4.4 4.74018 4.475 4.62351 4.525C4.50684 4.575 4.38184 4.6 4.24851 4.6C4.11518 4.6 3.99018 4.575 3.87351 4.525C3.75684 4.475 3.64851 4.4 3.54851 4.3Z"
+                  fill="#2A3647"
+                />
+              </svg>
+            </div>
+            <div class="selected-contacts-logos">
+              @for (contact of getSelectedContacts(); track contact.id) {
+              <div
+                class="selected-contact-logo"
+                [style.backgroundColor]="contact.color"
+              >
+                {{ getInitials(contact.name) }}
+              </div>
+              }
+            </div>
+            @if (isDropdownOpen) {
+            <div class="dropdown-options" (blur)="isDropdownOpen = false">
+              @for (contact of contacts; track contact.id) {
+              <div class="contact-option" (click)="selectContact(contact)">
+                <div class="assign-contact">
+                  <div
+                    class="contact-color-circle"
+                    [style.backgroundColor]="contact.color"
+                  >
+                    {{ getInitials(contact.name) }}
+                  </div>
+                  <div class="contact-name">
+                    {{ contact.name | truncate : 20 }}
+                  </div>
+                  @if (contact.id) {
+                  <input
+                    class="contact-checkbox"
+                    type="checkbox"
+                    [checked]="checkedContacts[contact.id]"
+                    (change)="$event.stopPropagation(); selectContact(contact)"
+                  />
+                  }
+                </div>
+              </div>
+              }
+            </div>
             }
-          </select>
+          </div>
         </div>
       </div>
+
       <div class="input-field">
         <div class="label">Category <span class="required">*</span></div>
         <div class="input-wrapper">
@@ -92,7 +151,11 @@
           <a
             href="#"
             class="add-subtask-link"
-            (click)="addSubtask(subtaskInput.value); subtaskInput.value = ''"
+            (click)="
+              $event.preventDefault();
+              addSubtask(subtaskInput.value);
+              subtaskInput.value = ''
+            "
           >
             <img src="./assets/img/addtask/add.svg" alt="add" />
           </a>
