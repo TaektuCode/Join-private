@@ -73,9 +73,18 @@
       <div class="board-column">
         <div class="column-heading">
           <h2>Done</h2>
-          <!-- Kein Plus-Button -->
         </div>
-        <!-- Inhalt der Spalte -->
+        <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="[todoList, inProgressList, awaitFeedbackList]"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        @for (item of done; track item) {
+          <div class="example-box" cdkDrag>{{ item }}</div>
+        }
+      </div>
       </div>
     </div>
     <!-- Drag an Drop einheit -->
