@@ -57,6 +57,11 @@
         img {
           width: 12px;
         }
+
+        &:hover {
+          background-color: var(--accentColor2);
+        }
+        
       }
     }
   }
