@@ -61,7 +61,7 @@
         &:hover {
           background-color: var(--accentColor2);
         }
-        
+
       }
     }
   }
@@ -81,6 +81,12 @@
   
         img {
           width: 16px;
+          transition: filter 0.3s;
+
+          &:hover {
+            // Beispiel-Filter; der exakte Wert muss ggf. an deine var(--accentColor2) angepasst werden
+            filter: brightness(0) saturate(100%) invert(40%) sepia(70%) saturate(500%) hue-rotate(160deg);
+          }
         }
       }
     }
