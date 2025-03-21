@@ -51,6 +51,12 @@
 }
 
 /* Basis-Reset und Standardstile */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 h1 {
   font-family: "Inter", sans-serif;
   margin: 0;
@@ -217,5 +223,11 @@ footer {
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
