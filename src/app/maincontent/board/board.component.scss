@@ -42,10 +42,12 @@
         img {
           padding: 0.5rem;
           transition: filter 0.3s ease;
+          background-color: transparent;
           border-radius: 50%;
+          display: inline-block;
 
           &:hover {
-            box-shadow: 0 0 0 2px #A8A8A8;
+            background-color: #A8A8A8;
           }
         }
       }
