@@ -9,7 +9,6 @@
 
   @media (max-width: 1100px) {
     width: 380px;
-    padding-left: 20px;
   }
 
   @media (max-width: 460px) {
@@ -23,6 +22,9 @@
 
 .contact-box {
   max-height: 79vh;
+  margin-left: 25px;
+  margin-right: 0;
+  padding-right: 25px;
   overflow: auto;
   @media (max-height: 670px) {
     max-height: 73vh;
@@ -36,7 +38,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid #d1d1d1;
-  padding-left: 50px;
+  padding-left: 34px;
   padding-bottom: 17px;
   margin-bottom: 17px;
 

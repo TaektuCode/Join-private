@@ -153,6 +153,9 @@
     align-items: center;
     margin-top: 40px;
   }
+  @media (max-width: 670px) {
+    gap: 10px;
+  }
   @media (max-width: 420px) {
     flex-direction: column;
     align-items: flex-start;
