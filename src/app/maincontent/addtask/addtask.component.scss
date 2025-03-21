@@ -145,6 +145,14 @@
     cursor: pointer;
   }
 
+  .assign-contact:has(.contact-checkbox:checked) {
+    background-color: #2a3647;
+    color: white;
+    &:hover {
+      background-color: #091931;
+    }
+  }
+
   .assign-contact {
     display: flex;
     align-items: center;
