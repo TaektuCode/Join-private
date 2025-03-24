@@ -35,6 +35,10 @@
           <div class="example-box" cdkDrag>{{ item }}</div>
         }
       </div>
+      <!-- Platzhalter-DIV: wird nur angezeigt, wenn todo leer ist -->
+      <div *ngIf="todo.length === 0" class="no-data">
+        Keine Aufgaben vorhanden.
+     </div>
       </div>
       <div class="board-column">
         <div class="column-heading">
@@ -52,6 +56,10 @@
           <div class="example-box" cdkDrag>{{ item }}</div>
         }
       </div>
+      <!-- Platzhalter-DIV: wird nur angezeigt, wenn todo leer ist -->
+      <div *ngIf="inProgress.length === 0" class="no-data">
+        Keine Aufgaben vorhanden.
+     </div>
       </div>
       <div class="board-column">
         <div class="column-heading">
@@ -69,6 +77,10 @@
           <div class="example-box" cdkDrag>{{ item }}</div>
         }
       </div>
+      <!-- Platzhalter-DIV: wird nur angezeigt, wenn todo leer ist -->
+      <div *ngIf="awaitFeedback.length === 0" class="no-data">
+        Keine Aufgaben vorhanden.
+     </div>
       </div>
       <div class="board-column">
         <div class="column-heading">
@@ -85,6 +97,10 @@
           <div class="example-box" cdkDrag>{{ item }}</div>
         }
       </div>
+      <!-- Platzhalter-DIV: wird nur angezeigt, wenn todo leer ist -->
+      <div *ngIf="done.length === 0" class="no-data">
+        Keine Aufgaben vorhanden.
+     </div>
       </div>
     </div>
     
