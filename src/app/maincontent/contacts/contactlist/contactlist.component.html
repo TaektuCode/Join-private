@@ -1,24 +1,26 @@
 <div class="contact-list">
-  <app-addcontact></app-addcontact>
   <div class="contact-box">
-    @for (group of groupedContacts; track group.letter) {
-    <div class="letter-separator">
-      {{ group.letter }}
-    </div>
-    @for (item of group.contacts; track item.id) {
-    <div
-      class="contact"
-      (click)="selectContact(item)"
-      [class.active]="isContactActive(item)"
-    >
-      <div class="logo" [style.background-color]="item.color">
-        {{ getInitials(item.name) }}
+    <app-addcontact></app-addcontact>
+    <div class="contacts-container">
+      @for (group of groupedContacts; track group.letter) {
+      <div class="letter-separator">
+        {{ group.letter }}
       </div>
-      <div class="contact-data">
-        <p>{{ item.name | truncate : 23 }}</p>
-        <a>{{ item.email | truncate : 30 }}</a>
+      @for (item of group.contacts; track item.id) {
+      <div
+        class="contact"
+        (click)="selectContact(item)"
+        [class.active]="isContactActive(item)"
+      >
+        <div class="logo" [style.background-color]="item.color">
+          {{ getInitials(item.name) }}
+        </div>
+        <div class="contact-data">
+          <p>{{ item.name | truncate : 23 }}</p>
+          <a>{{ item.email | truncate : 30 }}</a>
+        </div>
       </div>
+      } }
     </div>
-    } }
   </div>
 </div>

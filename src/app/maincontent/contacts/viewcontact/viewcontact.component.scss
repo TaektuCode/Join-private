@@ -33,7 +33,7 @@
     width: 97.5%;
     height: calc(100dvh - 96px); /* Volle Höhe abzüglich Header */
     top: 96px;
-    padding-left: 10px;
+    padding-left: 25px;
     left: 0;
     margin: 0;
     background-color: white;
@@ -152,6 +152,9 @@
     flex-direction: row;
     align-items: center;
     margin-top: 40px;
+  }
+  @media (max-width: 670px) {
+    gap: 10px;
   }
   @media (max-width: 420px) {
     flex-direction: column;

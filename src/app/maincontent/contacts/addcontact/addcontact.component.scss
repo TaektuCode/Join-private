@@ -1,4 +1,5 @@
 .add-button {
+  position: fixed;
   font-weight: 700;
   font-size: 21px;
   display: flex;
@@ -12,7 +13,6 @@
   width: 352px;
   border-radius: 10px;
   height: 56px;
-  margin: 22.5px 0;
   cursor: pointer;
 
   &:hover {
