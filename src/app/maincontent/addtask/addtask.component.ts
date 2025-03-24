@@ -16,7 +16,7 @@ import { TruncatePipe } from '../../truncate.pipe';
 export class AddtaskComponent implements OnInit {
   newTask: TaskInterface = {
     title: '',
-    date: new Date(),
+    date: this.getTodayDate(),
     category: '',
     description: '',
     assignedTo: [],
@@ -30,6 +30,11 @@ export class AddtaskComponent implements OnInit {
   isDropdownOpen = false;
   selectedContact: ContactInterface | null = null;
   checkedContacts: { [key: string]: boolean } = {};
+  errors: { title: boolean; date: boolean; category: boolean } = {
+    title: false,
+    date: false,
+    category: false,
+  };
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -48,6 +53,14 @@ export class AddtaskComponent implements OnInit {
   }
 
   createTask() {
+    this.errors.title = !this.newTask.title;
+    this.errors.date = !this.newTask.date;
+    this.errors.category = !this.newTask.category;
+
+    if (this.errors.title || this.errors.date || this.errors.category) {
+      return; // Verhindere das Erstellen des Tasks, wenn Fehler vorhanden sind
+    }
+
     this.firebaseService.createTask(this.newTask).then(() => {
       console.log('Task created successfully!');
       this.resetForm();
@@ -57,7 +70,7 @@ export class AddtaskComponent implements OnInit {
   resetForm() {
     this.newTask = {
       title: '',
-      date: new Date(),
+      date: '',
       category: '',
       description: '',
       assignedTo: [],
@@ -66,6 +79,7 @@ export class AddtaskComponent implements OnInit {
       priority: 'medium',
       subtask: [],
     };
+    this.errors = { title: false, date: false, category: false };
   }
 
   setPriority(priority: 'urgent' | 'medium' | 'low') {
@@ -115,5 +129,23 @@ export class AddtaskComponent implements OnInit {
       }
       return false;
     });
+  }
+
+  getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const day = ('0' + today.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
+  resetError(fieldName: string) {
+    if (fieldName === 'title') {
+      this.errors.title = false;
+    } else if (fieldName === 'date') {
+      this.errors.date = false;
+    } else if (fieldName === 'category') {
+      this.errors.category = false;
+    }
   }
 }

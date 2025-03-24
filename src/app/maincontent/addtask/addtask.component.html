@@ -4,16 +4,17 @@
   </div>
   <div class="addtask-content">
     <div class="left">
-      <div class="input-field">
+      <div class="input-field" [class.error-active]="errors.title">
         <div class="label">Title <span class="required">*</span></div>
         <div class="input-wrapper">
           <input
             type="text"
             placeholder="Enter a title"
             [(ngModel)]="newTask.title"
+            (input)="resetError('title')"
           />
         </div>
-        <div class="error">@if (!newTask.title) { Enter title now }</div>
+        <div class="error">@if (errors.title) { Enter title now }</div>
       </div>
       <div class="input-field">
         <div class="label">Description</div>
@@ -23,14 +24,18 @@
             [(ngModel)]="newTask.description"
           ></textarea>
         </div>
-        <div class="error">Enter the Description</div>
       </div>
-      <div class="input-field">
+      <div class="input-field" [class.error-active]="errors.date">
         <div class="label">Due date <span class="required">*</span></div>
         <div class="date-wrapper">
-          <input type="date" [(ngModel)]="newTask.date" />
+          <input
+            type="date"
+            [(ngModel)]="newTask.date"
+            [min]="getTodayDate()"
+            (input)="resetError('date')"
+          />
         </div>
-        <div class="error">@if (!newTask.date) { Date require }</div>
+        <div class="error">@if (errors.date) { Date require }</div>
       </div>
     </div>
     <div class="right">
@@ -38,7 +43,7 @@
         <div class="label">Priority</div>
         <div class="input-wrapper priority-wrapper">
           <div
-            class="priority-option"
+            class="priority-option low"
             (click)="setPriority('low')"
             [class.selected]="newTask.priority === 'low'"
           >
@@ -46,15 +51,16 @@
             <span>Low</span>
           </div>
           <div
-            class="priority-option medium"
+            class="priority-option"
             (click)="setPriority('medium')"
             [class.selected]="newTask.priority === 'medium'"
+            [class.medium]="newTask.priority === 'medium'"
           >
             <img src="./assets/img/addtask/mid.svg" alt="Medium" />
             <span>Medium</span>
           </div>
           <div
-            class="priority-option"
+            class="priority-option urgent"
             (click)="setPriority('urgent')"
             [class.selected]="newTask.priority === 'urgent'"
           >
@@ -132,17 +138,19 @@
           </div>
         </div>
       </div>
-
-      <div class="input-field">
+      <div class="input-field-category" [class.error-active]="errors.category">
         <div class="label">Category <span class="required">*</span></div>
         <div class="input-wrapper">
-          <select [(ngModel)]="newTask.category">
+          <select
+            [(ngModel)]="newTask.category"
+            (change)="resetError('category')"
+          >
             <option [value]="null">Select task category</option>
             <option value="Technical Task">Technical Task</option>
             <option value="User Story">User Story</option>
           </select>
         </div>
-        <div class="error">@if (!newTask.category) { Add Category }</div>
+        <div class="error-category">@if (errors.category) { Add Category }</div>
       </div>
       <div class="input-field">
         <div class="label">Subtasks</div>
@@ -160,7 +168,6 @@
             <img src="./assets/img/addtask/add.svg" alt="add" />
           </a>
         </div>
-        <div class="error subtasks-error">Add your subtasks if you need</div>
         @for (subtask of newTask.subtask; track subtask.title; let i = $index) {
         <div>
           {{ subtask.title }}
