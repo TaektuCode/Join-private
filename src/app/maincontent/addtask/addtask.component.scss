@@ -56,9 +56,9 @@
 
     .error {
       font-size: 12px;
-      color: red;
+      color: red !important;
       margin-top: 5px;
-      display: none; // wird ausgeblendet, wenn Eingabe erfolgt
+      // display: none; // Entferne diese Zeile
     }
   }
 
@@ -90,6 +90,11 @@
       .required {
         color: red;
       }
+    }
+    .error-category {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
     }
   }
 
