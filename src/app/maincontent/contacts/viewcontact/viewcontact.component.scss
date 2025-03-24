@@ -30,7 +30,7 @@
   @media (max-width: 800px) {
     position: absolute;
     align-items: center;
-    width: 97.5%;
+    width: 100%;
     height: calc(100dvh - 96px); /* Volle Höhe abzüglich Header */
     top: 96px;
     padding-left: 25px;
@@ -39,7 +39,6 @@
     background-color: white;
   }
   @media (max-width: 420px) {
-    width: 96%;
   }
 
   @media (max-height: 670px) {
