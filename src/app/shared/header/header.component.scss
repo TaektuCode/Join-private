@@ -27,16 +27,16 @@ header {
   align-items: center;
   justify-content: center;
   flex: 1;
-  
+
   .header-title {
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  
+
   .header-logo {
     display: none;
     max-height: 40px; // Höhe anpassen falls nötig
@@ -48,13 +48,13 @@ header {
   align-items: center;
   gap: 1rem;
   flex-shrink: 0;
-  
+
   img {
     display: block;
     cursor: pointer;
     height: 40px;
   }
-  
+
   .circle {
     width: 40px;
     height: 40px;
@@ -68,7 +68,7 @@ header {
     &:hover {
       opacity: 0.8; // leicht transparent bei Hover
     }
-    
+
     span {
       color: var(--fontColorMaim);
       font-weight: bold;
@@ -87,7 +87,7 @@ header {
       display: inline-block; // Logo einblenden
     }
   }
-  
+
   .header-right {
     img {
       display: none; // Help-Icon ausblenden

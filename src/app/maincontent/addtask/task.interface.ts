@@ -3,7 +3,7 @@ export interface TaskInterface {
   assignedTo?: string[];
   category: string; // Nicht optional
   created?: Date;
-  date: Date; // Nicht optional
+  date: string; // Nicht optional
   description?: string;
   edited?: Date;
   priority?: 'urgent' | 'medium' | 'low';

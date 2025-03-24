@@ -17,7 +17,7 @@
 
   .left,
   .right {
-    width: 300px;
+    width: 50%;
     margin: 40px;
   }
 
@@ -62,6 +62,37 @@
     }
   }
 
+  //Category
+
+  .input-field-category {
+    margin-bottom: 20px;
+    .input-wrapper {
+      input,
+      textarea,
+      select {
+        width: 100%;
+        border: 1px solid gray; // heller Border
+        border-radius: 8px;
+        padding: 8px;
+        font-size: 14px;
+        background-color: transparent;
+      }
+
+      textarea {
+        height: 100px;
+      }
+    }
+
+    .label {
+      font-size: 16px;
+      margin-bottom: 5px;
+
+      .required {
+        color: red;
+      }
+    }
+  }
+
   // Speziell für das Datumfeld
   .date-wrapper {
     display: flex;
@@ -86,7 +117,6 @@
     }
   }
 
-  // Priority-Bereich
   .priority-wrapper {
     display: flex;
     gap: 10px;
@@ -111,10 +141,36 @@
       img {
         margin-right: 5px;
       }
-    }
 
-    .medium {
-      background-color: yellow;
+      &.selected {
+        color: white;
+
+        &.low {
+          background-color: green;
+          color: white;
+        }
+
+        &.medium {
+          background-color: yellow;
+          color: black;
+        }
+
+        &.urgent {
+          background-color: red;
+          color: white;
+        }
+      }
+
+      &.medium {
+        background-color: yellow;
+        color: black;
+      }
+
+      &.selected.medium {
+        // Hier die Änderung
+        background-color: yellow;
+        color: black;
+      }
     }
   }
 

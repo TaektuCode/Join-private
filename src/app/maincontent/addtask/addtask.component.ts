@@ -16,7 +16,7 @@ import { TruncatePipe } from '../../truncate.pipe';
 export class AddtaskComponent implements OnInit {
   newTask: TaskInterface = {
     title: '',
-    date: new Date(),
+    date: this.getTodayDate(),
     category: '',
     description: '',
     assignedTo: [],
@@ -57,7 +57,7 @@ export class AddtaskComponent implements OnInit {
   resetForm() {
     this.newTask = {
       title: '',
-      date: new Date(),
+      date: '',
       category: '',
       description: '',
       assignedTo: [],
@@ -115,5 +115,13 @@ export class AddtaskComponent implements OnInit {
       }
       return false;
     });
+  }
+
+  getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const day = ('0' + today.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
   }
 }

@@ -28,17 +28,22 @@
       <div class="input-field">
         <div class="label">Due date <span class="required">*</span></div>
         <div class="date-wrapper">
-          <input type="date" [(ngModel)]="newTask.date" />
+          <input
+            type="date"
+            [(ngModel)]="newTask.date"
+            [min]="getTodayDate()"
+          />
         </div>
         <div class="error">@if (!newTask.date) { Date require }</div>
       </div>
     </div>
     <div class="right">
       <div class="input-field">
+        <
         <div class="label">Priority</div>
         <div class="input-wrapper priority-wrapper">
           <div
-            class="priority-option"
+            class="priority-option low"
             (click)="setPriority('low')"
             [class.selected]="newTask.priority === 'low'"
           >
@@ -46,15 +51,16 @@
             <span>Low</span>
           </div>
           <div
-            class="priority-option medium"
+            class="priority-option"
             (click)="setPriority('medium')"
             [class.selected]="newTask.priority === 'medium'"
+            [class.medium]="newTask.priority === 'medium'"
           >
             <img src="./assets/img/addtask/mid.svg" alt="Medium" />
             <span>Medium</span>
           </div>
           <div
-            class="priority-option"
+            class="priority-option urgent"
             (click)="setPriority('urgent')"
             [class.selected]="newTask.priority === 'urgent'"
           >
@@ -133,7 +139,7 @@
         </div>
       </div>
 
-      <div class="input-field">
+      <div class="input-field-category">
         <div class="label">Category <span class="required">*</span></div>
         <div class="input-wrapper">
           <select [(ngModel)]="newTask.category">
