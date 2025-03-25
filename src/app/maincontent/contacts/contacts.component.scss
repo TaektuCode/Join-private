@@ -1,6 +1,10 @@
 .content-wrapper {
     display: flex;
-    min-height:  calc(100dvh - 100px);
+    max-width: calc(1440px - 232px);
+    width: 100%;
+
+    overflow: hidden;
+
 
     @media (max-width:800px) {
     justify-content: center;
