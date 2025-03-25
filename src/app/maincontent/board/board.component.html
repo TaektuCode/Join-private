@@ -34,6 +34,10 @@
         @for (item of todo; track item) {
           <div class="example-box" cdkDrag>{{ item }}</div>
         }
+        <!-- Platzhalter-DIV: wird nur angezeigt, wenn todo leer ist -->
+      <div *ngIf="todo.length === 0" class="no-data">
+        Keine Aufgaben vorhanden.
+     </div>
       </div>
       </div>
       <div class="board-column">
@@ -51,6 +55,10 @@
         @for (item of inProgress; track item) {
           <div class="example-box" cdkDrag>{{ item }}</div>
         }
+      <!-- Platzhalter-DIV: wird nur angezeigt, wenn todo leer ist -->
+      <div *ngIf="inProgress.length === 0" class="no-data">
+        Keine Aufgaben vorhanden.
+     </div>
       </div>
       </div>
       <div class="board-column">
@@ -68,6 +76,10 @@
         @for (item of awaitFeedback; track item) {
           <div class="example-box" cdkDrag>{{ item }}</div>
         }
+      <!-- Platzhalter-DIV: wird nur angezeigt, wenn todo leer ist -->
+      <div *ngIf="awaitFeedback.length === 0" class="no-data">
+        Keine Aufgaben vorhanden.
+     </div>
       </div>
       </div>
       <div class="board-column">
@@ -84,9 +96,11 @@
         @for (item of done; track item) {
           <div class="example-box" cdkDrag>{{ item }}</div>
         }
+        <!-- Platzhalter-DIV: wird nur angezeigt, wenn todo leer ist -->
+      <div *ngIf="done.length === 0" class="no-data">
+        Keine Aufgaben vorhanden.
+     </div>
       </div>
       </div>
     </div>
-    
-    
   </div>
