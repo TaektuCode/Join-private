@@ -63,6 +63,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   openTaskDetails() {
     this.selectedTask = this.task;
     this.isClicked = true;
+    console.log('card is clicked');
   }
 
   closeTaskDetails() {
