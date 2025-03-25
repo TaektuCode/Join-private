@@ -25,6 +25,7 @@ export class AddtaskComponent implements OnInit {
     edited: new Date(),
     priority: 'medium',
     subtask: [],
+    status: 'Todo', // Standardmäßig auf 'Todo' setzen
   };
   contacts: ContactInterface[] = [];
   contactSubscription: Subscription | undefined;
@@ -88,6 +89,7 @@ export class AddtaskComponent implements OnInit {
       edited: new Date(),
       priority: 'medium',
       subtask: [],
+      status: 'Todo',
     };
     this.errors = { title: false, date: false, category: false };
     this.isCategoryDropdownOpen = false;

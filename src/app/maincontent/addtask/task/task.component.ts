@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { TaskInterface } from '../task.interface';
-import { TaskService } from '../task.service';
-import { Subscription } from 'rxjs';
 import { ContactInterface } from '../../contacts/contact-interface';
 import { FirebaseService } from '../../../shared/services/firebase.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task',
@@ -13,23 +12,15 @@ import { FirebaseService } from '../../../shared/services/firebase.service';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit, OnDestroy {
-  tasks: TaskInterface[] = [];
-  taskSubscription: Subscription | undefined;
+  @Input() task!: TaskInterface; // Input-Property für den Task
   contacts: ContactInterface[] = [];
   contactSubscription: Subscription | undefined;
   isClicked: boolean = false;
   selectedTask: TaskInterface | null = null;
 
-  constructor(
-    private taskService: TaskService,
-    private firebaseService: FirebaseService
-  ) {}
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
-    this.taskSubscription = this.taskService.tasks$.subscribe((tasks) => {
-      this.tasks = tasks;
-      console.log('Tasks in TaskComponent:', this.tasks);
-    });
     this.contactSubscription = this.firebaseService.contactList.subscribe(
       (contacts) => {
         this.contacts = contacts;
@@ -38,9 +29,6 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.taskSubscription) {
-      this.taskSubscription.unsubscribe();
-    }
     if (this.contactSubscription) {
       this.contactSubscription.unsubscribe();
     }
@@ -72,8 +60,8 @@ export class TaskComponent implements OnInit, OnDestroy {
     return `${completed}/${total} Subtasks`;
   }
 
-  openTaskDetails(task: TaskInterface) {
-    this.selectedTask = task;
+  openTaskDetails() {
+    this.selectedTask = this.task;
     this.isClicked = true;
   }
 

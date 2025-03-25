@@ -16,21 +16,23 @@ import { ContactInterface } from '../../maincontent/contacts/contact-interface';
 import { TaskInterface } from '../../maincontent/addtask/task.interface';
 import { Unsubscribe } from '@angular/fire/auth';
 import { Observable, BehaviorSubject, map } from 'rxjs';
+
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService implements OnDestroy {
-  firebase = inject(Firestore); // Inject Firestore service
-  unsubscribeTasks: Unsubscribe | undefined; // Variable to store unsubscribe function for contacts
-  unsubscribeContacts: Unsubscribe | undefined; // Variable to store unsubscribe function for tasks
-  taskList: TaskInterface[] = []; // Array to hold task list
+  firebase = inject(Firestore);
+  unsubscribeTasks: Unsubscribe | undefined;
+  unsubscribeContacts: Unsubscribe | undefined;
+  private _taskList = new BehaviorSubject<TaskInterface[]>([]); // BehaviorSubject für Tasks
+  taskList$: Observable<TaskInterface[]> = this._taskList.asObservable(); // Observable für Tasks
   private _contactList = new BehaviorSubject<ContactInterface[]>([]);
   contactList: Observable<ContactInterface[]> =
     this._contactList.asObservable();
 
   constructor() {
-    this.subscribeToContacts(); // Subscribe to contact updates
-    this.subscribeToTasks(); // Subscribe to task updates
+    this.subscribeToContacts();
+    this.subscribeToTasks();
   }
 
   private subscribeToContacts() {
@@ -47,13 +49,12 @@ export class FirebaseService implements OnDestroy {
           );
         });
         sortedContacts.sort((a, b) => a.name.localeCompare(b.name));
-        this._contactList.next(sortedContacts); // Verwende _contactList.next()
+        this._contactList.next(sortedContacts);
       }
     );
   }
 
   private subscribeToTasks() {
-    // Subscribe to real-time updates from the 'tasks' collection
     this.unsubscribeTasks = onSnapshot(
       collection(this.firebase, 'tasks'),
       (tasksObject) => {
@@ -63,13 +64,12 @@ export class FirebaseService implements OnDestroy {
             this.setTaskObject(element.id, element.data() as TaskInterface)
           );
         });
-        this.taskList = sortedTasks;
+        this._taskList.next(sortedTasks); // Verwenden Sie _taskList.next()
       }
     );
   }
 
   setContactObject(id: string, obj: ContactInterface): ContactInterface {
-    // Method to create a ContactInterface object from document data
     return {
       id: id,
       email: obj.email,
@@ -80,29 +80,28 @@ export class FirebaseService implements OnDestroy {
   }
 
   setTaskObject(id: string, obj: TaskInterface): TaskInterface {
-    // Method to create a TaskInterface object from document data
     return {
       id: id,
       title: obj.title,
-      date: obj.date, // Convert Firebase Timestamp to Date object
+      date: obj.date,
       category: obj.category,
       description: obj.description,
       assignedTo: obj.assignedTo || [],
-      created: obj.created ? obj.created : undefined, // Convert Firebase Timestamp to Date object
-      edited: obj.edited ? obj.edited : undefined, // Convert Firebase Timestamp to Date object
+      created: obj.created ? obj.created : undefined,
+      edited: obj.edited ? obj.edited : undefined,
       priority: obj.priority,
       subtask: obj.subtask || [],
+      status: obj.status,
     };
   }
 
   getGroupedContacts(): Observable<
     { letter: string; contacts: ContactInterface[] }[]
   > {
-    // Method to group contacts by the first letter of their name
     return this.contactList.pipe(
       map((contacts) => {
         const grouped: { letter: string; contacts: ContactInterface[] }[] = [];
-        const sortedContacts = [...contacts]; // Verwende das Array aus dem Observable
+        const sortedContacts = [...contacts];
         sortedContacts.forEach((contact) => {
           const firstLetter = contact.name.charAt(0).toUpperCase();
           let group = grouped.find((g) => g.letter === firstLetter);
@@ -118,41 +117,27 @@ export class FirebaseService implements OnDestroy {
   }
 
   async deleteContact(contactId: string) {
-    // Method to delete a contact
     const contactDocRef = doc(this.firebase, 'contacts', contactId);
     await deleteDoc(contactDocRef);
   }
 
   async createTask(task: TaskInterface) {
-    // Method to create a new task
-    return await addDoc(collection(this.firebase, 'tasks'), task);
+    const newTask = { ...task, status: task.status || 'Todo' };
+    return await addDoc(collection(this.firebase, 'tasks'), newTask);
   }
 
-  async updateTask(taskId: string, task: TaskInterface) {
-    // Method to update an existing task
+  async updateTask(taskId: string, task: Partial<TaskInterface>) {
+    // Erlauben Sie partielle Updates
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
-    const taskData = {
-      title: task.title,
-      date: task.date,
-      category: task.category,
-      description: task.description,
-      assignedTo: task.assignedTo,
-      created: task.created,
-      edited: task.edited,
-      priority: task.priority,
-      subtask: task.subtask,
-    };
-    return await updateDoc(taskDocRef, taskData);
+    return await updateDoc(taskDocRef, task);
   }
 
   async deleteTask(taskId: string) {
-    // Method to delete a task
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
     await deleteDoc(taskDocRef);
   }
 
   async assignTaskToUsers(taskId: string, userIds: string[]) {
-    // Method to assign a task to multiple users
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
     await updateDoc(taskDocRef, {
       assignedTo: arrayUnion(...userIds),
@@ -160,7 +145,6 @@ export class FirebaseService implements OnDestroy {
   }
 
   async removeAssignedUserFromTask(taskId: string, userId: string) {
-    // Method to remove an assigned user from a task
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
     await updateDoc(taskDocRef, {
       assignedTo: arrayRemove(userId),
@@ -168,7 +152,6 @@ export class FirebaseService implements OnDestroy {
   }
 
   getTasksForUser(userId: string) {
-    // Method to get tasks assigned to a specific user
     const q = query(
       collection(this.firebase, 'tasks'),
       where('assignedTo', 'array-contains', userId)
@@ -183,7 +166,6 @@ export class FirebaseService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    // Lifecycle hook to unsubscribe from onSnapshot when the service is destroyed
     if (this.unsubscribeContacts) {
       this.unsubscribeContacts();
     }
