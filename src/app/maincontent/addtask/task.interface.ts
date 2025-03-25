@@ -1,7 +1,7 @@
 export interface TaskInterface {
   id?: number | string; // Optional, von Firebase generiert
   assignedTo?: string[];
-  category: string; // Nicht optional
+  category: string | null; // Nicht optional
   created?: Date;
   date: string; // Nicht optional
   description?: string;

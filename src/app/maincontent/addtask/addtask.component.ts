@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { TaskInterface } from './task.interface';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +17,7 @@ export class AddtaskComponent implements OnInit {
   newTask: TaskInterface = {
     title: '',
     date: this.getTodayDate(),
-    category: '',
+    category: null,
     description: '',
     assignedTo: [],
     created: new Date(),
@@ -35,6 +35,11 @@ export class AddtaskComponent implements OnInit {
     date: false,
     category: false,
   };
+
+  //Kategorie-Dropdown
+  isCategoryDropdownOpen: boolean = false;
+  selectedCategory: string | null = null;
+  categories: string[] = ['Technical Task', 'User Story'];
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -71,7 +76,7 @@ export class AddtaskComponent implements OnInit {
     this.newTask = {
       title: '',
       date: '',
-      category: '',
+      category: null,
       description: '',
       assignedTo: [],
       created: new Date(),
@@ -80,6 +85,9 @@ export class AddtaskComponent implements OnInit {
       subtask: [],
     };
     this.errors = { title: false, date: false, category: false };
+    this.isCategoryDropdownOpen = false;
+    this.selectedCategory = null;
+    this.checkedContacts = {};
   }
 
   setPriority(priority: 'urgent' | 'medium' | 'low') {
@@ -137,6 +145,17 @@ export class AddtaskComponent implements OnInit {
     const month = ('0' + (today.getMonth() + 1)).slice(-2);
     const day = ('0' + today.getDate()).slice(-2);
     return `${year}-${month}-${day}`;
+  }
+
+  toggleCategoryDropdown() {
+    this.isCategoryDropdownOpen = !this.isCategoryDropdownOpen;
+  }
+
+  selectCategory(category: string | null) {
+    this.selectedCategory = category;
+    this.newTask.category = category;
+    this.isCategoryDropdownOpen = false;
+    this.resetError('category');
   }
 
   resetError(fieldName: string) {
