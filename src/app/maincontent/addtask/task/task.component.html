@@ -1,82 +1,124 @@
-<div class="task-card">
-    <div class="task-label">User Story</div>
+<div class="task-list">
+  @for (task of tasks; track task.created) {
+  <div class="task-card">
+    <div class="task-label">{{ task.category }}</div>
     <div class="task-title">
-        <h5>Kochwelt Page & Recipe Recommender</h5>
+      <h5>{{ task.title }}</h5>
     </div>
     <div>
-        <p class="task-description">Build start page with recipe recommendation...</p>
+      <p class="task-description">{{ task.description }}</p>
     </div>
     <div class="task-progress">
-        <div class="progress-bar">
-            <div class="progress-fill" style="width: 50%;"></div>
-        </div>
-        <span>1/2 Subtasks</span>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 50%"></div>
+      </div>
+      <span>{{ getSubtaskProgressText(task) }}</span>
     </div>
     <div class="task-assignees-to">
-        <div class="task-assignees">
-            <span class="assignee" style="background-color: #FF8C00;">AM</span>
-            <span class="assignee" style="background-color: #32CD32;">EM</span>
-            <span class="assignee" style="background-color: #6A5ACD;">MB</span>
-        </div>
-        <div class="priority">
-            =
-        </div>
+      <div class="task-assignees">
+        @for (assigneeId of task.assignedTo; track $index) {
+        <span class="assignee">
+          {{ getAssigneeInitials(assigneeId) }}
+        </span>
+        }
+      </div>
+      <div class="priority">
+        @switch (task.priority) { @case ('urgent') {
+        <span>!!!</span>
+        } @case ('medium') {
+        <span>=</span>
+        } @case ('low') {
+        <span>-</span>
+        } @default {
+        <span></span>
+        } }
+      </div>
     </div>
+  </div>
+  } @empty {
+  <p>Es sind noch keine Tasks vorhanden.</p>
+  }
 </div>
 <p>task works!</p>
 
-@if(isClicked) {
+@if (isClicked && selectedTask) {
 <section>
-    <div class="open-card">
-        <div class="card-content">
-            <div class="on-top"><span class="badge">Technical Task connecten</span>
-                <svg width="25" height="25" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="mask0_75592_9957" style="mask-type: alpha" maskUnits="userSpaceOnUse" x="0" y="0"
-                        width="25" height="24">
-                        <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />
-                    </mask>
-                    <g mask="url(#mask0_75592_9957)">
-                        <path class="svg-path"
-                            d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z"
-                            fill="#2A3647" />
-                    </g>
-                </svg>
-            </div>
-            <h1>Titel connecten</h1>
-            <div class="description">
-                <h4>Description hier connecten</h4>
-            </div>
-            <div class="date">
-                <h4>Due date:</h4>
-                <div class="date-connection">date connecten</div>
-            </div>
-            <div class="priority">
-                <h4>Priority:</h4>
-                <div class="priority-connection">Priority connecten</div>
-            </div>
-            <h4>Assigned To:</h4>
-            <div class="assigned-to">
-                Contacte connecten
-            </div>
-            <h4>Subtasks:</h4>
-            <div class="subtasks">
-                Subtask Connecten
-            </div>
+  <div class="open-card">
+    <div class="card-content">
+      <div class="on-top">
+        <span class="badge">{{ selectedTask.category }}</span>
+        <svg
+          width="25"
+          height="25"
+          viewBox="0 0 25 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <mask
+            id="mask0_75592_9957"
+            style="mask-type: alpha"
+            maskUnits="userSpaceOnUse"
+            x="0"
+            y="0"
+            width="25"
+            height="24"
+          >
+            <rect x="0.144531" width="24" height="24" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_75592_9957)">
+            <path
+              class="svg-path"
+              d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z"
+              fill="#2A3647"
+            />
+          </g>
+        </svg>
+      </div>
+      <h1>{{ selectedTask.title }}</h1>
+      <div class="description">
+        <h4>Description:</h4>
+        <p>{{ selectedTask.description }}</p>
+      </div>
+      <div class="date">
+        <h4>Due date:</h4>
+        <div class="date-connection">{{ selectedTask.date }}</div>
+      </div>
+      <div class="priority">
+        <h4>Priority:</h4>
+        <div class="priority-connection">{{ selectedTask.priority }}</div>
+      </div>
+      <h4>Assigned To:</h4>
+      <div class="assigned-to">
+        @for (assigneeId of selectedTask.assignedTo; track $index) {
+        <span class="assignee">
+          {{ getAssigneeInitials(assigneeId) }}
+        </span>
+        }
+      </div>
+      <h4>Subtasks:</h4>
+      <div class="subtasks">
+        @for (subtask of selectedTask.subtask; track $index) {
+        <div>
+          <input type="checkbox" [checked]="subtask.completed" disabled />
+          {{ subtask.title }}
         </div>
-        <div class="btn">
-            <button class="delete-button">
-                <p class="icon-delete">
-                    <img src="./assets/img/delete.svg" alt="">
-                    Delete
-                </p>
-            </button>
-            <button class="edit-button">
-                <p class="icon-edit">
-                    <img src="./assets/img/edit.svg" alt="">
-                    Edit
-                </p>
-            </button>
-        </div>
+        }
+      </div>
     </div>
+    <div class="btn">
+      <button class="delete-button">
+        <p class="icon-delete">
+          <img src="./assets/img/delete.svg" alt="" />
+          Delete
+        </p>
+      </button>
+      <button class="edit-button">
+        <p class="icon-edit">
+          <img src="./assets/img/edit.svg" alt="" />
+          Edit
+        </p>
+      </button>
+    </div>
+  </div>
 </section>
 }

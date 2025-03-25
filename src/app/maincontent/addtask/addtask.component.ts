@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ContactInterface } from '../contacts/contact-interface';
 import { Subscription } from 'rxjs';
 import { TruncatePipe } from '../../truncate.pipe';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-add-task',
@@ -41,7 +42,10 @@ export class AddtaskComponent implements OnInit {
   selectedCategory: string | null = null;
   categories: string[] = ['Technical Task', 'User Story'];
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(
+    private firebaseService: FirebaseService,
+    private taskService: TaskService // Injizieren Sie Ihren TaskService
+  ) {}
 
   ngOnInit(): void {
     this.contactSubscription = this.firebaseService.contactList.subscribe(
@@ -68,6 +72,7 @@ export class AddtaskComponent implements OnInit {
 
     this.firebaseService.createTask(this.newTask).then(() => {
       console.log('Task created successfully!');
+      this.taskService.addTask(this.newTask); // Übertragen Sie den Task über Ihren Service
       this.resetForm();
     });
   }
@@ -124,19 +129,17 @@ export class AddtaskComponent implements OnInit {
   selectContact(contact: ContactInterface) {
     if (contact.id) {
       this.selectedContact = contact;
-      this.newTask.assignedTo = [contact.id];
-      // this.isDropdownOpen = false;
       this.checkedContacts[contact.id] = !this.checkedContacts[contact.id];
     }
   }
 
   getSelectedContacts(): ContactInterface[] {
-    return this.contacts.filter((contact) => {
-      if (contact.id) {
-        return this.checkedContacts[contact.id];
-      }
-      return false;
-    });
+    this.newTask.assignedTo = this.contacts
+      .filter((contact) => contact.id && this.checkedContacts[contact.id])
+      .map((contact) => contact.id!);
+    return this.contacts.filter(
+      (contact) => contact.id && this.checkedContacts[contact.id]
+    );
   }
 
   getTodayDate(): string {
