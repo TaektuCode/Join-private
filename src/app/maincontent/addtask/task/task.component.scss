@@ -6,7 +6,7 @@
   padding: 16px;
   border-radius: 24px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -89,7 +89,6 @@ section {
   align-items: center;
   width: 100%;
   // height: 100%;
-
 }
 
 .open-card {
@@ -108,12 +107,13 @@ section {
   z-index: 1001;
 
   .card-content {
+    width: 88%;
     display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: 90%;
-    gap: 24px;
+    height: 95%;
     background-color: white;
+    gap: 10px;
+    flex-direction: column;
+    overflow-x: auto;
   }
 }
 
@@ -191,7 +191,7 @@ p {
 
 .btn {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   width: 90%;
 
@@ -241,4 +241,171 @@ svg {
 .assigned-list {
   list-style: none;
   padding: 0;
+}
+
+
+input,
+textarea,
+select {
+  width: 98%;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  outline: none;
+  border: 1px solid black;
+  cursor: pointer;
+  color: black;
+  margin-bottom: 20px;
+}
+
+input {
+  height: 30px;
+}
+
+textarea {
+  height: 125px;
+  resize: none;
+}
+
+select {
+  height: 25px;
+}
+
+option {
+  font-size: 14px;
+}
+
+.input-field {
+  margin-bottom: 20px;
+
+  .label {
+    font-size: 24px;
+    margin-bottom: 5px;
+    display: flex
+;
+    justify-content: space-between;
+  }
+}
+
+.input-field2 {
+  margin-bottom: 20px;
+  width: 98%;
+}
+
+.priority-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+
+  .priority-option {
+    flex: 1;
+    max-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    img {
+      margin-right: 5px;
+    }
+  }
+
+  .medium {
+    background-color: yellow;
+  }
+}
+
+.subtasks-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 8px 0 8px 8px;
+  border: 1px solid black;
+
+  input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    height: 18px;
+    margin-bottom: 0;
+  }
+
+  .add-subtask-link {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.ok-btn-container {
+  display: flex;
+  justify-content: flex-end;
+
+  .ok-btn {
+    background-color: blue;
+    color: white;
+    padding: 10px 18px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ok-btn:hover {
+    animation-timing-function: ease-in-out;
+    animation-duration: 100ms;
+  }
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: black;
+  opacity: 1;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder,
+select::-webkit-input-placeholder {
+  color: black;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder,
+select:-moz-placeholder {
+  color: black;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder,
+select::-moz-placeholder {
+  color: black;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder,
+select:-ms-input-placeholder {
+  color: black;
 }

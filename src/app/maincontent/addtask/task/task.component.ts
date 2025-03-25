@@ -16,6 +16,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   contacts: ContactInterface[] = [];
   contactSubscription: Subscription | undefined;
   isClicked: boolean = false;
+  isEditing: boolean = false;
   selectedTask: TaskInterface | null = null;
 
   constructor(private firebaseService: FirebaseService) {}
@@ -63,11 +64,15 @@ export class TaskComponent implements OnInit, OnDestroy {
   openTaskDetails() {
     this.selectedTask = this.task;
     this.isClicked = true;
-    console.log('card is clicked');
   }
 
   closeTaskDetails() {
     this.isClicked = false;
     this.selectedTask = null;
+    this.isEditing = false; // Bearbeitungsmodus schließen, wenn Details geschlossen werden
+  }
+
+  startEditing() {
+    this.isEditing = true;
   }
 }
