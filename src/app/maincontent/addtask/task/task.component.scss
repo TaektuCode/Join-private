@@ -91,7 +91,8 @@ section {
   // height: 100%;
 }
 
-.open-card {
+.open-card-1,
+.open-card-2 {
   position: absolute;
   left: 35%;
   top: 35px;
@@ -100,7 +101,7 @@ section {
   justify-content: center;
   align-items: center;
   width: 525px;
-  height: 871px;
+  height: 885px;
   background-color: white;
   border-radius: 3%;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
@@ -109,7 +110,7 @@ section {
   .card-content {
     width: 88%;
     display: flex;
-    height: 95%;
+    height: 90%;
     background-color: white;
     gap: 10px;
     flex-direction: column;
@@ -189,6 +190,14 @@ p {
   padding: 0;
 }
 
+.subtask-container {
+  display: flex;
+}
+.subtask-title{
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 5px;
+}
 .btn {
   display: flex;
   justify-content: flex-end;
@@ -258,8 +267,9 @@ select {
   margin-bottom: 20px;
 }
 
-input {
-  height: 30px;
+.input-subtask {
+  height: 20px;
+  width: 50px;
 }
 
 textarea {
@@ -281,8 +291,7 @@ option {
   .label {
     font-size: 24px;
     margin-bottom: 5px;
-    display: flex
-;
+    display: flex;
     justify-content: space-between;
   }
 }
@@ -332,7 +341,7 @@ option {
   padding: 8px 0 8px 8px;
   border: 1px solid black;
 
-  input {
+  .input-subtask {
     flex: 1;
     border: none;
     outline: none;

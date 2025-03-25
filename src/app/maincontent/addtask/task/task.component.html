@@ -38,7 +38,7 @@
 
 @if (isClicked && selectedTask) {
 <section>
-  <div class="open-card">
+  <div class="open-card-1">
     <div class="card-content">
       <div class="on-top">
         <span class="badge">{{ selectedTask.category }}</span>
@@ -78,9 +78,9 @@
       <h4>Subtasks:</h4>
       <div class="subtasks">
         @for (subtask of selectedTask.subtask; track $index) {
-        <div>
-          <input type="checkbox" [checked]="subtask.completed" disabled />
-          {{ subtask.title }}
+        <div class="subtask-container">
+          <input class="input-subtask" type="checkbox" [checked]="subtask.completed"  />
+          <div class="subtask-title">{{ subtask.title }}</div>
         </div>
         }
       </div>
@@ -105,7 +105,7 @@
 
 @if (isEditing) {
 <section>
-  <div class="open-card">
+  <div class="open-card-2">
     <div class="card-content">
       <div class="input-field">
         <div class="label">Title
