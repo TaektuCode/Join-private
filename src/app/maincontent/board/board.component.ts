@@ -12,11 +12,20 @@ import { TaskInterface } from '../addtask/task.interface';
 import { Subscription } from 'rxjs';
 import { ContactInterface } from '../contacts/contact-interface';
 import { TaskComponent } from '../addtask/task/task.component';
+import { AddtaskComponent } from '../addtask/addtask.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CommonModule, TaskComponent],
+  imports: [
+    CdkDropList,
+    CdkDrag,
+    CommonModule,
+    TaskComponent,
+    AddtaskComponent,
+    FormsModule,
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -29,15 +38,18 @@ export class BoardComponent implements OnInit, OnDestroy {
   taskSubscription: Subscription | undefined;
   contacts: ContactInterface[] = []; // Property für Kontakte
   contactSubscription: Subscription | undefined;
+  isAddTaskOverlayVisible: boolean = false;
+  searchTerm: string = '';
+  allTasks: TaskInterface[] = [];
 
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
     this.taskSubscription = this.firebaseService.taskList$.subscribe(
       (tasks) => {
-        this.tasks = tasks;
-        console.log('Alle Tasks in BoardComponent:', this.tasks);
-        this.filterTasksByStatus();
+        this.allTasks = tasks; // Speichert alle Aufgaben
+        console.log('Alle Tasks in BoardComponent:', this.allTasks);
+        this.filterTasks();
       }
     );
     this.contactSubscription = this.firebaseService.contactList.subscribe(
@@ -57,23 +69,45 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
-  filterTasksByStatus(): void {
-    this.todo = this.tasks.filter((task) => task.status === 'Todo');
-    this.inProgress = this.tasks.filter(
+  filterTasksByStatus(tasksToFilter: TaskInterface[]): {
+    todo: TaskInterface[];
+    inProgress: TaskInterface[];
+    awaitFeedback: TaskInterface[];
+    done: TaskInterface[];
+  } {
+    const todo = tasksToFilter.filter((task) => task.status === 'Todo');
+    const inProgress = tasksToFilter.filter(
       (task) => task.status === 'In Progress'
     );
-    this.awaitFeedback = this.tasks.filter(
+    const awaitFeedback = tasksToFilter.filter(
       (task) => task.status === 'Await Feedback'
     );
-    this.done = this.tasks.filter((task) => task.status === 'Done');
+    const done = tasksToFilter.filter((task) => task.status === 'Done');
+    return { todo, inProgress, awaitFeedback, done }; // Wichtig! Das Objekt zurückgeben
+  }
 
-    console.log('Todo-Tasks:', this.todo); // Überprüfe die gefilterten Todo-Tasks
-    console.log('In Progress-Tasks:', this.inProgress); // Überprüfe die gefilterten In Progress-Tasks
-    console.log('Await Feedback-Tasks:', this.awaitFeedback); // Überprüfe die gefilterten Await Feedback-Tasks
-    console.log('Done-Tasks:', this.done); // Überprüfe die gefilterten Done-Tasks
+  filterTasks(): void {
+    const lowerSearchTerm = this.searchTerm.toLowerCase();
+
+    const filteredTasks = this.allTasks.filter((task) => {
+      const titleMatch =
+        task.title && task.title.toLowerCase().includes(lowerSearchTerm);
+      const descriptionMatch =
+        task.description &&
+        task.description.toLowerCase().includes(lowerSearchTerm);
+      return titleMatch || descriptionMatch;
+    });
+
+    const { todo, inProgress, awaitFeedback, done } =
+      this.filterTasksByStatus(filteredTasks);
+    this.todo = todo;
+    this.inProgress = inProgress;
+    this.awaitFeedback = awaitFeedback;
+    this.done = done;
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {
+    console.log('drop-Methode aufgerufen:', event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -88,29 +122,30 @@ export class BoardComponent implements OnInit, OnDestroy {
         event.currentIndex
       );
       const movedTask = event.container.data[event.currentIndex];
+      console.log('Verschobener Task:', movedTask);
+      console.log('Ziel-Container-ID:', event.container.id); // Überprüfen Sie die ID des Containers, in den verschoben wurde
       if (movedTask.id) {
-        let newCategory: string | null = null;
+        let newStatus:
+          | 'Todo'
+          | 'In Progress'
+          | 'Await Feedback'
+          | 'Done'
+          | null = null;
         if (event.container.id === 'todoList') {
-          newCategory = 'Todo';
+          newStatus = 'Todo';
         } else if (event.container.id === 'inProgressList') {
-          newCategory = 'In Progress';
+          newStatus = 'In Progress';
         } else if (event.container.id === 'awaitFeedbackList') {
-          newCategory = 'Await Feedback';
+          newStatus = 'Await Feedback';
         } else if (event.container.id === 'doneList') {
-          newCategory = 'Done';
+          newStatus = 'Done';
         }
-        if (newCategory) {
-          this.firebaseService.updateTask(movedTask.id, {
-            ...movedTask,
-            category: newCategory,
-          });
+
+        if (newStatus && movedTask.id) {
+          this.firebaseService.updateTask(movedTask.id, { status: newStatus });
         }
       }
     }
-  }
-
-  trackByFn(index: number, item: TaskInterface): string | undefined {
-    return item.id;
   }
 
   getAssigneeInitials(assigneeId: string): string {
@@ -125,5 +160,25 @@ export class BoardComponent implements OnInit, OnDestroy {
       return firstNameInitial + lastNameInitial;
     }
     return '';
+  }
+
+  openAddTaskOverlay() {
+    this.isAddTaskOverlayVisible = true;
+  }
+
+  closeAddTaskOverlay() {
+    this.isAddTaskOverlayVisible = false;
+  }
+
+  handleTaskCreated(newTask: TaskInterface) {
+    console.log('Neue Aufgabe vom Overlay erhalten:', newTask);
+    // Da `this.tasks` über das Firebase-Observable `taskList$` aktualisiert wird,
+    // müssen wir die neu erstellte Aufgabe nicht direkt zu `this.tasks` hinzufügen.
+    // Firebase aktualisiert die Liste und unser Observable löst eine neue Emission aus,
+    // wodurch `filterTasksByStatus()` erneut aufgerufen und die lokalen Arrays
+    // (`todo`, `inProgress`, etc.) aktualisiert werden.
+
+    // Optional: Zeige eine Erfolgsmeldung an
+    this.closeAddTaskOverlay();
   }
 }

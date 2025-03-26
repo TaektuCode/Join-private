@@ -3,10 +3,15 @@
     <h1>Board</h1>
     <div class="board-controls">
       <div class="search-container header-search">
-        <input type="text" placeholder="Find Task" />
+        <input
+          type="text"
+          placeholder="Find Task"
+          [(ngModel)]="searchTerm"
+          (input)="filterTasks()"
+        />
         <img src="./assets/img/board/search.svg" alt="Search" />
       </div>
-      <button class="add-task">
+      <button class="add-task" (click)="openAddTaskOverlay()">
         <img src="./assets/img/board/add.svg" alt="Add" />
         <span class="btn-text">Add task</span>
       </button>
@@ -18,6 +23,12 @@
       <img src="./assets/img/board/search.svg" alt="Search" />
     </div>
   </div>
+  @if (isAddTaskOverlayVisible) {
+  <div class="overlay">
+    <app-add-task (taskCreated)="handleTaskCreated($event)"></app-add-task>
+    <div class="overlay-background" (click)="closeAddTaskOverlay()"></div>
+  </div>
+  }
   <div class="main-board">
     <div class="board-column">
       <div class="column-heading">
@@ -31,6 +42,7 @@
         [cdkDropListConnectedTo]="[inProgressList, awaitFeedbackList, doneList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
+        id="todoList"
       >
         @for (task of todo; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
@@ -51,6 +63,7 @@
         [cdkDropListConnectedTo]="[todoList, awaitFeedbackList, doneList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
+        id="inProgressList"
       >
         @for (task of inProgress; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
@@ -71,6 +84,7 @@
         [cdkDropListConnectedTo]="[todoList, inProgressList, doneList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
+        id="awaitFeedbackList"
       >
         @for (task of awaitFeedback; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
@@ -90,6 +104,7 @@
         [cdkDropListConnectedTo]="[todoList, inProgressList, awaitFeedbackList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
+        id="doneList"
       >
         @for (task of done; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>

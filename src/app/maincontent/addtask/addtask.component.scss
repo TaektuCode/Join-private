@@ -14,6 +14,7 @@
 .addtask-content {
   display: flex;
   gap: 20px;
+  position: relative;
 
   .left,
   .right {
@@ -251,6 +252,8 @@
     border: 1px solid #ccc;
     z-index: 1;
     width: 300px;
+    height: 400px;
+    overflow: auto;
   }
 
   .contact-option {
@@ -355,15 +358,14 @@
 }
 
 .footer {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  margin-top: 160px;
-  bottom: 50px;
   max-width: 1440px;
-  width: 76vw;
+  width: 76%;
+  bottom: 20px;
 
   .footer-left {
     font-size: 14px;

@@ -127,7 +127,6 @@ export class FirebaseService implements OnDestroy {
   }
 
   async updateTask(taskId: string, task: Partial<TaskInterface>) {
-    // Erlauben Sie partielle Updates
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
     return await updateDoc(taskDocRef, task);
   }
