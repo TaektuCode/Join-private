@@ -1,4 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { TaskInterface } from './task.interface';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +21,8 @@ import { TaskService } from './task.service';
   styleUrls: ['./addtask.component.scss'],
 })
 export class AddtaskComponent implements OnInit {
+  @Output() taskCreated = new EventEmitter<TaskInterface>();
+
   newTask: TaskInterface = {
     title: '',
     date: this.getTodayDate(),
@@ -74,6 +82,7 @@ export class AddtaskComponent implements OnInit {
     this.firebaseService.createTask(this.newTask).then(() => {
       console.log('Task created successfully!');
       this.taskService.addTask(this.newTask); // Übertragen Sie den Task über Ihren Service
+      this.taskCreated.emit(this.newTask); // Emit the new task
       this.resetForm();
     });
   }

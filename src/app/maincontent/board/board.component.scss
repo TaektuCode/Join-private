@@ -82,6 +82,53 @@
   }
 }
 
+//Add Task Overlay
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25px;
+  z-index: 1000; /* Stellt sicher, dass es über anderen Inhalten liegt */
+  app-add-task {
+    ::ng-deep .footer {
+      position: fixed;
+      width: 73%;
+      bottom: 45px !important;
+    }
+    ::ng-deep .dropdown-options {
+      height: 350px;
+    }
+  }
+}
+
+.overlay-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+app-add-task {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Stellt sicher, dass die Komponente über dem Hintergrund liegt */
+  width: 80%;
+  height: 90%;
+  max-width: 80%; /* Beispiel für maximale Breite */
+  max-height: 90%; /* Beispiel für maximale Höhe */
+  overflow-y: auto; /* Ermöglicht Scrollen bei Bedarf */
+}
+
+//Main Board
 .main-board {
   display: flex;
   gap: 16px;

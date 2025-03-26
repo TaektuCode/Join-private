@@ -12,11 +12,18 @@ import { TaskInterface } from '../addtask/task.interface';
 import { Subscription } from 'rxjs';
 import { ContactInterface } from '../contacts/contact-interface';
 import { TaskComponent } from '../addtask/task/task.component';
+import { AddtaskComponent } from '../addtask/addtask.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, CommonModule, TaskComponent],
+  imports: [
+    CdkDropList,
+    CdkDrag,
+    CommonModule,
+    TaskComponent,
+    AddtaskComponent,
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -29,6 +36,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   taskSubscription: Subscription | undefined;
   contacts: ContactInterface[] = []; // Property für Kontakte
   contactSubscription: Subscription | undefined;
+  isAddTaskOverlayVisible: boolean = false;
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -131,5 +139,25 @@ export class BoardComponent implements OnInit, OnDestroy {
       return firstNameInitial + lastNameInitial;
     }
     return '';
+  }
+
+  openAddTaskOverlay() {
+    this.isAddTaskOverlayVisible = true;
+  }
+
+  closeAddTaskOverlay() {
+    this.isAddTaskOverlayVisible = false;
+  }
+
+  handleTaskCreated(newTask: TaskInterface) {
+    console.log('Neue Aufgabe vom Overlay erhalten:', newTask);
+    // Da `this.tasks` über das Firebase-Observable `taskList$` aktualisiert wird,
+    // müssen wir die neu erstellte Aufgabe nicht direkt zu `this.tasks` hinzufügen.
+    // Firebase aktualisiert die Liste und unser Observable löst eine neue Emission aus,
+    // wodurch `filterTasksByStatus()` erneut aufgerufen und die lokalen Arrays
+    // (`todo`, `inProgress`, etc.) aktualisiert werden.
+
+    // Optional: Zeige eine Erfolgsmeldung an
+    this.closeAddTaskOverlay();
   }
 }

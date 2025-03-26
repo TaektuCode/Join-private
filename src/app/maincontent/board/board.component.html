@@ -6,7 +6,7 @@
         <input type="text" placeholder="Find Task" />
         <img src="./assets/img/board/search.svg" alt="Search" />
       </div>
-      <button class="add-task">
+      <button class="add-task" (click)="openAddTaskOverlay()">
         <img src="./assets/img/board/add.svg" alt="Add" />
         <span class="btn-text">Add task</span>
       </button>
@@ -18,6 +18,12 @@
       <img src="./assets/img/board/search.svg" alt="Search" />
     </div>
   </div>
+  @if (isAddTaskOverlayVisible) {
+  <div class="overlay">
+    <app-add-task (taskCreated)="handleTaskCreated($event)"></app-add-task>
+    <div class="overlay-background" (click)="closeAddTaskOverlay()"></div>
+  </div>
+  }
   <div class="main-board">
     <div class="board-column">
       <div class="column-heading">
