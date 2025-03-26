@@ -182,3 +182,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.closeAddTaskOverlay();
   }
 }
+
+triggerAnimation(event: MouseEvent) {
+  const cardElement = event.currentTarget as HTMLElement;
+  cardElement.classList.add('rotate-animation');
+  // Entferne die Klasse nach Ablauf der Animation (hier 600ms)
+  setTimeout(() => {
+    cardElement.classList.remove('rotate-animation');
+  }, 600);
+}
+
