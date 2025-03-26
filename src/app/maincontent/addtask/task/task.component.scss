@@ -440,3 +440,12 @@ select:-ms-input-placeholder {
 .rotate-animation {
   animation: rotateEffect 0.6s ease-in-out;
 }
+
+.task-card {
+  transition: transform 0.3s ease; // Sorgt für eine sanfte Übergangsanimation
+}
+
+.rotated {
+  transform: rotate(5deg);
+}
+

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { TaskInterface } from '../task.interface';
 import { ContactInterface } from '../../contacts/contact-interface';
 import { FirebaseService } from '../../../shared/services/firebase.service';
@@ -76,12 +76,23 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.isEditing = true;
   }
 
-  triggerAnimation(event: MouseEvent) {
+  rotateCard(event: Event, add: boolean): void {
     const cardElement = event.currentTarget as HTMLElement;
-    cardElement.classList.add('rotate-animation');
-    setTimeout(() => {
-      cardElement.classList.remove('rotate-animation');
-    }, 600);
+    if (add) {
+      cardElement.classList.add('rotated');
+    } else {
+      cardElement.classList.remove('rotated');
+    }
   }
+
+@HostListener('cdkDragStarted', ['$event'])
+onDragStarted(event: Event): void {
+  this.rotateCard(event, true);
+}
+
+@HostListener('cdkDragEnded', ['$event'])
+onDragEnded(event: Event): void {
+  this.rotateCard(event, false);
+}
 }
 
