@@ -1,18 +1,28 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { TaskInterface } from '../task.interface';
 import { ContactInterface } from '../../contacts/contact-interface';
 import { FirebaseService } from '../../../shared/services/firebase.service';
 import { Subscription } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit, OnDestroy {
   @Input() task!: TaskInterface; // Input-Property für den Task
+  @Output() taskUpdated = new EventEmitter<TaskInterface>(); // Output-Event für aktualisierte Tasks (optional)
   contacts: ContactInterface[] = [];
   contactSubscription: Subscription | undefined;
   isClicked: boolean = false;
@@ -62,17 +72,59 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   openTaskDetails() {
-    this.selectedTask = this.task;
+    this.selectedTask = { ...this.task }; // Erstelle eine tiefe Kopie
     this.isClicked = true;
   }
 
   closeTaskDetails() {
     this.isClicked = false;
     this.selectedTask = null;
-    this.isEditing = false; // Bearbeitungsmodus schließen, wenn Details geschlossen werden
+    this.isEditing = false;
   }
 
   startEditing() {
     this.isEditing = true;
+  }
+
+  cancelEditing() {
+    this.isEditing = false;
+    this.selectedTask = null; // Setze selectedTask zurück, um Änderungen zu verwerfen
+  }
+
+  saveTaskDetails() {
+    if (this.selectedTask && this.selectedTask.id) {
+      const updatedTaskData: Partial<TaskInterface> = {
+        title: this.selectedTask.title,
+        description: this.selectedTask.description,
+        date: this.selectedTask.date,
+        priority: this.selectedTask.priority,
+        assignedTo: this.selectedTask.assignedTo,
+        subtask: this.selectedTask.subtask,
+        edited: new Date(),
+      };
+
+      this.firebaseService
+        .updateTask(this.selectedTask.id, updatedTaskData)
+        .then(() => {
+          console.log(
+            `Task mit ID ${this.selectedTask?.id} erfolgreich aktualisiert.`
+          );
+          this.isEditing = false;
+          this.isClicked = false;
+          this.selectedTask = null;
+          this.taskUpdated.emit({ ...this.task, ...updatedTaskData }); // Optional: Event auslösen
+        })
+        .catch((error) => {
+          console.error('Fehler beim Aktualisieren des Tasks:', error);
+          // Hier könntest du eine Fehlermeldung für den Benutzer anzeigen
+        });
+    }
+  }
+
+  addSubtask(title: string) {
+    if (title && this.selectedTask) {
+      this.selectedTask.subtask = this.selectedTask.subtask || [];
+      this.selectedTask.subtask.push({ title: title, completed: false });
+    }
   }
 }
