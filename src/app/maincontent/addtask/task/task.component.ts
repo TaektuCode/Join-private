@@ -75,4 +75,13 @@ export class TaskComponent implements OnInit, OnDestroy {
   startEditing() {
     this.isEditing = true;
   }
+
+  triggerAnimation(event: MouseEvent) {
+    const cardElement = event.currentTarget as HTMLElement;
+    cardElement.classList.add('rotate-animation');
+    setTimeout(() => {
+      cardElement.classList.remove('rotate-animation');
+    }, 600);
+  }
 }
+
