@@ -31,6 +31,7 @@
         [cdkDropListConnectedTo]="[inProgressList, awaitFeedbackList, doneList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
+        id="todoList"
       >
         @for (task of todo; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
@@ -51,6 +52,7 @@
         [cdkDropListConnectedTo]="[todoList, awaitFeedbackList, doneList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
+        id="inProgressList"
       >
         @for (task of inProgress; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
@@ -71,6 +73,7 @@
         [cdkDropListConnectedTo]="[todoList, inProgressList, doneList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
+        id="awaitFeedbackList"
       >
         @for (task of awaitFeedback; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
@@ -90,6 +93,7 @@
         [cdkDropListConnectedTo]="[todoList, inProgressList, awaitFeedbackList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)"
+        id="doneList"
       >
         @for (task of done; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>

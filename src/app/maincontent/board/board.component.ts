@@ -74,6 +74,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {
+    console.log('drop-Methode aufgerufen:', event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -88,22 +89,27 @@ export class BoardComponent implements OnInit, OnDestroy {
         event.currentIndex
       );
       const movedTask = event.container.data[event.currentIndex];
+      console.log('Verschobener Task:', movedTask);
+      console.log('Ziel-Container-ID:', event.container.id); // Überprüfen Sie die ID des Containers, in den verschoben wurde
       if (movedTask.id) {
-        let newCategory: string | null = null;
+        let newStatus:
+          | 'Todo'
+          | 'In Progress'
+          | 'Await Feedback'
+          | 'Done'
+          | null = null;
         if (event.container.id === 'todoList') {
-          newCategory = 'Todo';
+          newStatus = 'Todo';
         } else if (event.container.id === 'inProgressList') {
-          newCategory = 'In Progress';
+          newStatus = 'In Progress';
         } else if (event.container.id === 'awaitFeedbackList') {
-          newCategory = 'Await Feedback';
+          newStatus = 'Await Feedback';
         } else if (event.container.id === 'doneList') {
-          newCategory = 'Done';
+          newStatus = 'Done';
         }
-        if (newCategory) {
-          this.firebaseService.updateTask(movedTask.id, {
-            ...movedTask,
-            category: newCategory,
-          });
+
+        if (newStatus && movedTask.id) {
+          this.firebaseService.updateTask(movedTask.id, { status: newStatus });
         }
       }
     }
