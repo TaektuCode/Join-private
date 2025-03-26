@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { ContactInterface } from '../contacts/contact-interface';
 import { TaskComponent } from '../addtask/task/task.component';
 import { AddtaskComponent } from '../addtask/addtask.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
@@ -23,6 +24,7 @@ import { AddtaskComponent } from '../addtask/addtask.component';
     CommonModule,
     TaskComponent,
     AddtaskComponent,
+    FormsModule,
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
@@ -37,15 +39,17 @@ export class BoardComponent implements OnInit, OnDestroy {
   contacts: ContactInterface[] = []; // Property für Kontakte
   contactSubscription: Subscription | undefined;
   isAddTaskOverlayVisible: boolean = false;
+  searchTerm: string = '';
+  allTasks: TaskInterface[] = [];
 
   constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
     this.taskSubscription = this.firebaseService.taskList$.subscribe(
       (tasks) => {
-        this.tasks = tasks;
-        console.log('Alle Tasks in BoardComponent:', this.tasks);
-        this.filterTasksByStatus();
+        this.allTasks = tasks; // Speichert alle Aufgaben
+        console.log('Alle Tasks in BoardComponent:', this.allTasks);
+        this.filterTasks();
       }
     );
     this.contactSubscription = this.firebaseService.contactList.subscribe(
@@ -65,20 +69,41 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
-  filterTasksByStatus(): void {
-    this.todo = this.tasks.filter((task) => task.status === 'Todo');
-    this.inProgress = this.tasks.filter(
+  filterTasksByStatus(tasksToFilter: TaskInterface[]): {
+    todo: TaskInterface[];
+    inProgress: TaskInterface[];
+    awaitFeedback: TaskInterface[];
+    done: TaskInterface[];
+  } {
+    const todo = tasksToFilter.filter((task) => task.status === 'Todo');
+    const inProgress = tasksToFilter.filter(
       (task) => task.status === 'In Progress'
     );
-    this.awaitFeedback = this.tasks.filter(
+    const awaitFeedback = tasksToFilter.filter(
       (task) => task.status === 'Await Feedback'
     );
-    this.done = this.tasks.filter((task) => task.status === 'Done');
+    const done = tasksToFilter.filter((task) => task.status === 'Done');
+    return { todo, inProgress, awaitFeedback, done }; // Wichtig! Das Objekt zurückgeben
+  }
 
-    console.log('Todo-Tasks:', this.todo); // Überprüfe die gefilterten Todo-Tasks
-    console.log('In Progress-Tasks:', this.inProgress); // Überprüfe die gefilterten In Progress-Tasks
-    console.log('Await Feedback-Tasks:', this.awaitFeedback); // Überprüfe die gefilterten Await Feedback-Tasks
-    console.log('Done-Tasks:', this.done); // Überprüfe die gefilterten Done-Tasks
+  filterTasks(): void {
+    const lowerSearchTerm = this.searchTerm.toLowerCase();
+
+    const filteredTasks = this.allTasks.filter((task) => {
+      const titleMatch =
+        task.title && task.title.toLowerCase().includes(lowerSearchTerm);
+      const descriptionMatch =
+        task.description &&
+        task.description.toLowerCase().includes(lowerSearchTerm);
+      return titleMatch || descriptionMatch;
+    });
+
+    const { todo, inProgress, awaitFeedback, done } =
+      this.filterTasksByStatus(filteredTasks);
+    this.todo = todo;
+    this.inProgress = inProgress;
+    this.awaitFeedback = awaitFeedback;
+    this.done = done;
   }
 
   drop(event: CdkDragDrop<TaskInterface[]>) {
@@ -121,10 +146,6 @@ export class BoardComponent implements OnInit, OnDestroy {
         }
       }
     }
-  }
-
-  trackByFn(index: number, item: TaskInterface): string | undefined {
-    return item.id;
   }
 
   getAssigneeInitials(assigneeId: string): string {

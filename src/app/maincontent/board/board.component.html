@@ -3,7 +3,12 @@
     <h1>Board</h1>
     <div class="board-controls">
       <div class="search-container header-search">
-        <input type="text" placeholder="Find Task" />
+        <input
+          type="text"
+          placeholder="Find Task"
+          [(ngModel)]="searchTerm"
+          (input)="filterTasks()"
+        />
         <img src="./assets/img/board/search.svg" alt="Search" />
       </div>
       <button class="add-task" (click)="openAddTaskOverlay()">
