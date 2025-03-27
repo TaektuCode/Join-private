@@ -418,3 +418,12 @@ textarea:-ms-input-placeholder,
 select:-ms-input-placeholder {
   color: black;
 }
+
+.task-card {
+  transition: transform 0.3s ease; // Sorgt für eine sanfte Übergangsanimation
+}
+
+.rotated {
+  transform: rotate(5deg);
+}
+
