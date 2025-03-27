@@ -1,3 +1,4 @@
+
 import {
   Component,
   Input,
@@ -5,7 +6,9 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
+  HostListener,
 } from '@angular/core';
+
 import { TaskInterface } from '../task.interface';
 import { ContactInterface } from '../../contacts/contact-interface';
 import { FirebaseService } from '../../../shared/services/firebase.service';
@@ -86,6 +89,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.isEditing = true;
   }
 
+
   cancelEditing() {
     this.isEditing = false;
     this.selectedTask = null; // Setze selectedTask zurück, um Änderungen zu verwerfen
@@ -127,4 +131,25 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.selectedTask.subtask.push({ title: title, completed: false });
     }
   }
+
+  rotateCard(event: Event, add: boolean): void {
+    const cardElement = event.currentTarget as HTMLElement;
+    if (add) {
+      cardElement.classList.add('rotated');
+    } else {
+      cardElement.classList.remove('rotated');
+    }
+  }
+
+@HostListener('cdkDragStarted', ['$event'])
+onDragStarted(event: Event): void {
+  this.rotateCard(event, true);
+
 }
+
+@HostListener('cdkDragEnded', ['$event'])
+onDragEnded(event: Event): void {
+  this.rotateCard(event, false);
+}
+}
+
