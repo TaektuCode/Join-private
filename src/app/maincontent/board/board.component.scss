@@ -170,6 +170,10 @@ app-add-task {
         }
       }
     }
+    .board-section {
+      max-height: 1024px;
+      overflow-y: auto;
+    }
   }
 }
 
