@@ -477,7 +477,7 @@ option {
   background-color: white;
   border: 1px solid #ccc;
   z-index: 1;
-  width: auto;
+  width: 99%;
   height: 400px;
   overflow: auto;
 }
@@ -573,6 +573,11 @@ option {
 .add-subtask-btn {
   height: 40px;
   background-color: white;
+  padding: 4px;
+  :hover{
+    background-color: #ccc;
+    border-radius: 100%;
+  }
 }
 
 .subtask-add-btn-svg path {
