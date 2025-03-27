@@ -358,6 +358,9 @@ option {
 
     svg {
       margin-left: 15px;
+      @media(max-width:450px){
+        display: none;
+      }
     }
 
     &.selected {
@@ -594,6 +597,7 @@ option {
   padding: 5px;
   transition: background-color 0.3s ease;
   border-radius: 5px;
+  margin-top: 5px;
 }
 
 .new-subtask-container:hover {
@@ -613,4 +617,19 @@ option {
 .subtask-icons img {
   cursor: pointer;
   margin-left: 5px;
+}
+
+.editing-subtask-input{
+  height: 40%;
+  background-color: white;
+}
+
+.close-btn-container{
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  :hover{
+    background-color: #ccc;
+    border-radius: 100%;
+  }
 }
