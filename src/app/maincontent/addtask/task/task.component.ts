@@ -31,8 +31,9 @@ export class TaskComponent implements OnInit, OnDestroy {
   selectedTask: TaskInterface | null = null;
   isDropdownOpen = false;
   checkedContacts: { [key: string]: boolean } = {};
+  editingSubtaskIndex: number | null = null;
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
     this.contactSubscription = this.firebaseService.contactList.subscribe(
@@ -224,5 +225,47 @@ export class TaskComponent implements OnInit, OnDestroy {
     const firstNameInitial = names[0].charAt(0).toUpperCase();
     const lastNameInitial = names[names.length - 1].charAt(0).toUpperCase();
     return firstNameInitial + lastNameInitial;
+  }
+
+  editSubtask(index: number) {
+    if (this.editingSubtaskIndex === index) {
+      this.editingSubtaskIndex = null; // Speichern, wenn bereits im Bearbeitungsmodus
+    } else {
+      this.editingSubtaskIndex = index; // Bearbeitungsmodus starten
+    }
+  }
+
+  saveSubtask(subtask: any, index: number) {
+    this.editingSubtaskIndex = null;
+    this.updateSubtaskInFirebase(subtask, index);
+  }
+
+  updateSubtaskInFirebase(subtask: any, index: number) {
+    if (this.selectedTask && this.selectedTask.id) {
+      const updatedSubtasks = this.selectedTask.subtask
+        ? [...this.selectedTask.subtask]
+        : [];
+      updatedSubtasks[index] = subtask;
+
+      const updatedTaskData: Partial<TaskInterface> = {
+        subtask: updatedSubtasks,
+      };
+
+      this.firebaseService
+        .updateTask(this.selectedTask.id, updatedTaskData)
+        .then(() => {
+          this.taskUpdated.emit({ ...this.task, ...updatedTaskData });
+        })
+        .catch((error) => {
+          console.error('Fehler beim Aktualisieren des Subtasks:', error);
+        });
+    }
+  }
+
+  deleteSubtask(index: number) {
+    if (this.selectedTask && this.selectedTask.id && this.selectedTask.subtask) {
+      this.selectedTask.subtask.splice(index, 1); // Subtask aus dem Array entfernen
+      this.updateSubtaskInFirebase(this.selectedTask.subtask, -1);
+    }
   }
 }
