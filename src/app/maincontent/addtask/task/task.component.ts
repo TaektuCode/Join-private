@@ -160,11 +160,10 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.firebaseService
         .updateTask(this.selectedTask.id, updatedTaskData)
         .then(() => {
-          console.log('Subtask-Status erfolgreich aktualisiert!');
-          this.taskUpdated.emit({ ...this.task, ...updatedTaskData }); // Optional: Event auslösen
+          this.taskUpdated.emit({ ...this.task, ...updatedTaskData });
         })
         .catch((error) => {
-          console.error('Fehler beim Aktualisieren des Subtask-Status:', error);
+          console.error('Error Updating Subtask Status:', error);
         });
     }
   }
@@ -180,7 +179,7 @@ export class TaskComponent implements OnInit, OnDestroy {
           this.taskUpdated.emit();
         })
         .catch((error) => {
-          console.error('Error cant delete:', error);
+          console.error('Error cant delete SelectedTask:', error);
         });
     }
   }
