@@ -68,6 +68,15 @@ export class TaskComponent implements OnInit, OnDestroy {
     return '';
   }
 
+  getAssigneeColor(assigneeId: string): string | undefined {
+    const contact = this.contacts.find((contact) => contact.id === assigneeId);
+    return contact?.color;
+  }
+
+  getAssigneeDetails(assigneeId: string): ContactInterface | undefined {
+    return this.contacts.find((contact) => contact.id === assigneeId);
+  }
+
   getSubtaskProgressPercent(task: TaskInterface): number {
     const completed = task.subtask?.filter((sub) => sub.completed).length || 0;
     const total = task.subtask?.length || 1;
@@ -114,7 +123,7 @@ export class TaskComponent implements OnInit, OnDestroy {
         description: this.selectedTask.description,
         date: this.selectedTask.date,
         priority: this.selectedTask.priority,
-        assignedTo: this.getSelectedContacts().map(contact => contact.id!), // Aktualisieren Sie assignedTo basierend auf checkedContacts
+        assignedTo: this.getSelectedContacts().map((contact) => contact.id!), // Aktualisieren Sie assignedTo basierend auf checkedContacts
         subtask: this.selectedTask.subtask,
         edited: new Date(),
       };
@@ -226,6 +235,8 @@ export class TaskComponent implements OnInit, OnDestroy {
     const lastNameInitial = names[names.length - 1].charAt(0).toUpperCase();
     return firstNameInitial + lastNameInitial;
   }
+}
+
 
   editSubtask(index: number) {
     if (this.editingSubtaskIndex === index) {
