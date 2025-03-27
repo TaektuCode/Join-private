@@ -42,17 +42,15 @@
 
       input::placeholder {
         color: rgba(209, 209, 209, 1);
-
       }
 
       img {
-        padding: 0.5rem;
         transition: filter 0.3s ease;
         background-color: transparent;
         border-radius: 50%;
         display: inline-block;
         width: 32px;
-        margin: 8px;
+        margin-left: 8px;
 
         &:hover {
           background-color: #a8a8a8;
