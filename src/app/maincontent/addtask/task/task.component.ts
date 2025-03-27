@@ -33,7 +33,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   checkedContacts: { [key: string]: boolean } = {};
   editingSubtaskIndex: number | null = null;
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
     this.contactSubscription = this.firebaseService.contactList.subscribe(
@@ -235,8 +235,6 @@ export class TaskComponent implements OnInit, OnDestroy {
     const lastNameInitial = names[names.length - 1].charAt(0).toUpperCase();
     return firstNameInitial + lastNameInitial;
   }
-}
-
 
   editSubtask(index: number) {
     if (this.editingSubtaskIndex === index) {
@@ -274,7 +272,11 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   deleteSubtask(index: number) {
-    if (this.selectedTask && this.selectedTask.id && this.selectedTask.subtask) {
+    if (
+      this.selectedTask &&
+      this.selectedTask.id &&
+      this.selectedTask.subtask
+    ) {
       this.selectedTask.subtask.splice(index, 1); // Subtask aus dem Array entfernen
       this.updateSubtaskInFirebase(this.selectedTask.subtask, -1);
     }
