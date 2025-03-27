@@ -190,18 +190,50 @@
           </div>
         </div>
       </div>
+
+      <!-- Assigned to -->
       <div class="input-field">
         <div class="label">Assigned to</div>
-        <div class="input-wrapper">
-          <select multiple [(ngModel)]="selectedTask.assignedTo">
-            <option [value]="null" disabled>Select Contacts to assign</option>
-            @for (contact of contacts; track contact.id) {
-            <option [value]="contact.id">{{ contact.name }}</option>
+        <div class="assigned-to-wrapper">
+          <div class="input-wrapper-contact">
+            <div class="selected-contact" (click)="toggleDropdown()">
+              @if (!isDropdownOpen && getSelectedContacts().length === 0) { Select Contacts to assign }
+              <svg width="8" height="5" viewBox="0 0 8 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+              </svg>
+            </div>
+            <div class="selected-contacts-logos">
+              @for (contact of getSelectedContacts(); track contact.id) {
+              <div class="selected-contact-logo" [style.backgroundColor]="contact.color">
+                {{ getInitials(contact.name) }}
+              </div>
+              }
+            </div>
+            @if (isDropdownOpen) {
+            <div class="dropdown-options" (blur)="isDropdownOpen = false">
+              @for (contact of contacts; track contact.id) {
+              <div class="contact-option" (click)="selectContact(contact)">
+                <div class="assign-contact">
+                  <div class="contact-color-circle" [style.backgroundColor]="contact.color">
+                    {{ getInitials(contact.name) }}
+                  </div>
+                  <div class="contact-name">
+                    {{ contact.name}}
+                  </div>
+                  @if (contact.id) {
+                  <input class="contact-checkbox" type="checkbox" [checked]="checkedContacts[contact.id]"
+                    (change)="$event.stopPropagation(); selectContact(contact)" />
+                  }
+                </div>
+              </div>
+              }
+            </div>
             }
-          </select>
-          <div>Contacte adden</div>
+          </div>
         </div>
       </div>
+
+      <!-- Subtasks -->
+
       <div class="input-field2">
         <div class="label">Subtasks</div>
         <div class="input-wrapper subtasks-wrapper">
@@ -215,7 +247,7 @@
         <div>
           @for (subtask of selectedTask.subtask; track $index) {
           <div class="new-subtask-container">
-            <input type="checkbox" [(ngModel)]="subtask.completed" />
+            <!-- <input type="checkbox" [(ngModel)]="subtask.completed" /> -->
             <span>{{ subtask.title }}</span>
           </div>
           }

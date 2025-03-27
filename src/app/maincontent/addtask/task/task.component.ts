@@ -29,6 +29,8 @@ export class TaskComponent implements OnInit, OnDestroy {
   isClicked: boolean = false;
   isEditing: boolean = false;
   selectedTask: TaskInterface | null = null;
+  isDropdownOpen = false;
+  checkedContacts: { [key: string]: boolean } = {};
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -36,6 +38,11 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.contactSubscription = this.firebaseService.contactList.subscribe(
       (contacts) => {
         this.contacts = contacts;
+        if (this.task && this.task.assignedTo) {
+          this.task.assignedTo.forEach((contactId) => {
+            this.checkedContacts[contactId] = true;
+          });
+        }
       }
     );
   }
@@ -75,12 +82,19 @@ export class TaskComponent implements OnInit, OnDestroy {
   openTaskDetails() {
     this.selectedTask = { ...this.task };
     this.isClicked = true;
+    this.checkedContacts = {};
+    if (this.selectedTask && this.selectedTask.assignedTo) {
+      this.selectedTask.assignedTo.forEach((contactId) => {
+        this.checkedContacts[contactId] = true;
+      });
+    }
   }
 
   closeTaskDetails() {
     this.isClicked = false;
     this.selectedTask = null;
     this.isEditing = false;
+    this.isDropdownOpen = false;
   }
 
   startEditing() {
@@ -99,7 +113,7 @@ export class TaskComponent implements OnInit, OnDestroy {
         description: this.selectedTask.description,
         date: this.selectedTask.date,
         priority: this.selectedTask.priority,
-        assignedTo: this.selectedTask.assignedTo,
+        assignedTo: this.getSelectedContacts().map(contact => contact.id!), // Aktualisieren Sie assignedTo basierend auf checkedContacts
         subtask: this.selectedTask.subtask,
         edited: new Date(),
       };
@@ -147,7 +161,6 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.rotateCard(event, false);
   }
 
-  // Füge die updateSubtaskStatus-Funktion hinzu
   updateSubtaskStatus(subtask: any, event: any) {
     if (this.selectedTask && this.selectedTask.id) {
       const isChecked = event.target.checked;
@@ -182,5 +195,34 @@ export class TaskComponent implements OnInit, OnDestroy {
           console.error('Error cant delete SelectedTask:', error);
         });
     }
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  selectContact(contact: ContactInterface) {
+    if (contact.id) {
+      this.checkedContacts[contact.id] = !this.checkedContacts[contact.id];
+    }
+  }
+
+  getSelectedContacts(): ContactInterface[] {
+    return this.contacts.filter(
+      (contact) => contact.id && this.checkedContacts[contact.id]
+    );
+  }
+
+  getInitials(name: string): string {
+    if (!name) {
+      return '';
+    }
+    const names = name.trim().split(' ');
+    if (names.length === 1) {
+      return names[0].charAt(0).toUpperCase();
+    }
+    const firstNameInitial = names[0].charAt(0).toUpperCase();
+    const lastNameInitial = names[names.length - 1].charAt(0).toUpperCase();
+    return firstNameInitial + lastNameInitial;
   }
 }
