@@ -47,7 +47,7 @@
         @for (task of todo; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
         } @empty {
-        <div class="no-data">No tasks To do.</div>
+        <div class="no-data">No tasks To do</div>
         }
       </div>
     </div>
@@ -68,7 +68,7 @@
         @for (task of inProgress; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
         } @empty {
-        <div class="no-data">No tasks in progress.</div>
+        <div class="no-data">No tasks in progress</div>
         }
       </div>
     </div>
@@ -89,7 +89,7 @@
         @for (task of awaitFeedback; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
         } @empty {
-        <div class="no-data">No tasks Await feedback.</div>
+        <div class="no-data">No tasks Await feedback</div>
         }
       </div>
     </div>
@@ -109,7 +109,7 @@
         @for (task of done; track task.id) {
         <app-task [task]="task" cdkDrag [cdkDragData]="task"></app-task>
         } @empty {
-        <div class="no-data">No tasks Done.</div>
+        <div class="no-data">No tasks Done</div>
         }
       </div>
     </div>
