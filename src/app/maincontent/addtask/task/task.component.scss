@@ -156,7 +156,7 @@ h4 {
   font-size: 20px;
   font-weight: 400;
   margin: 0;
-  color: #2A3647;
+  color: #2a3647;
 }
 
 p {
@@ -193,7 +193,7 @@ p {
 .subtask-container {
   display: flex;
 }
-.subtask-title{
+.subtask-title {
   font-size: 16px;
   font-weight: 400;
   margin-top: 5px;
@@ -222,7 +222,8 @@ p {
     gap: 10px;
 
     &:hover .icon-delete {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
+        hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 
@@ -230,7 +231,8 @@ p {
     gap: 5px;
 
     &:hover .icon-edit {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
+        hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 }
@@ -251,7 +253,6 @@ svg {
   list-style: none;
   padding: 0;
 }
-
 
 input,
 textarea,
@@ -303,12 +304,11 @@ option {
 
 .priority-wrapper {
   display: flex;
-  justify-content: center;
-  gap: 35px;
+  gap: 10px;
 
   .priority-option {
     flex: 1;
-    max-width: 80px;
+    width: 136px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -323,13 +323,32 @@ option {
       box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
     }
 
-    img {
-      margin-right: 5px;
+    svg {
+      margin-left: 15px;
     }
-  }
 
-  .medium {
-    background-color: yellow;
+    &.selected {
+      color: white;
+      font-weight: 700;
+
+      &.low {
+        background-color: #7ae229;
+        path {
+          fill: #fff;
+        }
+      }
+
+      &.medium {
+        background-color: #ffa800;
+      }
+
+      &.urgent {
+        background-color: #ff3d00;
+        path {
+          fill: #fff;
+        }
+      }
+    }
   }
 }
 
