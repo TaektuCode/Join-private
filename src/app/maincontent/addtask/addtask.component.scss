@@ -1,6 +1,7 @@
 .and-task {
   padding: 25px 0 50px 50px;
   max-width: 1440px;
+  font-family: "Inter", sans-serif;
 }
 
 .top {
@@ -45,19 +46,39 @@
       }
     }
 
+    .title-input {
+      width: 100%;
+      height: 40px;
+      font-size: 16px;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+
+      &:focus {
+        outline: none;
+      }
+      &.has-value {
+        border-color: var(--accentColor2);
+      }
+    }
+
     .input-wrapper {
-      input,
       textarea,
       select {
         width: 100%;
         border: 1px solid #ccc; // heller Border
         border-radius: 8px;
         padding: 8px;
-        font-size: 14px;
+        font-size: 16px;
       }
 
       textarea {
         height: 100px;
+        &:focus {
+          outline: none;
+        }
+        &.has-value {
+          border-color: var(--accentColor2);
+        }
       }
     }
 
@@ -98,6 +119,10 @@
       border-radius: 10px;
       background-color: white; // Stelle sicher, dass es einen Hintergrund hat
 
+      &.has-value {
+        border-color: var(--accentColor2);
+      }
+
       svg {
         margin-left: auto;
       }
@@ -112,7 +137,8 @@
       border-top: none;
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px;
-      max-height: 200px; /* Optionale maximale Höhe mit Scrollbar */
+      height: fit-content;
+      max-height: 400px;
       overflow-y: auto;
     }
 
@@ -149,6 +175,9 @@
     border-radius: 10px;
     padding: 8px;
     border: 1px solid #ccc;
+    &.has-value {
+      border-color: var(--accentColor2);
+    }
 
     input {
       flex: 1;
@@ -241,6 +270,10 @@
     background-color: white;
     min-height: 40px;
     border-radius: 10px;
+    &.has-value {
+      border-color: var(--accentColor2);
+    }
+
     svg {
       margin-left: auto;
     }
@@ -251,9 +284,10 @@
     background-color: white;
     border: 1px solid #ccc;
     z-index: 1;
-    width: 300px;
+    width: 100%;
     height: 400px;
     overflow: auto;
+    z-index: 2;
   }
 
   .contact-option {
@@ -342,17 +376,40 @@
     align-items: center;
     background-color: #fff;
     border-radius: 8px;
-    padding: 8px;
+    border: 1px solid #ccc;
+    padding: 0 8px;
+    height: 40px;
+    &.has-value {
+      border-color: var(--accentColor2);
+    }
 
-    input {
+    .input-subtask {
       flex: 1;
+      height: 100%;
+      width: 100%;
       border: none !important;
       outline: none;
+      font-size: 16px;
     }
 
     .add-subtask-link {
       display: flex;
       align-items: center;
+    }
+
+    .svg-bg:hover {
+      fill: #eeeeee;
+    }
+  }
+  .added-subtask {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin: 5px 10px;
+    width: 100px;
+    > svg {
+      margin-left: auto;
+      cursor: pointer;
     }
   }
 }
