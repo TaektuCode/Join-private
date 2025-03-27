@@ -168,4 +168,20 @@ export class TaskComponent implements OnInit, OnDestroy {
         });
     }
   }
+
+  deleteTask() {
+    if (this.selectedTask && this.selectedTask.id) {
+      this.firebaseService
+        .deleteTask(this.selectedTask.id)
+        .then(() => {
+          console.log(`Task with ID ${this.selectedTask?.id} deleted.`);
+          this.isClicked = false;
+          this.selectedTask = null;
+          this.taskUpdated.emit();
+        })
+        .catch((error) => {
+          console.error('Error cant delete:', error);
+        });
+    }
+  }
 }
