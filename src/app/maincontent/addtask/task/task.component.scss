@@ -116,6 +116,29 @@ section {
     flex-direction: column;
     overflow-x: auto;
   }
+
+  @media (max-width:1000px){
+    left: 23%;
+  }
+  @media (max-width:900px){
+    left: 18%;
+  }
+  @media (max-width:800px){
+    left: 13%;
+  }
+  @media (max-width:700px){
+    left: 8%;
+  }
+  @media (max-width:630px){
+    left: 3%;
+  }
+  @media (max-width:570px){
+    height: 85%;
+    width: 94%;
+    h1{
+      font-size: 36px;
+    }
+  }
 }
 
 .on-top {
@@ -163,6 +186,7 @@ p {
   margin: 0;
   font-size: 20px;
   font-weight: 400;
+  word-wrap: break-word;
 }
 
 .date,
@@ -193,11 +217,13 @@ p {
 .subtask-container {
   display: flex;
 }
+
 .subtask-title {
   font-size: 16px;
   font-weight: 400;
   margin-top: 5px;
 }
+
 .btn {
   display: flex;
   justify-content: flex-end;
