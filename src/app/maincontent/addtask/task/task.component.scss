@@ -118,25 +118,31 @@ section {
     overflow-x: auto;
   }
 
-  @media (max-width:1000px){
+  @media (max-width:1000px) {
     left: 23%;
   }
-  @media (max-width:900px){
+
+  @media (max-width:900px) {
     left: 18%;
   }
-  @media (max-width:800px){
+
+  @media (max-width:800px) {
     left: 13%;
   }
-  @media (max-width:700px){
+
+  @media (max-width:700px) {
     left: 8%;
   }
-  @media (max-width:630px){
+
+  @media (max-width:630px) {
     left: 3%;
   }
-  @media (max-width:570px){
+
+  @media (max-width:570px) {
     height: 85%;
     width: 94%;
-    h1{
+
+    h1 {
       font-size: 36px;
     }
   }
@@ -249,8 +255,7 @@ p {
     gap: 10px;
 
     &:hover .icon-delete {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
-        hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 
@@ -258,8 +263,7 @@ p {
     gap: 5px;
 
     &:hover .icon-edit {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
-        hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 }
@@ -324,10 +328,11 @@ option {
   }
 }
 
-.input-field2 {
-  margin-bottom: 20px;
-  width: 98%;
-}
+// .input-field2 {
+//   margin-top: 15px;
+//   margin-bottom: 20px;
+//   width: 98%;
+// }
 
 .priority-wrapper {
   display: flex;
@@ -360,6 +365,7 @@ option {
 
       &.low {
         background-color: #7ae229;
+
         path {
           fill: #fff;
         }
@@ -371,6 +377,7 @@ option {
 
       &.urgent {
         background-color: #ff3d00;
+
         path {
           fill: #fff;
         }
@@ -379,34 +386,34 @@ option {
   }
 }
 
-.subtasks-wrapper {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 8px 0 8px 8px;
-  border: 1px solid black;
+// .subtasks-wrapper {
+//   display: flex;
+//   align-items: center;
+//   background-color: #fff;
+//   border-radius: 8px;
+//   padding: 8px 0 8px 8px;
+//   border: 1px solid black;
 
-  .input-subtask {
-    flex: 1;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    height: 18px;
-    margin-bottom: 0;
-  }
+//   .input-subtask {
+//     flex: 1;
+//     border: none;
+//     outline: none;
+//     font-size: 16px;
+//     height: 18px;
+//     margin-bottom: 0;
+//   }
 
-  .add-subtask-link {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+//   .add-subtask-link {
+//     display: flex;
+//     align-items: center;
+//     cursor: pointer;
 
-    img {
-      width: 20px;
-      height: 20px;
-    }
-  }
-}
+//     img {
+//       width: 20px;
+//       height: 20px;
+//     }
+//   }
+// }
 
 .ok-btn-container {
   display: flex;
@@ -472,4 +479,115 @@ select:-ms-input-placeholder {
 .rotated {
   transform: rotate(5deg);
 }
+
+// Assigend To
+.selected-contact {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  min-height: 40px;
+  border-radius: 10px;
+
+  svg {
+    margin-left: auto;
+  }
+}
+
+.dropdown-options {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  z-index: 1;
+  width: 300px;
+  height: 400px;
+  overflow: auto;
+}
+
+.contact-option {
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.assign-contact:has(.contact-checkbox:checked) {
+  background-color: #2a3647;
+  color: white;
+
+  &:hover {
+    background-color: #091931;
+  }
+}
+
+.assign-contact {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 5px;
+  border-radius: 15px;
+
+  &:hover {
+    background-color: #f3f1f1;
+  }
+
+  .contact-name {
+    width: 80%;
+    font-size: 18px;
+  }
+
+  .contact-color-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    min-width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #fff;
+  }
+
+  .contact-checkbox {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+  }
+}
+
+.input-wrapper-contact {
+  position: relative;
+}
+
+.assigned-to-wrapper {
+  position: relative;
+  min-height: 40px;
+}
+
+.selected-contacts-logos {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  z-index: 0;
+
+  .selected-contact-logo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+  }
+}
+
+// Subtask
 
