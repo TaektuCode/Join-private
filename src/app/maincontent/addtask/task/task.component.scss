@@ -131,6 +131,7 @@ section {
     gap: 10px;
     flex-direction: column;
     overflow-x: auto;
+    margin-top: 10px;
   }
 
   @media (max-width: 1000px) {
@@ -324,14 +325,14 @@ input,
 textarea,
 select {
   width: 98%;
+  height: 40px;
   border-radius: 8px;
-  font-weight: bold;
+  font-weight: 400;
   font-size: 16px;
   outline: none;
-  border: 1px solid black;
+  border: 1px solid #ccc;
   cursor: pointer;
   color: black;
-  margin-bottom: 20px;
 }
 
 .input-subtask {
@@ -363,11 +364,11 @@ option {
   }
 }
 
-// .input-field2 {
-//   margin-top: 15px;
-//   margin-bottom: 20px;
-//   width: 98%;
-// }
+.input-field2 {
+  margin-top: 25px;
+  margin-bottom: 20px;
+  width: 98%;
+}
 
 .priority-wrapper {
   display: flex;
@@ -380,7 +381,7 @@ option {
     align-items: center;
     justify-content: center;
     background-color: white;
-    border: 1px solid gray;
+    border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
     cursor: pointer;
@@ -392,6 +393,9 @@ option {
 
     svg {
       margin-left: 15px;
+      @media(max-width:450px){
+        display: none;
+      }
     }
 
     &.selected {
@@ -421,35 +425,6 @@ option {
   }
 }
 
-// .subtasks-wrapper {
-//   display: flex;
-//   align-items: center;
-//   background-color: #fff;
-//   border-radius: 8px;
-//   padding: 8px 0 8px 8px;
-//   border: 1px solid black;
-
-//   .input-subtask {
-//     flex: 1;
-//     border: none;
-//     outline: none;
-//     font-size: 16px;
-//     height: 18px;
-//     margin-bottom: 0;
-//   }
-
-//   .add-subtask-link {
-//     display: flex;
-//     align-items: center;
-//     cursor: pointer;
-
-//     img {
-//       width: 20px;
-//       height: 20px;
-//     }
-//   }
-// }
-
 .ok-btn-container {
   display: flex;
   justify-content: flex-end;
@@ -476,36 +451,36 @@ option {
   }
 }
 
-input::placeholder,
-textarea::placeholder,
-select::placeholder {
-  color: black;
-  opacity: 1;
-}
+// input::placeholder,
+// textarea::placeholder,
+// select::placeholder {
+//   color: black;
+//   opacity: 1;
+// }
 
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder,
-select::-webkit-input-placeholder {
-  color: black;
-}
+// input::-webkit-input-placeholder,
+// textarea::-webkit-input-placeholder,
+// select::-webkit-input-placeholder {
+//   color: black;
+// }
 
-input:-moz-placeholder,
-textarea:-moz-placeholder,
-select:-moz-placeholder {
-  color: black;
-}
+// input:-moz-placeholder,
+// textarea:-moz-placeholder,
+// select:-moz-placeholder {
+//   color: black;
+// }
 
-input::-moz-placeholder,
-textarea::-moz-placeholder,
-select::-moz-placeholder {
-  color: black;
-}
+// input::-moz-placeholder,
+// textarea::-moz-placeholder,
+// select::-moz-placeholder {
+//   color: black;
+// }
 
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder,
-select:-ms-input-placeholder {
-  color: black;
-}
+// input:-ms-input-placeholder,
+// textarea:-ms-input-placeholder,
+// select:-ms-input-placeholder {
+//   color: black;
+// }
 
 .task-card {
   transition: transform 0.3s ease; // Sorgt für eine sanfte Übergangsanimation
@@ -537,7 +512,7 @@ select:-ms-input-placeholder {
   background-color: white;
   border: 1px solid #ccc;
   z-index: 1;
-  width: 300px;
+  width: 99%;
   height: 400px;
   overflow: auto;
 }
@@ -625,3 +600,77 @@ select:-ms-input-placeholder {
 }
 
 // Subtask
+.input-wrapper,
+.subtasks-wrapper {
+  display: flex;
+}
+
+.add-subtask-btn {
+  height: 40px;
+  background-color: white;
+  padding: 4px;
+  :hover{
+    background-color: #ccc;
+    border-radius: 100%;
+  }
+}
+
+.subtask-add-btn-svg path {
+  fill: black;
+}
+
+.subtask-input {
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #ccc;
+}
+
+.add-subtask-btn {
+  border-radius: 0 4px 4px 0;
+  border: 1px solid #ccc;
+}
+
+.new-subtask-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 5px;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.new-subtask-container:hover {
+  background-color: #ccc;
+}
+
+.subtask-icons {
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.new-subtask-container:hover .subtask-icons {
+  opacity: 1;
+}
+
+.subtask-icons img {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.editing-subtask-input{
+  height: 40%;
+  background-color: white;
+}
+
+.close-btn-container{
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  :hover{
+    background-color: #ccc;
+    border-radius: 100%;
+  }
+}
+
