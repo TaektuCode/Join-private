@@ -491,9 +491,10 @@ option {
   transition: transform 0.3s ease; // Sorgt für eine sanfte Übergangsanimation
 }
 
-.rotated {
-  transform: rotate(5deg);
-}
+// .rotated {
+//   transform: rotate(5deg);
+// }
+
 
 // Assigend To
 .selected-contact {

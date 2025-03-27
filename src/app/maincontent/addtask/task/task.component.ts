@@ -32,6 +32,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   isDropdownOpen = false;
   checkedContacts: { [key: string]: boolean } = {};
   editingSubtaskIndex: number | null = null;
+  rotateValue: number = 0;
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -152,24 +153,28 @@ export class TaskComponent implements OnInit, OnDestroy {
     }
   }
 
+  // rotateCard(event: Event, add: boolean): void {
+  //   const cardElement = event.currentTarget as HTMLElement;
+  //   if (add) {
+  //     cardElement.classList.add('rotated');
+  //   } else {
+  //     cardElement.classList.remove('rotated');
+  //   }
+  // }
+
   rotateCard(event: Event, add: boolean): void {
-    const cardElement = event.currentTarget as HTMLElement;
-    if (add) {
-      cardElement.classList.add('rotated');
-    } else {
-      cardElement.classList.remove('rotated');
-    }
+    this.rotateValue = add ? 5 : 0;
   }
 
-  @HostListener('cdkDragStarted', ['$event'])
-  onDragStarted(event: Event): void {
-    this.rotateCard(event, true);
-  }
+  // @HostListener('cdkDragStarted', ['$event'])
+  // onDragStarted(event: Event): void {
+  //   this.rotateCard(event, true);
+  // }
 
-  @HostListener('cdkDragEnded', ['$event'])
-  onDragEnded(event: Event): void {
-    this.rotateCard(event, false);
-  }
+  // @HostListener('cdkDragEnded', ['$event'])
+  // onDragEnded(event: Event): void {
+  //   this.rotateCard(event, false);
+  // }
 
   updateSubtaskStatus(subtask: any, event: any) {
     if (this.selectedTask && this.selectedTask.id) {
