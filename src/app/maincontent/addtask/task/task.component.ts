@@ -1,4 +1,3 @@
-
 import {
   Component,
   Input,
@@ -8,7 +7,6 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core';
-
 import { TaskInterface } from '../task.interface';
 import { ContactInterface } from '../../contacts/contact-interface';
 import { FirebaseService } from '../../../shared/services/firebase.service';
@@ -24,8 +22,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit, OnDestroy {
-  @Input() task!: TaskInterface; // Input-Property für den Task
-  @Output() taskUpdated = new EventEmitter<TaskInterface>(); // Output-Event für aktualisierte Tasks (optional)
+  @Input() task!: TaskInterface;
+  @Output() taskUpdated = new EventEmitter<TaskInterface>();
   contacts: ContactInterface[] = [];
   contactSubscription: Subscription | undefined;
   isClicked: boolean = false;
@@ -75,7 +73,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   }
 
   openTaskDetails() {
-    this.selectedTask = { ...this.task }; // Erstelle eine tiefe Kopie
+    this.selectedTask = { ...this.task };
     this.isClicked = true;
   }
 
@@ -89,10 +87,9 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.isEditing = true;
   }
 
-
   cancelEditing() {
     this.isEditing = false;
-    this.selectedTask = null; // Setze selectedTask zurück, um Änderungen zu verwerfen
+    this.selectedTask = null;
   }
 
   saveTaskDetails() {
@@ -116,11 +113,10 @@ export class TaskComponent implements OnInit, OnDestroy {
           this.isEditing = false;
           this.isClicked = false;
           this.selectedTask = null;
-          this.taskUpdated.emit({ ...this.task, ...updatedTaskData }); // Optional: Event auslösen
+          this.taskUpdated.emit({ ...this.task, ...updatedTaskData });
         })
         .catch((error) => {
           console.error('Fehler beim Aktualisieren des Tasks:', error);
-          // Hier könntest du eine Fehlermeldung für den Benutzer anzeigen
         });
     }
   }
@@ -141,15 +137,35 @@ export class TaskComponent implements OnInit, OnDestroy {
     }
   }
 
-@HostListener('cdkDragStarted', ['$event'])
-onDragStarted(event: Event): void {
-  this.rotateCard(event, true);
+  @HostListener('cdkDragStarted', ['$event'])
+  onDragStarted(event: Event): void {
+    this.rotateCard(event, true);
+  }
 
-}
+  @HostListener('cdkDragEnded', ['$event'])
+  onDragEnded(event: Event): void {
+    this.rotateCard(event, false);
+  }
 
-@HostListener('cdkDragEnded', ['$event'])
-onDragEnded(event: Event): void {
-  this.rotateCard(event, false);
-}
-}
+  // Füge die updateSubtaskStatus-Funktion hinzu
+  updateSubtaskStatus(subtask: any, event: any) {
+    if (this.selectedTask && this.selectedTask.id) {
+      const isChecked = event.target.checked;
+      subtask.completed = isChecked;
 
+      const updatedTaskData: Partial<TaskInterface> = {
+        subtask: this.selectedTask.subtask,
+      };
+
+      this.firebaseService
+        .updateTask(this.selectedTask.id, updatedTaskData)
+        .then(() => {
+          console.log('Subtask-Status erfolgreich aktualisiert!');
+          this.taskUpdated.emit({ ...this.task, ...updatedTaskData }); // Optional: Event auslösen
+        })
+        .catch((error) => {
+          console.error('Fehler beim Aktualisieren des Subtask-Status:', error);
+        });
+    }
+  }
+}
