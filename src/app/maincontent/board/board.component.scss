@@ -134,8 +134,10 @@ app-add-task {
   gap: 16px;
 
   .board-column {
-    flex: 1;
-    padding: 1rem;
+    width: 252px;
+    overflow-y: auto;
+    // flex: 1;
+    // padding: 1rem;
 
     .column-heading {
       display: flex;
@@ -229,15 +231,15 @@ app-add-task {
   vertical-align: top;
 }
 
-.example-list {
-  // min-height: 60px;
-  height: 58px;
-  width: 98%;
-  background: white;
-  border-radius: 10px;
-  // overflow: hidden;
-  display: block;
-}
+// .example-list {
+//   // min-height: 60px;
+//   height: 58px;
+//   width: 98%;
+//   background: white;
+//   border-radius: 10px;
+//   // overflow: hidden;
+//   display: block;
+// }
 
 .example-box {
   padding: 20px 10px;
@@ -282,10 +284,12 @@ app-add-task {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  margin-top: 16px;
   // text-align: center;
   color: lightgray;
   height: 100%;
-  width: 100%;
+  width: 242px;
   border-radius: 10px;
   border: 1px dashed rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
