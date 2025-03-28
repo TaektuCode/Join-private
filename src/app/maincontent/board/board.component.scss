@@ -9,6 +9,10 @@
   @media (max-width: 1000px) {
     flex: 1;
   }
+
+  @media (max-width: 420px) {
+    padding: 20px;
+  }
 }
 
 .board-header {
@@ -25,7 +29,6 @@
     display: flex;
     align-items: center;
     gap: 2rem;
-    margin-right: 21px;
 
     .search-container {
       background-color: #fff;
@@ -38,10 +41,11 @@
 
       input {
         border: none;
-        padding: 12px 0 12px 16px;
+        padding: 8px 0;
         outline: none;
         border-right: 1px solid rgba(209, 209, 209, 1);
         font-size: 20px;
+        margin-left: 5px;
       }
 
       input::placeholder {
@@ -54,7 +58,6 @@
         border-radius: 50%;
         display: inline-block;
         width: 32px;
-        margin-left: 8px;
 
         &:hover {
           background-color: #a8a8a8;
@@ -75,6 +78,11 @@
       cursor: pointer;
       font-weight: 700;
       font-size: 21px;
+
+      @media (max-width: 1550px) {
+        width: auto;
+        padding: 0.5rem;
+      }
 
       span {
         padding-top: 2px;
@@ -143,12 +151,9 @@ app-add-task {
   justify-content: space-between;
 
   .board-column {
-    width: 252px;
-    overflow-y: auto;
-    // flex: 1;
-    // padding: 1rem;
+    width: 284px;
 
-    @media (max-width: 1440px) {
+    @media (max-width: 1550px) {
     width:100%;
     }
 
@@ -156,8 +161,8 @@ app-add-task {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 24px;
-      margin: 16px 0;
+      height: 16px;
+      margin: 16px;
 
       img {
         width: 24px;
@@ -171,33 +176,34 @@ app-add-task {
       }
     }
     .board-section {
-      max-height: 1024px;
+      max-height: 70vh;
       overflow-y: auto;
+      width: 305px;
+
+      @media (max-width: 1550px) {
+        display: flex;
+        flex-direction: row; // Hier wird von column zu row gewechselt
+        gap: 16px; // Falls Abstand zwischen den Elementen benötigt wird
+        width: 100%;
+      }
     }
   }
 }
 
-@media (max-width: 1440px) {
-  h1 {
-    font-size: 34px;
-  }
+@media (max-width: 1550px) {
+  // h1 {
+  //   font-size: 34px;
+  // }
 
   .main-board {
     flex-direction: column;
   }
 
-  .board-header .board-controls .search-container {
-    display: none;
-  }
-
-  .board-header .board-controls .add-task .btn-text {
-    display: none;
-  }
-
   .mobile-search {
-    display: block;
+    display: flex;
     text-align: center;
     margin-top: 1rem;
+
 
     .search-container {
       background-color: #fff;
@@ -221,10 +227,26 @@ app-add-task {
   }
 }
 
+@media (max-width: 1050px) {
+  .board-header .board-controls .search-container {
+    display: none;
+  }
+}
+
 /* Auf breiteren Bildschirmen das zusätzliche Search-Feld ausblenden */
-@media (min-width: 1001px) {
+@media (min-width: 1050px) {
   .mobile-search {
     display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .board-header .board-controls .add-task .btn-text {
+      display: none;
+  }
+
+  h1 {
+    font-size: 47px;
   }
 }
 
@@ -246,16 +268,6 @@ app-add-task {
   vertical-align: top;
 }
 
-// .example-list {
-//   // min-height: 60px;
-//   height: 58px;
-//   width: 98%;
-//   background: white;
-//   border-radius: 10px;
-//   // overflow: hidden;
-//   display: block;
-// }
-
 .example-box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
@@ -271,10 +283,7 @@ app-add-task {
 }
 
 .cdk-drag-preview {
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  margin: 16px;
 }
 
 .cdk-drag-placeholder {
@@ -293,7 +302,7 @@ app-add-task {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1550px) {
   .example-list {
     display: flex;
     flex-direction: row;
@@ -315,6 +324,4 @@ app-add-task {
   border-radius: 10px;
   border: 1px dashed rgba(168, 168, 168, 1);
   background-color: rgba(231, 231, 231, 1);
-
-
 }

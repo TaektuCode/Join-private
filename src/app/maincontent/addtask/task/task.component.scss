@@ -3,17 +3,13 @@
   height: fit-content;
   display: flex;
   flex-direction: column;
-  margin-top: 16px;
+  margin: 16px;
   padding: 15px;
   border-radius: 24px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: white;
+  transition: transform 0.3s ease; // Sorgt für eine sanfte Übergangsanimation
   cursor: pointer;
-
-  @media (max-width: 1440px) {
-    margin-right: 16px;
-    margin-bottom: 16px;
-  }
 }
 
 .task-label {
@@ -444,10 +440,6 @@ select {
     animation-timing-function: ease-in-out;
     animation-duration: 100ms;
   }
-}
-
-.task-card {
-  transition: transform 0.3s ease;
 }
 
 .cdk-drop-list-dragging {
