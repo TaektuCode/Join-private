@@ -232,3 +232,21 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+::-webkit-scrollbar {
+  width: 8px; // Breite der Scrollleiste
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; // Unsichtbarer Hintergrund
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3); // Transparenter, abgerundeter Balken
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5); // Beim Hover dunkler
+}

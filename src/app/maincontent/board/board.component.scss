@@ -143,12 +143,9 @@ app-add-task {
   justify-content: space-between;
 
   .board-column {
-    width: 252px;
-    overflow-y: auto;
-    // flex: 1;
-    // padding: 1rem;
+    width: 284px;
 
-    @media (max-width: 1440px) {
+    @media (max-width: 1550px) {
     width:100%;
     }
 
@@ -156,8 +153,8 @@ app-add-task {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 24px;
-      margin: 16px 0;
+      height: 16px;
+      margin: 16px;
 
       img {
         width: 24px;
@@ -173,11 +170,18 @@ app-add-task {
     .board-section {
       max-height: 1024px;
       overflow-y: auto;
+      width: 305px;
+
+      @media (max-width: 1550px) {
+        display: flex;
+        flex-direction: row; // Hier wird von column zu row gewechselt
+        gap: 16px; // Falls Abstand zwischen den Elementen benötigt wird
+      }
     }
   }
 }
 
-@media (max-width: 1440px) {
+@media (max-width: 1550px) {
   h1 {
     font-size: 34px;
   }
@@ -271,10 +275,7 @@ app-add-task {
 }
 
 .cdk-drag-preview {
-  box-sizing: border-box;
-  border-radius: 4px;
-  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  margin: 16px;
 }
 
 .cdk-drag-placeholder {
