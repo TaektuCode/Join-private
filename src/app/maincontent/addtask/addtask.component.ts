@@ -4,6 +4,9 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
+  ElementRef,
+  ViewChild,
+  HostListener,
 } from '@angular/core';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { TaskInterface } from './task.interface';
@@ -13,6 +16,11 @@ import { Subscription } from 'rxjs';
 import { TruncatePipe } from '../../truncate.pipe';
 import { TaskService } from './task.service';
 
+interface Subtask {
+  title: string;
+  completed: boolean;
+  isEditing?: boolean;
+}
 @Component({
   selector: 'app-add-task',
   standalone: true,
@@ -20,7 +28,7 @@ import { TaskService } from './task.service';
   templateUrl: './addtask.component.html',
   styleUrls: ['./addtask.component.scss'],
 })
-export class AddtaskComponent implements OnInit {
+export class AddtaskComponent implements OnInit, OnDestroy {
   @Output() taskCreated = new EventEmitter<TaskInterface>();
 
   newTask: TaskInterface = {
@@ -35,6 +43,8 @@ export class AddtaskComponent implements OnInit {
     subtask: [],
     status: 'Todo', // Standardmäßig auf 'Todo' setzen
   };
+
+  newSubtaskTitle: string = '';
   contacts: ContactInterface[] = [];
   contactSubscription: Subscription | undefined;
   isDropdownOpen = false;
@@ -50,6 +60,12 @@ export class AddtaskComponent implements OnInit {
   isCategoryDropdownOpen: boolean = false;
   selectedCategory: string | null = null;
   categories: string[] = ['Technical Task', 'User Story'];
+
+  // Fokus-Status für das Subtask-Input-Feld
+  isSubtaskInputFocused: boolean = false;
+
+  @ViewChild('contactsDropdown') contactsDropdown!: ElementRef;
+  @ViewChild('dropdownTrigger') dropdownTrigger!: ElementRef;
 
   constructor(
     private firebaseService: FirebaseService,
@@ -120,6 +136,24 @@ export class AddtaskComponent implements OnInit {
     this.newTask.subtask?.splice(index, 1);
   }
 
+  startEditSubtask(subtask: Subtask) {
+    subtask.isEditing = true;
+  }
+
+  finishEditSubtask(subtask: Subtask, index: number) {
+    subtask.isEditing = false;
+    if (!subtask.title.trim()) {
+      this.removeSubtask(index);
+    }
+  }
+
+  cancelEditSubtask(subtask: Subtask, index: number) {
+    subtask.isEditing = false;
+    if (!subtask.title.trim()) {
+      this.removeSubtask(index);
+    }
+  }
+
   getInitials(name: string): string {
     if (!name) {
       return '';
@@ -135,6 +169,31 @@ export class AddtaskComponent implements OnInit {
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    console.log('Document geklickt:', event.target);
+    if (this.isDropdownOpen && this.contactsDropdown && this.dropdownTrigger) {
+      if (
+        !this.dropdownTrigger.nativeElement.contains(event.target) &&
+        !this.contactsDropdown.nativeElement.contains(event.target)
+      ) {
+        console.log('Klick außerhalb von Trigger und Dropdown!');
+        this.isDropdownOpen = false;
+      } else if (this.dropdownTrigger.nativeElement.contains(event.target)) {
+        console.log('Klick auf den Trigger.');
+        // Nicht schließen
+      } else {
+        console.log('Klick innerhalb des Dropdowns.');
+      }
+    } else if (this.isDropdownOpen) {
+      console.log(
+        'Dropdown offen, contactsDropdown oder dropdownTrigger nicht gefunden.'
+      );
+    } else {
+      console.log('Dropdown ist geschlossen.');
+    }
   }
 
   selectContact(contact: ContactInterface) {

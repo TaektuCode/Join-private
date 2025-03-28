@@ -149,7 +149,7 @@ app-add-task {
     // padding: 1rem;
 
     @media (max-width: 1440px) {
-    width:100%;
+      width: 100%;
     }
 
     .column-heading {
@@ -160,6 +160,7 @@ app-add-task {
       margin: 16px 0;
 
       img {
+        cursor: pointer;
         width: 24px;
         transition: filter 0.3s;
 
@@ -315,6 +316,4 @@ app-add-task {
   border-radius: 10px;
   border: 1px dashed rgba(168, 168, 168, 1);
   background-color: rgba(231, 231, 231, 1);
-
-
 }
