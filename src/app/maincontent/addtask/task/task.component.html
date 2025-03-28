@@ -397,13 +397,27 @@
                 ></svg>
               </div>
               <div class="selected-contacts-logos">
-                @for (contact of getSelectedContacts(); track contact.id) {
-                <div
-                  class="selected-contact-logo"
-                  [style.backgroundColor]="contact.color"
-                >
-                  {{ getInitials(contact.name) }}
-                </div>
+                @if (getSelectedContacts() && getSelectedContacts().length > 0) {
+                  @if (getSelectedContacts().length <= 3) {
+                    @for (contact of getSelectedContacts(); track contact.id) {
+                      <div
+                        class="selected-contact-logo"
+                        [style.backgroundColor]="contact.color"
+                      >
+                        {{ getInitials(contact.name) }}
+                      </div>
+                    }
+                  } @else {
+                    @for (contact of getSelectedContacts().slice(0, 3); track contact.id) {
+                      <div
+                        class="selected-contact-logo"
+                        [style.backgroundColor]="contact.color"
+                      >
+                        {{ getInitials(contact.name) }}
+                      </div>
+                    }
+                    <span class="assignee-more-cut"> +{{ getSelectedContacts().length - 3 }} </span>
+                  }
                 }
               </div>
               @if (isDropdownOpen) {

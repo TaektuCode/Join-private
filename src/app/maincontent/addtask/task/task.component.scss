@@ -139,7 +139,6 @@ section {
     display: flex;
     height: 90%;
     background-color: white;
-    gap: 10px;
     flex-direction: column;
     overflow-x: auto;
     margin-top: 10px;
@@ -341,7 +340,7 @@ select {
 }
 
 textarea {
-  height: 125px;
+  height: 75px;
   resize: none;
 }
 
@@ -556,6 +555,8 @@ select {
   flex-wrap: wrap;
   margin-top: 10px;
   z-index: 0;
+  padding-left: 15px;
+  
 
   .selected-contact-logo {
     width: 30px;
@@ -568,6 +569,7 @@ select {
     justify-content: center;
     color: white;
     font-size: 12px;
+    margin-left: -11px;
   }
 }
 
@@ -651,4 +653,10 @@ select {
     background-color: #ccc;
     border-radius: 100%;
   }
+}
+
+.assignee-more-cut{
+  display: flex;
+  align-items: center;
+  margin: 0;
 }
