@@ -278,6 +278,57 @@
     }
   }
 
+  // Custom Checkbox
+
+  .custom-checkbox {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: -7;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+  }
+
+  .custom-checkbox:hover input ~ .checkmark {
+    background-color: #d9d9d9;
+  }
+
+  .custom-checkbox input:checked ~ .checkmark {
+    background-color: #2196f3; /* Farbe des Häkchens */
+    border-color: #2196f3;
+  }
+
+  .custom-checkbox input:checked ~ .checkmark {
+    background-color: transparent; /* Hintergrund transparent machen */
+    border: none;
+    background-image: url("../../../assets/img/addtask/check_button.svg"); /* Pfad zu deinem "checked"-Bild */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 20px;
+  }
+
   .dropdown-options {
     position: absolute;
     background-color: white;
@@ -382,6 +433,7 @@
     border: 1px solid #ccc;
     padding: 0 8px;
     height: 40px;
+    cursor: pointer;
     &.has-value {
       border-color: var(--accentColor2);
     }
@@ -393,6 +445,7 @@
       border: none !important;
       outline: none;
       font-size: 16px;
+      cursor: pointer;
     }
 
     .add-subtask-link {
@@ -405,17 +458,34 @@
     }
   }
   .added-subtask-box {
+    display: block;
     height: 95px;
     overflow: auto;
     .added-subtask {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       font-size: 14px;
       margin: 5px 10px;
-      width: 100px;
       > svg {
-        margin-left: auto;
         cursor: pointer;
+      }
+      &.editing {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        width: 95%;
+      }
+      .added-subtask-logos {
+        display: flex;
+        gap: 10px;
+      }
+      .edit-input {
+        border: none;
+        width: 95%;
+        padding: 5px;
+        border-radius: 8px;
+        outline: none;
       }
     }
   }

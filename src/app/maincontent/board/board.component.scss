@@ -153,6 +153,7 @@ app-add-task {
   .board-column {
     width: 284px;
 
+
     @media (max-width: 1550px) {
     width:100%;
     }
@@ -165,6 +166,7 @@ app-add-task {
       margin: 16px;
 
       img {
+        cursor: pointer;
         width: 24px;
         transition: filter 0.3s;
 

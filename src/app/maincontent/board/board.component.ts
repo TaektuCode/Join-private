@@ -182,5 +182,3 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.closeAddTaskOverlay();
   }
 }
-
-
