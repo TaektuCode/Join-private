@@ -176,7 +176,7 @@ app-add-task {
       }
     }
     .board-section {
-      max-height: 1024px;
+      max-height: 70vh;
       overflow-y: auto;
       width: 305px;
 
@@ -199,18 +199,11 @@ app-add-task {
     flex-direction: column;
   }
 
-  // .board-header .board-controls .search-container {
-  //   display: none;
-  // }
-
-  // .board-header .board-controls .add-task .btn-text {
-  //   display: none;
-  // }
-
   .mobile-search {
-    display: block;
+    display: flex;
     text-align: center;
     margin-top: 1rem;
+
 
     .search-container {
       background-color: #fff;
@@ -275,16 +268,6 @@ app-add-task {
   vertical-align: top;
 }
 
-// .example-list {
-//   // min-height: 60px;
-//   height: 58px;
-//   width: 98%;
-//   background: white;
-//   border-radius: 10px;
-//   // overflow: hidden;
-//   display: block;
-// }
-
 .example-box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
@@ -341,6 +324,4 @@ app-add-task {
   border-radius: 10px;
   border: 1px dashed rgba(168, 168, 168, 1);
   background-color: rgba(231, 231, 231, 1);
-
-
 }
