@@ -34,8 +34,9 @@ export class TaskComponent implements OnInit, OnDestroy {
   checkedContacts: { [key: string]: boolean } = {};
   editingSubtaskIndex: number | null = null;
   rotateValue: number = 0;
+  showDeleteConfirmation: boolean = false;
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
     this.contactSubscription = this.firebaseService.contactList.subscribe(
@@ -195,6 +196,19 @@ export class TaskComponent implements OnInit, OnDestroy {
           console.error('Error Updating Subtask Status:', error);
         });
     }
+  }
+
+  openDeleteConfirmation() {
+    this.showDeleteConfirmation = true;
+  }
+
+  cancelDelete() {
+    this.showDeleteConfirmation = false;
+  }
+
+  confirmDelete() {
+    this.showDeleteConfirmation = false;
+    this.deleteTask();
   }
 
   deleteTask() {
