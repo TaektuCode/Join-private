@@ -1,42 +1,75 @@
 .login-header {
-    
-    height: var(--headerHeight); // Falls --headerHeight nicht definiert ist, wird 96px genutzt
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 40px; // Außenabstand links und rechts
-  
-    img {
-      height: 50px; 
-      animation: logoMove 2s ease-out forwards;
-    }
-  
-    .header-right {
-      display: flex;
-      align-items: center;
-  
-      span {
-        color: #000000;
-        margin-right: 20px; // Abstand zwischen Text und Button
-      }
-  
-      button {
-        background-color: #2A3647;
-        color: #ffffff;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
-        cursor: pointer;
-        text-align: center;
-        appearance: none; // Entfernt native Browser-Styles
+  position: relative;
+  height: var(--headerHeight); // z.B. 96px
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
 
-        &:hover {
-          background-color: var(--accentColor2);
-          box-shadow: 4px 4px 4px lightgray;
-        }
+  img {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 50px;
+    z-index: 1000;
+    animation: logoMove 2s ease-out forwards;
+  }
+
+  .header-right {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 2s;
+    
+    span {
+      color: #000;
+      margin-right: 20px;
+    }
+    
+    button {
+      background-color: #2A3647;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      appearance: none;
+
+      &:hover {
+        background-color: var(--accentColor2);
+        box-shadow: 4px 4px 4px lightgray;
       }
     }
   }
+}
+
+// Fade-in für weitere Inhalte
+.main-content,
+.mobile-header-right,
+.login-footer {
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 2s;
+}
+
+@keyframes logoMove {
+  0% {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    left: 40px;       // ggf. anpassen
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 
   .main-content {
     width: 600px;
@@ -197,15 +230,6 @@
     transform: scaleX(1);
   }
 } 
-
-@keyframes logoMove {
-  from {
-    transform: translate(300px, 300px);
-  }
-  to {
-    transform: translate(0, 0);
-  }
-}
 
 @media (max-width: 1000px) {
   .login-header .header-right {
