@@ -1,4 +1,4 @@
-<div class="task-list">
+<!-- <div class="task-list">
   <div
     class="task-card"
     cdkDrag
@@ -127,7 +127,73 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="task-list">
+  <div
+    cdkDrag
+    class="draggable-wrapper"
+    (mousedown)="rotateCard($event, true)"
+    (mouseup)="rotateCard($event, false)"
+    (mouseleave)="rotateCard($event, false)"
+    (cdkDragStarted)="rotateCard($event, true)"
+    (cdkDragEnded)="rotateCard($event, false)"
+    (dblclick)="openTaskDetails()"
+  >
+    <div
+      [ngStyle]="{'transform': 'rotate(' + rotateValue + 'deg)'}"
+      class="task-card"
+    >
+      <div
+        class="task-label"
+        [style.backgroundColor]="task.category === 'Technical Task' ? '#1FD7C1' : 'blue'"
+      >
+        {{ task.category }}
+      </div>
+      <div class="task-title">
+        <h5>{{ task.title }}</h5>
+      </div>
+      <div>
+        <p class="task-description">{{ task.description }}</p>
+      </div>
+      <div class="task-progress">
+        <div class="progress-bar">
+          <div
+            class="progress-fill"
+            [style.width]="getSubtaskProgressPercent(task) + '%'"
+          ></div>
+        </div>
+        <span>{{ getSubtaskProgressText(task) }}</span>
+      </div>
+      <div class="task-assignees-to">
+        <div class="task-assignees">
+          @for (assigneeId of task.assignedTo; track $index) { 
+            @if (contacts) {
+              @if (getAssigneeDetails(assigneeId)) {
+                <span
+                  class="assignee-logo"
+                  [style.backgroundColor]="getAssigneeDetails(assigneeId)?.color"
+                  [title]="getAssigneeDetails(assigneeId)?.name"
+                >
+                  {{ getAssigneeInitials(assigneeId) }}
+                </span>
+              } 
+            }
+          }
+        </div>
+        <div class="priority">
+          @switch (task.priority) { 
+            @case ('urgent') { <span>!!!</span> }
+            @case ('medium') { <span>=</span> }
+            @case ('low') { <span>-</span> }
+            @default { <span></span> }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 @if (isClicked && selectedTask) {
 <section>

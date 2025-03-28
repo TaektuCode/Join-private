@@ -509,9 +509,24 @@ option {
   transition: transform 0.3s ease; // Sorgt für eine sanfte Übergangsanimation
 }
 
-.rotated {
-  transform: rotate(5deg);
+// .rotated {
+//   transform: rotate(5deg);
+// }
+.cdk-drop-list-dragging{
+  border: none;
 }
+
+// .examble-list{
+//   background-color: #ff3d00;
+// }
+
+.draggable-wrapper {
+  display: inline-block; /* Passt die Größe an den Inhalt an */
+  position: relative;    /* Ermöglicht relative Positionierung für den Inhalt */
+  /* Optional: weitere Styles, z. B. */
+  cursor: move;          /* Zeigt an, dass das Element verschiebbar ist */
+}
+
 
 // Assigend To
 .selected-contact {
