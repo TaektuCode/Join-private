@@ -1,42 +1,99 @@
 .login-header {
-    
-    height: var(--headerHeight); // Falls --headerHeight nicht definiert ist, wird 96px genutzt
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 40px; // Außenabstand links und rechts
-  
-    img {
-      height: 50px; 
-      animation: logoMove 2s ease-out forwards;
-    }
-  
-    .header-right {
-      display: flex;
-      align-items: center;
-  
-      span {
-        color: #000000;
-        margin-right: 20px; // Abstand zwischen Text und Button
-      }
-  
-      button {
-        background-color: #2A3647;
-        color: #ffffff;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
-        cursor: pointer;
-        text-align: center;
-        appearance: none; // Entfernt native Browser-Styles
+  position: relative; // Wichtig: so wird das absolute Element relativ zum Header positioniert
+  height: var(--headerHeight); // z. B. 96px
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 0 40px;
 
-        &:hover {
-          background-color: var(--accentColor2);
-          box-shadow: 4px 4px 4px lightgray;
-        }
+  img {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    transform: translate(-50%, -50%);
+    height: 50px;
+    z-index: 1000;
+    animation: logoMove 4s ease-out forwards;
+  }
+
+  .header-right {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 6s;
+
+    span {
+      color: #000;
+      margin-right: 20px;
+    }
+
+    button {
+      background-color: #2A3647;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      appearance: none;
+
+      &:hover {
+        background-color: var(--accentColor2);
+        box-shadow: 4px 4px 4px lightgray;
       }
     }
   }
+}
+
+
+// Fade-in für weitere Inhalte
+.main-content,
+.login-header,
+.header-right,
+.login-footer {
+  opacity: 0;
+  animation: fadeIn 1s ease-out forwards;
+  animation-delay: 4s;
+}
+
+// @keyframes logoMove {
+//   0% {
+//     left: 50%;
+//     top: 300px;
+//     transform: translate(-50%, -50%);
+//   }
+//   33% {
+//     left: 45%;
+//     top: 40%;
+//     transform: translate(-50%, -50%);
+//   }
+//   66% {
+//     left: 35%;
+//     top: 30%;
+//     transform: translate(-50%, -50%);
+//   }
+//   100% {
+//     left: 40px;  // entspricht dem linken Padding des Headers
+//     top: 20px; 
+//     transform: translate(0, 0);
+//   }
+// }
+
+@keyframes logoMove {
+  from {
+    left: 300px;
+    top: 400px;
+    transform: translate(50%, 50%);
+  }
+  to {
+    left: 45px;
+    top: 45px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 
   .main-content {
     width: 600px;
@@ -197,15 +254,6 @@
     transform: scaleX(1);
   }
 } 
-
-@keyframes logoMove {
-  from {
-    transform: translate(300px, 300px);
-  }
-  to {
-    transform: translate(0, 0);
-  }
-}
 
 @media (max-width: 1000px) {
   .login-header .header-right {
