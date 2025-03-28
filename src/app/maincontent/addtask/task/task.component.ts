@@ -13,11 +13,12 @@ import { FirebaseService } from '../../../shared/services/firebase.service';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { TruncatePipe } from '../../../truncate.pipe';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TruncatePipe],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
