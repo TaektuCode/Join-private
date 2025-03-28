@@ -498,7 +498,7 @@
   align-items: center;
   padding: 20px 0;
   max-width: 1440px;
-  width: 76%;
+  width: 74vw;
   bottom: 20px;
 
   .footer-left {
@@ -544,7 +544,23 @@
   }
 }
 
+@media (max-width: 1300px) {
+  .footer {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 1300px) {
+  .footer {
+    width: 65vw;
+  }
+}
+
 @media (max-width: 1000px) {
+  .and-task {
+    padding-top: 25px;
+  }
+
   h1 {
     font-size: 40px;
     margin-bottom: 40px;
@@ -558,6 +574,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0;
+    margin-bottom: 90px;
 
     .left,
     .right {
@@ -590,7 +607,10 @@
   .footer {
     flex-direction: column-reverse;
     text-align: center;
-    padding-bottom: 40px;
+    width: 100%;
+    padding: 0;
+    margin-bottom: 60px;
+    background-color: var(--backgroundColor);
 
     .footer-right {
       margin: 20px 0;
