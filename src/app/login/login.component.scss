@@ -13,13 +13,13 @@
     transform: translate(-50%, -50%);
     height: 50px;
     z-index: 1000;
-    animation: logoMove 2s ease-out forwards;
+    animation: logoMove 4s ease-out forwards;
   }
 
   .header-right {
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
-    animation-delay: 2s;
+    animation-delay: 4s;
 
     span {
       color: #000;
@@ -50,8 +50,8 @@
 .header-right,
 .login-footer {
   opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 2s;
+  animation: fadeIn 4s ease-out forwards;
+  animation-delay: 4s;
 }
 
 @keyframes logoMove {
@@ -60,13 +60,22 @@
     top: 50%;
     transform: translate(-50%, -50%);
   }
+  33% {
+    left: 45%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+  }
+  66% {
+    left: 35%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+  }
   100% {
     left: 40px;  // entspricht dem linken Padding des Headers
     top: 20px; 
     transform: translate(0, 0);
   }
 }
-
 
 @keyframes fadeIn {
   from { opacity: 0; }
