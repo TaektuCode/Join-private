@@ -8,8 +8,8 @@
 
   img {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 20px;
+    top: 20px;
     transform: translate(-50%, -50%);
     height: 50px;
     z-index: 1000;
@@ -19,7 +19,7 @@
   .header-right {
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
-    animation-delay: 4s;
+    animation-delay: 6s;
 
     span {
       color: #000;
@@ -50,30 +50,42 @@
 .header-right,
 .login-footer {
   opacity: 0;
-  animation: fadeIn 4s ease-out forwards;
+  animation: fadeIn 1s ease-out forwards;
   animation-delay: 4s;
 }
 
+// @keyframes logoMove {
+//   0% {
+//     left: 50%;
+//     top: 300px;
+//     transform: translate(-50%, -50%);
+//   }
+//   33% {
+//     left: 45%;
+//     top: 40%;
+//     transform: translate(-50%, -50%);
+//   }
+//   66% {
+//     left: 35%;
+//     top: 30%;
+//     transform: translate(-50%, -50%);
+//   }
+//   100% {
+//     left: 40px;  // entspricht dem linken Padding des Headers
+//     top: 20px; 
+//     transform: translate(0, 0);
+//   }
+// }
+
 @keyframes logoMove {
-  0% {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  from {
+    left: 300px;
+    top: 400px;
+    transform: translate(50%, 50%);
   }
-  33% {
-    left: 45%;
-    top: 40%;
-    transform: translate(-50%, -50%);
-  }
-  66% {
-    left: 35%;
-    top: 30%;
-    transform: translate(-50%, -50%);
-  }
-  100% {
-    left: 40px;  // entspricht dem linken Padding des Headers
-    top: 20px; 
-    transform: translate(0, 0);
+  to {
+    left: 45px;
+    top: 45px;
   }
 }
 
