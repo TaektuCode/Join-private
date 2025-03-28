@@ -29,7 +29,6 @@
     display: flex;
     align-items: center;
     gap: 2rem;
-    margin-right: 21px;
 
     .search-container {
       background-color: #fff;
@@ -42,10 +41,11 @@
 
       input {
         border: none;
-        padding: 12px 0 12px 16px;
+        padding: 8px 0;
         outline: none;
         border-right: 1px solid rgba(209, 209, 209, 1);
         font-size: 20px;
+        margin-left: 5px;
       }
 
       input::placeholder {
@@ -58,7 +58,6 @@
         border-radius: 50%;
         display: inline-block;
         width: 32px;
-        margin-left: 8px;
 
         &:hover {
           background-color: #a8a8a8;
@@ -79,6 +78,11 @@
       cursor: pointer;
       font-weight: 700;
       font-size: 21px;
+
+      @media (max-width: 1550px) {
+        width: auto;
+        padding: 0.5rem;
+      }
 
       span {
         padding-top: 2px;
@@ -187,21 +191,21 @@ app-add-task {
 }
 
 @media (max-width: 1550px) {
-  h1 {
-    font-size: 34px;
-  }
+  // h1 {
+  //   font-size: 34px;
+  // }
 
   .main-board {
     flex-direction: column;
   }
 
-  .board-header .board-controls .search-container {
-    display: none;
-  }
+  // .board-header .board-controls .search-container {
+  //   display: none;
+  // }
 
-  .board-header .board-controls .add-task .btn-text {
-    display: none;
-  }
+  // .board-header .board-controls .add-task .btn-text {
+  //   display: none;
+  // }
 
   .mobile-search {
     display: block;
@@ -230,10 +234,26 @@ app-add-task {
   }
 }
 
+@media (max-width: 1050px) {
+  .board-header .board-controls .search-container {
+    display: none;
+  }
+}
+
 /* Auf breiteren Bildschirmen das zusätzliche Search-Feld ausblenden */
-@media (min-width: 1001px) {
+@media (min-width: 1050px) {
   .mobile-search {
     display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .board-header .board-controls .add-task .btn-text {
+      display: none;
+  }
+
+  h1 {
+    font-size: 47px;
   }
 }
 
