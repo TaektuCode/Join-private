@@ -282,9 +282,8 @@
     position: absolute;
     background-color: white;
     border: 1px solid #ccc;
-    z-index: 1;
     width: 100%;
-    height: 400px;
+    height: 335px;
     overflow: auto;
     z-index: 2;
   }
@@ -351,6 +350,7 @@
     left: 0;
     width: 100%;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     margin-top: 10px;
     z-index: 0;
@@ -366,6 +366,10 @@
       justify-content: center;
       color: white;
       font-size: 12px;
+    }
+
+    .selected-contact-more {
+      margin-left: 10px;
     }
   }
 
@@ -400,15 +404,19 @@
       fill: #eeeeee;
     }
   }
-  .added-subtask {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    margin: 5px 10px;
-    width: 100px;
-    > svg {
-      margin-left: auto;
-      cursor: pointer;
+  .added-subtask-box {
+    height: 95px;
+    overflow: auto;
+    .added-subtask {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      margin: 5px 10px;
+      width: 100px;
+      > svg {
+        margin-left: auto;
+        cursor: pointer;
+      }
     }
   }
 }
