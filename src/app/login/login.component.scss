@@ -1,13 +1,13 @@
 .login-header {
-  position: relative;
-  height: var(--headerHeight); // z.B. 96px
+  position: relative; // Wichtig: so wird das absolute Element relativ zum Header positioniert
+  height: var(--headerHeight); // z. B. 96px
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
   padding: 0 40px;
 
   img {
-    position: fixed;
+    position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -20,12 +20,12 @@
     opacity: 0;
     animation: fadeIn 1s ease-out forwards;
     animation-delay: 2s;
-    
+
     span {
       color: #000;
       margin-right: 20px;
     }
-    
+
     button {
       background-color: #2A3647;
       color: #fff;
@@ -43,9 +43,11 @@
   }
 }
 
+
 // Fade-in für weitere Inhalte
 .main-content,
-.mobile-header-right,
+.login-header,
+.header-right,
 .login-footer {
   opacity: 0;
   animation: fadeIn 1s ease-out forwards;
@@ -59,11 +61,12 @@
     transform: translate(-50%, -50%);
   }
   100% {
-    left: 40px;       // ggf. anpassen
-    top: 50%;
-    transform: translate(0, -50%);
+    left: 40px;  // entspricht dem linken Padding des Headers
+    top: 20px; 
+    transform: translate(0, 0);
   }
 }
+
 
 @keyframes fadeIn {
   from { opacity: 0; }
