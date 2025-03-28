@@ -494,6 +494,13 @@ option {
 // .rotated {
 //   transform: rotate(5deg);
 // }
+.cdk-drop-list-dragging{
+  border: none;
+}
+
+// .examble-list{
+//   background-color: #ff3d00;
+// }
 
 .draggable-wrapper {
   display: inline-block; /* Passt die Größe an den Inhalt an */
