@@ -7,6 +7,7 @@
 .top {
   display: flex;
   justify-content: space-between;
+
   img {
     cursor: pointer;
   }
@@ -28,6 +29,7 @@
     margin-right: 40px;
     margin-top: 40px;
   }
+
   .right {
     margin-left: 40px;
     margin-top: 40px;
@@ -56,12 +58,14 @@
       &:focus {
         outline: none;
       }
+
       &.has-value {
         border-color: var(--accentColor2);
       }
     }
 
     .input-wrapper {
+
       textarea,
       select {
         width: 100%;
@@ -73,9 +77,11 @@
 
       textarea {
         height: 100px;
+
         &:focus {
           outline: none;
         }
+
         &.has-value {
           border-color: var(--accentColor2);
         }
@@ -133,7 +139,8 @@
       background-color: white;
       border: 1px solid #ccc;
       z-index: 1;
-      width: 100%; /* Breite an den Wrapper anpassen */
+      width: 100%;
+      /* Breite an den Wrapper anpassen */
       border-top: none;
       border-bottom-left-radius: 4px;
       border-bottom-right-radius: 4px;
@@ -175,6 +182,7 @@
     border-radius: 10px;
     padding: 8px;
     border: 1px solid #ccc;
+
     &.has-value {
       border-color: var(--accentColor2);
     }
@@ -218,6 +226,10 @@
 
       svg {
         margin-left: 15px;
+
+        @media(max-width: 1000px) {
+          display: none;
+        }
       }
 
       &.selected {
@@ -227,6 +239,7 @@
           background-color: #7ae229;
           color: white;
           font-weight: 700;
+
           path {
             fill: #fff;
           }
@@ -242,6 +255,7 @@
           background-color: #ff3d00;
           color: white;
           font-weight: 700;
+
           path {
             fill: #fff;
           }
@@ -252,6 +266,7 @@
         background-color: #ffa800;
         color: white;
         font-weight: 700;
+
         path {
           fill: #fff;
         }
@@ -270,6 +285,7 @@
     background-color: white;
     min-height: 40px;
     border-radius: 10px;
+
     &.has-value {
       border-color: var(--accentColor2);
     }
@@ -312,19 +328,22 @@
     border-radius: 2px;
   }
 
-  .custom-checkbox:hover input ~ .checkmark {
+  .custom-checkbox:hover input~.checkmark {
     background-color: #d9d9d9;
   }
 
-  .custom-checkbox input:checked ~ .checkmark {
-    background-color: #2196f3; /* Farbe des Häkchens */
+  .custom-checkbox input:checked~.checkmark {
+    background-color: #2196f3;
+    /* Farbe des Häkchens */
     border-color: #2196f3;
   }
 
-  .custom-checkbox input:checked ~ .checkmark {
-    background-color: transparent; /* Hintergrund transparent machen */
+  .custom-checkbox input:checked~.checkmark {
+    background-color: transparent;
+    /* Hintergrund transparent machen */
     border: none;
-    background-image: url("../../../assets/img/addtask/check_button.svg"); /* Pfad zu deinem "checked"-Bild */
+    background-image: url("../../../assets/img/addtask/check_button.svg");
+    /* Pfad zu deinem "checked"-Bild */
     background-repeat: no-repeat;
     background-position: center;
     background-size: auto 20px;
@@ -348,6 +367,7 @@
   .assign-contact:has(.contact-checkbox:checked) {
     background-color: #2a3647;
     color: white;
+
     &:hover {
       background-color: #091931;
     }
@@ -359,6 +379,7 @@
     position: relative;
     padding: 5px;
     border-radius: 15px;
+
     &:hover {
       background-color: #f3f1f1;
     }
@@ -393,7 +414,7 @@
 
   .assigned-to-wrapper {
     position: relative;
-    min-height: 40px ;
+    min-height: 40px;
   }
 
   .selected-contacts-logos {
@@ -435,6 +456,7 @@
     padding: 0 8px;
     height: 40px;
     cursor: pointer;
+
     &.has-value {
       border-color: var(--accentColor2);
     }
@@ -458,29 +480,35 @@
       fill: #eeeeee;
     }
   }
+
   .added-subtask-box {
     display: block;
     height: 95px;
     overflow: auto;
+
     .added-subtask {
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: 14px;
       margin: 5px 10px;
-      > svg {
+
+      >svg {
         cursor: pointer;
       }
+
       &.editing {
         background-color: white;
         border: 1px solid #ccc;
         border-radius: 8px;
         width: 95%;
       }
+
       .added-subtask-logos {
         display: flex;
         gap: 10px;
       }
+
       .edit-input {
         border: none;
         width: 95%;
@@ -504,6 +532,7 @@
 
   .footer-left {
     font-size: 14px;
+
     .required {
       color: red;
     }
@@ -597,10 +626,11 @@
       img {
         width: 16px; // setzt die Bildgröße herab
         height: auto;
+
       }
 
       span {
-        font-size: 10px; // verkleinert den Text
+        font-size: 16px; // verkleinert den Text
       }
     }
   }
