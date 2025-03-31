@@ -15,11 +15,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TruncatePipe } from '../../../truncate.pipe';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDragStart, CdkDragEnd } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [FormsModule, CommonModule, TruncatePipe],
+  imports: [FormsModule, CommonModule, TruncatePipe, DragDropModule],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
@@ -166,7 +168,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   //   }
   // }
 
-  rotateCard(event: Event, add: boolean): void {
+  rotateCard(event: Event | CdkDragStart<any> | CdkDragEnd<any>, add: boolean): void {
     this.rotateValue = add ? 5 : 0;
   }
 
