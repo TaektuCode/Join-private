@@ -55,6 +55,10 @@
   overflow: auto;
   flex-grow: 1; /* Scrollbarer Bereich */
   margin-top: 74px;
+
+  @media (max-width: 800px) {
+    margin: 0px;
+  }
 }
 
 .letter-separator {
