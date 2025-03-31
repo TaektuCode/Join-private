@@ -6,7 +6,7 @@
     (mouseleave)="rotateCard($event, false)"
     (cdkDragStarted)="rotateCard($event, true)"
     (cdkDragEnded)="rotateCard($event, false)"
-    (dblclick)="openTaskDetails()"
+    (click)="openTaskDetails()"
   >
     <div
       [ngStyle]="{ transform: 'rotate(' + rotateValue + 'deg)' }"
