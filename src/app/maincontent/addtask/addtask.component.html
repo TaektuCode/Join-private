@@ -140,14 +140,8 @@
       <div class="input-field">
         <div class="label">Assigned to</div>
         <div
-          class="assigned-to-wrapper"
-          [style.minHeight.px]="
-            getSelectedContacts().length > 0
-              ? getSelectedContacts().length > 8
-                ? getSelectedContacts().length * 35 + 80
-                : 80
-              : 0
-          "
+        class="assigned-to-wrapper"
+        [style.minHeight.px]="getSelectedContacts().length > 0 ? 80 : 0"
         >
           <div class="input-wrapper-contact">
             <div
