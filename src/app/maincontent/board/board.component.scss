@@ -106,18 +106,22 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Halbtransparenter Hintergrund */
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 25px;
-  z-index: 1000; /* Stellt sicher, dass es über anderen Inhalten liegt */
+  z-index: 1000;
+
+  /* Stellt sicher, dass es über anderen Inhalten liegt */
   app-add-task {
     ::ng-deep .footer {
       position: fixed;
       width: 73%;
       bottom: 45px !important;
     }
+
     ::ng-deep .dropdown-options {
       height: 350px;
     }
@@ -137,12 +141,21 @@ app-add-task {
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 1001; /* Stellt sicher, dass die Komponente über dem Hintergrund liegt */
+  z-index: 1001;
+  /* Stellt sicher, dass die Komponente über dem Hintergrund liegt */
   width: 80%;
   height: 90%;
-  max-width: 80%; /* Beispiel für maximale Breite */
-  max-height: 90%; /* Beispiel für maximale Höhe */
-  overflow-y: auto; /* Ermöglicht Scrollen bei Bedarf */
+  max-width: 80%;
+  /* Beispiel für maximale Breite */
+  max-height: 90%;
+  /* Beispiel für maximale Höhe */
+  overflow-y: auto;
+
+  /* Ermöglicht Scrollen bei Bedarf */
+  @media(max-width: 500px) {
+    max-width: 95%;
+    width: 95%;
+  }
 }
 
 //Main Board
@@ -155,7 +168,7 @@ app-add-task {
 
 
     @media (max-width: 1550px) {
-    width:100%;
+      width: 100%;
     }
 
     .column-heading {
@@ -172,11 +185,11 @@ app-add-task {
 
         &:hover {
           // Beispiel-Filter; der exakte Wert muss ggf. an deine var(--accentColor2) angepasst werden
-          filter: brightness(0) saturate(100%) invert(40%) sepia(70%)
-            saturate(500%) hue-rotate(160deg);
+          filter: brightness(0) saturate(100%) invert(40%) sepia(70%) saturate(500%) hue-rotate(160deg);
         }
       }
     }
+
     .board-section {
       max-height: 70vh;
       overflow-y: auto;
@@ -244,7 +257,7 @@ app-add-task {
 
 @media (max-width: 500px) {
   .board-header .board-controls .add-task .btn-text {
-      display: none;
+    display: none;
   }
 
   h1 {
