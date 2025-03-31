@@ -15,6 +15,7 @@ import { ContactInterface } from '../contacts/contact-interface';
 import { Subscription } from 'rxjs';
 import { TruncatePipe } from '../../truncate.pipe';
 import { TaskService } from './task.service';
+import { Router } from '@angular/router';
 
 interface Subtask {
   title: string;
@@ -66,10 +67,13 @@ export class AddtaskComponent implements OnInit, OnDestroy {
 
   @ViewChild('contactsDropdown') contactsDropdown!: ElementRef;
   @ViewChild('dropdownTrigger') dropdownTrigger!: ElementRef;
+  @ViewChild('categoryDropdown') categoryDropdown!: ElementRef;
+  @ViewChild('categoryDropdownTrigger') categoryDropdownTrigger!: ElementRef;
 
   constructor(
     private firebaseService: FirebaseService,
-    private taskService: TaskService // Injizieren Sie Ihren TaskService
+    private taskService: TaskService, // Injizieren Sie Ihren TaskService
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -92,14 +96,15 @@ export class AddtaskComponent implements OnInit, OnDestroy {
     this.errors.category = !this.newTask.category;
 
     if (this.errors.title || this.errors.date || this.errors.category) {
-      return; // Verhindere das Erstellen des Tasks, wenn Fehler vorhanden sind
+      return;
     }
 
     this.firebaseService.createTask(this.newTask).then(() => {
       console.log('Task created successfully!');
-      this.taskService.addTask(this.newTask); // Übertragen Sie den Task über Ihren Service
-      this.taskCreated.emit(this.newTask); // Emit the new task
+      this.taskService.addTask(this.newTask);
+      this.taskCreated.emit(this.newTask);
       this.resetForm();
+      this.router.navigate(['/board']);
     });
   }
 
@@ -173,26 +178,25 @@ export class AddtaskComponent implements OnInit, OnDestroy {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
-    console.log('Document geklickt:', event.target);
     if (this.isDropdownOpen && this.contactsDropdown && this.dropdownTrigger) {
       if (
         !this.dropdownTrigger.nativeElement.contains(event.target) &&
         !this.contactsDropdown.nativeElement.contains(event.target)
       ) {
-        console.log('Klick außerhalb von Trigger und Dropdown!');
         this.isDropdownOpen = false;
-      } else if (this.dropdownTrigger.nativeElement.contains(event.target)) {
-        console.log('Klick auf den Trigger.');
-        // Nicht schließen
-      } else {
-        console.log('Klick innerhalb des Dropdowns.');
       }
-    } else if (this.isDropdownOpen) {
-      console.log(
-        'Dropdown offen, contactsDropdown oder dropdownTrigger nicht gefunden.'
-      );
-    } else {
-      console.log('Dropdown ist geschlossen.');
+    }
+    if (
+      this.isCategoryDropdownOpen &&
+      this.categoryDropdown &&
+      this.categoryDropdownTrigger
+    ) {
+      if (
+        !this.categoryDropdownTrigger.nativeElement.contains(event.target) &&
+        !this.categoryDropdown.nativeElement.contains(event.target)
+      ) {
+        this.isCategoryDropdownOpen = false;
+      }
     }
   }
 

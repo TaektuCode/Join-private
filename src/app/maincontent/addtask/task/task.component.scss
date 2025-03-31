@@ -285,7 +285,8 @@ p {
     gap: 10px;
 
     &:hover .icon-delete {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
+        hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 
@@ -293,7 +294,8 @@ p {
     gap: 5px;
 
     &:hover .icon-edit {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
+        hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 }
@@ -547,7 +549,6 @@ select {
   margin-top: 10px;
   z-index: 0;
   padding-left: 15px;
-
 
   .selected-contact-logo {
     width: 30px;

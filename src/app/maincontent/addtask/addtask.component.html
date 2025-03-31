@@ -239,6 +239,7 @@
         </div>
         <div class="input-wrapper-category">
           <div
+            #categoryDropdownTrigger
             class="selected-category"
             (click)="toggleCategoryDropdown()"
             [class.has-value]="newTask.category"
@@ -259,7 +260,11 @@
             </svg>
           </div>
           @if (isCategoryDropdownOpen) {
-          <div class="dropdown-options" (blur)="isCategoryDropdownOpen = false">
+          <div
+            #categoryDropdown
+            class="dropdown-options"
+            (blur)="isCategoryDropdownOpen = false"
+          >
             @for (category of categories; track $index) {
             <div
               class="category-option"

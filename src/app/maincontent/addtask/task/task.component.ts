@@ -36,7 +36,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   rotateValue: number = 0;
   showDeleteConfirmation: boolean = false;
 
-  constructor(private firebaseService: FirebaseService) { }
+  constructor(private firebaseService: FirebaseService) {}
 
   ngOnInit(): void {
     this.contactSubscription = this.firebaseService.contactList.subscribe(
