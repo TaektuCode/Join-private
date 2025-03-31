@@ -14,11 +14,14 @@ import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TruncatePipe } from '../../../truncate.pipe';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkDragStart, CdkDragEnd } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [FormsModule, CommonModule, TruncatePipe],
+  imports: [FormsModule, CommonModule, TruncatePipe, DragDropModule],
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
@@ -35,6 +38,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   editingSubtaskIndex: number | null = null;
   rotateValue: number = 0;
   showDeleteConfirmation: boolean = false;
+  showDropZone: boolean = false;
 
   constructor(private firebaseService: FirebaseService) {}
 
@@ -164,7 +168,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   //   }
   // }
 
-  rotateCard(event: Event, add: boolean): void {
+  rotateCard(event: Event | CdkDragStart<any> | CdkDragEnd<any>, add: boolean): void {
     this.rotateValue = add ? 5 : 0;
   }
 
@@ -300,5 +304,21 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.selectedTask.subtask.splice(index, 1); // Subtask aus dem Array entfernen
       this.updateSubtaskInFirebase(this.selectedTask.subtask, -1);
     }
+  }
+  // Neue Methoden für den Drop:
+  onDropZoneEntered(event: any): void {
+    this.showDropZone = true;
+    console.log('Karte betritt Drop-Zone', event);
+  }
+
+  onDropZoneExited(event: any): void {
+    this.showDropZone = false;
+    console.log('Karte verlässt Drop-Zone', event);
+  }
+
+  onDrop(event: CdkDragDrop<any>): void {
+    console.log('Karte wurde abgelegt:', event);
+    // Hier kannst du Logik einbauen, um die Karte in einen anderen Bereich zu verschieben
+    this.showDropZone = false;
   }
 }
