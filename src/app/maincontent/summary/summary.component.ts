@@ -68,6 +68,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
     urgentTasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-    return urgentTasks[0].date;
+    const dateString = urgentTasks[0].date;
+    const dateParts = dateString.split('-');
+    return `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
   }
 }
