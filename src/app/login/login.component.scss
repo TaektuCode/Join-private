@@ -8,11 +8,14 @@
 
   img {
     position: absolute;
-    left: 20px;
-    top: 20px;
+    /* Startposition: in der Mitte */
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    height: 50px;
+    /* Initialer Zustand: Höhe 0px */
+    height: 0;
     z-index: 1000;
+    animation: logoAnimation 3s ease-out forwards;
   }
 
   .header-right {
@@ -40,6 +43,30 @@
   }
 }
 
+/* Keyframes für die Logo-Animation */
+@keyframes logoAnimation {
+  0% {
+    /* Start in der Mitte, Höhe 0px */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 0;
+  }
+  50% {
+    /* Das Logo "wächst" in der Mitte auf 100px Höhe */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
+  }
+  100% {
+    /* Endposition: oben links (50px Abstand) und Höhe 50px */
+    top: 50px;
+    left: 50px;
+    transform: none; // Keine Translation mehr, da Position schon final
+    height: 50px;
+  }
+}
 
 // Fade-in für weitere Inhalte
 // .main-content,
