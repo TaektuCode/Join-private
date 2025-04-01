@@ -1,6 +1,9 @@
 <footer class="sidebar">
         <a><img class="join-logo" src="./assets/img/menu/logo.svg" alt="Join Logo"></a>
         <nav class="nav-bar">
+                <a [routerLink]="['logIn']" routerLinkActive="active" class="hidden">
+                        <img src="./assets/img/menu/logIn.svg" alt="LogIn Icon">Log In
+                </a>
                 <a [routerLink]="['summary']" routerLinkActive="active">
                         <img src="./assets/img/menu/summary.svg" alt="Summary Icon">Summary
                 </a>
@@ -16,7 +19,7 @@
         </nav>
 
         <div class="policy-links-wrapper">
-                <a [routerLink]="['policy']">Privacy Policy</a>
-                <a [routerLink]="['imprint']">Legal Notice</a>
+                <a [routerLink]="['policy']" routerLinkActive="active">Privacy Policy</a>
+                <a [routerLink]="['imprint']" routerLinkActive="active">Legal Notice</a>
         </div>
 </footer>
