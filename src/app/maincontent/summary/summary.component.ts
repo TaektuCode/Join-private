@@ -19,6 +19,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   inProgressTasksCount: number = 0;
   awaitFeedbackTasksCount: number = 0;
   urgentTasksCount: number = 0;
+  upcomingDeadline: string = '';
   taskSubscription: Subscription | undefined;
 
   constructor(private firebaseService: FirebaseService) {
@@ -33,6 +34,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
       this.inProgressTasksCount = tasks.filter(task => task.status === 'In Progress').length;
       this.awaitFeedbackTasksCount = tasks.filter(task => task.status === 'Await Feedback').length;
       this.urgentTasksCount = tasks.filter(task => task.priority === 'urgent').length;
+      this.upcomingDeadline = this.getUpcomingDeadline(tasks);
     });
   }
 
@@ -51,5 +53,21 @@ export class SummaryComponent implements OnInit, OnDestroy {
         hours >= 11 && hours < 15 ? 'Good Afternoon' :
           hours >= 15 && hours < 22 ? 'Good Evening' :
             'Good Night';
+  }
+
+  getUpcomingDeadline(tasks: TaskInterface[]): string {
+    if (!tasks || tasks.length === 0) {
+      return 'No Deadline';
+    }
+
+    const urgentTasks = tasks.filter(task => task.priority === 'urgent' && task.date);
+
+    if (urgentTasks.length === 0) {
+      return 'No Urgent Deadline';
+    }
+
+    urgentTasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+    return urgentTasks[0].date;
   }
 }
