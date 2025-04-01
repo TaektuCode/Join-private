@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class SummaryComponent implements OnInit, OnDestroy {
   message: string = '';
-  todoTasksCount: number = 0; // Füge diese Zeile hinzu
+  todoTasksCount: number = 0;
+  doneTasksCount: number = 0; // Füge diese Zeile hinzu
   taskSubscription: Subscription | undefined;
 
   constructor(private firebaseService: FirebaseService) {
@@ -22,7 +23,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.taskSubscription = this.firebaseService.taskList$.subscribe(tasks => {
-      this.todoTasksCount = tasks.filter(task => task.status === 'Todo').length; // Aktualisiere den Zähler
+      this.todoTasksCount = tasks.filter(task => task.status === 'Todo').length;
+      this.doneTasksCount = tasks.filter(task => task.status === 'Done').length; // Füge diese Zeile hinzu
     });
   }
 
