@@ -55,14 +55,28 @@ h1 {
         transform: scale(1.05);
         background-color: rgba(42, 54, 71, 1);
         color: white;
+    }
 
-        .todo-done-svg circle {
-            fill: white;
-        }
+    .top-container-main:hover .todo-done-svg circle {
+        fill: white;
+    }
 
-        .todo-done-svg path {
-            fill: rgba(42, 54, 71, 1);
-        }
+    .top-container-main:hover .todo-done-svg1 circle {
+        fill: white;
+    }
+
+    .top-container-main:hover .todo-done-svg path {
+        stroke: rgba(42, 54, 71, 1);
+    }
+
+    .top-container-main:hover .todo-done-svg1 path {
+        stroke: rgba(42, 54, 71, 1);
+        fill: rgb(42, 54, 71);
+    }
+
+    .top-container-main:hover .counter-container .counter,
+    .top-container-main:hover .counter-container .counter-description {
+        color: white;
     }
 }
 
