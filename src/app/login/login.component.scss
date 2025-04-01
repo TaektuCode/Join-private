@@ -8,7 +8,7 @@
 
 
   .header-right {
-    opacity: 0;
+    
     
     span {
       color: #000;
@@ -64,20 +64,29 @@
     /* Endposition: oben links (50px Abstand) und Höhe 50px */
     top: 50px;
     left: 50px;
-    transform: none; // Keine Translation mehr, da Position schon final
+    transform: translate(-50%, -50%); // Keine Translation mehr, da Position schon final
     height: 50px;
   }
 }
 
 // Fade-in für weitere Inhalte
-// .main-content,
-// .login-header,
-// .header-right,
-// .login-footer {
-//   opacity: 0;
-//   animation: fadeIn 1s ease-out forwards;
-//   animation-delay: 4s;
-// }
+.header-right,
+.main-content,
+.login-footer,
+.mobile-header-right {
+  opacity: 0;
+  animation: fadeInMain 1s ease-out forwards;
+  animation-delay: 3s;
+}
+
+@keyframes fadeInMain {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 
 
@@ -130,7 +139,7 @@
       }
   
       img {
-        width: 24px;                  // Feste Breite für das Symbol
+        width: 24px; 
         height: auto;
       }
     }
