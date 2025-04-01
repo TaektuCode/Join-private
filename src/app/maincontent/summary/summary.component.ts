@@ -16,7 +16,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
   todoTasksCount: number = 0;
   doneTasksCount: number = 0;
   totalTasksCount: number = 0;
-  inProgressTasksCount: number = 0; // Füge diese Zeile hinzu
+  inProgressTasksCount: number = 0;
+  awaitFeedbackTasksCount: number = 0; // Füge diese Zeile hinzu
   taskSubscription: Subscription | undefined;
 
   constructor(private firebaseService: FirebaseService) {
@@ -28,7 +29,8 @@ export class SummaryComponent implements OnInit, OnDestroy {
       this.todoTasksCount = tasks.filter(task => task.status === 'Todo').length;
       this.doneTasksCount = tasks.filter(task => task.status === 'Done').length;
       this.totalTasksCount = tasks.length;
-      this.inProgressTasksCount = tasks.filter(task => task.status === 'In Progress').length; // Füge diese Zeile hinzu
+      this.inProgressTasksCount = tasks.filter(task => task.status === 'In Progress').length;
+      this.awaitFeedbackTasksCount = tasks.filter(task => task.status === 'Await Feedback').length; // Füge diese Zeile hinzu
     });
   }
 
