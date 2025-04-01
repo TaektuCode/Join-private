@@ -6,7 +6,7 @@
         </div>
 
         <div class="top-container">
-            <div class="top-container-main">
+            <div class="top-container-main" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="todo-done-svg1">
                     <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="35.3945" cy="34.8083" r="34.5" fill="#2A3647" />
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <div class="top-container-main">
+            <div class="top-container-main" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="todo-done-svg">
                     <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="34.8945" cy="34.8083" r="34.5" fill="#2A3647" />
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="urgent-deadline-container">
+        <div class="urgent-deadline-container" [routerLink]="['/board']" routerLinkActive="router-link-active">
             <div class="urgent-container">
                 <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="30.1445" cy="30.8083" r="30" fill="#FF3D00" />
@@ -73,25 +73,25 @@
             <div class="deadline-container">
                 <div class="deadline-date">{{ upcomingDeadline }}</div>
                 <div class="deadline-date-description">Upcoming Deadline</div>
-              </div>
+            </div>
         </div>
 
         <div class="bottom-task-container">
-            <div class="tasks">
+            <div class="tasks" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="tasks-countdown">
                     <div class="counter">{{ totalTasksCount }}</div>
                     <div class="counter-description">Tasks in<br />Board</div>
                 </div>
             </div>
 
-            <div class="tasks">
+            <div class="tasks" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="task-countdown">
                     <div class="counter">{{ inProgressTasksCount }}</div>
                     <div class="counter-description">Tasks in<br />Progress</div>
                 </div>
             </div>
 
-            <div class="tasks">
+            <div class="tasks" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="tasks-countdown">
                     <div class="counter">{{ awaitFeedbackTasksCount }}</div>
                     <div class="counter-description">Awaiting<br />Feedback</div>

@@ -3,11 +3,12 @@ import { FirebaseService } from '../../shared/services/firebase.service';
 import { Subscription } from 'rxjs';
 import { TaskInterface } from '../addtask/task.interface';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
 })
