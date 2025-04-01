@@ -13,14 +13,11 @@
     transform: translate(-50%, -50%);
     height: 50px;
     z-index: 1000;
-    animation: logoMove 4s ease-out forwards;
   }
 
   .header-right {
     opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-    animation-delay: 6s;
-
+    
     span {
       color: #000;
       margin-right: 20px;
@@ -45,54 +42,15 @@
 
 
 // Fade-in für weitere Inhalte
-.main-content,
-.login-header,
-.header-right,
-.login-footer {
-  opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 4s;
-}
-
-// @keyframes logoMove {
-//   0% {
-//     left: 50%;
-//     top: 300px;
-//     transform: translate(-50%, -50%);
-//   }
-//   33% {
-//     left: 45%;
-//     top: 40%;
-//     transform: translate(-50%, -50%);
-//   }
-//   66% {
-//     left: 35%;
-//     top: 30%;
-//     transform: translate(-50%, -50%);
-//   }
-//   100% {
-//     left: 40px;  // entspricht dem linken Padding des Headers
-//     top: 20px; 
-//     transform: translate(0, 0);
-//   }
+// .main-content,
+// .login-header,
+// .header-right,
+// .login-footer {
+//   opacity: 0;
+//   animation: fadeIn 1s ease-out forwards;
+//   animation-delay: 4s;
 // }
 
-@keyframes logoMove {
-  from {
-    left: 300px;
-    top: 400px;
-    transform: translate(50%, 50%);
-  }
-  to {
-    left: 45px;
-    top: 45px;
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 
 
   .main-content {
