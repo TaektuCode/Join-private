@@ -68,7 +68,7 @@
   margin-top: 12px;
   gap: 4px;
 
-  svg{
+  svg {
     margin-left: 80px;
   }
 }
@@ -99,7 +99,7 @@
   font-size: 12px;
   color: white;
   border: 1px solid #fff;
-  
+
 
   &:not(:first-child) {
     margin-left: -10px;
@@ -242,7 +242,7 @@ p {
   color: white;
   border: 1px solid #fff;
   margin-right: 15px;
-  
+
 }
 
 .assigned-to-overlay-box {
@@ -291,8 +291,7 @@ p {
     gap: 10px;
 
     &:hover .icon-delete {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
-        hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 
@@ -300,8 +299,7 @@ p {
     gap: 5px;
 
     &:hover .icon-edit {
-      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%)
-        hue-rotate(162deg) brightness(97%) contrast(91%);
+      filter: brightness(0) saturate(100%) invert(47%) sepia(72%) saturate(319%) hue-rotate(162deg) brightness(97%) contrast(91%);
     }
   }
 }
@@ -391,10 +389,6 @@ select {
 
     svg {
       margin-left: 15px;
-
-      @media (max-width: 450px) {
-        display: none;
-      }
     }
 
     &.selected {
@@ -575,8 +569,17 @@ select {
 .input-wrapper,
 .subtasks-wrapper {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.input-wrapper-subtasks {
+  display: flex;
+}
+.subtasks-wrapper-subtasks{
+  display: flex;
+}
 .add-subtask-btn {
   height: 40px;
   background-color: white;
@@ -703,7 +706,7 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 16px; /* optional für etwas Abstand */
+  margin: 16px;
+  /* optional für etwas Abstand */
   background-color: #f9f9f9;
 }
-
