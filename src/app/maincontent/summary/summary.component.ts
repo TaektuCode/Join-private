@@ -1,17 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FirebaseService } from '../../shared/services/firebase.service';
+import { Subscription } from 'rxjs';
+import { TaskInterface } from '../addtask/task.interface';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
 })
-export class SummaryComponent {
+export class SummaryComponent implements OnInit, OnDestroy {
   message: string = '';
+  todoTasksCount: number = 0; // Füge diese Zeile hinzu
+  taskSubscription: Subscription | undefined;
 
-  constructor() {
+  constructor(private firebaseService: FirebaseService) {
     this.checkTime();
+  }
+
+  ngOnInit(): void {
+    this.taskSubscription = this.firebaseService.taskList$.subscribe(tasks => {
+      this.todoTasksCount = tasks.filter(task => task.status === 'Todo').length; // Aktualisiere den Zähler
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.taskSubscription) {
+      this.taskSubscription.unsubscribe();
+    }
   }
 
   checkTime(): void {
