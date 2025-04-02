@@ -1,3 +1,14 @@
+// body {
+//   align-items: center !important;
+// }
+.login-site {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // align-items: center;
+  height: 100dvh;
+}
+
 .login-header {
   position: relative; // Wichtig: so wird das absolute Element relativ zum Header positioniert
   height: var(--headerHeight); // z. B. 96px
@@ -6,21 +17,10 @@
   align-items: center;
   padding: 0 40px;
 
-  img {
-    position: absolute;
-    left: 20px;
-    top: 20px;
-    transform: translate(-50%, -50%);
-    height: 50px;
-    z-index: 1000;
-    animation: logoMove 4s ease-out forwards;
-  }
 
   .header-right {
-    opacity: 0;
-    animation: fadeIn 1s ease-out forwards;
-    animation-delay: 6s;
-
+    
+    
     span {
       color: #000;
       margin-right: 20px;
@@ -43,56 +43,62 @@
   }
 }
 
+.imglogo {
+  position: fixed;
+  /* Startposition: in der Mitte */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Initialer Zustand: Höhe 0px */
+  height: 0;
+  z-index: 1000;
+  animation: logoAnimation 3s ease-out forwards;
+}
+
+/* Keyframes für die Logo-Animation */
+@keyframes logoAnimation {
+  0% {
+    /* Start in der Mitte, Höhe 0px */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 0;
+  }
+  50% {
+    /* Das Logo "wächst" in der Mitte auf 100px Höhe */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
+  }
+  100% {
+    /* Endposition: oben links (50px Abstand) und Höhe 50px */
+    top: 50px;
+    left: 50px;
+    transform: translate(-50%, -50%); // Keine Translation mehr, da Position schon final
+    height: 50px;
+  }
+}
 
 // Fade-in für weitere Inhalte
-.main-content,
-.login-header,
 .header-right,
-.login-footer {
+.main-content,
+.login-footer,
+.mobile-header-right {
   opacity: 0;
-  animation: fadeIn 1s ease-out forwards;
-  animation-delay: 4s;
+  animation: fadeInMain 1s ease-out forwards;
+  animation-delay: 3s;
 }
 
-// @keyframes logoMove {
-//   0% {
-//     left: 50%;
-//     top: 300px;
-//     transform: translate(-50%, -50%);
-//   }
-//   33% {
-//     left: 45%;
-//     top: 40%;
-//     transform: translate(-50%, -50%);
-//   }
-//   66% {
-//     left: 35%;
-//     top: 30%;
-//     transform: translate(-50%, -50%);
-//   }
-//   100% {
-//     left: 40px;  // entspricht dem linken Padding des Headers
-//     top: 20px; 
-//     transform: translate(0, 0);
-//   }
-// }
-
-@keyframes logoMove {
+@keyframes fadeInMain {
   from {
-    left: 300px;
-    top: 400px;
-    transform: translate(50%, 50%);
+    opacity: 0;
   }
   to {
-    left: 45px;
-    top: 45px;
+    opacity: 1;
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 
 
   .main-content {
@@ -102,7 +108,7 @@
     border: 1px solid #ccc;           // Grauer Rahmen
     border-radius: 16px;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);  // Grauer Schatten (1px stark)
-    margin: 0 auto;                   // Zentriert horizontal
+    margin: 0 auto;
     padding: 20px;                    // Innenabstand, damit der Inhalt nicht direkt am Rand klebt
   
     h1 {
@@ -119,6 +125,7 @@
       transform: scale(0);
       transform-origin: center;
       animation: expandUnderline 2s ease-out forwards;
+      animation-delay: 4s;
     }
   
     .input-group {
@@ -144,7 +151,7 @@
       }
   
       img {
-        width: 24px;                  // Feste Breite für das Symbol
+        width: 24px; 
         height: auto;
       }
     }
@@ -205,7 +212,7 @@
   }
 
   .login-footer {
-    margin-top: 40px;
+    margin-top: 40px 40px;
     display: flex;
     justify-content: center;
     gap: 24px;
