@@ -1,23 +1,65 @@
 section {
     display: flex;
-    padding: 76px;
+    padding: 50px 0 0 50px;
     width: fit-content;
     height: auto;
+
+    @media (max-width: 650px) {
+        padding: 0;
+        width: 100%;
+    }
+
+    @media (max-width: 475px) {
+        position: absolute;
+        left: -20px;
+    }
+
+    @media (max-width: 400px) {
+        height: 50vh;
+        left: -40px;
+    }
 }
 
 h1 {
-    font-size: 61px;
-    font-weight: 700;
+    font-size: 58px;
 }
 
 .header-container {
     display: flex;
-    width: fit-content;
-    gap: 30px;
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
 
-    .next-to-header {
+    .separator {
+        width: 3px;
+        height: 59px;
+        background-color: #29abe2;
+    }
+
+    .subtitle {
         font-size: 27px;
-        font-weight: 400;
+        color: rgba(42, 54, 70, 1);
+
+        @media(max-width: 380px) {
+            font-size: 21px;
+        }
+    }
+
+    @media (max-width: 1350px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        width: fit-content;
+
+        .subtitle {
+            order: 1;
+        }
+
+        .separator {
+            width: 90px;
+            height: 3px;
+            order: 2;
+        }
     }
 }
 
@@ -27,6 +69,27 @@ h1 {
     width: fit-content;
     height: auto;
     gap: 40px;
+
+    @media (max-width: 1000px) {
+        width: 80%;
+        gap: 20px;
+    }
+
+    @media (max-width: 650px) {
+        transform: scale(0.8);
+    }
+
+    @media (max-width: 520px) {
+        transform: scale(0.7);
+    }
+
+    @media (max-width: 450px) {
+        transform: scale(0.6);
+    }
+
+    @media (max-width: 380px) {
+        transform: scale(0.5);
+    }
 }
 
 .top-container {
@@ -187,5 +250,28 @@ h1 {
         font-size: 64px;
         font-weight: 700;
         color: rgba(41, 171, 226, 1);
+    }
+
+    @media(max-width: 1350px) {
+        position: absolute;
+        top: -4px;
+        left: 590px;
+
+        .timezone {
+            font-size: 40px;
+        }
+
+        .user-name {
+            font-size: 35px;
+        }
+    }
+
+    @media(max-width: 1000px) {
+        left: 360px;
+        width: fit-content;
+    }
+
+    @media(max-width: 700px) {
+        display: none;
     }
 }
