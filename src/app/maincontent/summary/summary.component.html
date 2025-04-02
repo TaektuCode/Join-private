@@ -6,8 +6,8 @@
         </div>
 
         <div class="top-container">
-            <div class="top-container-main">
-                <div class="todo-done-svg">
+            <div class="top-container-main" [routerLink]="['/board']" routerLinkActive="router-link-active">
+                <div class="todo-done-svg1">
                     <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="35.3945" cy="34.8083" r="34.5" fill="#2A3647" />
                         <mask id="mask0_62_578" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="19" y="18"
@@ -22,12 +22,12 @@
                     </svg>
                 </div>
                 <div class="counter-container">
-                    <div class="counter">0</div>
+                    <div class="counter">{{ todoTasksCount }}</div>
                     <div class="counter-description">To-do</div>
                 </div>
             </div>
 
-            <div class="top-container-main">
+            <div class="top-container-main" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="todo-done-svg">
                     <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="34.8945" cy="34.8083" r="34.5" fill="#2A3647" />
@@ -36,13 +36,13 @@
                     </svg>
                 </div>
                 <div class="counter-container">
-                    <div class="counter">0</div>
+                    <div class="counter">{{ doneTasksCount }}</div>
                     <div class="counter-description">Done</div>
                 </div>
             </div>
         </div>
 
-        <div class="urgent-deadline-container">
+        <div class="urgent-deadline-container" [routerLink]="['/board']" routerLinkActive="router-link-active">
             <div class="urgent-container">
                 <svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="30.1445" cy="30.8083" r="30" fill="#FF3D00" />
@@ -61,7 +61,7 @@
                     </defs>
                 </svg>
                 <div class="urgent-countdown">
-                    <div class="counter">0</div>
+                    <div class="counter">{{ urgentTasksCount }}</div>
                     <div class="counter-description">Urgent</div>
                 </div>
             </div>
@@ -71,29 +71,29 @@
             </svg>
 
             <div class="deadline-container">
-                <div class="deadline-date">14.03.2025</div>
-                <div class="deadline-date-description">Upcomimg Deadline</div>
+                <div class="deadline-date">{{ upcomingDeadline }}</div>
+                <div class="deadline-date-description">Upcoming Deadline</div>
             </div>
         </div>
 
         <div class="bottom-task-container">
-            <div class="tasks">
+            <div class="tasks" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="tasks-countdown">
-                    <div class="counter">0</div>
+                    <div class="counter">{{ totalTasksCount }}</div>
                     <div class="counter-description">Tasks in<br />Board</div>
                 </div>
             </div>
 
-            <div class="tasks">
+            <div class="tasks" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="task-countdown">
-                    <div class="counter">0</div>
+                    <div class="counter">{{ inProgressTasksCount }}</div>
                     <div class="counter-description">Tasks in<br />Progress</div>
                 </div>
             </div>
 
-            <div class="tasks">
+            <div class="tasks" [routerLink]="['/board']" routerLinkActive="router-link-active">
                 <div class="tasks-countdown">
-                    <div class="counter">0</div>
+                    <div class="counter">{{ awaitFeedbackTasksCount }}</div>
                     <div class="counter-description">Awaiting<br />Feedback</div>
                 </div>
             </div>
