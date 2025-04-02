@@ -51,6 +51,9 @@
         font-weight: 700;
       }
     }
+    .hidden {
+      display: none;
+    }
   }
 
   .policy-links-wrapper {
@@ -78,6 +81,10 @@
       &:hover {
         color: #29abe2;
         transform: scale(1.05);
+      }
+
+      &.active {
+        background-color: rgb(9, 25, 49);
       }
     }
   }
