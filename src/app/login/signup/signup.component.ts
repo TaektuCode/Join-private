@@ -7,11 +7,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  Auth,
-} from '@angular/fire/auth';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -25,7 +21,7 @@ export class SignupComponent implements OnInit {
   errorMessage: string = '';
   private location = inject(Location);
   private fb = inject(FormBuilder);
-  private auth: Auth = inject(Auth);
+  private authService = inject(AuthService); // Injiziere den AuthService
 
   constructor() {
     this.signupForm = this.fb.group(
@@ -60,23 +56,23 @@ export class SignupComponent implements OnInit {
   onSubmit(): void {
     if (this.signupForm.valid) {
       const { email, password } = this.signupForm.value;
-      createUserWithEmailAndPassword(this.auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          console.log('Registrierung erfolgreich', user);
-          this.errorMessage = '';
-          // Optional: Weiterleitung des Benutzers
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.error(
-            'Registrierung fehlgeschlagen',
-            errorCode,
-            errorMessage
-          );
-          this.errorMessage = errorMessage;
-        });
+      this.authService.signup({ email, password }).subscribe({
+        next: (response) => {
+          if (response.user) {
+            console.log('Registrierung erfolgreich', response.user);
+            this.errorMessage = '';
+            // Optional: Weiterleitung des Benutzers
+          } else if (response.error) {
+            console.error('Registrierung fehlgeschlagen', response.error);
+            this.errorMessage = response.error.message;
+          }
+        },
+        error: (err) => {
+          console.error('Unerwarteter Fehler bei der Registrierung', err);
+          this.errorMessage =
+            'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.';
+        },
+      });
     } else {
       this.errorMessage = 'Bitte fülle alle Felder korrekt aus.';
     }
