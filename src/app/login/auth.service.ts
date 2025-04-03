@@ -50,5 +50,32 @@ export class AuthService {
     );
   }
 
-  // ... (login, logout, isLoggedIn, getCurrentUser Methoden wie zuvor)
+  login(email: string, password: string): Observable<AuthResponse> {
+    return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
+      map((userCredential) => ({ user: userCredential.user })),
+      catchError((error) => of({ error }))
+    );
+  }
+
+  logout(): Observable<void> {
+    return from(signOut(this.auth)).pipe(
+      tap(() => {
+        this._user.next(null);
+        this._isAuthenticated.next(false);
+        this.router.navigate(['/login']); // Optional: Weiterleitung nach dem Ausloggen
+      }),
+      catchError((error) => {
+        console.error('Logout fehlgeschlagen', error);
+        return of(undefined); // Gib ein Observable<void> zurück, auch im Fehlerfall
+      })
+    );
+  }
+
+  isLoggedIn(): Observable<boolean> {
+    return this.isAuthenticated$;
+  }
+
+  getCurrentUser(): Observable<User | null> {
+    return this.user$;
+  }
 }

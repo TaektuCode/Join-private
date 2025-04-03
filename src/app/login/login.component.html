@@ -1,6 +1,10 @@
-<div class="login-site" >
+<div
+  class="login-site"
+  [formGroup]="loginForm"
+  (ngSubmit)="loginWithEmailAndPassword()"
+>
   <div class="login-header">
-    <img class="imglogo" src="./assets/img/login/logo.svg" alt="Logo">
+    <img class="imglogo" src="./assets/img/login/logo.svg" alt="Logo" />
     <div class="header-right">
       <span>Not a Join User?</span>
       <button routerLink="/signup">Sign up</button>
@@ -10,33 +14,62 @@
     <h1>Log in</h1>
     <div class="underline"></div>
     <div class="input-group">
-      <input type="text" placeholder="Email">
-      <img src="./assets/img/login/mail.svg" alt="Mail Icon">
+      <input type="email" placeholder="Email" formControlName="email" />
+      <img src="./assets/img/login/mail.svg" alt="Mail Icon" />
+      @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty ||
+      loginForm.get('email')?.touched)) {
+      <div class="error-message">
+        @if (loginForm.get('email')?.errors?.['required']) {
+        <div>Email is required.</div>
+        } @if (loginForm.get('email')?.errors?.['email']) {
+        <div>Please enter a valid email address.</div>
+        }
+      </div>
+      }
     </div>
-  
+
     <div class="input-group">
-      <input type="password" placeholder="Password">
-      <img src="./assets/img/login/lock.svg" alt="Lock Icon">
+      <input
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <img src="./assets/img/login/lock.svg" alt="Lock Icon" />
+      @if (loginForm.get('password')?.invalid &&
+      (loginForm.get('password')?.dirty || loginForm.get('password')?.touched))
+      {
+      <div class="error-message">Password is required.</div>
+      }
     </div>
-  
+
     <div class="remember-me">
-      <input type="checkbox" id="remember">
+      <input type="checkbox" id="remember" formControlName="remember" />
       <label for="remember">Remember Me</label>
     </div>
-  
+
     <div class="button-group">
-      <button class="login-btn">Log in</button>
-      <button class="guest-btn">Guest Log in</button>
+      <button
+        type="submit"
+        class="login-btn"
+        [disabled]="loginForm.invalid"
+        (click)="loginWithEmailAndPassword()"
+      >
+        Log in
+      </button>
+      <button type="button" class="guest-btn" (click)="guestLogin()">
+        Guest Log in
+      </button>
     </div>
+    @if (errorMessage) {
+    <div class="error-message">{{ errorMessage }}</div>
+    }
   </div>
   <div class="mobile-header-right">
     <span>Not a Join User?</span>
-    <button>Sign up</button>
+    <button routerLink="/signup">Sign up</button>
   </div>
   <div class="login-footer">
     <a routerLink="/policy">Privacy Policy</a>
     <a routerLink="/imprint">Legal notice</a>
   </div>
 </div>
-  
-  
