@@ -14,7 +14,7 @@ export class FooterComponent {
 
 // import { Component, OnInit } from '@angular/core';
 // import { RouterModule, Router, NavigationEnd } from '@angular/router';
-// import { AuthService } from '../auth.service'; // Passe den Pfad zu deinem AuthService an
+// import { AuthService } from '../auth.service'; // Pfad zu AuthService eingeben
 
 // @Component({
 //   selector: 'app-footer',
