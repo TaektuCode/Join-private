@@ -1,6 +1,3 @@
-// body {
-//   align-items: center !important;
-// }
 .login-site {
   display: flex;
   flex-direction: column;
@@ -269,6 +266,12 @@
   .mobile-header-right {
     display: flex;
   }
+  .login-site.animation-phase {
+    background-color: #2A3647;
+
+    .imglogo {
+      content: url('/assets/img/login/logoMobileAnimation.svg');
+    }
 }
 
 
@@ -287,4 +290,9 @@
     margin: 0 auto;
     padding: 20px;
   }
+
+  .login-footer{
+    margin: 8px 0;
+  }
+}
 }
