@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
   errorMessage: string = '';
   private location = inject(Location);
   private fb = inject(FormBuilder);
-  private auth: Auth = inject(getAuth);
+  private auth: Auth = inject(Auth);
 
   constructor() {
     this.signupForm = this.fb.group(
