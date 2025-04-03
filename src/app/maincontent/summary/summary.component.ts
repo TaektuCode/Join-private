@@ -24,7 +24,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   upcomingDeadline: string = '';
   taskSubscription: Subscription | undefined;
   private authService = inject(AuthService);
-  userName: string | null | undefined = '4 Coders'; // Initialwert
+  userName: string | null | undefined = 'Gast'; // Standardwert gesetzt
   userSubscription: Subscription | undefined;
 
   constructor(private firebaseService: FirebaseService) {
@@ -34,29 +34,25 @@ export class SummaryComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.taskSubscription = this.firebaseService.taskList$.subscribe(
       (tasks) => {
-        this.todoTasksCount = tasks.filter(
-          (task) => task.status === 'Todo'
-        ).length;
-        this.doneTasksCount = tasks.filter(
-          (task) => task.status === 'Done'
-        ).length;
+        this.todoTasksCount = tasks.filter((task) => task.status === 'Todo').length;
+        this.doneTasksCount = tasks.filter((task) => task.status === 'Done').length;
         this.totalTasksCount = tasks.length;
-        this.inProgressTasksCount = tasks.filter(
-          (task) => task.status === 'In Progress'
-        ).length;
-        this.awaitFeedbackTasksCount = tasks.filter(
-          (task) => task.status === 'Await Feedback'
-        ).length;
-        this.urgentTasksCount = tasks.filter(
-          (task) => task.priority === 'urgent'
-        ).length;
+        this.inProgressTasksCount = tasks.filter((task) => task.status === 'In Progress').length;
+        this.awaitFeedbackTasksCount = tasks.filter((task) => task.status === 'Await Feedback').length;
+        this.urgentTasksCount = tasks.filter((task) => task.priority === 'urgent').length;
         this.upcomingDeadline = this.getUpcomingDeadline(tasks);
       }
     );
 
     this.userSubscription = this.authService.user$.subscribe((user) => {
-      this.userName = user?.displayName || 'Gast'; // Verwende 'Gast', falls kein Anzeigename vorhanden ist
-      console.log('Benutzername in Summary:', this.userName);
+      if (user && user.displayName) {
+        const spaceIndex = user.displayName.indexOf(' ');
+        if (spaceIndex !== -1) {
+          this.userName = user.displayName.substring(0, spaceIndex);
+        } else {
+          this.userName = user.displayName;
+        }
+      }
     });
   }
 
@@ -77,10 +73,10 @@ export class SummaryComponent implements OnInit, OnDestroy {
       hours >= 6 && hours < 11
         ? 'Good Morning'
         : hours >= 11 && hours < 15
-        ? 'Good Afternoon'
-        : hours >= 15 && hours < 22
-        ? 'Good Evening'
-        : 'Good Night';
+          ? 'Good Afternoon'
+          : hours >= 15 && hours < 22
+            ? 'Good Evening'
+            : 'Good Night';
   }
 
   getUpcomingDeadline(tasks: TaskInterface[]): string {
@@ -88,17 +84,13 @@ export class SummaryComponent implements OnInit, OnDestroy {
       return 'No Deadline';
     }
 
-    const urgentTasks = tasks.filter(
-      (task) => task.priority === 'urgent' && task.date
-    );
+    const urgentTasks = tasks.filter((task) => task.priority === 'urgent' && task.date);
 
     if (urgentTasks.length === 0) {
       return 'No Urgent Deadline';
     }
 
-    urgentTasks.sort(
-      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-    );
+    urgentTasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     const dateString = urgentTasks[0].date;
     const dateParts = dateString.split('-');
