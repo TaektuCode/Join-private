@@ -12,7 +12,7 @@ export class FooterComponent {
 
 }
 
-// import { Component, OnInit } from '@angular/core';
+// import { Component, signal, effect } from '@angular/core';
 // import { RouterModule, Router, NavigationEnd } from '@angular/router';
 // import { AuthService } from '../auth.service'; // Pfad zu AuthService eingeben
 
@@ -23,23 +23,26 @@ export class FooterComponent {
 //   templateUrl: './footer.component.html',
 //   styleUrl: './footer.component.scss'
 // })
-// export class FooterComponent implements OnInit {
-//   isUserLoggedIn: boolean = false;
-//   isLoginPage: boolean = false;
+// export class FooterComponent {
+//   isUserLoggedIn = signal(false);
+//   isLoginPage = signal(false);
 
-//   constructor(private authService: AuthService, private router: Router) { }
-
-//   ngOnInit() {
-//     this.isUserLoggedIn = this.authService.isLoggedIn();
+//   constructor(private authService: AuthService, private router: Router) {
+//     this.isUserLoggedIn.set(this.authService.isLoggedIn());
 
 //     this.router.events.subscribe(event => {
 //       if (event instanceof NavigationEnd) {
-//         this.isLoginPage = event.url === '/logIn';
+//         this.isLoginPage.set(event.url === '/logIn');
 //       }
 //     });
 
 //     this.authService.loginStatusChanged.subscribe((loggedIn: boolean) => {
-//       this.isUserLoggedIn = loggedIn;
+//       this.isUserLoggedIn.set(loggedIn);
+//     });
+
+//     // Automatische Reaktion auf Änderungen
+//     effect(() => {
+//       console.log('Login-Status geändert:', this.isUserLoggedIn());
 //     });
 //   }
 // }
