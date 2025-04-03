@@ -1,16 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { Subscription } from 'rxjs';
 import { TaskInterface } from '../addtask/task.interface';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../login/auth.service';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './summary.component.html',
-  styleUrl: './summary.component.scss'
+  styleUrl: './summary.component.scss',
 })
 export class SummaryComponent implements OnInit, OnDestroy {
   message: string = '';
@@ -22,26 +23,49 @@ export class SummaryComponent implements OnInit, OnDestroy {
   urgentTasksCount: number = 0;
   upcomingDeadline: string = '';
   taskSubscription: Subscription | undefined;
+  private authService = inject(AuthService);
+  userName: string | null | undefined = '4 Coders'; // Initialwert
+  userSubscription: Subscription | undefined;
 
   constructor(private firebaseService: FirebaseService) {
     this.checkTime();
   }
 
   ngOnInit(): void {
-    this.taskSubscription = this.firebaseService.taskList$.subscribe(tasks => {
-      this.todoTasksCount = tasks.filter(task => task.status === 'Todo').length;
-      this.doneTasksCount = tasks.filter(task => task.status === 'Done').length;
-      this.totalTasksCount = tasks.length;
-      this.inProgressTasksCount = tasks.filter(task => task.status === 'In Progress').length;
-      this.awaitFeedbackTasksCount = tasks.filter(task => task.status === 'Await Feedback').length;
-      this.urgentTasksCount = tasks.filter(task => task.priority === 'urgent').length;
-      this.upcomingDeadline = this.getUpcomingDeadline(tasks);
+    this.taskSubscription = this.firebaseService.taskList$.subscribe(
+      (tasks) => {
+        this.todoTasksCount = tasks.filter(
+          (task) => task.status === 'Todo'
+        ).length;
+        this.doneTasksCount = tasks.filter(
+          (task) => task.status === 'Done'
+        ).length;
+        this.totalTasksCount = tasks.length;
+        this.inProgressTasksCount = tasks.filter(
+          (task) => task.status === 'In Progress'
+        ).length;
+        this.awaitFeedbackTasksCount = tasks.filter(
+          (task) => task.status === 'Await Feedback'
+        ).length;
+        this.urgentTasksCount = tasks.filter(
+          (task) => task.priority === 'urgent'
+        ).length;
+        this.upcomingDeadline = this.getUpcomingDeadline(tasks);
+      }
+    );
+
+    this.userSubscription = this.authService.user$.subscribe((user) => {
+      this.userName = user?.displayName || 'Gast'; // Verwende 'Gast', falls kein Anzeigename vorhanden ist
+      console.log('Benutzername in Summary:', this.userName);
     });
   }
 
   ngOnDestroy(): void {
     if (this.taskSubscription) {
       this.taskSubscription.unsubscribe();
+    }
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
     }
   }
 
@@ -50,10 +74,13 @@ export class SummaryComponent implements OnInit, OnDestroy {
     const hours = date.getHours();
 
     this.message =
-      hours >= 6 && hours < 11 ? 'Good Morning' :
-        hours >= 11 && hours < 15 ? 'Good Afternoon' :
-          hours >= 15 && hours < 22 ? 'Good Evening' :
-            'Good Night';
+      hours >= 6 && hours < 11
+        ? 'Good Morning'
+        : hours >= 11 && hours < 15
+        ? 'Good Afternoon'
+        : hours >= 15 && hours < 22
+        ? 'Good Evening'
+        : 'Good Night';
   }
 
   getUpcomingDeadline(tasks: TaskInterface[]): string {
@@ -61,13 +88,17 @@ export class SummaryComponent implements OnInit, OnDestroy {
       return 'No Deadline';
     }
 
-    const urgentTasks = tasks.filter(task => task.priority === 'urgent' && task.date);
+    const urgentTasks = tasks.filter(
+      (task) => task.priority === 'urgent' && task.date
+    );
 
     if (urgentTasks.length === 0) {
       return 'No Urgent Deadline';
     }
 
-    urgentTasks.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    urgentTasks.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    );
 
     const dateString = urgentTasks[0].date;
     const dateParts = dateString.split('-');

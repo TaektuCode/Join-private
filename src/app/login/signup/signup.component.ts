@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Location } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -22,6 +22,7 @@ export class SignupComponent implements OnInit {
   private location = inject(Location);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService); // Injiziere den AuthService
+  private router = inject(Router);
 
   constructor() {
     this.signupForm = this.fb.group(
@@ -55,13 +56,14 @@ export class SignupComponent implements OnInit {
 
   onSubmit(): void {
     if (this.signupForm.valid) {
-      const { email, password } = this.signupForm.value;
-      this.authService.signup({ email, password }).subscribe({
+      const { name, email, password } = this.signupForm.value; // Hole den 'name'-Wert aus dem Formular
+      this.authService.signup({ name, email, password }).subscribe({
+        // Übergib das gesamte Objekt an die signup-Methode
         next: (response) => {
           if (response.user) {
             console.log('Registrierung erfolgreich', response.user);
             this.errorMessage = '';
-            // Optional: Weiterleitung des Benutzers
+            this.router.navigate(['/summary']); // Stelle sicher, dass du den Router injected hast
           } else if (response.error) {
             console.error('Registrierung fehlgeschlagen', response.error);
             this.errorMessage = response.error.message;

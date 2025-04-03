@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, from, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { User } from '@angular/fire/auth';
+import { User, updateProfile } from '@angular/fire/auth';
 
 import {
   Auth,
@@ -45,7 +45,20 @@ export class AuthService {
         userData.password
       )
     ).pipe(
-      map((userCredential) => ({ user: userCredential.user })),
+      map((userCredential) => userCredential.user),
+      tap((user) => {
+        if (user && userData.name) {
+          updateProfile(user, { displayName: userData.name })
+            .then(() => console.log('Anzeigename aktualisiert'))
+            .catch((error) =>
+              console.error(
+                'Fehler beim Aktualisieren des Anzeigenamens',
+                error
+              )
+            );
+        }
+      }),
+      map((user) => ({ user })),
       catchError((error) => of({ error }))
     );
   }
