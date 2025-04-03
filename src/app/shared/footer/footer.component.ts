@@ -12,9 +12,9 @@ export class FooterComponent {
 
 }
 
-// import { Component, signal, effect } from '@angular/core';
+// import { Component, inject, effect } from '@angular/core';
 // import { RouterModule, Router, NavigationEnd } from '@angular/router';
-// import { AuthService } from '../auth.service'; // Pfad zu AuthService eingeben
+// import { AuthService } from '../../login/auth.service'; // Pfad zu AuthService eingeben
 
 // @Component({
 //   selector: 'app-footer',
@@ -24,15 +24,15 @@ export class FooterComponent {
 //   styleUrl: './footer.component.scss'
 // })
 // export class FooterComponent {
-//   isUserLoggedIn = signal(false);
-//   isLoginPage = signal(false);
+//   isUserLoggedIn = inject(false);
+//   isLoginPage = inject(false);
 
 //   constructor(private authService: AuthService, private router: Router) {
 //     this.isUserLoggedIn.set(this.authService.isLoggedIn());
 
 //     this.router.events.subscribe(event => {
 //       if (event instanceof NavigationEnd) {
-//         this.isLoginPage.set(event.url === '/logIn');
+//         this.isLoginPage.set(event.url === '/login');
 //       }
 //     });
 
