@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MenuoverlayComponent } from '../../menuoverlay/menuoverlay.component';
-import { AuthService } from '../../login/auth.service';
+import { AuthService } from '../../login/auth.service'; // Importiere AuthService
+import { Subscription } from 'rxjs'; // Importiere Subscription
 import { User } from '@angular/fire/auth'; // User-Interface nutzen 
 // Test mit Vor und Nachnamen machen
+
 
 @Component({
   selector: 'app-header',
@@ -12,14 +14,19 @@ import { User } from '@angular/fire/auth'; // User-Interface nutzen
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+
+export class HeaderComponent implements OnInit, OnDestroy {
   overlayVisible = false;
+  isLoggedIn = false;
   userInitials = '';
+  private isLoggedInSubscription: Subscription | undefined;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {} // Injiziere AuthService
 
-  ngOnInit(): void {
-    // user$ ist ein Observable -> wir abonnieren es
+  ngOnInit() {
+    this.isLoggedInSubscription = this.authService.isLoggedIn().subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn; // Aktualisiere isLoggedIn
+    });
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
         // Prüfen, ob user da ist und displayName gesetzt ist
@@ -32,6 +39,11 @@ export class HeaderComponent implements OnInit {
       },
     });
   }
+
+  ngOnDestroy() {
+    if (this.isLoggedInSubscription) {
+      this.isLoggedInSubscription.unsubscribe(); // Melde Abonnement ab
+   }
 
   getUserInitials(fullName: string): string {
     const [first, second] = fullName.trim().split(' ');
