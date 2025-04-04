@@ -1,64 +1,38 @@
-<div class="signup-header">
-  <img
-    src="./assets/img/contacts/back-arrow.svg"
-    alt="back-arrow"
-    (click)="backPage()"
-  />
-  <div class="header-right">
-    <span>Already a Join User?</span>
-    <button routerLink="/login">Log in</button>
-  </div>
-</div>
+<div class="signup-header"></div>
 
 <form class="main-content" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-  <div class="mobile-header">
-    <img
-      src="./assets/img/contacts/back-arrow.svg"
-      alt="back-arrow"
-      class="mobile-back-arrow"
-      (click)="backPage()"
-    />
-    <h1>Sign up</h1>
-    <div class="spacer"></div>
-  </div>
-  <div class="desktop-header">
-    <h1>Sign up</h1>
-  </div>
-  <div class="underline"></div>
-
   <div class="input-group">
     <input type="text" placeholder="Name" formControlName="name" />
     <img src="./assets/img/contacts/person.svg" alt="Person Icon" />
-    @if (signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty ||
-    signupForm.get('name')?.touched)) {
-    <div class="error-message">Name is required.</div>
-    }
   </div>
+  @if (signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty ||
+  signupForm.get('name')?.touched)) {
+  <div class="error-message">Name is required.</div>
+  }
 
   <div class="input-group">
     <input type="email" placeholder="Email" formControlName="email" />
     <img src="./assets/img/login/mail.svg" alt="Mail Icon" />
-    @if (signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty ||
-    signupForm.get('email')?.touched)) {
-    <div class="error-message">
-      @if (signupForm.get('email')?.errors?.['required']) {
-      <div>Email is required.</div>
-      } @if (signupForm.get('email')?.errors?.['email']) {
-      <div>Please enter a valid email address.</div>
-      }
-    </div>
+  </div>
+  @if (signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty ||
+  signupForm.get('email')?.touched)) {
+  <div class="error-message">
+    @if (signupForm.get('email')?.errors?.['required']) {
+    <div>Email is required.</div>
+    } @if (signupForm.get('email')?.errors?.['email']) {
+    <div>Please enter a valid email address.</div>
     }
   </div>
+  }
 
   <div class="input-group">
     <input type="password" placeholder="Password" formControlName="password" />
     <img src="./assets/img/login/lock.svg" alt="Lock Icon" />
-    @if (signupForm.get('password')?.invalid &&
-    (signupForm.get('password')?.dirty || signupForm.get('password')?.touched))
-    {
-    <div class="error-message">Password is required.</div>
-    }
   </div>
+  @if (signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty
+  || signupForm.get('password')?.touched)) {
+  <div class="error-message">Password is required.</div>
+  }
 
   <div class="input-group">
     <input
@@ -67,42 +41,33 @@
       formControlName="confirmPassword"
     />
     <img src="./assets/img/login/lock.svg" alt="Lock Icon" />
-    @if (signupForm.get('confirmPassword')?.invalid &&
-    (signupForm.get('confirmPassword')?.dirty ||
-    signupForm.get('confirmPassword')?.touched)) {
-    <div class="error-message">
-      @if (signupForm.get('confirmPassword')?.errors?.['required']) {
-      <div>Confirm Password is required.</div>
-      } @if (signupForm.get('confirmPassword')?.errors?.['notSame']) {
-      <div>Passwords do not match.</div>
-      }
-    </div>
+  </div>
+  @if (signupForm.get('confirmPassword')?.invalid &&
+  (signupForm.get('confirmPassword')?.dirty ||
+  signupForm.get('confirmPassword')?.touched)) {
+  <div class="error-message">
+    @if (signupForm.get('confirmPassword')?.errors?.['required']) {
+    <div>Confirm Password is required.</div>
+    } @if (signupForm.get('confirmPassword')?.errors?.['notSame']) {
+    <div>Passwords do not match.</div>
     }
   </div>
+  }
 
   <div class="remember-me">
     <input type="checkbox" id="accept" formControlName="accept" />
-    <label for="accept">
-      I accept the <a routerLink="/policy">Privacy Policy</a>
-    </label>
-    @if (signupForm.get('accept')?.invalid && (signupForm.get('accept')?.dirty
-    || signupForm.get('accept')?.touched)) {
-    <div class="error-message">You must accept the Privacy Policy.</div>
-    }
+    <label for="accept"
+      >I accept the <a routerLink="/policy">Privacy Policy</a></label
+    >
   </div>
+  @if (signupForm.get('accept')?.invalid && (signupForm.get('accept')?.dirty ||
+  signupForm.get('accept')?.touched)) {
+  <div class="error-message-checkbox">You must accept the Privacy Policy.</div>
+  }
 
   <div class="button-group">
-    <button type="submit" class="login-btn" [disabled]="signupForm.invalid">
-      Sign up
-    </button>
+    <button type="submit" class="login-btn">Sign up</button>
   </div>
-
-  @if (errorMessage) {
-  <div class="error-message">{{ errorMessage }}</div>
-  }
 </form>
 
-<div class="signup-footer">
-  <a routerLink="/policy">Privacy Policy</a>
-  <a routerLink="/imprint">Legal notice</a>
-</div>
+<div class="signup-footer"></div>

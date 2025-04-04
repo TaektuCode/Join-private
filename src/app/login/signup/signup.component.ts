@@ -55,28 +55,24 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.signupForm.markAllAsTouched(); // Alle Steuerelemente als "touched" markieren
+
+    // Validierungsfehler manuell aktualisieren
+    Object.keys(this.signupForm.controls).forEach((key) => {
+      this.signupForm.controls[key].updateValueAndValidity();
+    });
+
     if (this.signupForm.valid) {
-      const { name, email, password } = this.signupForm.value; // Hole den 'name'-Wert aus dem Formular
+      const { name, email, password } = this.signupForm.value;
       this.authService.signup({ name, email, password }).subscribe({
-        // Übergib das gesamte Objekt an die signup-Methode
         next: (response) => {
           if (response.user) {
             console.log('Registrierung erfolgreich', response.user);
             this.errorMessage = '';
-            this.router.navigate(['/summary']); // Stelle sicher, dass du den Router injected hast
-          } else if (response.error) {
-            console.error('Registrierung fehlgeschlagen', response.error);
-            this.errorMessage = response.error.message;
+            this.router.navigate(['/summary']);
           }
         },
-        error: (err) => {
-          console.error('Unerwarteter Fehler bei der Registrierung', err);
-          this.errorMessage =
-            'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.';
-        },
       });
-    } else {
-      this.errorMessage = 'Bitte fülle alle Felder korrekt aus.';
     }
   }
 }
