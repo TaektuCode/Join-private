@@ -9,8 +9,8 @@
         <img src="./assets/img/header/help.svg" alt="Help sign">
       </a>
       <div class="circle" (click)="toggleOverlay($event)">
-        <span>G</span>
-      </div>
+        <span>{{ userInitials }}</span>
+      </div>      
     </div>
   </div>
   <app-menuoverlay [visible]="overlayVisible" (closed)="overlayVisible = false"></app-menuoverlay>
