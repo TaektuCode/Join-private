@@ -10,16 +10,21 @@ import { HelpComponent } from './help/help.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './login/signup/signup.component';
 import { authGuard } from './auth-functional.guard/auth-functional.guard.component';
+import { alreadyLoggedInGuard } from './auth-functional.guard/already-logged-in.guard.';
 
 export const routes: Routes = [
-    { path: '', component: MaincontentComponent },
-    { path: 'policy', component: PolicyComponent },
-    { path: 'imprint', component: ImprintComponent },
-    { path: 'summary', component: SummaryComponent, canActivate: [authGuard] }, // Geschützte Route
-    { path: 'addtask', component: AddtaskComponent, canActivate: [authGuard] }, // Geschützte Route
-    { path: 'board', component: BoardComponent, canActivate: [authGuard] }, // Geschützte Route
-    { path: 'contacts', component: ContactsComponent, canActivate: [authGuard] }, // Geschützte Route
-    { path: 'help', component: HelpComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'signup', component: SignupComponent }
+  { path: '', component: MaincontentComponent },
+  { path: 'policy', component: PolicyComponent },
+  { path: 'imprint', component: ImprintComponent },
+  { path: 'summary', component: SummaryComponent, canActivate: [authGuard] }, // Geschützte Route
+  { path: 'addtask', component: AddtaskComponent, canActivate: [authGuard] }, // Geschützte Route
+  { path: 'board', component: BoardComponent, canActivate: [authGuard] }, // Geschützte Route
+  { path: 'contacts', component: ContactsComponent, canActivate: [authGuard] }, // Geschützte Route
+  { path: 'help', component: HelpComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [alreadyLoggedInGuard],
+  },
+  { path: 'signup', component: SignupComponent },
 ];
