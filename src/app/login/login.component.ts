@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Auth, getAuth, signInAnonymously } from '@angular/fire/auth';
+import { LoginStatusService } from './../login/login-status.service';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,13 @@ import { Auth, getAuth, signInAnonymously } from '@angular/fire/auth';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
+
 export class LoginComponent implements AfterViewInit {
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
   private auth: Auth = inject(Auth);
   private router = inject(Router);
+  private loginStatusService = inject(LoginStatusService);
 
   loginForm: FormGroup;
   errorMessage: string = '';
@@ -51,6 +54,7 @@ export class LoginComponent implements AfterViewInit {
           if (response.user) {
             console.log('Login successful', response.user);
             this.errorMessage = '';
+            this.loginStatusService.setLoginStatus(true);
             this.router.navigate(['/summary']);
           } else if (response.error) {
             this.errorMessage =
@@ -67,6 +71,7 @@ export class LoginComponent implements AfterViewInit {
         const user = userCredential.user;
         console.log('Gast-Login erfolgreich', user);
         this.errorMessage = '';
+        this.loginStatusService.setLoginStatus(true);
         this.router.navigate(['/summary']);
       })
       .catch((error) => {

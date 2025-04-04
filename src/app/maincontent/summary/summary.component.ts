@@ -5,6 +5,7 @@ import { TaskInterface } from '../addtask/task.interface';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../login/auth.service';
+import { LoginStatusService } from './../../login/login-status.service';
 
 @Component({
   selector: 'app-summary',
@@ -13,6 +14,7 @@ import { AuthService } from '../../login/auth.service';
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',
 })
+
 export class SummaryComponent implements OnInit, OnDestroy {
   message: string = '';
   todoTasksCount: number = 0;
@@ -24,25 +26,25 @@ export class SummaryComponent implements OnInit, OnDestroy {
   upcomingDeadline: string = '';
   taskSubscription: Subscription | undefined;
   private authService = inject(AuthService);
-  userName: string | null | undefined = 'Gast'; // Standardwert gesetzt
+  userName: string | null | undefined = 'Gast';
   userSubscription: Subscription | undefined;
+  animationPlayed: boolean = false;
+  private loginStatusService = inject(LoginStatusService);
 
   constructor(private firebaseService: FirebaseService) {
     this.checkTime();
   }
 
   ngOnInit(): void {
-    this.taskSubscription = this.firebaseService.taskList$.subscribe(
-      (tasks) => {
-        this.todoTasksCount = tasks.filter((task) => task.status === 'Todo').length;
-        this.doneTasksCount = tasks.filter((task) => task.status === 'Done').length;
-        this.totalTasksCount = tasks.length;
-        this.inProgressTasksCount = tasks.filter((task) => task.status === 'In Progress').length;
-        this.awaitFeedbackTasksCount = tasks.filter((task) => task.status === 'Await Feedback').length;
-        this.urgentTasksCount = tasks.filter((task) => task.priority === 'urgent').length;
-        this.upcomingDeadline = this.getUpcomingDeadline(tasks);
-      }
-    );
+    this.taskSubscription = this.firebaseService.taskList$.subscribe((tasks) => {
+      this.todoTasksCount = tasks.filter((task) => task.status === 'Todo').length;
+      this.doneTasksCount = tasks.filter((task) => task.status === 'Done').length;
+      this.totalTasksCount = tasks.length;
+      this.inProgressTasksCount = tasks.filter((task) => task.status === 'In Progress').length;
+      this.awaitFeedbackTasksCount = tasks.filter((task) => task.status === 'Await Feedback').length;
+      this.urgentTasksCount = tasks.filter((task) => task.priority === 'urgent').length;
+      this.upcomingDeadline = this.getUpcomingDeadline(tasks);
+    });
 
     this.userSubscription = this.authService.user$.subscribe((user) => {
       if (user && user.displayName) {
@@ -51,6 +53,21 @@ export class SummaryComponent implements OnInit, OnDestroy {
           this.userName = user.displayName.substring(0, spaceIndex);
         } else {
           this.userName = user.displayName;
+        }
+      }
+    });
+
+    this.loginStatusService.loginStatus$.subscribe((loggedIn) => {
+      if (loggedIn && !this.animationPlayed) {
+        this.animationPlayed = true;
+        const mainContainer = document.querySelector('.main-container');
+        const helloContainer = document.querySelector('.hello-container');
+
+        if (mainContainer) {
+          mainContainer.classList.add('animate-once');
+        }
+        if (helloContainer) {
+          helloContainer.classList.add('animate-once');
         }
       }
     });
@@ -63,6 +80,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
+    this.loginStatusService.resetLoginStatus();
   }
 
   checkTime(): void {
