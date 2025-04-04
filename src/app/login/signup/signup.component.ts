@@ -19,7 +19,7 @@ import { AuthService } from '../auth.service';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMessage: string = '';
-  showSuccessMessage: boolean = false; // Variable für den Erfolgsdialog
+  showSuccessMessage: boolean = false;
   private location = inject(Location);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
@@ -30,7 +30,7 @@ export class SignupComponent implements OnInit {
       {
         name: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(6)]], // Korrigierte Reihenfolge
         confirmPassword: ['', Validators.required],
         accept: [false, Validators.requiredTrue],
       },
@@ -69,11 +69,11 @@ export class SignupComponent implements OnInit {
           if (response.user) {
             console.log('Registrierung erfolgreich', response.user);
             this.errorMessage = '';
-            this.showSuccessMessage = true; // Erfolgsdialog anzeigen
-            // setTimeout(() => {
-            //   this.showSuccessMessage = false; // Dialog nach 3 Sekunden ausblenden
-            //   this.router.navigate(['/summary']);
-            // }, 3000); // 3 Sekunden Timeout
+            this.showSuccessMessage = true;
+            setTimeout(() => {
+              this.showSuccessMessage = false;
+              this.router.navigate(['/summary']);
+            }, 3000);
           } else if (response.error) {
             console.error('Registrierung fehlgeschlagen', response.error);
             this.errorMessage = response.error.message;
@@ -85,8 +85,6 @@ export class SignupComponent implements OnInit {
             'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.';
         },
       });
-    } else {
-      this.errorMessage = 'Bitte fülle alle Felder korrekt aus.';
     }
   }
 }
