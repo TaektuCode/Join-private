@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MenuoverlayComponent } from '../../menuoverlay/menuoverlay.component';
 import { AuthService } from '../../login/auth.service';
-// achtung wild 
+import { User } from '@angular/fire/auth'; // Falls du das User-Interface nutzen willst
 
 @Component({
   selector: 'app-header',
@@ -18,10 +18,18 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    const user = this.authService.getCurrentUser(); // Beispielhafter Aufruf
-    if (user && user.name) {
-      this.userInitials = this.getUserInitials(user.name);
-    }
+    // user$ ist ein Observable -> wir abonnieren es
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        // Prüfen, ob user da ist und displayName gesetzt ist
+        if (user && user.displayName) {
+          this.userInitials = this.getUserInitials(user.displayName);
+        }
+      },
+      error: (err) => {
+        console.error('Fehler beim Abrufen des Users:', err);
+      },
+    });
   }
 
   getUserInitials(fullName: string): string {
@@ -38,6 +46,3 @@ export class HeaderComponent implements OnInit {
     this.overlayVisible = !this.overlayVisible;
   }
 }
-
-
-
