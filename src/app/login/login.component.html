@@ -16,16 +16,6 @@
     <div class="input-group">
       <input type="email" placeholder="Email" formControlName="email" />
       <img src="./assets/img/login/mail.svg" alt="Mail Icon" />
-      @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty ||
-      loginForm.get('email')?.touched)) {
-      <div class="error-message">
-        @if (loginForm.get('email')?.errors?.['required']) {
-        <div>Email is required.</div>
-        } @if (loginForm.get('email')?.errors?.['email']) {
-        <div>Please enter a valid email address.</div>
-        }
-      </div>
-      }
     </div>
 
     <div class="input-group">
@@ -35,11 +25,6 @@
         formControlName="password"
       />
       <img src="./assets/img/login/lock.svg" alt="Lock Icon" />
-      @if (loginForm.get('password')?.invalid &&
-      (loginForm.get('password')?.dirty || loginForm.get('password')?.touched))
-      {
-      <div class="error-message">Password is required.</div>
-      }
     </div>
 
     <div class="remember-me">
@@ -51,7 +36,6 @@
       <button
         type="submit"
         class="login-btn"
-        [disabled]="loginForm.invalid"
         (click)="loginWithEmailAndPassword()"
       >
         Log in

@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Auth, getAuth, signInAnonymously } from '@angular/fire/auth';
+import { LoginStatusService } from './../login/login-status.service';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,13 @@ import { Auth, getAuth, signInAnonymously } from '@angular/fire/auth';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
+
 export class LoginComponent implements AfterViewInit {
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
   private auth: Auth = inject(Auth);
   private router = inject(Router);
+  private loginStatusService = inject(LoginStatusService);
 
   loginForm: FormGroup;
   errorMessage: string = '';
@@ -47,23 +50,18 @@ export class LoginComponent implements AfterViewInit {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
         next: (response) => {
+          console.log('Server response:', response);
           if (response.user) {
-            console.log('Login erfolgreich', response.user);
+            console.log('Login successful', response.user);
             this.errorMessage = '';
-            this.router.navigate(['/summary']); // Beispielhafte Weiterleitung nach dem Login
+            this.loginStatusService.setLoginStatus(true);
+            this.router.navigate(['/summary']);
           } else if (response.error) {
-            console.error('Login fehlgeschlagen', response.error);
-            this.errorMessage = response.error.message;
+            this.errorMessage =
+              'Invalid login credentials. Please check your email and password.';
           }
         },
-        error: (err) => {
-          console.error('Unerwarteter Fehler beim Login', err);
-          this.errorMessage =
-            'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.';
-        },
       });
-    } else {
-      this.errorMessage = 'Bitte fülle alle Felder korrekt aus.';
     }
   }
 
@@ -73,7 +71,8 @@ export class LoginComponent implements AfterViewInit {
         const user = userCredential.user;
         console.log('Gast-Login erfolgreich', user);
         this.errorMessage = '';
-        this.router.navigate(['/summary']); // Beispielhafte Weiterleitung nach dem Gast-Login
+        this.loginStatusService.setLoginStatus(true);
+        this.router.navigate(['/summary']);
       })
       .catch((error) => {
         const errorCode = error.code;
