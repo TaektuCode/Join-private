@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { AuthService } from './auth.service';
-import { Auth, getAuth, signInAnonymously } from '@angular/fire/auth';
+import { Auth, signInAnonymously } from '@angular/fire/auth';
 import { LoginStatusService } from './../login/login-status.service';
 
 @Component({
@@ -17,7 +17,6 @@ import { LoginStatusService } from './../login/login-status.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-
 export class LoginComponent implements AfterViewInit {
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
