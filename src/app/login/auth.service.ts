@@ -1,6 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, from, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  from,
+  of,
+  filter,
+  switchMap,
+  take,
+} from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { User, updateProfile } from '@angular/fire/auth';
 
@@ -29,11 +37,16 @@ export class AuthService {
   user$ = this._user.asObservable();
   private _isAuthenticated = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this._isAuthenticated.asObservable();
+  private _initialAuthLoaded = new BehaviorSubject<boolean>(false);
+  initialAuthLoaded$ = this._initialAuthLoaded
+    .asObservable()
+    .pipe(filter((loaded) => loaded)); // Nur true-Werte durchlassen
 
   constructor() {
     onAuthStateChanged(this.auth, (user) => {
       this._user.next(user);
       this._isAuthenticated.next(!!user);
+      this._initialAuthLoaded.next(true); // Initialisierung abgeschlossen
     });
   }
 
@@ -85,7 +98,10 @@ export class AuthService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    return this.isAuthenticated$;
+    return this.initialAuthLoaded$.pipe(
+      take(1), // Stelle sicher, dass wir nur einmal warten
+      switchMap(() => this.isAuthenticated$)
+    );
   }
 
   getCurrentUser(): Observable<User | null> {
