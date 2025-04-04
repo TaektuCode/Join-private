@@ -1,6 +1,20 @@
 <div class="signup-header"></div>
 
 <form class="main-content" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div class="mobile-header">
+    <img
+      src="./assets/img/contacts/back-arrow.svg"
+      alt="back-arrow"
+      class="mobile-back-arrow"
+      (click)="backPage()"
+    />
+    <h1>Sign up</h1>
+    <div class="spacer"></div>
+  </div>
+  <div class="desktop-header">
+    <h1>Sign up</h1>
+  </div>
+  <div class="underline"></div>
   <div class="input-group">
     <input type="text" placeholder="Name" formControlName="name" />
     <img src="./assets/img/contacts/person.svg" alt="Person Icon" />
