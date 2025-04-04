@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MenuoverlayComponent } from '../../menuoverlay/menuoverlay.component';
 import { AuthService } from '../../login/auth.service';
+// achtung wild 
 
 @Component({
   selector: 'app-header',
