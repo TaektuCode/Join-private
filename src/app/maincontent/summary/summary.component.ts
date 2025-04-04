@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, inject, ElementRef } from '@angular/core';
 import { FirebaseService } from '../../shared/services/firebase.service';
 import { Subscription } from 'rxjs';
 import { TaskInterface } from '../addtask/task.interface';
@@ -14,8 +14,7 @@ import { LoginStatusService } from './../../login/login-status.service';
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',
 })
-
-export class SummaryComponent implements OnInit, OnDestroy {
+export class SummaryComponent implements OnInit, OnDestroy, AfterViewInit {
   message: string = '';
   todoTasksCount: number = 0;
   doneTasksCount: number = 0;
@@ -30,6 +29,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   userSubscription: Subscription | undefined;
   animationPlayed: boolean = false;
   private loginStatusService = inject(LoginStatusService);
+  private el = inject(ElementRef); // Inject ElementRef
 
   constructor(private firebaseService: FirebaseService) {
     this.checkTime();
@@ -56,12 +56,14 @@ export class SummaryComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
 
+  ngAfterViewInit(): void {
     this.loginStatusService.loginStatus$.subscribe((loggedIn) => {
       if (loggedIn && !this.animationPlayed) {
         this.animationPlayed = true;
-        const mainContainer = document.querySelector('.main-container');
-        const helloContainer = document.querySelector('.hello-container');
+        const mainContainer = this.el.nativeElement.querySelector('.main-container');
+        const helloContainer = this.el.nativeElement.querySelector('.hello-container');
 
         if (mainContainer) {
           mainContainer.classList.add('animate-once');
