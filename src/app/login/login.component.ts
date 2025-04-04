@@ -47,23 +47,17 @@ export class LoginComponent implements AfterViewInit {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
         next: (response) => {
+          console.log('Server response:', response);
           if (response.user) {
-            console.log('Login erfolgreich', response.user);
+            console.log('Login successful', response.user);
             this.errorMessage = '';
-            this.router.navigate(['/summary']); // Beispielhafte Weiterleitung nach dem Login
+            this.router.navigate(['/summary']);
           } else if (response.error) {
-            console.error('Login fehlgeschlagen', response.error);
-            this.errorMessage = response.error.message;
+            this.errorMessage =
+              'Invalid login credentials. Please check your email and password.';
           }
         },
-        error: (err) => {
-          console.error('Unerwarteter Fehler beim Login', err);
-          this.errorMessage =
-            'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.';
-        },
       });
-    } else {
-      this.errorMessage = 'Bitte fülle alle Felder korrekt aus.';
     }
   }
 
@@ -73,7 +67,7 @@ export class LoginComponent implements AfterViewInit {
         const user = userCredential.user;
         console.log('Gast-Login erfolgreich', user);
         this.errorMessage = '';
-        this.router.navigate(['/summary']); // Beispielhafte Weiterleitung nach dem Gast-Login
+        this.router.navigate(['/summary']);
       })
       .catch((error) => {
         const errorCode = error.code;
