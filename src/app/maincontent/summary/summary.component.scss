@@ -40,7 +40,7 @@ h1 {
         font-size: 27px;
         color: rgba(42, 54, 70, 1);
 
-        @media(max-width: 380px) {
+        @media (max-width: 380px) {
             font-size: 21px;
         }
     }
@@ -85,15 +85,17 @@ h1 {
     }
 }
 
-@media (max-width: 699px) {
-    .main-container {
-        opacity: 0;
-        /* Ausblenden bei < 700px */
-        animation: fadeIn 1s ease-out forwards;
-        animation-delay: 3s;
-        /* Nach 3 Sekunden starten */
-    }
+.main-container.animate-once {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    animation-delay: 3s;
 }
+
+// @media (max-width: 699px) {
+//     .main-container {
+//        
+//     }
+// }
 
 @media (max-width: 1000px) {
     .main-container {
@@ -122,7 +124,7 @@ h1 {
 
 @media (max-width: 380px) {
     .main-container {
-        transform: scale(0.5);
+        transform: scale(0.52);
     }
 }
 
@@ -286,7 +288,7 @@ h1 {
         color: rgba(41, 171, 226, 1);
     }
 
-    @media(max-width: 1350px) {
+    @media (max-width: 1350px) {
         position: absolute;
         top: -4px;
         left: 590px;
@@ -300,14 +302,25 @@ h1 {
         }
     }
 
-    @media(max-width: 1000px) {
+    @media (max-width: 1000px) {
         left: 360px;
         width: fit-content;
     }
 
-    @media(max-width: 700px) {
+    @media (max-width: 700px) {
         display: none;
+    }
 
+    @media (max-width: 600px) {
+        .timezone {
+            font-size: 26px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .timezone {
+            font-size: 22px;
+        }
     }
 }
 
@@ -320,28 +333,7 @@ h1 {
         height: auto;
         width: auto;
         z-index: 1000;
-        animation: helloContainer 3s ease-out forwards;
         display: flex;
-
-        @media (max-width: 600px) {
-            .timezone {
-                font-size: 26px;
-            }
-
-            .user-name {
-                font-size: 22px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .timezone {
-                font-size: 22px;
-            }
-
-            .user-name {
-                font-size: 18px;
-            }
-        }
     }
 }
 
@@ -355,10 +347,16 @@ h1 {
     }
 }
 
+.hello-container.animate-once {
+    animation: helloContainer 3s ease-out forwards;
+    display: flex;
+    animation-fill-mode: forwards;
+    animation-name: fadeOut;
+}
+
 @media (max-width: 699px) {
     .hello-container {
-        animation-fill-mode: forwards;
-        animation-name: fadeOut;
+        display: none;
     }
 }
 
