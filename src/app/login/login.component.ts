@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from './auth.service';
 import { Auth, getAuth, signInAnonymously } from '@angular/fire/auth';
+import { LoginStatusService } from './../login/login-status.service';
 
 @Component({
   selector: 'app-login',
@@ -16,11 +17,13 @@ import { Auth, getAuth, signInAnonymously } from '@angular/fire/auth';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
+
 export class LoginComponent implements AfterViewInit {
   private authService = inject(AuthService);
   private fb = inject(FormBuilder);
   private auth: Auth = inject(Auth);
   private router = inject(Router);
+  private loginStatusService = inject(LoginStatusService);
 
   loginForm: FormGroup;
   errorMessage: string = '';
@@ -50,7 +53,8 @@ export class LoginComponent implements AfterViewInit {
           if (response.user) {
             console.log('Login erfolgreich', response.user);
             this.errorMessage = '';
-            this.router.navigate(['/summary']); // Beispielhafte Weiterleitung nach dem Login
+            this.loginStatusService.setLoginStatus(true);
+            this.router.navigate(['/summary']);
           } else if (response.error) {
             console.error('Login fehlgeschlagen', response.error);
             this.errorMessage = response.error.message;
@@ -73,7 +77,8 @@ export class LoginComponent implements AfterViewInit {
         const user = userCredential.user;
         console.log('Gast-Login erfolgreich', user);
         this.errorMessage = '';
-        this.router.navigate(['/summary']); // Beispielhafte Weiterleitung nach dem Gast-Login
+        this.loginStatusService.setLoginStatus(true);
+        this.router.navigate(['/summary']);
       })
       .catch((error) => {
         const errorCode = error.code;
