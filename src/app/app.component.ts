@@ -22,6 +22,7 @@ import { filter } from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'join';
   showFooter = true;
+  showHeader = true;
 
   constructor(private router: Router) {}
 
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.showFooter = event.url !== '/login';
+        this.showHeader = event.url !== '/login';
       });
   }
 }
