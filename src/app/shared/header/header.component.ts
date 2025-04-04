@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MenuoverlayComponent } from '../../menuoverlay/menuoverlay.component';
 import { AuthService } from '../../login/auth.service';
-import { User } from '@angular/fire/auth'; // Falls du das User-Interface nutzen willst
+import { User } from '@angular/fire/auth'; // User-Interface nutzen 
+// Test mit Vor und Nachnamen machen
 
 @Component({
   selector: 'app-header',
