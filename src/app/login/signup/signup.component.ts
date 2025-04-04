@@ -19,9 +19,10 @@ import { AuthService } from '../auth.service';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMessage: string = '';
+  showSuccessMessage: boolean = false; // Variable für den Erfolgsdialog
   private location = inject(Location);
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService); // Injiziere den AuthService
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   constructor() {
@@ -55,9 +56,8 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.signupForm.markAllAsTouched(); // Alle Steuerelemente als "touched" markieren
+    this.signupForm.markAllAsTouched();
 
-    // Validierungsfehler manuell aktualisieren
     Object.keys(this.signupForm.controls).forEach((key) => {
       this.signupForm.controls[key].updateValueAndValidity();
     });
@@ -69,10 +69,24 @@ export class SignupComponent implements OnInit {
           if (response.user) {
             console.log('Registrierung erfolgreich', response.user);
             this.errorMessage = '';
-            this.router.navigate(['/summary']);
+            this.showSuccessMessage = true; // Erfolgsdialog anzeigen
+            // setTimeout(() => {
+            //   this.showSuccessMessage = false; // Dialog nach 3 Sekunden ausblenden
+            //   this.router.navigate(['/summary']);
+            // }, 3000); // 3 Sekunden Timeout
+          } else if (response.error) {
+            console.error('Registrierung fehlgeschlagen', response.error);
+            this.errorMessage = response.error.message;
           }
         },
+        error: (err) => {
+          console.error('Unerwarteter Fehler bei der Registrierung', err);
+          this.errorMessage =
+            'Ein unerwarteter Fehler ist aufgetreten. Bitte versuche es später erneut.';
+        },
       });
+    } else {
+      this.errorMessage = 'Bitte fülle alle Felder korrekt aus.';
     }
   }
 }
