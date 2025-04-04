@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { ContactsComponent } from "./contacts/contacts.component";
+import { SummaryComponent } from './summary/summary.component';
 
 @Component({
   selector: 'app-maincontent',
   standalone: true,
-  imports: [ContactsComponent],
+  imports: [SummaryComponent],
   templateUrl: './maincontent.component.html',
-  styleUrl: './maincontent.component.scss'
+  styleUrl: './maincontent.component.scss',
 })
-export class MaincontentComponent {
-
-}
+export class MaincontentComponent {}

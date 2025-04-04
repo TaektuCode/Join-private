@@ -13,7 +13,11 @@ import { authGuard } from './auth-functional.guard/auth-functional.guard.compone
 import { alreadyLoggedInGuard } from './auth-functional.guard/already-logged-in.guard.';
 
 export const routes: Routes = [
-  { path: '', component: MaincontentComponent },
+  {
+    path: '',
+    component: MaincontentComponent,
+    canActivate: [authGuard],
+  },
   { path: 'policy', component: PolicyComponent },
   { path: 'imprint', component: ImprintComponent },
   { path: 'summary', component: SummaryComponent, canActivate: [authGuard] }, // Geschützte Route
