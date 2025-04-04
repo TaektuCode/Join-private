@@ -1,48 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../login/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
   imports: [RouterModule],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrl: './footer.component.scss',
 })
-export class FooterComponent {
+export class FooterComponent implements OnInit, OnDestroy {
+  isLoggedIn = false; // Standardmäßig nicht eingeloggt
+  private isLoggedInSubscription: Subscription | undefined; // Subscription Variable
 
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.isLoggedInSubscription = this.authService.isLoggedIn().subscribe(loggedIn => {
+      this.isLoggedIn = loggedIn; // Observable wert zuweisen
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.isLoggedInSubscription) {
+      this.isLoggedInSubscription.unsubscribe(); // Subscription abmelden
+    }
+  }
 }
-
-// import { Component, inject, effect } from '@angular/core';
-// import { RouterModule, Router, NavigationEnd } from '@angular/router';
-// import { AuthService } from '../../login/auth.service'; // Pfad zu AuthService eingeben
-
-// @Component({
-//   selector: 'app-footer',
-//   standalone: true,
-//   imports: [RouterModule],
-//   templateUrl: './footer.component.html',
-//   styleUrl: './footer.component.scss'
-// })
-// export class FooterComponent {
-//   isUserLoggedIn = inject(false);
-//   isLoginPage = inject(false);
-
-//   constructor(private authService: AuthService, private router: Router) {
-//     this.isUserLoggedIn.set(this.authService.isLoggedIn());
-
-//     this.router.events.subscribe(event => {
-//       if (event instanceof NavigationEnd) {
-//         this.isLoginPage.set(event.url === '/login');
-//       }
-//     });
-
-//     this.authService.loginStatusChanged.subscribe((loggedIn: boolean) => {
-//       this.isUserLoggedIn.set(loggedIn);
-//     });
-
-//     // Automatische Reaktion auf Änderungen
-//     effect(() => {
-//       console.log('Login-Status geändert:', this.isUserLoggedIn());
-//     });
-//   }
-// }

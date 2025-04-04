@@ -3,8 +3,10 @@ import { Router, RouterOutlet, NavigationEnd, Event } from '@angular/router';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './login/signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,8 @@ import { filter } from 'rxjs/operators';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    FormsModule,
+    SignupComponent,
+    FormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -30,8 +33,8 @@ export class AppComponent implements OnInit {
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.showFooter = event.url !== '/login';
-        this.showHeader = event.url !== '/login';
+        this.showFooter = event.url !== '/login' && event.url !== '/signup';
+        this.showHeader = event.url !== '/login' && event.url !== '/signup';
       });
   }
 }

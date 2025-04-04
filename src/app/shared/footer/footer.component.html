@@ -1,27 +1,33 @@
 <footer class="sidebar">
   <a>
     <img class="join-logo" src="./assets/img/menu/logo.svg" alt="Join Logo" />
-  </a> 
-  <nav class="nav-bar">
-    <a [routerLink]="['summary']" routerLinkActive="active">
-      <img src="./assets/img/menu/summary.svg" alt="Summary Icon" />Summary
-    </a>
-    <a [routerLink]="['addtask']" routerLinkActive="active">
-      <img src="./assets/img/menu/task.svg" alt="Add Task Icon" />Add Task
-    </a>
-    <a [routerLink]="['board']" routerLinkActive="active">
-      <img src="./assets/img/menu/board.svg" alt="Board Icon" />Board
-    </a>
-    <a [routerLink]="['contacts']" routerLinkActive="active">
-      <img src="./assets/img/menu/contact.svg" alt="Contacts Icon" />Contacts
-    </a>
-  </nav>
-  <nav class="nav-bar">
+  </a>
+  @if (isLoggedIn) {
+    <nav class="nav-bar-login">
+      <a [routerLink]="['summary']" routerLinkActive="active">
+        <img src="./assets/img/menu/summary.svg" alt="Summary Icon" />Summary
+      </a>
+      <a [routerLink]="['addtask']" routerLinkActive="active">
+        <img src="./assets/img/menu/task.svg" alt="Add Task Icon" />Add Task
+      </a>
+      <a [routerLink]="['board']" routerLinkActive="active">
+        <img src="./assets/img/menu/board.svg" alt="Board Icon" />Board
+      </a>
+      <a [routerLink]="['contacts']" routerLinkActive="active">
+        <img src="./assets/img/menu/contact.svg" alt="Contacts Icon" />Contacts
+      </a>
       <a [routerLink]="['login']" routerLinkActive="active">
         <img src="./assets/img/menu/logIn.svg" alt="LogIn Icon" />Log In
       </a>
-  </nav>
-
+    </nav>
+  }
+  @if (!isLoggedIn) {
+    <nav class="nav-bar">
+      <a [routerLink]="['login']" routerLinkActive="active">
+        <img src="./assets/img/menu/logIn.svg" alt="LogIn Icon" />Log In
+      </a>
+    </nav>
+  }
   <div class="policy-links-wrapper">
     <a [routerLink]="['policy']" routerLinkActive="active">Privacy Policy</a>
     <a [routerLink]="['imprint']" routerLinkActive="active">Legal Notice</a>

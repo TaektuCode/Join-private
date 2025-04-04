@@ -255,3 +255,20 @@
   bottom: 50%;
   transform: translate(-50%, 50%);
 }
+
+.login-footer {
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+
+  a {
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--accentColor2);
+    }
+  }
+}
