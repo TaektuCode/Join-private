@@ -19,9 +19,10 @@ import { AuthService } from '../auth.service';
 export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   errorMessage: string = '';
+  showSuccessMessage: boolean = false; // Variable für den Erfolgsdialog
   private location = inject(Location);
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService); // Injiziere den AuthService
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   constructor() {
@@ -55,15 +56,24 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.signupForm.markAllAsTouched();
+
+    Object.keys(this.signupForm.controls).forEach((key) => {
+      this.signupForm.controls[key].updateValueAndValidity();
+    });
+
     if (this.signupForm.valid) {
-      const { name, email, password } = this.signupForm.value; // Hole den 'name'-Wert aus dem Formular
+      const { name, email, password } = this.signupForm.value;
       this.authService.signup({ name, email, password }).subscribe({
-        // Übergib das gesamte Objekt an die signup-Methode
         next: (response) => {
           if (response.user) {
             console.log('Registrierung erfolgreich', response.user);
             this.errorMessage = '';
-            this.router.navigate(['/summary']); // Stelle sicher, dass du den Router injected hast
+            this.showSuccessMessage = true; // Erfolgsdialog anzeigen
+            // setTimeout(() => {
+            //   this.showSuccessMessage = false; // Dialog nach 3 Sekunden ausblenden
+            //   this.router.navigate(['/summary']);
+            // }, 3000); // 3 Sekunden Timeout
           } else if (response.error) {
             console.error('Registrierung fehlgeschlagen', response.error);
             this.errorMessage = response.error.message;

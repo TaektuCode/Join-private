@@ -1,225 +1,257 @@
 .signup-header {
-    height: var(--headerHeight); 
+  height: var(--headerHeight);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+
+  img {
+    height: 50px;
+  }
+
+  .header-right {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 40px;
-  
-    img {
-      height: 50px;
+
+    span {
+      color: #000000;
+      margin-right: 20px;
     }
-  
-    .header-right {
-      display: flex;
-      align-items: center;
-  
-      span {
-        color: #000000;
-        margin-right: 20px;
-      }
-  
-      button {
-        background-color: #2A3647;
-        color: #ffffff;
-        border: none;
-        border-radius: 8px;
-        padding: 10px 20px;
-        cursor: pointer;
-        text-align: center;
-        appearance: none;
-      }
+
+    button {
+      background-color: #2a3647;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      cursor: pointer;
+      text-align: center;
+      appearance: none;
     }
   }
-  
-  .main-content {
-    width: 600px;
-    /* Höhe auf auto, damit alle Felder Platz haben */
-    height: auto;
-    background-color: #ffffff;
-    border: 1px solid #ccc;           // Grauer Rahmen
-    border-radius: 16px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);  // Grauer Schatten (1px stark)
-    margin: 0 auto;                   // Zentriert horizontal
-    padding: 20px;                    // Innenabstand
-  
+}
+
+.main-content {
+  width: 600px;
+  /* Höhe auf auto, damit alle Felder Platz haben */
+  height: auto;
+  background-color: #ffffff;
+  border: 1px solid #ccc; // Grauer Rahmen
+  border-radius: 16px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3); // Grauer Schatten (1px stark)
+  margin: 0 auto; // Zentriert horizontal
+  padding: 20px; // Innenabstand
+
+  h1 {
+    margin-top: 40px;
+    text-align: center;
+    color: #000000;
+  }
+  .mobile-header {
+    display: none;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .mobile-back-arrow {
+      cursor: pointer;
+      height: 30px; // nach Bedarf anpassen
+      margin-right: 10px;
+    }
+
     h1 {
-      margin-top: 40px;
-      text-align: center;
+      margin: 0;
+      font-size: 24px; // ggf. anpassen
       color: #000000;
     }
-    .mobile-header {
-      display: none;
-      align-items: center;
-      margin-bottom: 20px;
-      
-      .mobile-back-arrow {
-        cursor: pointer;
-        height: 30px; // nach Bedarf anpassen
-        margin-right: 10px;
-      }
-      
-      h1 {
-        margin: 0;
-        font-size: 24px;  // ggf. anpassen
-        color: #000000;
-      }
-    }
-    .underline {
-      width: 25%;
-      height: 2px;
-      background-color: var(--accentColor2);
-      margin: 10px auto 20px auto;
-      transform-origin: center; // startpinkt animation
-      animation: growFromCenter 3s forwards; // dauer Animation 3 Sekunden
-    }
-  
-    .input-group {
-      width: 80%;
-      margin: 10px auto;
-      display: flex;
-      align-items: center;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 8px 12px;
-  
-      input {
-        flex: 1;
-        border: none;
-        outline: none;
-        font-size: 14px;
-        color: gray;
-        background-color: transparent;
-        
-        &::placeholder {
-          color: gray;
-        }
-      }
-  
-      img {
-        width: 24px; 
-        height: auto;
-      }
-    }
-  
-    .remember-me {
-      width: 80%;
-      margin: 10px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  }
+  .underline {
+    width: 25%;
+    height: 2px;
+    background-color: var(--accentColor2);
+    margin: 10px auto 20px auto;
+    transform-origin: center; // startpinkt animation
+    animation: growFromCenter 3s forwards; // dauer Animation 3 Sekunden
+  }
+
+  .input-group {
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
       font-size: 14px;
       color: gray;
-  
-      input[type="checkbox"] {
-        margin-right: 8px;
-      }
-  
-      label a {
-        color: var(--accentColor2);
-        text-decoration: none;
-        cursor: pointer;
-  
-        &:hover {
-          text-decoration: underline;
-          text-decoration-color: var(--accentColor2);
-        }
+      background-color: transparent;
+
+      &::placeholder {
+        color: gray;
       }
     }
-  
-    .button-group {
-      width: 80%;
-      margin: 20px auto;
-      display: flex;
-      justify-content: center;
-  
-      button {
-        font-weight: bold;
-        padding: 10px 20px;
-        border-radius: 8px;
-        cursor: pointer;
-        text-align: center;
-        appearance: none;
-      }
-  
-      .login-btn {
-        background-color: #2A3647;
-        color: #ffffff;
-        border: none;
-  
-        &:hover {
-          background-color: var(--accentColor2);
-          box-shadow: 4px 4px 4px lightgray;
-        }
-      }
+
+    img {
+      width: 24px;
+      height: auto;
     }
   }
-  
-  .signup-footer {
-    margin-top: 40px;
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-left: 70px;
+  }
+
+  .error-message-checkbox {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+    margin: 5px auto;
+  }
+
+  .remember-me {
+    width: 80%;
+    margin: 10px auto;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 24px;
-  
-    a {
-      color: gray;
+    font-size: 14px;
+    color: gray;
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    label a {
+      color: var(--accentColor2);
       text-decoration: none;
       cursor: pointer;
-  
+
       &:hover {
-        color: var(--accentColor2);
+        text-decoration: underline;
+        text-decoration-color: var(--accentColor2);
       }
-    }
-  }
-  
-  @keyframes growFromCenter {
-    0% {
-      transform: scaleX(0);
-    }
-    100% {
-      transform: scaleX(1);
     }
   }
 
-  @media (max-width: 1000px) {
-    .signup-header {
-      display: none; // Original Header ausblenden
-    }
-  
-    .main-content {
-      width: 100%;
-      padding: 20px 10px;
+  .button-group {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
 
-      .underline {
-        width: 5%;
-      }
-  
-      // Mobiler Header einblenden und Desktop-Header ausblenden
-      .mobile-header {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        width: 80%;
-        margin: 0 auto 20px;
-  
-        .mobile-back-arrow {
-          height: 30px;
-          cursor: pointer;
-        }
-  
-        h1 {
-          margin: 0;
-          text-align: center;
-          font-size: 24px;
-          color: #000;
-        }
-  
-        .spacer {
-          width: 30px; // Gleiche Breite wie der Arrow, damit das h1 exakt zentriert wird
-        }
-      }
-  
-      .desktop-header {
-        display: none;
+    button {
+      font-weight: bold;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      appearance: none;
+    }
+
+    .login-btn {
+      background-color: #2a3647;
+      color: #ffffff;
+      border: none;
+
+      &:hover {
+        background-color: var(--accentColor2);
+        box-shadow: 4px 4px 4px lightgray;
       }
     }
   }
+}
+
+.signup-footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+
+  a {
+    color: gray;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--accentColor2);
+    }
+  }
+}
+
+@keyframes growFromCenter {
+  0% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 1000px) {
+  .signup-header {
+    display: none; // Original Header ausblenden
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 20px 10px;
+
+    .underline {
+      width: 5%;
+    }
+
+    // Mobiler Header einblenden und Desktop-Header ausblenden
+    .mobile-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      width: 80%;
+      margin: 0 auto 20px;
+
+      .mobile-back-arrow {
+        height: 30px;
+        cursor: pointer;
+      }
+
+      h1 {
+        margin: 0;
+        text-align: center;
+        font-size: 24px;
+        color: #000;
+      }
+
+      .spacer {
+        width: 30px; // Gleiche Breite wie der Arrow, damit das h1 exakt zentriert wird
+      }
+    }
+
+    .desktop-header {
+      display: none;
+    }
+  }
+}
+
+.success-dialog {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: bottom 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+.success-dialog.show {
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+}
