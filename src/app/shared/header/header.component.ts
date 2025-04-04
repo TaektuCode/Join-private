@@ -16,7 +16,7 @@ import { User } from '@angular/fire/auth'; // User-Interface nutzen
 export class HeaderComponent implements OnInit, OnDestroy {
   overlayVisible = false;
   isLoggedIn = false;
-  userInitials = '';
+  userInitials = 'G';
   private isLoggedInSubscription: Subscription | undefined;
 
   constructor(private authService: AuthService) {} // Injiziere AuthService

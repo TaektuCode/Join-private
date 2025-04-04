@@ -98,18 +98,13 @@
   <div class="button-group">
     <button type="submit" class="login-btn">Sign up</button>
   </div>
+  <div class="signup-footer">
+    <a routerLink="/policy">Privacy Policy</a>
+    <a routerLink="/imprint">Legal notice</a>
+  </div>
 </form>
-<div class="signup-footer">
-  <a routerLink="/policy">Privacy Policy</a>
-  <a routerLink="/imprint">Legal notice</a>
-</div>
 
 @if (showSuccessMessage) {
 <div class="overlay"></div>
 <div class="success-dialog show">You signed up successfully!</div>
 }
-
-<div class="login-footer">
-  <a routerLink="/policy">Privacy Policy</a>
-  <a routerLink="/imprint">Legal notice</a>
-</div>

@@ -3,10 +3,10 @@
   @if (showHeader) {
   <app-header></app-header>
   }
-  <div class="main-router">
+  <div class="main-router" [class.no-margins]="!showMargins">
     <router-outlet></router-outlet>
   </div>
   @if (showFooter) {
-    <app-footer></app-footer>
+  <app-footer></app-footer>
   }
 </body>

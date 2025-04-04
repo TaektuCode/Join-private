@@ -1,15 +1,19 @@
 body {
-    height: 100dvh;
+  height: 100dvh;
 }
 
 .main-router {
-    margin-left: 232px;
-    margin-top: 96px;
-    max-width: calc(1920px - 232px);
+  margin-left: 232px;
+  margin-top: 96px;
+  max-width: calc(1920px - 232px);
+
+  &.no-margins {
+    margin: 0;
+  }
 }
 
 @media (max-width: 1000px) {
-    .main-router {
-        margin-left: 0;
-    }
+  .main-router {
+    margin-left: 0;
+  }
 }

@@ -7,7 +7,6 @@ import { SignupComponent } from './login/signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { filter } from 'rxjs/operators';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,7 +16,7 @@ import { filter } from 'rxjs/operators';
     FooterComponent,
     LoginComponent,
     SignupComponent,
-    FormsModule
+    FormsModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -26,15 +25,26 @@ export class AppComponent implements OnInit {
   title = 'join';
   showFooter = true;
   showHeader = true;
+  showMargins = true;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events
-      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
+      .pipe(
+        filter(
+          (event): event is NavigationEnd => event instanceof NavigationEnd
+        )
+      )
       .subscribe((event: NavigationEnd) => {
         this.showFooter = event.url !== '/login' && event.url !== '/signup';
         this.showHeader = event.url !== '/login' && event.url !== '/signup';
+        this.showMargins = event.url !== '/login' && event.url !== '/signup';
+        if (!this.showMargins) {
+          document.querySelector('app-root')?.classList.add('no-margins');
+        } else {
+          document.querySelector('app-root')?.classList.remove('no-margins');
+        }
       });
   }
 }

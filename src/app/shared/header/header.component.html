@@ -2,18 +2,25 @@
   <div class="header-content">
     <div class="header-left">
       <span class="header-title">Kanban Project Management Tool</span>
-      <img class="header-logo" src="./assets/img/header/logoresp.svg" alt="Logo">
+      <img
+        class="header-logo"
+        src="./assets/img/header/logoresp.svg"
+        alt="Logo"
+      />
     </div>
-    @if (!isLoggedIn) {
+    @if (isLoggedIn) {
     <div class="header-right">
       <a [routerLink]="['/help']" routerLinkActive="active">
-        <img src="./assets/img/header/help.svg" alt="Help sign">
+        <img src="./assets/img/header/help.svg" alt="Help sign" />
       </a>
       <div class="circle" (click)="toggleOverlay($event)">
         <span>{{ userInitials }}</span>
-      </div>      
+      </div>
     </div>
     }
   </div>
-  <app-menuoverlay [visible]="overlayVisible" (closed)="overlayVisible = false"></app-menuoverlay>
+  <app-menuoverlay
+    [visible]="overlayVisible"
+    (closed)="overlayVisible = false"
+  ></app-menuoverlay>
 </header>
