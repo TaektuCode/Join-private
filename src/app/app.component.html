@@ -1,8 +1,12 @@
 <body>
   <!-- <app-login></app-login> -->
+  @if (showHeader) {
   <app-header></app-header>
+  }
   <div class="main-router">
     <router-outlet></router-outlet>
   </div>
-  <app-footer></app-footer>
+  @if (showFooter) {
+    <app-footer></app-footer>
+  }
 </body>
