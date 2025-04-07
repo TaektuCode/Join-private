@@ -8,6 +8,8 @@
 
   @media (max-width: 1000px) {
     flex: 1;
+    height: 85vh;
+    overflow: auto;
   }
 
   @media (max-width: 420px) {

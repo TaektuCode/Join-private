@@ -19,7 +19,7 @@
   </nav>
   } @if (!isLoggedIn) {
   <nav class="nav-bar">
-    <a [routerLink]="['login']" routerLinkActive="active">
+    <a (click)="backPage()">
       <img src="./assets/img/menu/logIn.svg" alt="LogIn Icon" />Log In
     </a>
   </nav>

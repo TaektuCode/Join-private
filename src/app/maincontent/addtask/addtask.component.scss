@@ -594,6 +594,8 @@
 @media (max-width: 1000px) {
   .and-task {
     padding-top: 25px;
+    overflow: auto;
+    height: 85vh;
   }
 
   h1 {
@@ -643,7 +645,7 @@
   .footer {
     flex-direction: column-reverse;
     text-align: center;
-    width: 100%;
+    width: 85%;
     padding: 0;
     margin-bottom: 60px;
     background-color: var(--backgroundColor);

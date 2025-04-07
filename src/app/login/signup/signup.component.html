@@ -1,113 +1,121 @@
 <div class="sign-up-container">
-<img class="imglogo" src="./assets/img/login/logo.svg" alt="Logo" />
-<div class="signup-header"> </div>
+  <img class="imglogo" src="./assets/img/login/logo.svg" alt="Logo" />
+  <div class="signup-header"> </div>
 
-<form class="main-content" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-  <div class="mobile-header">
-    <img
-      src="./assets/img/contacts/back-arrow.svg"
-      alt="back-arrow"
-      class="mobile-back-arrow"
-      (click)="backPage()"
-    />
-    <h1>Sign up</h1>
-    <div class="spacer"></div>
-  </div>
-  <div class="desktop-header">
-    <img
-      src="./assets/img/contacts/back-arrow.svg"
-      alt="back-arrow"
-      class="back-arrow"
-      (click)="backPage()"
-    />
-    <h1>Sign up</h1>
-  </div>
-  <div class="underline"></div>
-  <div class="input-group">
-    <input type="text" placeholder="Name" formControlName="name" />
-    <img src="./assets/img/contacts/person.svg" alt="Person Icon" />
-  </div>
-  @if (signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty ||
-  signupForm.get('name')?.touched)) {
-  <div class="error-message">Name is required.</div>
-  }
-
-  <div class="input-group">
-    <input type="email" placeholder="Email" formControlName="email" />
-    <img src="./assets/img/login/mail.svg" alt="Mail Icon" />
-  </div>
-  @if (signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty ||
-  signupForm.get('email')?.touched)) {
-  <div class="error-message">
-    @if (signupForm.get('email')?.errors?.['required']) {
-    <div>Email is required.</div>
-    } @if (signupForm.get('email')?.errors?.['email']) {
-    <div>Please enter a valid email address.</div>
+  <form class="main-content" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="mobile-header">
+      <img
+        src="./assets/img/contacts/back-arrow.svg"
+        alt="back-arrow"
+        class="mobile-back-arrow"
+        (click)="backPage()"
+      />
+      <h1>Sign up</h1>
+      <div class="spacer"></div>
+    </div>
+    <div class="desktop-header">
+      <img
+        src="./assets/img/contacts/back-arrow.svg"
+        alt="back-arrow"
+        class="back-arrow"
+        (click)="backPage()"
+      />
+      <h1>Sign up</h1>
+    </div>
+    <div class="underline"></div>
+    <div class="input-group">
+      <input type="text" placeholder="Name" formControlName="name" />
+      <img src="./assets/img/contacts/person.svg" alt="Person Icon" />
+    </div>
+    @if (signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty ||
+    signupForm.get('name')?.touched)) {
+      <div class="error-message">Name is required.</div>
     }
-  </div>
-  }
 
-  <div class="input-group">
-    <input
-      type="password"
-      placeholder="Password (min. 6 char..)"
-      formControlName="password"
-    />
-    <img src="./assets/img/login/lock.svg" alt="Lock Icon" />
-  </div>
-  @if (signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty
-  || signupForm.get('password')?.touched)) {
-  <div class="error-message">
-    @if (signupForm.get('password')?.errors?.['required']) {
-    <div>Password is required.</div>
-    } @if (signupForm.get('password')?.errors?.['minlength']) {
-    <div>Password must be at least 6 characters long.</div>
+    <div class="input-group">
+      <input type="email" placeholder="Email" formControlName="email" />
+      <img class="img-email" src="./assets/img/login/mail.svg" alt="Mail Icon" />
+    </div>
+    @if (signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty ||
+    signupForm.get('email')?.touched)) {
+      <div class="error-message">
+        @if (signupForm.get('email')?.errors?.['required']) {
+          <div>Email is required.</div>
+        } @if (signupForm.get('email')?.errors?.['email']) {
+          <div>Please enter a valid email address.</div>
+        }
+      </div>
     }
-  </div>
-  }
 
-  <div class="input-group">
-    <input
-      type="password"
-      placeholder="Confirm Password"
-      formControlName="confirmPassword"
-    />
-    <img src="./assets/img/login/lock.svg" alt="Lock Icon" />
-  </div>
-  @if (signupForm.get('confirmPassword')?.invalid &&
-  (signupForm.get('confirmPassword')?.dirty ||
-  signupForm.get('confirmPassword')?.touched)) {
-  <div class="error-message">
-    @if (signupForm.get('confirmPassword')?.errors?.['required']) {
-    <div>Confirm Password is required.</div>
-    } @if (signupForm.get('confirmPassword')?.errors?.['notSame']) {
-    <div>Passwords do not match.</div>
+    <div class="input-group">
+      <input
+        [type]="passwordVisible ? 'text' : 'password'"
+        placeholder="Password (min. 6 char..)"
+        formControlName="password"
+      />
+      <img
+        [src]="passwordVisible ? './assets/img/login/visibility.svg' : './assets/img/login/visibility_off.svg'"
+        alt="Passwort anzeigen/verbergen"
+        class="password-toggle-icon"
+        (click)="togglePasswordVisibility()"
+      />
+    </div>
+    @if (signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty
+    || signupForm.get('password')?.touched)) {
+      <div class="error-message">
+        @if (signupForm.get('password')?.errors?.['required']) {
+          <div>Password is required.</div>
+        } @if (signupForm.get('password')?.errors?.['minlength']) {
+          <div>Password must be at least 6 characters long.</div>
+        }
+      </div>
     }
-  </div>
+
+    <div class="input-group">
+      <input
+        [type]="confirmPasswordVisible ? 'text' : 'password'"
+        placeholder="Confirm Password"
+        formControlName="confirmPassword"
+      />
+      <img
+        [src]="confirmPasswordVisible ? './assets/img/login/visibility.svg' : './assets/img/login/visibility_off.svg'"
+        alt="Passwort bestätigen anzeigen/verbergen"
+        class="password-toggle-icon"
+        (click)="toggleConfirmPasswordVisibility()"
+      />
+    </div>
+    @if (signupForm.get('confirmPassword')?.invalid &&
+    (signupForm.get('confirmPassword')?.dirty ||
+    signupForm.get('confirmPassword')?.touched)) {
+      <div class="error-message">
+        @if (signupForm.get('confirmPassword')?.errors?.['required']) {
+          <div>Confirm Password is required.</div>
+        } @if (signupForm.get('confirmPassword')?.errors?.['notSame']) {
+          <div>Passwords do not match.</div>
+        }
+      </div>
+    }
+
+    <div class="remember-me">
+      <input type="checkbox" id="accept" formControlName="accept" />
+      <label for="accept">I accept the <a routerLink="/policy">Privacy Policy</a></label>
+    </div>
+    @if (signupForm.get('accept')?.invalid && (signupForm.get('accept')?.dirty ||
+    signupForm.get('accept')?.touched)) {
+      <div class="error-message-checkbox">You must accept the Privacy Policy.</div>
+    }
+
+    <div class="button-group">
+      <button type="submit" class="login-btn">Sign up</button>
+    </div>
+    <div class="signup-footer">
+      <a routerLink="/policy">Privacy Policy</a>
+      <a routerLink="/imprint">Legal notice</a>
+    </div>
+  </form>
+
+  @if (showSuccessMessage) {
+    <div class="overlay"></div>
+    <div class="success-dialog show">You signed up successfully!</div>
   }
-
-  <div class="remember-me">
-    <input type="checkbox" id="accept" formControlName="accept" />
-    <label for="accept"
-      >I accept the <a routerLink="/policy">Privacy Policy</a></label
-    >
-  </div>
-  @if (signupForm.get('accept')?.invalid && (signupForm.get('accept')?.dirty ||
-  signupForm.get('accept')?.touched)) {
-  <div class="error-message-checkbox">You must accept the Privacy Policy.</div>
-  }
-
-  <div class="button-group">
-    <button type="submit" class="login-btn">Sign up</button>
-  </div>
-  <div class="signup-footer">
-    <a routerLink="/policy">Privacy Policy</a>
-    <a routerLink="/imprint">Legal notice</a>
-  </div>
-</form>
-
-@if (showSuccessMessage) {
-<div class="overlay"></div>
-<div class="success-dialog show">You signed up successfully!</div>
-}
 </div>

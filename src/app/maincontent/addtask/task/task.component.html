@@ -46,7 +46,7 @@
         <span>{{ getSubtaskProgressText(task) }}</span>
       </div>
       <div class="task-assignees">
-        @if (task.assignedTo!.length <= 4) { @for (assigneeId of
+        @if (task.assignedTo!.length <= 3) { @for (assigneeId of
         task.assignedTo; track $index) { @if (contacts) { @if
         (getAssigneeDetails(assigneeId)) {
         <span
