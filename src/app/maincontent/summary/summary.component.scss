@@ -260,6 +260,7 @@ h1 {
     align-items: center;
     justify-content: center;
     width: 385px;
+    opacity: 1;
 
     .timezone {
         font-size: 47px;
@@ -321,17 +322,6 @@ h1 {
     }
 }
 
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-
-    100% {
-        opacity: 0;
-        display: none;
-    }
-}
-
 @media (max-width: 699px) {
     .hello-container {
         position: fixed;
@@ -341,11 +331,21 @@ h1 {
         height: auto;
         width: auto;
         z-index: 1000;
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                display: none;
+            }
+        }
     }
 
     .hello-container.animate-once {
         animation: fadeOut 3s ease-out forwards;
-        animation-fill-mode: forwards;
         display: flex;
     }
 
