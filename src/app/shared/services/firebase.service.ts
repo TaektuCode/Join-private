@@ -17,24 +17,39 @@ import { TaskInterface } from '../../maincontent/addtask/task.interface';
 import { Unsubscribe } from '@angular/fire/auth';
 import { Observable, BehaviorSubject, map } from 'rxjs';
 
+/**
+ * Service for interacting with Firebase Firestore, managing contacts and tasks.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class FirebaseService implements OnDestroy {
-  firebase = inject(Firestore);
-  unsubscribeTasks: Unsubscribe | undefined;
-  unsubscribeContacts: Unsubscribe | undefined;
-  private _taskList = new BehaviorSubject<TaskInterface[]>([]); // BehaviorSubject für Tasks
-  taskList$: Observable<TaskInterface[]> = this._taskList.asObservable(); // Observable für Tasks
+  private firebase = inject(Firestore);
+  private unsubscribeTasks: Unsubscribe | undefined;
+  private unsubscribeContacts: Unsubscribe | undefined;
+  private _taskList = new BehaviorSubject<TaskInterface[]>([]); // BehaviorSubject for Tasks
+  /**
+   * Observable emitting the latest array of tasks.
+   */
+  taskList$: Observable<TaskInterface[]> = this._taskList.asObservable(); // Observable for Tasks
   private _contactList = new BehaviorSubject<ContactInterface[]>([]);
+  /**
+   * Observable emitting the latest array of contacts.
+   */
   contactList: Observable<ContactInterface[]> =
     this._contactList.asObservable();
 
+  /**
+   * Initializes the FirebaseService and subscribes to contacts and tasks collections.
+   */
   constructor() {
     this.subscribeToContacts();
     this.subscribeToTasks();
   }
 
+  /**
+   * Subscribes to the 'contacts' collection in Firestore and updates the contactList BehaviorSubject.
+   */
   private subscribeToContacts() {
     this.unsubscribeContacts = onSnapshot(
       collection(this.firebase, 'contacts'),
@@ -54,6 +69,9 @@ export class FirebaseService implements OnDestroy {
     );
   }
 
+  /**
+   * Subscribes to the 'tasks' collection in Firestore and updates the taskList BehaviorSubject.
+   */
   private subscribeToTasks() {
     this.unsubscribeTasks = onSnapshot(
       collection(this.firebase, 'tasks'),
@@ -64,11 +82,17 @@ export class FirebaseService implements OnDestroy {
             this.setTaskObject(element.id, element.data() as TaskInterface)
           );
         });
-        this._taskList.next(sortedTasks); // Verwenden Sie _taskList.next()
+        this._taskList.next(sortedTasks); // Use _taskList.next()
       }
     );
   }
 
+  /**
+   * Creates a ContactInterface object with the provided ID and data.
+   * @param id The document ID.
+   * @param obj The ContactInterface data.
+   * @returns A ContactInterface object.
+   */
   setContactObject(id: string, obj: ContactInterface): ContactInterface {
     return {
       id: id,
@@ -79,6 +103,12 @@ export class FirebaseService implements OnDestroy {
     };
   }
 
+  /**
+   * Creates a TaskInterface object with the provided ID and data.
+   * @param id The document ID.
+   * @param obj The TaskInterface data.
+   * @returns A TaskInterface object.
+   */
   setTaskObject(id: string, obj: TaskInterface): TaskInterface {
     return {
       id: id,
@@ -95,6 +125,10 @@ export class FirebaseService implements OnDestroy {
     };
   }
 
+  /**
+   * Retrieves an Observable of contacts grouped by the first letter of their name.
+   * @returns An Observable emitting an array of objects, where each object contains a 'letter' and an array of 'contacts'.
+   */
   getGroupedContacts(): Observable<
     { letter: string; contacts: ContactInterface[] }[]
   > {
@@ -116,26 +150,49 @@ export class FirebaseService implements OnDestroy {
     );
   }
 
+  /**
+   * Deletes a contact from Firestore.
+   * @param contactId The ID of the contact to delete.
+   */
   async deleteContact(contactId: string) {
     const contactDocRef = doc(this.firebase, 'contacts', contactId);
     await deleteDoc(contactDocRef);
   }
 
+  /**
+   * Creates a new task in Firestore.
+   * @param task The TaskInterface object to create.
+   * @returns A Promise containing the DocumentReference of the newly created task.
+   */
   async createTask(task: TaskInterface) {
     const newTask = { ...task, status: task.status || 'Todo' };
     return await addDoc(collection(this.firebase, 'tasks'), newTask);
   }
 
+  /**
+   * Updates an existing task in Firestore.
+   * @param taskId The ID of the task to update.
+   * @param task An object containing the fields to update.
+   */
   async updateTask(taskId: string, task: Partial<TaskInterface>) {
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
     return await updateDoc(taskDocRef, task);
   }
 
+  /**
+   * Deletes a task from Firestore.
+   * @param taskId The ID of the task to delete.
+   */
   async deleteTask(taskId: string) {
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
     await deleteDoc(taskDocRef);
   }
 
+  /**
+   * Assigns multiple users to a task in Firestore.
+   * @param taskId The ID of the task to assign users to.
+   * @param userIds An array of user IDs to assign.
+   */
   async assignTaskToUsers(taskId: string, userIds: string[]) {
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
     await updateDoc(taskDocRef, {
@@ -143,6 +200,11 @@ export class FirebaseService implements OnDestroy {
     });
   }
 
+  /**
+   * Removes a specific user from the assigned users of a task in Firestore.
+   * @param taskId The ID of the task to remove the user from.
+   * @param userId The ID of the user to remove.
+   */
   async removeAssignedUserFromTask(taskId: string, userId: string) {
     const taskDocRef = doc(this.firebase, 'tasks', taskId);
     await updateDoc(taskDocRef, {
@@ -150,20 +212,35 @@ export class FirebaseService implements OnDestroy {
     });
   }
 
-  getTasksForUser(userId: string) {
+  /**
+   * Retrieves an Observable of tasks assigned to a specific user.
+   * @param userId The ID of the user to get tasks for.
+   * @returns An Observable emitting an array of TaskInterface objects assigned to the user.
+   */
+  getTasksForUser(userId: string): Observable<TaskInterface[]> {
     const q = query(
       collection(this.firebase, 'tasks'),
       where('assignedTo', 'array-contains', userId)
     );
-    return onSnapshot(q, (snapshot) => {
-      const tasks: TaskInterface[] = [];
-      snapshot.forEach((doc) => {
-        tasks.push(this.setTaskObject(doc.id, doc.data() as TaskInterface));
+    return new Observable((subscriber) => {
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const tasks: TaskInterface[] = [];
+        snapshot.forEach((doc) => {
+          tasks.push(this.setTaskObject(doc.id, doc.data() as TaskInterface));
+        });
+        subscriber.next(tasks);
+      }, (error) => {
+        subscriber.error(error);
+      }, () => {
+        subscriber.complete();
       });
-      return tasks;
+      return unsubscribe;
     });
   }
 
+  /**
+   * Unsubscribes from the Firestore listeners when the service is destroyed.
+   */
   ngOnDestroy() {
     if (this.unsubscribeContacts) {
       this.unsubscribeContacts();

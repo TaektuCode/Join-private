@@ -10,6 +10,9 @@ import { AuthService } from './auth.service';
 import { Auth, signInAnonymously } from '@angular/fire/auth';
 import { LoginStatusService } from './../login/login-status.service';
 
+/**
+ * Component for user login.
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -22,13 +25,25 @@ export class LoginComponent implements OnInit, AfterViewInit {
   private fb = inject(FormBuilder);
   private auth: Auth = inject(Auth);
   private router = inject(Router);
-  private route = inject(ActivatedRoute); // Injizieren Sie ActivatedRoute
+  private route = inject(ActivatedRoute);
   private loginStatusService = inject(LoginStatusService);
 
+  /**
+   * The form group for user login.
+   */
   loginForm: FormGroup;
+  /**
+   * Message to display for login errors.
+   */
   errorMessage: string = '';
-  returnUrl: string | null = null; // Variable für die Rücksprung-URL
+  /**
+   * The URL to navigate to after successful login.
+   */
+  returnUrl: string | null = null;
 
+  /**
+   * Initializes the LoginComponent and sets up the login form.
+   */
   constructor() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,19 +52,25 @@ export class LoginComponent implements OnInit, AfterViewInit {
     });
   }
 
+  /**
+   * Lifecycle hook called after data-bound properties have been initialized.
+   * It checks for a 'returnUrl' query parameter and handles redirection if present.
+   */
   ngOnInit(): void {
-    // Überprüfen, ob der returnUrl Parameter vorhanden ist
+    // Check if the returnUrl parameter exists
     if (this.route.snapshot.queryParams['returnUrl']) {
-      console.log('returnUrl Parameter in der URL gefunden. Weiterleitung zur normalen Login-Seite.');
-      this.router.navigate(['/login']); // Leitet zur /login-Seite ohne Query-Parameter weiter
-      return; // Beendet die weitere Initialisierung
+      this.router.navigate(['/login']); // Redirect to /login without query parameters
+      return; // Stop further initialization
     }
 
-    // Wenn kein returnUrl vorhanden ist, lies ihn aus (für den normalen Weiterleitungsfluss nach dem Login)
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/summary'; // Standardmäßig auf '/summary' setzen, falls kein returnUrl vorhanden ist
-    console.log('Return URL beim Login (falls vorhanden):', this.returnUrl);
+    // If no returnUrl is present, read it (for normal post-login redirection)
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/summary'; // Default to '/summary' if no returnUrl
   }
 
+  /**
+   * Lifecycle hook called after the component's view has been fully initialized.
+   * It adds and then removes an animation class from the login site element.
+   */
   ngAfterViewInit() {
     const loginSite = document.querySelector('.login-site');
     loginSite?.classList.add('animation-phase');
@@ -59,17 +80,18 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }, 3000);
   }
 
+  /**
+   * Logs in the user with the provided email and password.
+   */
   loginWithEmailAndPassword(): void {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
         next: (response) => {
-          console.log('Server response:', response);
           if (response.user) {
-            console.log('Login successful', response.user);
             this.errorMessage = '';
             this.loginStatusService.setLoginStatus(true);
-            this.router.navigateByUrl(this.returnUrl!); // Verwenden Sie navigateByUrl mit der gespeicherten returnUrl
+            this.router.navigateByUrl(this.returnUrl!); // Navigate using the stored returnUrl
           } else if (response.error) {
             this.errorMessage =
               'Invalid login credentials. Please check your email and password.';
@@ -79,19 +101,19 @@ export class LoginComponent implements OnInit, AfterViewInit {
     }
   }
 
+  /**
+   * Logs in the user anonymously as a guest.
+   */
   guestLogin(): void {
     signInAnonymously(this.auth)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log('Gast-Login erfolgreich', user);
         this.errorMessage = '';
         this.loginStatusService.setLoginStatus(true);
-        this.router.navigateByUrl(this.returnUrl!); // Verwenden Sie navigateByUrl mit der gespeicherten returnUrl
+        this.router.navigateByUrl(this.returnUrl!); // Navigate using the stored returnUrl
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
-        console.error('Gast-Login fehlgeschlagen', errorCode, errorMessage);
         this.errorMessage = errorMessage;
       });
   }
