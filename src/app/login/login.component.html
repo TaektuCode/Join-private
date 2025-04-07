@@ -1,4 +1,4 @@
-<div
+<form
   class="login-site"
   [formGroup]="loginForm"
   (ngSubmit)="loginWithEmailAndPassword()"
@@ -20,11 +20,16 @@
 
     <div class="input-group">
       <input
-        type="password"
+        [type]="passwordVisible ? 'text' : 'password'"
         placeholder="Password"
         formControlName="password"
       />
-      <img src="./assets/img/login/lock.svg" alt="Lock Icon" />
+      <img
+        [src]="passwordVisible ? './assets/img/login/visibility.svg' : './assets/img/login/visibility_off.svg'"
+        alt="Passwort anzeigen/verbergen"
+        class="password-toggle-icon"
+        (click)="togglePasswordVisibility()"
+      />
     </div>
 
     <div class="remember-me">
@@ -33,11 +38,7 @@
     </div>
 
     <div class="button-group">
-      <button
-        type="submit"
-        class="login-btn"
-        (click)="loginWithEmailAndPassword()"
-      >
+      <button type="submit" class="login-btn">
         Log in
       </button>
       <button type="button" class="guest-btn" (click)="guestLogin()">
@@ -56,4 +57,4 @@
     <a routerLink="/policy">Privacy Policy</a>
     <a routerLink="/imprint">Legal notice</a>
   </div>
-</div>
+</form>

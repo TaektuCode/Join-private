@@ -32,14 +32,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
    * The form group for user login.
    */
   loginForm: FormGroup;
-  /**
-   * Message to display for login errors.
-   */
   errorMessage: string = '';
-  /**
-   * The URL to navigate to after successful login.
-   */
   returnUrl: string | null = null;
+  passwordVisible: boolean = false; // ADD THIS LINE
 
   /**
    * Initializes the LoginComponent and sets up the login form.
@@ -57,14 +52,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
    * It checks for a 'returnUrl' query parameter and handles redirection if present.
    */
   ngOnInit(): void {
-    // Check if the returnUrl parameter exists
     if (this.route.snapshot.queryParams['returnUrl']) {
-      this.router.navigate(['/login']); // Redirect to /login without query parameters
-      return; // Stop further initialization
+      this.router.navigate(['/login']);
+      return; 
     }
 
     // If no returnUrl is present, read it (for normal post-login redirection)
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/summary'; // Default to '/summary' if no returnUrl
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/summary'; 
   }
 
   /**
@@ -81,6 +75,13 @@ export class LoginComponent implements OnInit, AfterViewInit {
   }
 
   /**
+   * Toggles the visibility of the password input field.
+   */
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
+  /**
    * Logs in the user with the provided email and password.
    */
   loginWithEmailAndPassword(): void {
@@ -91,7 +92,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           if (response.user) {
             this.errorMessage = '';
             this.loginStatusService.setLoginStatus(true);
-            this.router.navigateByUrl(this.returnUrl!); // Navigate using the stored returnUrl
+            this.router.navigateByUrl(this.returnUrl!);
           } else if (response.error) {
             this.errorMessage =
               'Invalid login credentials. Please check your email and password.';
@@ -110,7 +111,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         const user = userCredential.user;
         this.errorMessage = '';
         this.loginStatusService.setLoginStatus(true);
-        this.router.navigateByUrl(this.returnUrl!); // Navigate using the stored returnUrl
+        this.router.navigateByUrl(this.returnUrl!); 
       })
       .catch((error) => {
         const errorMessage = error.message;
