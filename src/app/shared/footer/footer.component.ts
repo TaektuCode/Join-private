@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../login/auth.service';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 /**
  * Component for the application footer, displaying login/logout links based on the user's authentication status.
@@ -26,8 +27,9 @@ export class FooterComponent implements OnInit, OnDestroy {
   /**
    * Constructs the FooterComponent.
    * @param authService The AuthService for checking user authentication status.
+   * @param location Der Location-Service für die Navigation.
    */
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private location: Location) { }
 
   /**
    * Lifecycle hook called once the component is initialized.
@@ -47,5 +49,12 @@ export class FooterComponent implements OnInit, OnDestroy {
     if (this.isLoggedInSubscription) {
       this.isLoggedInSubscription.unsubscribe(); // Unsubscribe from the subscription
     }
+  }
+
+  /**
+     * Navigates the user back to the previous page in the browser history.
+     */
+  backPage() {
+    this.location.back();
   }
 }
