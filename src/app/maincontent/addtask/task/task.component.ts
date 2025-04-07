@@ -85,7 +85,7 @@ export class TaskComponent implements OnInit, OnDestroy {
    * Constructs the TaskComponent.
    * @param firebaseService The FirebaseService for database interactions.
    */
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService) { }
 
   /**
    * Lifecycle hook called once the component is initialized.
@@ -223,23 +223,37 @@ export class TaskComponent implements OnInit, OnDestroy {
         description: this.selectedTask.description,
         date: this.selectedTask.date,
         priority: this.selectedTask.priority,
-        assignedTo: this.getSelectedContacts().map((contact) => contact.id!), // Update assignedTo based on checkedContacts
+        assignedTo: this.getSelectedContacts().map((contact) => contact.id!),
         subtask: this.selectedTask.subtask,
         edited: new Date(),
       };
 
-      this.firebaseService
-        .updateTask(this.selectedTask.id, updatedTaskData)
-        .then(() => {
-          this.isEditing = false;
-          this.isClicked = false;
-          this.selectedTask = null;
-          this.taskUpdated.emit({ ...this.task, ...updatedTaskData });
-        })
-        .catch((error) => {
-          console.error('Error updating task:', error);
-        });
+      this.updateTaskInFirebase(this.selectedTask.id, updatedTaskData);
     }
+  }
+
+  /**
+   * Updates a task in the Firebase database.
+   * Upon successful update, UI states are reset, and an event with the updated data is emitted.
+   * If an error occurs, it is logged to the console and re-thrown.
+   *
+   * @param taskId The ID of the task to be updated.
+   * @param updatedTaskData A partial object containing the fields of the task to be updated.
+   * @returns A Promise that resolves if the update was successful, and rejects if an error occurred.
+   */
+  updateTaskInFirebase(taskId: string, updatedTaskData: Partial<TaskInterface>) {
+    return this.firebaseService
+      .updateTask(taskId, updatedTaskData)
+      .then(() => {
+        this.isEditing = false;
+        this.isClicked = false;
+        this.selectedTask = null;
+        this.taskUpdated.emit({ ...this.task, ...updatedTaskData });
+      })
+      .catch((error) => {
+        console.error('Error updating task:', error);
+        throw error;
+      });
   }
 
   /**
@@ -459,6 +473,5 @@ export class TaskComponent implements OnInit, OnDestroy {
    */
   onDrop(event: CdkDragDrop<any>): void {
     this.showDropZone = false;
-    // Logic to handle the dropped task can be implemented here
   }
 }
