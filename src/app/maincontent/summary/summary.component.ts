@@ -7,6 +7,9 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from '../../login/auth.service';
 import { LoginStatusService } from './../../login/login-status.service';
 
+/**
+ * Component displaying a summary of the user's tasks and a personalized greeting.
+ */
 @Component({
   selector: 'app-summary',
   standalone: true,
@@ -15,26 +18,70 @@ import { LoginStatusService } from './../../login/login-status.service';
   styleUrl: './summary.component.scss',
 })
 export class SummaryComponent implements OnInit, OnDestroy, AfterViewInit {
+  /**
+   * The greeting message based on the time of day.
+   */
   message: string = '';
+  /**
+   * The number of tasks with 'Todo' status.
+   */
   todoTasksCount: number = 0;
+  /**
+   * The number of tasks with 'Done' status.
+   */
   doneTasksCount: number = 0;
+  /**
+   * The total number of tasks.
+   */
   totalTasksCount: number = 0;
+  /**
+   * The number of tasks with 'In Progress' status.
+   */
   inProgressTasksCount: number = 0;
+  /**
+   * The number of tasks with 'Await Feedback' status.
+   */
   awaitFeedbackTasksCount: number = 0;
+  /**
+   * The number of tasks with 'urgent' priority.
+   */
   urgentTasksCount: number = 0;
+  /**
+   * The upcoming deadline of an urgent task.
+   */
   upcomingDeadline: string = '';
+  /**
+   * Subscription to the task list observable.
+   */
   taskSubscription: Subscription | undefined;
   private authService = inject(AuthService);
+  /**
+   * The name of the logged-in user. Defaults to 'Gast'.
+   */
   userName: string | null | undefined = 'Gast';
+  /**
+   * Subscription to the user observable.
+   */
   userSubscription: Subscription | undefined;
+  /**
+   * Flag to track if the initial animation has played.
+   */
   animationPlayed: boolean = false;
   private loginStatusService = inject(LoginStatusService);
   private el = inject(ElementRef); // Inject ElementRef
 
+  /**
+   * Constructs the SummaryComponent and initializes the greeting message based on the current time.
+   * @param firebaseService The FirebaseService for accessing task data.
+   */
   constructor(private firebaseService: FirebaseService) {
     this.checkTime();
   }
 
+  /**
+   * Lifecycle hook called once the component is initialized.
+   * Subscribes to the task list and user observables to update the summary data.
+   */
   ngOnInit(): void {
     this.taskSubscription = this.firebaseService.taskList$.subscribe((tasks) => {
       this.todoTasksCount = tasks.filter((task) => task.status === 'Todo').length;
@@ -58,6 +105,10 @@ export class SummaryComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  /**
+   * Lifecycle hook called after the component's view has been fully initialized.
+   * Subscribes to the login status and triggers the initial animation if the user is logged in.
+   */
   ngAfterViewInit(): void {
     this.loginStatusService.loginStatus$.subscribe((loggedIn) => {
       if (loggedIn && !this.animationPlayed) {
@@ -75,6 +126,10 @@ export class SummaryComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  /**
+   * Lifecycle hook called just before the component is destroyed.
+   * Unsubscribes from the task and user observables and resets the login status.
+   */
   ngOnDestroy(): void {
     if (this.taskSubscription) {
       this.taskSubscription.unsubscribe();
@@ -85,6 +140,9 @@ export class SummaryComponent implements OnInit, OnDestroy, AfterViewInit {
     this.loginStatusService.resetLoginStatus();
   }
 
+  /**
+   * Checks the current time and sets the greeting message accordingly.
+   */
   checkTime(): void {
     const date = new Date();
     const hours = date.getHours();
@@ -99,6 +157,11 @@ export class SummaryComponent implements OnInit, OnDestroy, AfterViewInit {
             : 'Good Night';
   }
 
+  /**
+   * Finds the upcoming deadline of an urgent task.
+   * @param tasks An array of TaskInterface objects.
+   * @returns A formatted date string of the upcoming urgent deadline, or 'No Urgent Deadline' if none found.
+   */
   getUpcomingDeadline(tasks: TaskInterface[]): string {
     if (!tasks || tasks.length === 0) {
       return 'No Deadline';

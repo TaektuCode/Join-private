@@ -15,6 +15,9 @@ import { TaskComponent } from '../addtask/task/task.component';
 import { AddtaskComponent } from '../addtask/addtask.component';
 import { FormsModule } from '@angular/forms';
 
+/**
+ * Component for displaying and managing tasks in a board view with drag and drop functionality.
+ */
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -30,36 +33,79 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './board.component.scss',
 })
 export class BoardComponent implements OnInit, OnDestroy {
+  /**
+   * Array to hold all tasks.
+   */
   tasks: TaskInterface[] = [];
+  /**
+   * Array to hold tasks with 'Todo' status.
+   */
   todo: TaskInterface[] = [];
+  /**
+   * Array to hold tasks with 'In Progress' status.
+   */
   inProgress: TaskInterface[] = [];
+  /**
+   * Array to hold tasks with 'Await Feedback' status.
+   */
   awaitFeedback: TaskInterface[] = [];
+  /**
+   * Array to hold tasks with 'Done' status.
+   */
   done: TaskInterface[] = [];
+  /**
+   * Subscription to the task list observable from FirebaseService.
+   */
   taskSubscription: Subscription | undefined;
-  contacts: ContactInterface[] = []; // Property für Kontakte
+  /**
+   * Array to hold contacts.
+   */
+  contacts: ContactInterface[] = [];
+  /**
+   * Subscription to the contact list observable from FirebaseService.
+   */
   contactSubscription: Subscription | undefined;
+  /**
+   * Controls the visibility of the add task overlay.
+   */
   isAddTaskOverlayVisible: boolean = false;
+  /**
+   * Term used to filter tasks.
+   */
   searchTerm: string = '';
+  /**
+   * Stores all tasks fetched from Firebase.
+   */
   allTasks: TaskInterface[] = [];
 
+  /**
+   * Constructs the BoardComponent.
+   * @param firebaseService The FirebaseService for interacting with the database.
+   */
   constructor(private firebaseService: FirebaseService) {}
 
+  /**
+   * Lifecycle hook called once the component is initialized.
+   * Subscribes to the task and contact lists from FirebaseService.
+   */
   ngOnInit(): void {
     this.taskSubscription = this.firebaseService.taskList$.subscribe(
       (tasks) => {
-        this.allTasks = tasks; // Speichert alle Aufgaben
-        console.log('Alle Tasks in BoardComponent:', this.allTasks);
+        this.allTasks = tasks; // Store all tasks
         this.filterTasks();
       }
     );
     this.contactSubscription = this.firebaseService.contactList.subscribe(
       (contacts) => {
         this.contacts = contacts;
-        console.log('Kontakte in BoardComponent:', this.contacts);
       }
     );
   }
 
+  /**
+   * Lifecycle hook called just before the component is destroyed.
+   * Unsubscribes from the task and contact list subscriptions to prevent memory leaks.
+   */
   ngOnDestroy(): void {
     if (this.taskSubscription) {
       this.taskSubscription.unsubscribe();
@@ -69,7 +115,14 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
-  filterTasksByStatus(tasksToFilter: TaskInterface[]): {
+  /**
+   * Filters an array of tasks based on their status.
+   * @param tasksToFilter The array of TaskInterface objects to filter.
+   * @returns An object containing arrays of tasks for each status ('todo', 'inProgress', 'awaitFeedback', 'done').
+   */
+  filterTasksByStatus(
+    tasksToFilter: TaskInterface[]
+  ): {
     todo: TaskInterface[];
     inProgress: TaskInterface[];
     awaitFeedback: TaskInterface[];
@@ -83,9 +136,12 @@ export class BoardComponent implements OnInit, OnDestroy {
       (task) => task.status === 'Await Feedback'
     );
     const done = tasksToFilter.filter((task) => task.status === 'Done');
-    return { todo, inProgress, awaitFeedback, done }; // Wichtig! Das Objekt zurückgeben
+    return { todo, inProgress, awaitFeedback, done }; // Important: return the object
   }
 
+  /**
+   * Filters the allTasks array based on the searchTerm and updates the todo, inProgress, awaitFeedback, and done arrays.
+   */
   filterTasks(): void {
     const lowerSearchTerm = this.searchTerm.toLowerCase();
 
@@ -106,8 +162,12 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.done = done;
   }
 
+  /**
+   * Handles the drop event when a task is dragged and dropped into a different list.
+   * Updates the task's status in Firebase based on the new container.
+   * @param event The CdkDragDrop event.
+   */
   drop(event: CdkDragDrop<TaskInterface[]>) {
-    console.log('drop-Methode aufgerufen:', event);
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -122,8 +182,6 @@ export class BoardComponent implements OnInit, OnDestroy {
         event.currentIndex
       );
       const movedTask = event.container.data[event.currentIndex];
-      console.log('Verschobener Task:', movedTask);
-      console.log('Ziel-Container-ID:', event.container.id); // Überprüfen Sie die ID des Containers, in den verschoben wurde
       if (movedTask.id) {
         let newStatus:
           | 'Todo'
@@ -148,6 +206,11 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Returns the initials of an assignee based on their ID.
+   * @param assigneeId The ID of the assigned contact.
+   * @returns A string containing the uppercase initials of the assignee's name, or an empty string if not found.
+   */
   getAssigneeInitials(assigneeId: string): string {
     const contact = this.contacts.find((c) => c.id === assigneeId);
     if (contact) {
@@ -162,23 +225,26 @@ export class BoardComponent implements OnInit, OnDestroy {
     return '';
   }
 
+  /**
+   * Opens the add task overlay.
+   */
   openAddTaskOverlay() {
     this.isAddTaskOverlayVisible = true;
   }
 
+  /**
+   * Closes the add task overlay.
+   */
   closeAddTaskOverlay() {
     this.isAddTaskOverlayVisible = false;
   }
 
+  /**
+   * Handles the event when a new task is created in the add task overlay.
+   * The task list is updated via the Firebase observable, so no direct action is needed here.
+   * @param newTask The newly created TaskInterface object.
+   */
   handleTaskCreated(newTask: TaskInterface) {
-    console.log('Neue Aufgabe vom Overlay erhalten:', newTask);
-    // Da `this.tasks` über das Firebase-Observable `taskList$` aktualisiert wird,
-    // müssen wir die neu erstellte Aufgabe nicht direkt zu `this.tasks` hinzufügen.
-    // Firebase aktualisiert die Liste und unser Observable löst eine neue Emission aus,
-    // wodurch `filterTasksByStatus()` erneut aufgerufen und die lokalen Arrays
-    // (`todo`, `inProgress`, etc.) aktualisiert werden.
-
-    // Optional: Zeige eine Erfolgsmeldung an
     this.closeAddTaskOverlay();
   }
 }
