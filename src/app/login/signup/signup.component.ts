@@ -25,12 +25,16 @@ export class SignupComponent implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  // Neue Properties für die Passwort-Sichtbarkeit
+  passwordVisible: boolean = false;
+  confirmPasswordVisible: boolean = false;
+
   constructor() {
     this.signupForm = this.fb.group(
       {
         name: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]], // Korrigierte Reihenfolge
+        password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
         accept: [false, Validators.requiredTrue],
       },
@@ -53,6 +57,15 @@ export class SignupComponent implements OnInit {
 
   backPage() {
     this.location.back();
+  }
+
+  // Neue Methoden zum Umschalten der Passwort-Sichtbarkeit
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.confirmPasswordVisible = !this.confirmPasswordVisible;
   }
 
   onSubmit(): void {
