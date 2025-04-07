@@ -163,6 +163,25 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Determines the new status of a task based on the ID of the drop container.
+   * @param containerId The ID of the container where the task was dropped.
+   * @returns The new status ('Todo', 'In Progress', 'Await Feedback', 'Done') or null if not recognized.
+   */
+  getNewStatusFromContainerId(containerId: string): 'Todo' | 'In Progress' | 'Await Feedback' | 'Done' | null {
+    if (containerId === 'todoList') {
+      return 'Todo';
+    } else if (containerId === 'inProgressList') {
+      return 'In Progress';
+    } else if (containerId === 'awaitFeedbackList') {
+      return 'Await Feedback';
+    } else if (containerId === 'doneList') {
+      return 'Done';
+    } else {
+      return null;
+    }
+  }
+
+  /**
    * Handles the drop event when a task is dragged and dropped into a different list.
    * Updates the task's status in Firebase based on the new container.
    * @param event The CdkDragDrop event.
@@ -183,22 +202,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       );
       const movedTask = event.container.data[event.currentIndex];
       if (movedTask.id) {
-        let newStatus:
-          | 'Todo'
-          | 'In Progress'
-          | 'Await Feedback'
-          | 'Done'
-          | null = null;
-        if (event.container.id === 'todoList') {
-          newStatus = 'Todo';
-        } else if (event.container.id === 'inProgressList') {
-          newStatus = 'In Progress';
-        } else if (event.container.id === 'awaitFeedbackList') {
-          newStatus = 'Await Feedback';
-        } else if (event.container.id === 'doneList') {
-          newStatus = 'Done';
-        }
-
+        const newStatus = this.getNewStatusFromContainerId(event.container.id);
         if (newStatus && movedTask.id) {
           this.firebaseService.updateTask(movedTask.id, { status: newStatus });
         }
