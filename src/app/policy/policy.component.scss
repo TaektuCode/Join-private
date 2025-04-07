@@ -1,10 +1,6 @@
 .policy {
-    padding: 25px 25px 50px 50px;
+    padding: 50px 25px 50px 25px;
     max-width: 1440px;
-
-    @media (max-width: 550px) {
-        padding: 25px 25px 50px 50px;
-    }
 }
 
 h3 {

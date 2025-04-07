@@ -58,6 +58,7 @@
     transform: translate(-50%, -50%);
     height: 0;
   }
+
   50% {
     /* Das Logo "wächst" in der Mitte auf 100px Höhe */
     top: 50%;
@@ -65,14 +66,13 @@
     transform: translate(-50%, -50%);
     height: 100px;
   }
+
   100% {
     /* Endposition: oben links (50px Abstand) und Höhe 50px */
     top: 50px;
     left: 50px;
-    transform: translate(
-      -50%,
-      -50%
-    ); // Keine Translation mehr, da Position schon final
+    transform: translate(-50%,
+        -50%); // Keine Translation mehr, da Position schon final
     height: 50px;
   }
 }
@@ -91,6 +91,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -131,6 +132,10 @@
     border: 1px solid #ccc; // Grauer Rahmen für das Eingabefeld
     border-radius: 8px;
     padding: 8px 12px;
+
+    @media(max-width: 700px) {
+      width: 90%;
+    }
 
     input {
       flex: 1;
@@ -265,9 +270,11 @@
   .login-header .header-right {
     display: none;
   }
+
   .mobile-header-right {
     display: flex;
   }
+
   .login-site.animation-phase {
     background-color: #2a3647;
 
@@ -280,6 +287,7 @@
     .button-group {
       flex-direction: column;
       gap: 16px;
+
       button {
         width: 100%;
       }
