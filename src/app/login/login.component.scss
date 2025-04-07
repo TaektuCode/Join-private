@@ -6,9 +6,16 @@
   height: 100dvh;
 }
 
+@media (min-width: 1921px) {
+  .login-site {
+    position: absolute;
+        width: 100%;
+  }
+}
+
 .login-header {
-  position: relative; // Wichtig: so wird das absolute Element relativ zum Header positioniert
-  height: var(--headerHeight); // z. B. 96px
+  position: relative;
+  height: var(--headerHeight);
   display: flex;
   justify-content: right;
   align-items: center;

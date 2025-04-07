@@ -30,7 +30,17 @@
     }
   }
 }
+.sign-up-container {
+  width: 100%;
+  height: 100vh;
+}
 
+@media (min-width: 1921px) {
+  .sign-up-container {
+    position: absolute;
+    width: 100%;
+  }
+}
 .main-content {
   width: 600px;
   height: 75%;

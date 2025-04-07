@@ -18,8 +18,6 @@ import { filter } from 'rxjs/operators';
     RouterOutlet,
     HeaderComponent,
     FooterComponent,
-    LoginComponent,
-    SignupComponent,
     FormsModule,
   ],
   templateUrl: './app.component.html',
