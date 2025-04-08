@@ -193,7 +193,7 @@ app-add-task {
     }
 
     .board-section {
-      height: 55vh;
+      height: auto;
       overflow-y: auto;
       width: 305px;
 
@@ -202,6 +202,7 @@ app-add-task {
         flex-direction: row; // Hier wird von column zu row gewechselt
         gap: 16px; // Falls Abstand zwischen den Elementen benötigt wird
         width: 100%;
+        padding-bottom: 50px;
       }
     }
   }
