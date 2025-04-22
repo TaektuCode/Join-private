@@ -1,23 +1,14 @@
-<div class="task-list">
-  <!-- <div
+<div class="task-list" *ngIf="task">
+  <div
     class="draggable-wrapper"
-    (mousedown)="rotateCard($event, true)"
+    cdkDrag
+    [cdkDragData]="task"  (mousedown)="rotateCard($event, true)"
     (mouseup)="rotateCard($event, false)"
     (mouseleave)="rotateCard($event, false)"
     (cdkDragStarted)="rotateCard($event, true)"
     (cdkDragEnded)="rotateCard($event, false)"
     (click)="openTaskDetails()"
-  > -->
-  <div
-  class="draggable-wrapper"
-  cdkDrag
-  (mousedown)="rotateCard($event, true)"
-  (mouseup)="rotateCard($event, false)"
-  (mouseleave)="rotateCard($event, false)"
-  (cdkDragStarted)="rotateCard($event, true)"
-  (cdkDragEnded)="rotateCard($event, false)"
-  (click)="openTaskDetails()"
->
+  >
     <div
       [ngStyle]="{ transform: 'rotate(' + rotateValue + 'deg)' }"
       class="task-card"

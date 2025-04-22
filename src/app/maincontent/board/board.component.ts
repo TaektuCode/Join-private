@@ -200,7 +200,7 @@ export class BoardComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
-      const movedTask = event.container.data[event.currentIndex];
+      const movedTask = event.item.data; // RICHTIG: Verwenden Sie die Daten des gezogenen Elements
       if (movedTask.id) {
         const newStatus = this.getNewStatusFromContainerId(event.container.id);
         if (newStatus && movedTask.id) {
@@ -209,6 +209,29 @@ export class BoardComponent implements OnInit, OnDestroy {
       }
     }
   }
+  // drop(event: CdkDragDrop<TaskInterface[]>) {
+  //   if (event.previousContainer === event.container) {
+  //     moveItemInArray(
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex
+  //     );
+  //   } else {
+  //     transferArrayItem(
+  //       event.previousContainer.data,
+  //       event.container.data,
+  //       event.previousIndex,
+  //       event.currentIndex
+  //     );
+  //     const movedTask = event.container.data[event.currentIndex];
+  //     if (movedTask.id) {
+  //       const newStatus = this.getNewStatusFromContainerId(event.container.id);
+  //       if (newStatus && movedTask.id) {
+  //         this.firebaseService.updateTask(movedTask.id, { status: newStatus });
+  //       }
+  //     }
+  //   }
+  // }
 
   /**
    * Returns the initials of an assignee based on their ID.
