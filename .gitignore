@@ -46,4 +46,5 @@ Thumbs.db
 *-debug.log
 .runtimeconfig.json
 
-src/app/app.config.ts
+# Environment file with local secrets
+src/environments/environment.ts
